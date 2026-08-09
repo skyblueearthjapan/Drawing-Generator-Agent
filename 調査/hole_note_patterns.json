@@ -1,0 +1,125 @@
+{
+ "n_files_analyzed": 80,
+ "note": "LEADER+MTEXT/DIMENSIONのオーバーライドテキストから正規表現で機械抽出した穴・タップ注記の書式パターン。頻度は全80枚合計の出現回数(1テキスト内の複数マッチも各カウント)。",
+ "patterns": [
+  {
+   "name": "phi_only",
+   "regex": "(?:%%c|φ|Φ)\\s*\\d+(?:\\.\\d+)?",
+   "count": 94,
+   "examples": [
+    "%%c80",
+    "%%c６",
+    "%%c１４",
+    "%%c２０",
+    "%%c１８",
+    "%%c２６",
+    "%%c１０",
+    "%%c５"
+   ]
+  },
+  {
+   "name": "count_phi",
+   "regex": "\\d+[-－]\\s*(?:%%c|φ|Φ)\\s*\\d+(?:\\.\\d+)?",
+   "count": 44,
+   "examples": [
+    "２－%%c６",
+    "４－%%c６",
+    "２－%%c８",
+    "２－%%c７",
+    "２－%%c５",
+    "４－%%c１１",
+    "２－%%c１４",
+    "２－%%c１０"
+   ]
+  },
+  {
+   "name": "depth",
+   "regex": "深さ\\s*\\d+(?:\\.\\d+)?",
+   "count": 38,
+   "examples": [
+    "深さ１０",
+    "深さ８",
+    "深さ１２",
+    "深さ１３",
+    "深さ１８",
+    "深さ２５",
+    "深さ１１",
+    "深さ１５"
+   ]
+  },
+  {
+   "name": "zaguri",
+   "regex": "ザグリ",
+   "count": 26,
+   "examples": [
+    "ザグリ"
+   ]
+  },
+  {
+   "name": "through_hole",
+   "regex": "通し",
+   "count": 16,
+   "examples": [
+    "通し"
+   ]
+  },
+  {
+   "name": "kiri",
+   "regex": "キリ",
+   "count": 8,
+   "examples": [
+    "キリ"
+   ]
+  },
+  {
+   "name": "pilot_hole",
+   "regex": "下穴",
+   "count": 4,
+   "examples": [
+    "下穴"
+   ]
+  },
+  {
+   "name": "metric_thread",
+   "regex": "[ＭむMм]\\d+(?:[×xX]\\d+(?:\\.\\d+)?)?",
+   "count": 3,
+   "examples": [
+    "ｍ３",
+    "ｍ６"
+   ]
+  },
+  {
+   "name": "tapped_depth_T",
+   "regex": "\\d+[TＴ]\\b",
+   "count": 3,
+   "examples": [
+    "３６Ｔ",
+    "９６Ｔ"
+   ]
+  },
+  {
+   "name": "pcd",
+   "regex": "PCD\\s*\\d+(?:\\.\\d+)?",
+   "count": 2,
+   "examples": [
+    "PCD108"
+   ]
+  },
+  {
+   "name": "od",
+   "regex": "OD\\s*\\d+(?:\\.\\d+)?",
+   "count": 2,
+   "examples": [
+    "OD114"
+   ]
+  },
+  {
+   "name": "through_zaguri",
+   "regex": "通しザグリ",
+   "count": 2,
+   "examples": [
+    "通しザグリ"
+   ]
+  }
+ ]
+}
