@@ -157,6 +157,20 @@ engine/          恒久エンジン(sw_compat.py, sw_helper.py, dxf_dump.py, dxf
 - ビュー間ギャップはA1の40mmのままではA3に収まらない → compose側で15mmに詰めて再レイアウト
 - 人間図面の穴注記は `2-%%c6.6` のように **%%c(φ)のDXF特殊コード**を使う(フェーズ3で踏襲)
 
+### 自社の寸法流儀(フェーズ3-A・80枚コーパス統計・2026-08-09確立)
+詳細は `調査/dimension_style_analysis.md` §8、決定版パラメータは `図枠/dimstyle_spec.json`。要点:
+- **直径寸法は線形DIMENSION+`dimpost='%%c<>'`**(83:4)。半径はRADIUS型+`dimpost='R<>'`
+- XDATAオーバーライドは使わず**1寸法=1専用DIMSTYLE**方式
+- 基本値: dimtxt=4.0/dimasz=3.0/dimexo=1.0/dimexe=2.0/dimdec=2/dimclrd=dimclre=3(緑)/
+  dimclrt=7/dimdli=8.0/矢印=_OPEN30/文字=txt.shx w=0.75
+- 公差: はめあい系=ネイティブdimtol方式、対称=%%p。**はめあい記号(H7等)は使わない文化**
+- 穴注記は `<個数>-%%c<値>`(φは必ず%%c制御コード)。複合注記は\P改行
+- 寸法線オフセット: 輪郭から16mm、2段目以降+8mm刻み
+- ezdxf実装の罠: **dimdsep既定がカンマ**(46=ピリオドを明示)/**_OPEN30はARROWS.create_block()で明示生成**/
+  公差ゼロ側はGMMは「0」表示(dimtzinでは再現不可→text側で整形。ディレクター裁定)
+- 裁定(調査/ディレクター裁定_フェーズ3A質問票.md): 公差は作図計画の明示指定のみ/
+  タップ記号JISB0205は初期実装・仕上げ記号は第2弾/表記は文脈ごとコーパス最頻値に統一
+
 ### ❗OpenDoc6がNoneでも「ActiveDocで拾う」フォールバックは危険【2026-08-09・実害あり】
 OpenDoc6 が None(開けていない)のとき `sw.ActiveDoc` は**ユーザーが既に開いていた無関係の
 ドキュメント**を返す。そのまま処理を続けて最後に `CloseDoc(title)` したため、

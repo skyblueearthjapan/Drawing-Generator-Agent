@@ -54,8 +54,8 @@ def mtext_plain(text):
 HOLE_PATTERNS = [
     ("count_phi", re.compile(r"\d+[-－]\s*(?:%%c|φ|Φ)\s*\d+(?:\.\d+)?")),
     ("phi_only", re.compile(r"(?:%%c|φ|Φ)\s*\d+(?:\.\d+)?")),
-    ("metric_thread", re.compile(r"[ｍMм]\d+(?:[×xX]\d+(?:\.\d+)?)?")),
-    ("count_metric_thread", re.compile(r"\d+[-－]\s*[ｍMм]\d+")),
+    ("metric_thread", re.compile(r"[MＭmｍ]\d+(?:[×xX]\d+(?:\.\d+)?)?")),
+    ("count_metric_thread", re.compile(r"\d+[-－]\s*[MＭmｍ]\d+")),
     ("pcd", re.compile(r"PCD\s*\d+(?:\.\d+)?", re.IGNORECASE)),
     ("through_zaguri", re.compile(r"通しザグリ")),
     ("fukazaguri", re.compile(r"深ザグリ")),
@@ -262,15 +262,24 @@ def analyze_file(path, frame_sigs):
             except Exception:
                 pass
             has_xdata = e.has_xdata("ACAD") if hasattr(e, "has_xdata") else False
-            # 定義点(寸法線位置)と幾何外形との距離
+            # 寸法線オフセット(1段目): defpoint2-defpoint3(引出線起点=ジオメトリ上の2点)を
+            # 結ぶ直線から defpoint(寸法線位置)までの垂直距離。線形/回転寸法(type0/1)のみ有効。
+            dline_offset = None
             try:
-                dp = e.dxf.defpoint
-                dline_dist = None
-                if geom_points_for_dist:
-                    bbox = bbox_of_points(geom_points_for_dist)
-                    dline_dist = dist_point_to_bbox(dp.x, dp.y, bbox)
+                if dimtype_base in (0, 1) and e.dxf.hasattr("defpoint2") and e.dxf.hasattr("defpoint3"):
+                    dp = e.dxf.defpoint
+                    p2 = e.dxf.defpoint2
+                    p3 = e.dxf.defpoint3
+                    dx, dy = (p3.x - p2.x), (p3.y - p2.y)
+                    seg_len = math.hypot(dx, dy)
+                    if seg_len > 1e-9:
+                        ux, uy = dx / seg_len, dy / seg_len
+                        vx, vy = dp.x - p2.x, dp.y - p2.y
+                        proj = vx * ux + vy * uy
+                        perp_x, perp_y = vx - proj * ux, vy - proj * uy
+                        dline_offset = math.hypot(perp_x, perp_y)
             except Exception:
-                dline_dist = None
+                dline_offset = None
 
             result["dimensions"].append({
                 "dimtype_raw": e.dimtype,
@@ -280,7 +289,7 @@ def analyze_file(path, frame_sigs):
                 "dimstyle": ds_name,
                 "ds_params": ds_params,
                 "has_xdata": has_xdata,
-                "dline_dist_to_geom_bbox": dline_dist,
+                "dline_offset_from_geom": dline_offset,
             })
             if text_override:
                 plain = mtext_plain(text_override)
@@ -332,6 +341,14 @@ def analyze_file(path, frame_sigs):
     n_clusters, sizes = cluster_views(view_geom_points, gap=18.0)
     result["n_view_clusters"] = n_clusters
     result["view_cluster_sizes"] = sizes[:20]
+
+    # gap=45mm: 小穴等のノイズ島を吸収し、真の「ビュー」に近い粒度になることを
+    # サンプル10ファイルでの閾値比較(調査/_tmp_view_gap_test.py)で確認済み。
+    # n_big45(>=4点で構成される島の数)を「ビュー数」の近似推定値として採用する。
+    n_clusters45, sizes45 = cluster_views(view_geom_points, gap=45.0)
+    result["n_view_clusters_gap45"] = n_clusters45
+    result["n_view_islands_big_gap45"] = sum(1 for s in sizes45 if s >= 4)
+    result["view_cluster_sizes_gap45"] = sizes45[:20]
 
     return result
 

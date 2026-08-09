@@ -117,15 +117,17 @@ def main():
 
     # ---------- 5. ビュー構成 ----------
     n_clusters_list = [r["n_view_clusters"] for r in results]
+    n_islands_big45_list = [r.get("n_view_islands_big_gap45", 0) for r in results]
     centerline_lines = [r["centerline_lines"] for r in results]
     centerline_circles = [r["centerline_circles"] for r in results]
     n_clusters_counter = Counter(n_clusters_list)
+    n_islands_big45_counter = Counter(n_islands_big45_list)
 
     # ---------- 6. 配置ルール ----------
     dline_dists = []
     for r in results:
         for dm in r["dimensions"]:
-            d_ = dm.get("dline_dist_to_geom_bbox")
+            d_ = dm.get("dline_offset_from_geom")
             if d_ is not None and d_ >= 0:
                 dline_dists.append(d_)
     leader_angles = []
@@ -175,14 +177,20 @@ def main():
         },
         "agm_blocks": agm_summary,
         "views": {
-            "n_clusters_per_file": numeric_stats([float(x) for x in n_clusters_list]),
-            "n_clusters_distribution": sorted(n_clusters_counter.items()),
+            "note": "n_clusters(gap=18mm)は幾何の空間連結成分数(=真のビュー数より過大: 孤立した穴等も別クラスタ化される)。"
+                    "n_view_islands_big_gap45(gap=45mm・4点以上の島のみ)の方がビュー数の近似として妥当性が高いことを"
+                    "10ファイルでの閾値比較(調査/_tmp_view_gap_test.py、削除済み・本ファイルに知見のみ残す)で確認した。"
+                    "ただし機械的クラスタリングは『同一ビュー内で離れた穴』と『別ビュー』を完全には区別できない限界がある。",
+            "n_clusters_gap18_per_file": numeric_stats([float(x) for x in n_clusters_list]),
+            "n_clusters_gap18_distribution": sorted(n_clusters_counter.items()),
+            "n_view_islands_big_gap45_per_file": numeric_stats([float(x) for x in n_islands_big45_list]),
+            "n_view_islands_big_gap45_distribution": sorted(n_islands_big45_counter.items()),
             "centerline_lines_per_file": numeric_stats([float(x) for x in centerline_lines]),
             "centerline_circles_per_file": numeric_stats([float(x) for x in centerline_circles]),
             "n_files_with_centerline_circle": sum(1 for x in centerline_circles if x > 0),
         },
         "placement": {
-            "dline_dist_to_geom_bbox": numeric_stats(dline_dists),
+            "dline_offset_from_geom_mm": numeric_stats(dline_dists),
             "leader_angle_deg": numeric_stats(leader_angles),
             "leader_length": numeric_stats(leader_lengths),
         },
@@ -202,8 +210,8 @@ def main():
     PATTERN_REGEX_SRC = {
         "count_phi": r"\d+[-－]\s*(?:%%c|φ|Φ)\s*\d+(?:\.\d+)?",
         "phi_only": r"(?:%%c|φ|Φ)\s*\d+(?:\.\d+)?",
-        "metric_thread": r"[ＭむMм]\d+(?:[×xX]\d+(?:\.\d+)?)?",
-        "count_metric_thread": r"\d+[-－]\s*[ＭむMм]\d+",
+        "metric_thread": r"[MＭmｍ]\d+(?:[×xX]\d+(?:\.\d+)?)?",
+        "count_metric_thread": r"\d+[-－]\s*[MＭmｍ]\d+",
         "pcd": r"PCD\s*\d+(?:\.\d+)?",
         "through_zaguri": r"通しザグリ",
         "fukazaguri": r"深ザグリ",

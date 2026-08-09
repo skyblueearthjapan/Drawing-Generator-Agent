@@ -1,0 +1,258 @@
+{
+  "_meta": {
+    "purpose": "寸法記入エンジン(フェーズ3)がezdxfでDIMENSION/LEADERを生成する際に従う自社流儀の決定版パラメータセット。",
+    "basis": "バケットA(A3実寸・80枚、荏原トライ調整用/DXF/部品表用DXFデータ/<軸>/*.dxf)を機械抽出・統計化。総DIMENSION数927本、LEADER131本。",
+    "generated_by": "調査/analyze_style_corpus.py + 調査/aggregate_style_stats.py",
+    "raw_stats": "調査/style_corpus_stats.json (数値の再現・全分布はこちらを参照)",
+    "unit": "mm(図面は実寸、$INSUNITS未設定=実寸mmとして扱う。図枠/frame_analysis.md参照)",
+    "dxf_version": "AC1015",
+    "encoding": "$DWGCODEPAGE=ANSI_932 (ezdxfでは doc.encoding='cp932' を明示設定すること。図枠/frame_analysis.md 7章参照)",
+    "known_pitfalls_found_during_repro_check": [
+      "dimdsep(小数点区切り文字)を明示しないと ezdxf の新規DIMSTYLEは既定でカンマ(',')になり『74.9』が『74,9』と表示される。実在図面は小数点(ピリオド)表記のため、新規DIMSTYLEには必ず dimdsep=46 ('.') を設定すること。",
+      "dimclrt=7(白/黒)は、matplotlib(ezdxf.addons.drawing)でのプレビュー生成時にBackgroundPolicy.WHITEを指定しないと白背景に白文字で埋もれて見えなくなる(検証時に発覚。DXF自体は正しいが、検証・プレビュー用レンダリングコードの設定漏れに注意)。",
+      "_OPEN30等の標準矢印ブロックはezdxf.new(setup=True)だけでは未登録。ezdxf.render.arrows.ARROWS.create_block(doc.blocks, ARROWS.open_30)で明示生成するか、DIMENSIONのrender()時に自動生成されるのを確認すること。"
+    ]
+  },
+
+  "text_style": {
+    "font": "txt.shx",
+    "bigfont": "bigfont.shx",
+    "width_factor": 0.75,
+    "oblique": 0.0,
+    "evidence": "全927 DIMENSIONのdimtxsty解決先フォントがtxt.shxで一致(100%)。width_factorは0.75が906/927(97.7%)、0.833が21/927(2.3%、dimtxt=6.0mmの大きめ文字と対応)。",
+    "note": "スタイル名(GMM0xx)はファイルごとの連番のため使い回さない。新規生成時はフォント実体(txt.shx/width=0.75/oblique=0)で新規TEXTスタイルを作成すること(図枠のSTYLE命名規則と同様の罠。調査/frame_analysis.md 5章参照)。"
+  },
+
+  "dimstyle_base": {
+    "_comment": "927本のDIMENSION実測から求めた最頻値。特記なき限りこの値を新規DIMSTYLEの既定値とする。",
+    "dimtxt": {"value": 4.0, "unit": "mm", "evidence": "906/927 = 97.7%。残り21本はdimtxt=6.0(強調表示・角度寸法等で使用)"},
+    "dimasz": {"value": 3.0, "unit": "mm", "evidence": "927/927 = 100%(矢印サイズは全DIMENSIONで統一)"},
+    "dimexo": {"value": 1.0, "unit": "mm", "evidence": "927/927 = 100%(延長線オフセット=ジオメトリから1.0mm離して開始)"},
+    "dimexe": {"value": 2.0, "unit": "mm", "evidence": "927/927 = 100%(延長線が寸法線を2.0mmオーバーラン)"},
+    "dimgap": {"value": 0.5, "unit": "mm", "evidence": "826/927 = 89.1%が0.5。残りは0.32〜1.35の範囲で微調整(寸法文字と寸法線/延長線の間隔を個別に詰めた形跡。過密な箇所での手動調整と推定)"},
+    "dimdec": {"value": 2, "evidence": "908/927 = 98.0%が小数2桁。4桁が16本(高精度公差寸法)、1桁が3本(概算寸法)。値の精度要求に応じて可変とする"},
+    "dimtad": {"value": 3, "evidence": "919/927 = 99.1%(文字を寸法線の上に配置=標準のJIS方式)"},
+    "dimclrd": {"value": 3, "color_name": "緑(ACI 3)", "evidence": "927/927 = 100%(寸法線・矢印の色)"},
+    "dimclre": {"value": 3, "color_name": "緑(ACI 3)", "evidence": "927/927 = 100%(延長線の色)"},
+    "dimclrt": {"value": 7, "color_name": "白/黒(ACI 7, 背景依存)", "evidence": "927/927 = 100%(寸法文字の色)"},
+    "dimdli": {"value": 8.0, "unit": "mm", "evidence": "927/927 = 100%(累進・並列寸法の2段目以降のオフセット増分)"},
+    "dimscale": {"value": 1.0, "evidence": "927/927 = 100%"},
+    "dimlfac": {"value": 1.0, "evidence": "927/927 = 100%"},
+    "dimfit": {"value": 3, "evidence": "845/927 = 91.2%。次点はdimfit=5が81本(8.7%、文字/矢印を両方外に出す必要がある密集箇所)"},
+    "dimupt": {"value": "0(通常)/1(位置調整あり)", "evidence": "710/927=76.6%が0。217本(23.4%)が1で、文字またはユーザー定義位置に手動調整されている(直径・PCD・注記付き寸法に多い)"},
+    "dimsah": {"value": 1, "evidence": "927/927 = 100%(dimblk1/dimblk2を個別指定する設定。両端で別矢印を使い分け可能にしている)"},
+    "dimjust": {"value": 0, "evidence": "927/927 = 100%(文字は寸法線の中央)"},
+    "dimcen": {"value": 1.0, "evidence": "927/927 = 100%(中心マーク/中心線を寸法線生成時に自動描画するモード)"}
+  },
+
+  "arrow": {
+    "dimblk1": {"value": "_OPEN30", "evidence": "846/927 = 91.3%。次点は_NONE(72本=7.8%、片側矢印省略。密集寸法や累進寸法の始端で使用)、_DOT(9本=1.0%、ごく小さい寸法)"},
+    "dimblk2": {"value": "_OPEN30", "evidence": "904/927 = 97.5%。_NONEが23本(2.5%)"},
+    "leader_arrow": {"value": "既定(dimldrblk未指定=AutoCAD既定の塗りつぶし矢印)", "evidence": "131本のLEADER全てでdimldrblk未設定を確認"},
+    "rule": "両端とも_OPEN30(開き30°矢印)を既定とする。密集して矢印が入らない箇所のみ片側を_NONEに変更(dimupt=1と併用されるケースが多い)。"
+  },
+
+  "color_layer": {
+    "dimension_entity_layer": {"value": "1", "evidence": "830/927 = 89.5%。次点はLEVEL001(61本=6.6%、名前付きレイヤ=このコーパスでの例外)、'3'(28本)、'255'(8本)"},
+    "leader_entity_layer": {"value": "1", "evidence": "102/131 = 77.9%。次点は'0'(11本)、'255'(10本)"},
+    "dimension_entity_color": {"value": 7, "evidence": "919/927 = 99.1%(エンティティ自体の色はBYLAYER相当の7。実際の見た目の色分けはdimclrd/dimclre/dimclrtが担う)"},
+    "note": "レイヤ名はACIカラー番号がそのまま使われる慣習(図枠と同じ。調査/frame_analysis.md参照)。新規生成時はDIMENSION/LEADERをレイヤ'1'に配置する。"
+  },
+
+  "dimtype_usage": {
+    "linear": {
+      "dimtype": 0,
+      "count": 855,
+      "note": "ezdxfの『rotated(回転線形)』寸法オブジェクトのみを使用。『aligned』寸法オブジェクト(type=1)は本コーパスで1件も確認されなかった。斜めの辺を測る場合もrotated dimensionのangle属性で対応している。",
+      "dimpost": ""
+    },
+    "diameter_via_linear": {
+      "dimtype": 0,
+      "count": 83,
+      "dimpost": "%%c<>",
+      "note": "直径寸法の大半(83本)は、ネイティブのDIAMETER型(type=3)ではなく、線形(rotated)寸法にdimpost='%%c<>'を設定して『φ<測定値>』を自動表示させる方式で作図されている。エンジンもこの方式を踏襲すること。"
+    },
+    "diameter_native": {
+      "dimtype": 3,
+      "count": 4,
+      "note": "ネイティブDIAMETER型は4本のみ(レア・例外的な使用)。基本方針は上記diameter_via_linearとする。"
+    },
+    "radius": {
+      "dimtype": 4,
+      "count": 52,
+      "dimpost": "R<> (単体) / 2-R<>,3-R<>,4-R<> (同一半径が複数箇所ある場合の個数プレフィックス)",
+      "note": "ネイティブRADIUS型を使用。個数接頭辞は『2-R<>』のように書式コード側(dimpost)に埋め込む。"
+    },
+    "angular": {
+      "dimtype": 2,
+      "count": 16,
+      "note": "角度寸法は全てtext_override(dxf.text)で明示指定されており、AutoCAD標準の角度単位書式(dimaunit)に頼っていない。例: '\\A1;120\\U+00B0'(=120°、\\U+00B0は°のUnicodeエスケープ)。新規生成時も度数の文字列を明示テキストとして与える方式を踏襲する。"
+    },
+    "reference_dimension": {
+      "dimpost": "(<>",
+      "count": 15,
+      "note": "参考寸法(基準外・目安)は寸法値をカッコで囲む。dimpost='(<>' で自動化するか、text_overrideで'(45)'のように直接カッコを付ける(コーパス内は後者の実測値埋め込み例が多い)。"
+    },
+    "pcd_label": {
+      "dimpost": "(PCD<>",
+      "count": 2,
+      "example": "(PCD108)",
+      "note": "ボルト穴等のピッチ円直径はdimpost='(PCD<>'または直接text_overrideで'(PCD108)'のように付記する。"
+    },
+    "outer_diameter_label": {
+      "dimpost": "(OD<>",
+      "count": 2,
+      "example": "(OD114)",
+      "note": "外径を強調表示する場合は'(OD<>'。使用頻度は低いがギア等の外径表記に使われている。"
+    },
+    "pilot_hole_diameter": {
+      "dimpost": "下穴%%c<>",
+      "count": 5,
+      "note": "タップ下穴の直径には接頭辞『下穴』+φ記号を付ける(下穴%%c<>)。"
+    }
+  },
+
+  "measurement_vs_override": {
+    "auto_measured_ratio": 0.9374,
+    "text_override_ratio": 0.0626,
+    "evidence": "927本中869本(93.7%)は寸法値をDIMENSION自身の実測値(自動計算)に任せている。text_override(dxf.text明示指定)は58本(6.3%)のみで、用途は主に (a) 角度寸法の単位付き書式化、(b) 参考寸法のカッコ付け、(c) PCD/OD等のラベル、(d) 対称公差(%%p)の付記に限られる。",
+    "rule": "エンジンは可能な限りDIMENSIONの自動計測(defpoint2/3から自動算出)に任せ、text_overrideは上記4用途に限定して使用する。AIの読解値(value_expected)は検証にのみ用い、DXF上の表示値は実測駆動にする(ゲート①の思想と一致)。"
+  },
+
+  "tolerance": {
+    "native_limit_tolerance": {
+      "mechanism": "DIMSTYLEのdimtol=1 + dimtp(上側許容差)/dimtm(下側許容差、共に絶対値)",
+      "count": 63,
+      "n_files": "20/80",
+      "pattern": "常に片側のみ非ゼロ(dimtp>0のときdimtm=0、またはその逆)。両側同時に非ゼロの例はコーパス中0件。",
+      "params": {
+        "dimtfac": 0.625,
+        "dimtdec": "1〜3(公差値の必要精度に応じて可変。例: ±0.2→dimtdec=1、±0.021→dimtdec=3)",
+        "dimtolj": 1
+      },
+      "examples": ["+0.2/-0.0 (35.3 +0.2/-0)", "+0.0/-0.021 (19 +0/-0.021)", "+0.025/-0.0 (32 +0.025/-0)"],
+      "note": "シャフト/ベアリング等のはめあいに関わる寸法(軸径・穴径)で使用。ISOはめあい記号(H7/g6等)はコーパス中0件確認されず、常に数値の上下限差として明示される。",
+      "repro_check_caveat": "調査/dimstyle_repro_check.pngでの目視検証で、実在図面はゼロ側の公差を'0'と省略表示するのに対し、ezdxfのdimtdec=3設定では'0.000'と桁を揃えて表示される軽微な差異を確認した(dimtzin設定を揃えても再現できず、CAD保存時の個別処理と推定)。構造(値+上下限スタック表示)・色・矢印・オフセットは完全一致。実装上は許容範囲の差とみなす。"
+    },
+    "symmetric_pct_code": {
+      "mechanism": "text_override内に%%p(AutoCAD制御コード=±記号)を直接埋め込む。書式: '<値>%%p<公差>' 例:'20%%p0.026'",
+      "count": 15,
+      "n_files": "12/80",
+      "note": "対称公差(±)が必要な寸法はDIMSTYLEのdimtol機構を使わず、text_overrideで直接記述する。native_limit_toleranceとは別経路であることに注意(11ファイルは両方式を併用)。"
+    },
+    "iso_fit_symbols": {
+      "count": 0,
+      "note": "H7/g6等のJIS/ISOはめあい記号はバケットA全80枚を通じて1件も確認されなかった。公差は常に数値(上下限差 or ±値)で明示する自社流儀と判断する。"
+    },
+    "rule": "①軸径・穴径など『はめあい』が絡む寸法は native_limit_tolerance(dimtol=1)方式、②その他の対称公差は text_override の%%p方式、③公差不要な寸法はdimtol=0のまま——の3方式を使い分ける。エンジンは寸法の意味(はめあい/対称/なし)をAI作図計画側で判定し、どちらの機構を使うか選択する。"
+  },
+
+  "placement": {
+    "dline_offset_from_geometry_first_level_mm": {
+      "median": 16.1,
+      "mean": 20.3,
+      "p25": 11.4,
+      "p75": 23.0,
+      "p90": 31.7,
+      "ratio_within_30mm": 0.882,
+      "evidence": "855本の線形(rotated)寸法について、defpoint2-defpoint3(引出線起点=ジオメトリ上の2点)を結ぶ直線からdefpoint(寸法線位置)までの垂直距離を計測。",
+      "rule": "第1段目の寸法線はジオメトリ輪郭から概ね15〜20mmオフセットして配置する(既定値として16mmを推奨)。密集度に応じて11〜31mmの範囲で調整可。"
+    },
+    "dline_stacking_increment_mm": {
+      "value": 8.0,
+      "source": "dimstyle_base.dimdli",
+      "rule": "2段目以降は1段目オフセットに8mm刻みで加算する(累進・並列寸法の標準間隔)。"
+    },
+    "leader_angle_deg": {
+      "distribution": "-154°〜+150°の全方位に分布(median 62°、mean 51°)。特定角度への強い偏りはなし(45°刻み等のスナップ規則は確認できず、部品ジオメトリに応じて自由な角度で引かれている)。",
+      "rule": "引出線の角度は固定スナップを設けず、注記対象の穴/フィーチャーからテキスト配置可能な空きスペースへ向けて自由角度で引く。"
+    },
+    "leader_length_mm": {
+      "median": 23.9,
+      "mean": 26.5,
+      "range": "9.3〜102.8",
+      "rule": "引出線の長さは概ね10〜50mm程度(中央値24mm)。長距離(50mm超)は詳細図が離れた位置にある場合の例外。"
+    }
+  },
+
+  "views": {
+    "note": "空間クラスタリング(幾何要素の近傍連結成分)による推定。gap=45mm・要素数4以上の島を「ビュー相当」とみなす閾値を10ファイルでの比較検証により採用(gap=18mmでは孤立した穴等が過剰に分割され中央値11という非現実的な値になった)。",
+    "n_views_estimate_per_file": {
+      "median": 3,
+      "mean": 4.15,
+      "distribution_top5": [["2", 18], ["4", 18], ["3", 16], ["1", 11], ["5", 6]]
+    },
+    "caveat": "機械的クラスタリングは『同一ビュー内で離れた穴』と『別ビュー』を完全には区別できない(例: 大型フランジの外周ボルト穴が中心ジオメトリと45mm以上離れていると誤って別クラスタになる)。1部品あたり1〜5ビュー(中央値3)が主流という傾向値として扱い、AI作図計画の最終判断はSWモデルの形状クラス判定と併用すること。"
+  },
+
+  "centerlines": {
+    "centerline_lines_per_file": {"median": 8, "mean": 9.6, "linetype": "DASHDOT"},
+    "centerline_circles_per_file": {"median": 0, "files_with_any": "16/80 (20%)", "linetype": "DASHDOT", "note": "PCD(ピッチ円)等の円形中心線。ボルト穴パターンを持つ部品でのみ出現。"},
+    "rule": "軸線・対称中心線は原則DASHDOT線種のLINEで描画する。PCD等の円形基準線もDASHDOTのCIRCLEで表現する(全体の20%の部品にのみ必要=ボルト穴パターンを持つ部品限定)。"
+  },
+
+  "finish_and_weld_symbols": {
+    "surface_finish": {
+      "block_name_pattern": "AGM_JISB0031_198201",
+      "standard": "JIS B 0031(表面性状の図示方法)",
+      "count": 29,
+      "n_files": 29,
+      "geometry": "POINT + LWPOLYLINE(2エンティティ、小さなチェックマーク状の仕上げ記号)",
+      "note": "insert=(0,0)/scale=1でブロック内部座標に絶対座標が焼き込まれている(図枠のINSERTと同じ慣習。調査/frame_analysis.md参照)。1部品あたり1個程度、加工面の指示箇所に配置。"
+    },
+    "tapped_hole_symbol": {
+      "block_name_pattern": "AGM_JISB0205_199701",
+      "standard": "JIS B 0205(一般用メートルねじ)",
+      "count": 33,
+      "n_files": 33,
+      "geometry": "POINT×2 + CIRCLE×2(同心円、ねじ山外径/谷径相当) + DASHDOT LINE×2(十字中心線)",
+      "note": "タップ穴の正面図に描く『ねじ穴の製図記号』(同心円+中心線)。穴注記(観点2のM表記)と併用される。"
+    },
+    "welding_symbol": {
+      "block_name_pattern": "AGM_JISZ3021_198701",
+      "standard": "JIS Z 3021(溶接記号)",
+      "count": 1,
+      "note": "溶接構造部品でのみ出現(バケットA80枚中1枚)。基準線+旗记号+数値2個(脚長等)の構成。"
+    },
+    "fastener_illustration": {
+      "block_name_pattern": "AGM_JISB1181_199301 / AGM_JISB1176_198801",
+      "standard": "JIS B 1181(六角ナット) / JIS B 1176(小ねじ)",
+      "count": "各1",
+      "note": "極めて低頻度。ボルト/ナット/ねじを模式的に描いた一品もの挿絵ブロック(締結部材の形状確認用と推定)。エンジンの標準機能としては優先度低。"
+    },
+    "rule": "①面精度指定にはJISB0031仕上げ記号、②タップ穴には正面図上にJISB0205同心円+中心線記号、を必要箇所にのみ配置する。いずれも既存INSERTブロックをそのまま複製せず、新規ファイルごとにジオメトリを再生成すること(insert=(0,0)絶対座標焼き込みの慣習を維持するか、より保守しやすい相対座標+INSERT変換に置き換えるかはエンジン実装時の設計判断: 相対座標化を推奨)。"
+  },
+
+  "hole_notes": {
+    "_ref": "調査/hole_note_patterns.json に正規表現+頻度+実例の詳細",
+    "primary_diameter_symbol": "%%c (AutoCAD制御コード。φのUnicode文字そのものは0件、全て%%cで統一)",
+    "format_examples": [
+      "2-%%c6  (個数-直径。最多パターン、count_phi 44件)",
+      "%%c80   (単体直径、phi_only 94件)",
+      "2-M5    (個数-ねじ呼び径、count_metric_thread 33件)",
+      "M5      (単体ねじ呼び径、metric_thread 81件)",
+      "2-M5通しザグリ%%c6深さ10\\P120°振り (複合注記: 個数-ねじ+ザグリ+深さ+配置角度、複数行\\P区切り)",
+      "(PCD108) (ピッチ円直径)",
+      "下穴%%c6.6 (タップ下穴径)"
+    ],
+    "rule": "穴注記は必ず%%c制御コードでφを表現する(Unicode文字のφ/Φは使わない)。個数を伴う場合は『<個数>-<記号><値>』の順(ハイフンは全角/半角どちらも実例あり、新規生成は半角ハイフン'-'に統一を推奨)。複合注記は\\Pで改行し、1行目=個数+径+ザグリ種別+深さ、2行目=配置角度(PCD上の位置)とする構成が代表的。"
+  },
+
+  "common_notes": {
+    "_ref": "調査/style_corpus_stats.json の notes.recurring_normalized_top30",
+    "top_patterns": [
+      {"text": "注記：塗装色は、工番指定色　とする。", "count": 33},
+      {"text": "注記：塗装は、不要　とする。", "count": 12},
+      {"text": "注記：塗装色は、赤色　とする。", "count": 8},
+      {"text": "注記：塗装は、プライマーのみ　とする。", "count": 8},
+      {"text": "注記．　塗装色は工番指定色とする。　指示無き角部はＣ０．２、隅部はＲ２以下とする。", "count": 3}
+    ],
+    "rule": "塗装指示注記(『注記：塗装＿＿は／色は、＿＿とする。』)はほぼ全部品図に付記される定型文。値のバリエーションは『工番指定色/不要/赤色/プライマーのみ』の4種が主。エンジンは部品の塗装要否をAI作図計画から受け取り、この定型文テンプレートに値を差し込んで生成する。二次的に『指示無き角部はC0.2、隅部はR2以下とする。』という共通仕上げ注記も一部で併記される。"
+  },
+
+  "open_questions": [
+    "diameter_via_linear(dimpost=%%c<>)方式とnative diameter(type=3)方式のどちらを新規エンジンの既定にするか。本分析はコーパス実測に基づき前者を多数派として推奨するが、ezdxf側の実装容易性(半径同様にネイティブ型を使う方が寸法線形状の自動生成は楽)とのトレードオフをディレクターと合意したい。",
+    "tolerance(native dimtol方式)の適用基準——『はめあいが絡む寸法』をAI作図計画側でどう機械判定するか(3Dモデルのfit指定情報が無い場合、手動指定に頼るしかない可能性)。",
+    "view数推定(空間クラスタリング)はあくまで参考値。フェーズ2のSWビュー投影ではSW側でビュー数が既知になるため、フェーズ3エンジンはこの統計値でなくSW側のビュー数を正とすべきという理解でよいか確認したい。"
+  ]
+}
