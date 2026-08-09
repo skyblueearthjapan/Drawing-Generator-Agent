@@ -504,8 +504,10 @@ def _clean_mtext(raw):
     u"""MTEXTの書式コード(\\Txxx; \\Wxxx; 等)と波括弧グループを取り除き、\\Pを改行にする。
     AutoCADの制御コード(%%c=φ / %%p=± / %%d=°)と公差スタック(\\S上^ 下;)も可読化する。"""
     s = raw.replace("\\P", "\n")
-    s = re.sub(r"\\S([^^]*)\^\s*([^;]*);", lambda m: "%s/%s" % (m.group(1).strip(),
-                                                                m.group(2).strip()), s)
+    # 公差スタックは「上/下」に潰す。**先頭に空白を入れないと寸法値と地続きになり
+    # 『%%c30』+『0/-0.021』が『φ300/-0.021』と誤読される**(TEST-003で実害)
+    s = re.sub(r"\\S([^^]*)\^\s*([^;]*);", lambda m: " %s/%s" % (m.group(1).strip(),
+                                                                 m.group(2).strip()), s)
     s = re.sub(r"\\[A-Za-z][^;]*;", "", s)
     s = s.replace("{", "").replace("}", "")
     s = s.replace("%%c", u"\u03c6").replace("%%C", u"\u03c6")

@@ -1,0 +1,230 @@
+{
+  "schema_version": "1.0",
+  "_note": "作図計画JSON(TEST-003 端子棒)。スキーマは engine/plan_schema.md。寸法の集合は人間の正解図面 15015-P3-012_013.dxf の端子棒(012)部分から読み取った(=『どの寸法を入れるか』の正解)。測定点は**3Dモデル座標(space=model)の実在特徴点**で指定する。人間図面のジオメトリは正解として使わない(CLAUDE.md知見: 人間図面には作図誤りがある。実際 φ25 の測定点を端面(0,±12.5)に取っているが、そこはC1面取り後でφ23相当。生成側は面取り開始点(-1,±12.5)で測る)。",
+
+  "part": {
+    "model": "15015-P3-012_端子棒",
+    "図番": "テスト-003",
+    "品名": "端子棒",
+    "shape_class": "旋盤物",
+    "材質": "BC6",
+    "個数": 1,
+    "形状要約": "全長78の段付き軸。X=-78側からφ25×5 → φ30×23 → φ25×49 → 右端C1面取り。右端から10の範囲に二面取り(19)。右端面からM10深さ20(下穴φ8.5深さ20)。"
+  },
+
+  "source": {
+    "base_dxf": "生成図面/TEST-003_端子棒.dxf",
+    "meta_json": "調査/phase2_meta_15015-P3-012_端子棒.json",
+    "scale": 1.0
+  },
+
+  "defaults": {
+    "first_offset_mm": 16.0,
+    "stack_step_mm": 8.0,
+    "snap_tol_mm": 0.01,
+    "gate_tol_mm": 0.01,
+    "_note_style": "2026-08-09ユーザー確定の流儀。既定は engine/dim_engine.py の DIAMETER_STYLE_DEFAULT / HOLE_NOTE_DEFAULT。ここに書くと計画単位で上書きできる",
+    "diameter_style": {"circular_view": "native", "profile_view": "linear"},
+    "hole_note": {"notation": "kiri", "width": "zenkaku"}
+  },
+
+  "dimensions": [
+    {
+      "id": "L5_left_step",
+      "comment": "左端φ25部の長さ5。人間図面の5に対応。front上側1段目",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-78.0, 12.5, 0.0],
+        "p2": [-73.0, 15.0, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "above", "level": 1},
+      "value_expected": 5.0,
+      "tolerance": null
+    },
+    {
+      "id": "L10_flat",
+      "comment": "二面取り部の長さ10(右端から)。人間図面の10に対応。front上側1段目(x範囲がL5と重ならないので同段)",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-10.0, 8.1240384046, 0.0],
+        "p2": [0.0, 11.5, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "above", "level": 1},
+      "value_expected": 10.0,
+      "tolerance": null
+    },
+    {
+      "id": "L28_to_step_end",
+      "comment": "左端からφ30部終端までの28。人間図面の28に対応。front上側2段目",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-78.0, 12.5, 0.0],
+        "p2": [-50.0, 15.0, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "above", "level": 2},
+      "value_expected": 28.0,
+      "tolerance": null
+    },
+    {
+      "id": "L50_from_step_end",
+      "comment": "φ30部終端から右端までの50。人間図面の50に対応。front上側2段目",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-50.0, 15.0, 0.0],
+        "p2": [0.0, 11.5, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "above", "level": 2},
+      "value_expected": 50.0,
+      "tolerance": null
+    },
+    {
+      "id": "L78_total",
+      "comment": "全長78。人間図面の78に対応。A3・4ビュー配置では上側3段目が平面図と干渉するため下側1段目へ回した(人間図面は上側最外段)",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-78.0, -12.5, 0.0],
+        "p2": [0.0, -11.5, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 1},
+      "value_expected": 78.0,
+      "tolerance": null
+    },
+    {
+      "id": "D25_left",
+      "comment": "左端部の外径φ25。front(輪郭ビュー)なので線形+dimpost='%%c<>'。左側1段目。人間図面のφ25(左)に対応",
+      "kind": "diameter",
+      "context": "profile_view",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-78.0, -12.5, 0.0],
+        "p2": [-78.0, 12.5, 0.0],
+        "direction": "vertical"
+      },
+      "placement": {"side": "left", "level": 1},
+      "value_expected": 25.0,
+      "tolerance": null,
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, 0.0],
+        "diameter": 25.0
+      }
+    },
+    {
+      "id": "D30_step",
+      "comment": "段付き部の外径φ30 公差0/-0.021(はめあい部)。人間図面 GMM008(dimtol=1/dimtp=0/dimtm=0.021/dimtdec=3)と同一。front左側2段目",
+      "kind": "diameter",
+      "context": "profile_view",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-73.0, -15.0, 0.0],
+        "p2": [-73.0, 15.0, 0.0],
+        "direction": "vertical"
+      },
+      "placement": {"side": "left", "level": 2},
+      "value_expected": 30.0,
+      "tolerance": {"mode": "limit", "upper": 0.0, "lower": -0.021, "dec": 3},
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, 0.0],
+        "diameter": 30.0
+      }
+    },
+    {
+      "id": "D25_right",
+      "comment": "右側軸部の外径φ25。front右側1段目。人間図面のφ25(右)に対応。**測定点は人間図面と違えてある**: 人間は端面(0,±12.5)に取っているが端面はC1面取り後でφ23。生成側は面取り開始点(-1,±12.5)で測る",
+      "kind": "diameter",
+      "context": "profile_view",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-1.0, -12.5, 0.0],
+        "p2": [-1.0, 12.5, 0.0],
+        "direction": "vertical"
+      },
+      "placement": {"side": "right", "level": 1},
+      "value_expected": 25.0,
+      "tolerance": null,
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, 0.0],
+        "diameter": 25.0
+      }
+    },
+    {
+      "id": "W19_flats",
+      "comment": "二面取りの二面幅19。right(円形ビュー)の下側1段目。測定点は二面取り稜線(z=±9.5)の実在端点。人間図面の19に対応",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [0.0, 6.4807406984, 9.5],
+        "p2": [0.0, 6.4807406984, -9.5],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 1},
+      "value_expected": 19.0,
+      "tolerance": null
+    }
+  ],
+
+  "hole_notes": [
+    {
+      "id": "N_tap_M10",
+      "comment": "人間図面の『Ｍ１０深さ２０』に対応。specから既定書式(全角)で自動生成。引出線始点は下穴φ8.5円の45度点(実在円上・anchor_checkで検証)",
+      "view": "right",
+      "spec": {"thread": "M10", "depth": 20},
+      "leader": {
+        "space": "model",
+        "points": [
+          [0.0, 3.0052038298, -3.0052038298],
+          [0.0, 13.0, -21.5],
+          [0.0, 13.0, -33.5]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [0.0, 13.0, -34.5],
+      "attachment": "bottom-left",
+      "anchor_check": {
+        "type": "on_circle",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, 0.0],
+        "diameter": 8.5
+      }
+    }
+  ],
+
+  "notes": [
+    {
+      "id": "N_paint",
+      "comment": "人間図面(012側)の注記と同文。塗装不要(013のホルダーとは文面が違う)",
+      "text": "注記．\\P　塗装不要とする。\\P　指示無き角部はＣ０．２、隅部はＲ２以下とする。",
+      "insert": [300.0, 75.0],
+      "attachment": "top-left",
+      "height": 3.5
+    }
+  ]
+}

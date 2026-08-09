@@ -1,0 +1,411 @@
+{
+  "gate": "gate2_completeness_v1",
+  "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\TEST-002_ホルダー.dxf",
+  "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\plan_TEST-002_ホルダー.json",
+  "dropped_dimensions": [],
+  "ok": true,
+  "unspecified": [],
+  "floating_dimensions": [],
+  "redundant_dimensions": [
+    {
+      "axis": "X",
+      "by": "L5_bore_land(5)",
+      "from": -5.0,
+      "to": 0.0,
+      "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+    }
+  ],
+  "duplicate_value_dimensions": [],
+  "circles": [
+    {
+      "diameter": 8.0,
+      "count": 2,
+      "views": [
+        "right"
+      ],
+      "covered_by": "dimension_or_note",
+      "ok": true
+    },
+    {
+      "diameter": 11.0,
+      "count": 2,
+      "views": [
+        "right"
+      ],
+      "covered_by": "dimension_or_note",
+      "ok": true
+    },
+    {
+      "diameter": 26.0,
+      "count": 1,
+      "views": [
+        "right"
+      ],
+      "covered_by": "dimension_or_note",
+      "ok": true
+    },
+    {
+      "diameter": 33.0,
+      "count": 1,
+      "views": [
+        "right"
+      ],
+      "covered_by": "dimension_or_note",
+      "ok": true
+    },
+    {
+      "diameter": 75.0,
+      "count": 1,
+      "views": [
+        "right"
+      ],
+      "covered_by": "dimension_or_note",
+      "ok": true
+    }
+  ],
+  "axes": {
+    "X": {
+      "axis": "X",
+      "node_count": 4,
+      "nodes": [
+        -40.0,
+        -7.0,
+        -5.0,
+        0.0
+      ],
+      "mode": "chain",
+      "edges": [
+        {
+          "from": -40.0,
+          "to": 0.0,
+          "by": "L40_total(40)",
+          "new_link": true
+        },
+        {
+          "from": -40.0,
+          "to": -5.0,
+          "by": "L35_counterbore_depth(35)",
+          "new_link": true
+        },
+        {
+          "from": -5.0,
+          "to": 0.0,
+          "by": "L5_bore_land(5)",
+          "new_link": false
+        },
+        {
+          "from": 0.0,
+          "to": -7.0,
+          "by": "注記深さ7",
+          "new_link": true
+        }
+      ],
+      "uncovered": [],
+      "out_of_scope_nodes": [],
+      "symmetry_center": null
+    },
+    "Y": {
+      "axis": "Y",
+      "node_count": 11,
+      "nodes": [
+        -37.5,
+        -16.5,
+        -13.0,
+        -5.5,
+        -4.0,
+        0.0,
+        4.0,
+        5.5,
+        13.0,
+        16.5,
+        37.5
+      ],
+      "mode": "symmetric",
+      "edges": [
+        {
+          "from": 0.0,
+          "to": -16.5,
+          "by": "D33_counterbore(対称・径/幅33)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 16.5,
+          "by": "D33_counterbore(対称・径/幅33)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -13.0,
+          "by": "D26_bore(対称・径/幅26)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 13.0,
+          "by": "D26_bore(対称・径/幅26)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 37.5,
+          "by": "円φ75(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -37.5,
+          "by": "円φ75(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 5.5,
+          "by": "円φ11(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -5.5,
+          "by": "円φ11(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 4.0,
+          "by": "円φ8(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -4.0,
+          "by": "円φ8(right)",
+          "new_link": true
+        }
+      ],
+      "uncovered": [],
+      "out_of_scope_nodes": [],
+      "symmetry_center": 0.0
+    },
+    "Z": {
+      "axis": "Z",
+      "node_count": 17,
+      "nodes": [
+        -37.5,
+        -35.5,
+        -34.0,
+        -30.0,
+        -26.0,
+        -24.5,
+        -16.5,
+        -13.0,
+        0.0,
+        13.0,
+        16.5,
+        24.5,
+        26.0,
+        30.0,
+        34.0,
+        35.5,
+        37.5
+      ],
+      "mode": "symmetric",
+      "edges": [
+        {
+          "from": 0.0,
+          "to": 30.0,
+          "by": "P60_hole_pitch(対称・径/幅60)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -30.0,
+          "by": "P60_hole_pitch(対称・径/幅60)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 13.0,
+          "by": "円φ26(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -13.0,
+          "by": "円φ26(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 37.5,
+          "by": "円φ75(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -37.5,
+          "by": "円φ75(right)",
+          "new_link": true
+        },
+        {
+          "from": 30.0,
+          "to": 35.5,
+          "by": "円φ11(right)",
+          "new_link": true
+        },
+        {
+          "from": 30.0,
+          "to": 24.5,
+          "by": "円φ11(right)",
+          "new_link": true
+        },
+        {
+          "from": -30.0,
+          "to": -24.5,
+          "by": "円φ11(right)",
+          "new_link": true
+        },
+        {
+          "from": -30.0,
+          "to": -35.5,
+          "by": "円φ11(right)",
+          "new_link": true
+        },
+        {
+          "from": -30.0,
+          "to": -26.0,
+          "by": "円φ8(right)",
+          "new_link": true
+        },
+        {
+          "from": -30.0,
+          "to": -34.0,
+          "by": "円φ8(right)",
+          "new_link": true
+        },
+        {
+          "from": 30.0,
+          "to": 34.0,
+          "by": "円φ8(right)",
+          "new_link": true
+        },
+        {
+          "from": 30.0,
+          "to": 26.0,
+          "by": "円φ8(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 16.5,
+          "by": "円φ33(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -16.5,
+          "by": "円φ33(right)",
+          "new_link": true
+        }
+      ],
+      "uncovered": [],
+      "out_of_scope_nodes": [],
+      "symmetry_center": 0.0
+    }
+  },
+  "dimensions_read": [
+    {
+      "id": "L40_total",
+      "role": "position_pair",
+      "axis": "X",
+      "value": 40.0,
+      "view": "front"
+    },
+    {
+      "id": "L35_counterbore_depth",
+      "role": "position_pair",
+      "axis": "X",
+      "value": 35.0,
+      "view": "front"
+    },
+    {
+      "id": "L5_bore_land",
+      "role": "position_pair",
+      "axis": "X",
+      "value": 5.0,
+      "view": "front"
+    },
+    {
+      "id": "D33_counterbore",
+      "role": "position_pair",
+      "axis": "Y",
+      "value": 33.0,
+      "view": "front"
+    },
+    {
+      "id": "D26_bore",
+      "role": "position_pair",
+      "axis": "Y",
+      "value": 26.0,
+      "view": "front"
+    },
+    {
+      "id": "D75_outer",
+      "role": "diameter",
+      "axis": null,
+      "value": 75.0,
+      "view": "right"
+    },
+    {
+      "id": "P60_hole_pitch",
+      "role": "position_pair",
+      "axis": "Z",
+      "value": 60.0,
+      "view": "right"
+    }
+  ],
+  "hole_notes": [
+    {
+      "raw": "\\A1;２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０",
+      "normalized": "2-8キリ ザグリ%%c11深さ7 PCD60",
+      "diameters": [
+        8.0,
+        11.0
+      ],
+      "taps": [],
+      "depths": [
+        7.0
+      ],
+      "pcds": [
+        60.0
+      ]
+    }
+  ],
+  "note_diameters": [
+    8.0,
+    11.0
+  ],
+  "note_taps": [],
+  "note_depths": [
+    7.0
+  ],
+  "covered_diameters": [
+    8.0,
+    11.0,
+    26.0,
+    33.0,
+    75.0
+  ],
+  "chamfers": [],
+  "out_of_scope": [
+    {
+      "class": "view_not_axis_aligned",
+      "view": "iso",
+      "reason": "軸平行でない投影(等角投影等)。v1は寸法棚卸しの対象外"
+    },
+    {
+      "class": "not_implemented",
+      "reason": "表面性状記号・幾何公差・溶接記号・ねじのピッチ/等級はv1の判定対象外(生成側も未実装)"
+    }
+  ]
+}

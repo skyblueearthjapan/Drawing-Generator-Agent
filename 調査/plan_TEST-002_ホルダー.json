@@ -22,7 +22,10 @@
     "first_offset_mm": 16.0,
     "stack_step_mm": 8.0,
     "snap_tol_mm": 0.01,
-    "gate_tol_mm": 0.01
+    "gate_tol_mm": 0.01,
+    "_note_style": "2026-08-09ユーザー確定の流儀。既定は engine/dim_engine.py の DIAMETER_STYLE_DEFAULT / HOLE_NOTE_DEFAULT。ここに書くと計画単位で上書きできる",
+    "diameter_style": {"circular_view": "native", "profile_view": "linear"},
+    "hole_note": {"notation": "kiri", "width": "zenkaku"}
   },
 
   "dimensions": [
@@ -73,8 +76,9 @@
     },
     {
       "id": "D33_counterbore",
-      "comment": "ザグリ径φ33。線形+dimpost='%%c<>'(裁定Q1)。front左側1段目。人間図面のφ33に対応",
-      "kind": "diameter_linear",
+      "comment": "ザグリ径φ33。front(輪郭ビュー)なので線形+dimpost='%%c<>'。front左側1段目。人間図面のφ33に対応",
+      "kind": "diameter",
+      "context": "profile_view",
       "view": "front",
       "measure": {
         "space": "model",
@@ -95,8 +99,9 @@
     },
     {
       "id": "D26_bore",
-      "comment": "内径φ26。front右側(右ビューとの隙間18.2mmに収めるためoffset=11mmへ詰めた)。人間図面のφ26に対応",
-      "kind": "diameter_linear",
+      "comment": "内径φ26。front(輪郭ビュー)なので線形+dimpost。右側(右ビューとの隙間18.2mmに収めるためoffset=11mmへ詰めた)。人間図面のφ26に対応",
+      "kind": "diameter",
+      "context": "profile_view",
       "view": "front",
       "measure": {
         "space": "model",
@@ -117,25 +122,18 @@
     },
     {
       "id": "D75_outer",
-      "comment": "外径φ75。right(正面円形)ビューの下側2段目。人間図面はネイティブDIAMETER型だが、§8ルール1・裁定Q1に従い線形+dimpost方式にした",
-      "kind": "diameter_linear",
+      "comment": "外径φ75。right(円形ビュー)なのでネイティブDIAMETER型(円を斜めに貫く寸法線+両矢印)。人間図面 GMM006(dimtype=131/base=3)と同方式。2026-08-09ユーザー確定",
+      "kind": "diameter",
+      "context": "circular_view",
       "view": "right",
       "measure": {
         "space": "model",
-        "p1": [0.0, 0.0, 37.5],
-        "p2": [0.0, 0.0, -37.5],
-        "direction": "horizontal"
+        "p1": [0.0, 0.0, 0.0],
+        "diameter": 75.0,
+        "leader_angle": 145.0
       },
-      "placement": {"side": "below", "level": 2},
       "value_expected": 75.0,
-      "tolerance": null,
-      "cross_check": {
-        "type": "circle_in_view",
-        "view": "right",
-        "space": "model",
-        "center": [0.0, 0.0, 0.0],
-        "diameter": 75.0
-      }
+      "tolerance": null
     },
     {
       "id": "P60_hole_pitch",
@@ -157,9 +155,9 @@
   "hole_notes": [
     {
       "id": "N_bolt_holes",
-      "comment": "人間図面の『２－８キリ　ザグリ%%c１１深さ７ / ＰＣＤ６０』に対応。裁定Q5に従い半角+%%cへ統一",
+      "comment": "人間図面の『２－８キリ　ザグリ%%c１１深さ７ / ＰＣＤ６０』に対応。2026-08-09ユーザー確定によりキリ表記・全角を踏襲(specから自動生成)",
       "view": "right",
-      "pattern": "\\A1;2-%%c8ザグリ%%c11深さ7\\PPCD60",
+      "spec": {"count": 2, "drill": 8, "counterbore": {"dia": 11, "depth": 7}, "placement": "PCD60"},
       "leader": {
         "space": "view",
         "points": [[271.3890873, 103.2970733], [288.0, 120.0], [298.0, 120.0]]

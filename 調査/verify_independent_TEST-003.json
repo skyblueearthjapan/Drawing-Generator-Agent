@@ -1,0 +1,331 @@
+{
+  "test": "TEST-003",
+  "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\TEST-003_端子棒.dxf",
+  "file_attrs_ok": true,
+  "frame": {
+    "total": 240,
+    "frame_matched": 113,
+    "remaining": 127,
+    "remaining_ratio": 0.5291666666666667
+  },
+  "gate1": [
+    {
+      "id": "L5_left_step",
+      "style": "GEN001",
+      "kind": "linear",
+      "dimtype": 32,
+      "dimtype_base": 0,
+      "kind_impl_ok": true,
+      "expected": 5.0,
+      "measured": 5.0,
+      "diff_mm": 0.0,
+      "text": "5",
+      "text_value": 5.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "L10_flat",
+      "style": "GEN002",
+      "kind": "linear",
+      "dimtype": 32,
+      "dimtype_base": 0,
+      "kind_impl_ok": true,
+      "expected": 10.0,
+      "measured": 10.0,
+      "diff_mm": 0.0,
+      "text": "10",
+      "text_value": 10.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "L28_to_step_end",
+      "style": "GEN003",
+      "kind": "linear",
+      "dimtype": 32,
+      "dimtype_base": 0,
+      "kind_impl_ok": true,
+      "expected": 28.0,
+      "measured": 28.0,
+      "diff_mm": 0.0,
+      "text": "28",
+      "text_value": 28.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "L50_from_step_end",
+      "style": "GEN004",
+      "kind": "linear",
+      "dimtype": 32,
+      "dimtype_base": 0,
+      "kind_impl_ok": true,
+      "expected": 50.0,
+      "measured": 50.0,
+      "diff_mm": 0.0,
+      "text": "50",
+      "text_value": 50.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "L78_total",
+      "style": "GEN005",
+      "kind": "linear",
+      "dimtype": 32,
+      "dimtype_base": 0,
+      "kind_impl_ok": true,
+      "expected": 78.0,
+      "measured": 78.0,
+      "diff_mm": 0.0,
+      "text": "78",
+      "text_value": 78.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "D25_left",
+      "style": "GEN006",
+      "kind": "diameter_linear",
+      "dimtype": 32,
+      "dimtype_base": 0,
+      "kind_impl_ok": true,
+      "expected": 25.0,
+      "measured": 25.0,
+      "diff_mm": 0.0,
+      "text": "%%c25",
+      "text_value": 25.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "D30_step",
+      "style": "GEN007",
+      "kind": "diameter_linear",
+      "dimtype": 32,
+      "dimtype_base": 0,
+      "kind_impl_ok": true,
+      "expected": 30.0,
+      "measured": 30.0,
+      "diff_mm": 0.0,
+      "text": "\\A1;%%c30{\\H0.625x;\\S 0^ -0.021;}",
+      "text_value": 30.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "D25_right",
+      "style": "GEN008",
+      "kind": "diameter_linear",
+      "dimtype": 32,
+      "dimtype_base": 0,
+      "kind_impl_ok": true,
+      "expected": 25.0,
+      "measured": 25.0,
+      "diff_mm": 0.0,
+      "text": "%%c25",
+      "text_value": 25.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "W19_flats",
+      "style": "GEN009",
+      "kind": "linear",
+      "dimtype": 32,
+      "dimtype_base": 0,
+      "kind_impl_ok": true,
+      "expected": 19.0,
+      "measured": 19.0,
+      "diff_mm": 0.0,
+      "text": "19",
+      "text_value": 19.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    }
+  ],
+  "gate1_ok": true,
+  "style_ok": true,
+  "style_mismatches": [],
+  "dimfit_equivalence": {
+    "dimfit_in_file": null,
+    "dimatfit": 3,
+    "dimtmove": 0,
+    "spec_dimfit": 3
+  },
+  "dimpost": {
+    "L5_left_step": "",
+    "L10_flat": "",
+    "L28_to_step_end": "",
+    "L50_from_step_end": "",
+    "L78_total": "",
+    "D25_left": "%%c<>",
+    "D30_step": "%%c<>",
+    "D25_right": "%%c<>",
+    "W19_flats": ""
+  },
+  "notes": [
+    "\\A1;Ｍ１０深さ２０"
+  ],
+  "note_ok": true,
+  "human_compare": {
+    "human": [
+      {
+        "kind": "linear",
+        "value": 19.0,
+        "dimpost": "",
+        "style": "GMM002",
+        "draw_text": "\\A1;19",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0
+      },
+      {
+        "kind": "diameter_linear",
+        "value": 25.0,
+        "dimpost": "%%c<>",
+        "style": "GMM003",
+        "draw_text": "\\A1;%%c25",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0
+      },
+      {
+        "kind": "linear",
+        "value": 10.0,
+        "dimpost": "",
+        "style": "GMM002",
+        "draw_text": "\\A1;10",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0
+      },
+      {
+        "kind": "diameter_linear",
+        "value": 30.0,
+        "dimpost": "%%c<>",
+        "style": "GMM008",
+        "draw_text": "\\A1;%%c30{\\H0.625x;\\S 0^ -0.021;}",
+        "dimtol": 1,
+        "dimtp": 0.0,
+        "dimtm": 0.021
+      },
+      {
+        "kind": "linear",
+        "value": 78.0,
+        "dimpost": "",
+        "style": "GMM004",
+        "draw_text": "\\A1;78",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0
+      },
+      {
+        "kind": "linear",
+        "value": 28.0,
+        "dimpost": "",
+        "style": "GMM004",
+        "draw_text": "\\A1;28",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0
+      },
+      {
+        "kind": "linear",
+        "value": 50.0,
+        "dimpost": "",
+        "style": "GMM004",
+        "draw_text": "\\A1;50",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0
+      },
+      {
+        "kind": "linear",
+        "value": 5.0,
+        "dimpost": "",
+        "style": "GMM002",
+        "draw_text": "\\A1;5",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0
+      },
+      {
+        "kind": "diameter_linear",
+        "value": 25.0,
+        "dimpost": "%%c<>",
+        "style": "GMM009",
+        "draw_text": "\\A1;%%c25",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0
+      }
+    ],
+    "human_notes": [
+      "\\T1.000000;Ｍ１０×２０　ＳＷ　Ｗ",
+      "\\A1;Ｍ１０深さ２０"
+    ],
+    "generated": [
+      {
+        "id": "L5_left_step",
+        "kind": "linear",
+        "value": 5.0
+      },
+      {
+        "id": "L10_flat",
+        "kind": "linear",
+        "value": 10.0
+      },
+      {
+        "id": "L28_to_step_end",
+        "kind": "linear",
+        "value": 28.0
+      },
+      {
+        "id": "L50_from_step_end",
+        "kind": "linear",
+        "value": 50.0
+      },
+      {
+        "id": "L78_total",
+        "kind": "linear",
+        "value": 78.0
+      },
+      {
+        "id": "D25_left",
+        "kind": "diameter_linear",
+        "value": 25.0
+      },
+      {
+        "id": "D30_step",
+        "kind": "diameter_linear",
+        "value": 30.0
+      },
+      {
+        "id": "D25_right",
+        "kind": "diameter_linear",
+        "value": 25.0
+      },
+      {
+        "id": "W19_flats",
+        "kind": "linear",
+        "value": 19.0
+      }
+    ],
+    "missing": [],
+    "extra": []
+  },
+  "human_set_ok": true,
+  "tolerance_smoke_ok": true,
+  "tolerances_in_drawing": [
+    {
+      "id": "D30_step",
+      "dimtp": 0.0,
+      "dimtm": 0.021,
+      "dimtdec": 3,
+      "text": "\\A1;%%c30{\\H0.625x;\\S 0^ -0.021;}"
+    }
+  ],
+  "ok": true
+}

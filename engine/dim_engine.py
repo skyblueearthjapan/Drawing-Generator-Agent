@@ -7,12 +7,19 @@ u"""寸法記入エンジン(恒久モジュール・フェーズ3-B)。
     apply_plan(plan_path, out_dxf_path) -> 検証レポートdict
 
 設計方針(調査/dimension_style_analysis.md §8 / 図枠/dimstyle_spec.json / 裁定Q1-Q5 準拠):
-  1. 直径寸法は「線形(rotated)DIMENSION + dimpost='%%c<>'」(裁定Q1)。半径はRADIUS型+'R<>'
+  1. 直径寸法は**文脈で使い分ける**(2026-08-09 ユーザー確定・裁定Q1の更新):
+       円形ビュー上の外径 → ネイティブDIAMETER型(dimtype=3。円を斜めに貫く寸法線+両矢印)
+       断面・側面(輪郭)ビュー → 線形(rotated)DIMENSION + dimpost='%%c<>'
+     計画側は kind='diameter' + context='circular_view'/'profile_view' と書き、
+     どちらの実装を使うかは defaults.diameter_style(DIAMETER_STYLE_DEFAULT)で決める
+     = **裁定が変わってもこの1箇所の差し替えで戻せる**。半径はRADIUS型+'R<>'
   2. 1寸法=1専用DIMSTYLE(XDATAオーバーライドは使わない。コーパス実測0件)
   3. _OPEN30 矢印は ARROWS.create_block() で明示生成(ezdxfの罠)
   4. dimdsep=46(明示しないとカンマ区切りになるezdxfの罠)
   5. 寸法線オフセットは輪郭から16mm、2段目以降 +8mm 刻み
-  6. 穴注記は %%c 制御コード・半角統一(裁定Q5)
+  6. 穴注記は**キリ表記・全角**が既定(2026-08-09 ユーザー確定。裁定Q5の更新)。
+     人間図面の `２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０` を踏襲する。
+     φ表記/半角へ戻す場合は defaults.hole_note(HOLE_NOTE_DEFAULT)を差し替える
   7. 公差ゼロ側は描画後に text を「0」へ整形(裁定の追記。dimtzinでは再現不可)
   8. **ゲート①内蔵**: 各寸法について
        (a) 測定点が実ジオメトリの特徴点に一致するか(snap検証)
@@ -54,6 +61,23 @@ NOTE_ZONE_RECT = compose_drawing.NOTE_ZONE_RECT
 CLASSIFY_MARGIN_MM = 8.0
 
 ATTACH = compose_drawing.ATTACH
+
+# ---------------------------------------------------------------------------
+# ❗未確定だった流儀の既定値(2026-08-09 ユーザー確定)。
+#    **裁定が変わったらここだけ差し替えれば全計画に反映される**ように分離してある。
+#    計画JSONの defaults.diameter_style / defaults.hole_note で個別に上書きできる。
+# ---------------------------------------------------------------------------
+# 直径寸法の実装方式: 円形ビュー(円が見えるビュー)の外径はネイティブDIAMETER型、
+# 断面・側面(輪郭)ビューは線形+dimpost='%%c<>'
+DIAMETER_STYLE_DEFAULT = {
+    "circular_view": "native",   # native | linear
+    "profile_view": "linear",    # native | linear
+}
+# 穴注記の書式: ドリル穴は「キリ」表記、文字は全角(%%c/\P/\A1;等の制御コードは半角のまま)
+HOLE_NOTE_DEFAULT = {
+    "notation": "kiri",   # kiri(=8キリ) | phi(=%%c8)
+    "width": "zenkaku",   # zenkaku | hankaku
+}
 
 
 class DimensionGateError(Exception):
@@ -300,6 +324,32 @@ def _zero_side_to_0(s):
     return s
 
 
+_TOL_HFAC_RE = re.compile(r"\\H([0-9.]+)x;")
+
+
+def fix_tolerance_height_factor(doc, dim, dimtfac):
+    u"""公差スタックの高さ係数表記を dimtfac の実値へ揃える。
+
+    ❗ezdxfは `\\H{:.2f}x;` で丸めるため dimtfac=0.625 が **`\\H0.62x;`** と書かれる。
+    GMM実ファイル(人間図面 GMM008)は `\\H0.625x;`。見た目の完全一致を優先し描画後に整形する。
+    """
+    geom = dim.dxf.get("geometry", None)
+    if not geom or geom not in doc.blocks:
+        return False
+    want = ("%g" % float(dimtfac))
+    changed = False
+    for e in doc.blocks.get(geom):
+        if e.dxftype() != "MTEXT":
+            continue
+        new = _TOL_HFAC_RE.sub(
+            lambda m: ("\\H%sx;" % want) if abs(float(m.group(1)) - float(dimtfac)) <= 0.01
+            else m.group(0), e.text)
+        if new != e.text:
+            e.text = new
+            changed = True
+    return changed
+
+
 def fix_zero_tolerance_text(doc, dim):
     u"""描画済みDIMENSIONの寸法文字MTEXT内で、公差のゼロ側を『0.000』→『0』へ整形する。
     (裁定: dimtzinでは再現できないためtext側で整形する)"""
@@ -318,6 +368,107 @@ def fix_zero_tolerance_text(doc, dim):
             e.text = new
             changed = True
     return changed
+
+
+# ---------------------------------------------------------------------------
+# ネイティブDIAMETER型のφ重複除去
+# ---------------------------------------------------------------------------
+# ❗ezdxfのDiameterDimensionレンダラーは PREFIX='Ø'(DXF出力時に'%%c')を**必ず**前置する
+#   (render/dim_radius.py RadiusMeasurement.format_text)。DIMSTYLEに dimpost='%%c<>' を
+#   設定するとアノニマスブロック内の描画文字が '%%c%%c75' と二重φになる。
+#   dimpost はコーパス流儀(GMM006 実測)に合わせて '%%c<>' のまま保持し、
+#   **キャッシュ描画側の重複だけを描画後に除去する**(DIMENSION.text は '<>' のままなので
+#   CAD側で再生成されても dimpost により正しく '%%c75' になる)。
+_DUP_PHI_RE = re.compile(r"(%%[cC])\s*(%%[cC])")
+
+
+def fix_duplicate_diameter_prefix(doc, dim):
+    u"""ネイティブDIAMETER寸法の描画文字にできる '%%c%%c' の重複を1つへ潰す。"""
+    geom = dim.dxf.get("geometry", None)
+    if not geom or geom not in doc.blocks:
+        return False
+    changed = False
+    for e in doc.blocks.get(geom):
+        if e.dxftype() == "MTEXT":
+            new = _DUP_PHI_RE.sub(r"\1", e.text)
+            if new != e.text:
+                e.text = new
+                changed = True
+        elif e.dxftype() == "TEXT":
+            new = _DUP_PHI_RE.sub(r"\1", e.dxf.text)
+            if new != e.dxf.text:
+                e.dxf.text = new
+                changed = True
+    return changed
+
+
+# ---------------------------------------------------------------------------
+# 穴注記パターン生成(裁定2026-08-09: キリ表記・全角が既定)
+# ---------------------------------------------------------------------------
+_PROTECT_RE = re.compile(r"(%%[cCpPdD]|\\P|\\[A-Za-z][^;]*;)")
+
+
+def _zenkaku_keep_codes(s):
+    u"""DXF制御コード(%%c, \\P, \\A1; 等)を保護したまま、半角英数記号・空白を全角へ変換する。"""
+    out = []
+    pos = 0
+    for m in _PROTECT_RE.finditer(s):
+        out.append(compose_drawing.to_zenkaku(s[pos:m.start()]))
+        out.append(m.group(0))
+        pos = m.end()
+    out.append(compose_drawing.to_zenkaku(s[pos:]))
+    return "".join(out)
+
+
+def _fmt_num(v):
+    return ("%g" % v)
+
+
+def build_hole_note_pattern(spec, style=None):
+    u"""構造化された穴仕様から注記パターン文字列を組み立てる。
+
+    spec 例:
+      {"count":2, "drill":8, "counterbore":{"dia":11,"depth":7}, "placement":"PCD60"}
+        -> キリ/全角: '\\A1;２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０'
+        -> φ/半角  : '\\A1;2-%%c8ザグリ%%c11深さ7\\PPCD60'
+      {"thread":"M10", "depth":20}
+        -> '\\A1;Ｍ１０深さ２０'
+
+    style: {"notation": "kiri"|"phi", "width": "zenkaku"|"hankaku"}(既定 HOLE_NOTE_DEFAULT)
+    """
+    st = dict(HOLE_NOTE_DEFAULT)
+    st.update(style or {})
+    lines = []
+    head = ""
+    cnt = spec.get("count")
+    if cnt:
+        head += "%d-" % int(cnt)
+    if spec.get("thread"):
+        head += str(spec["thread"])
+        if spec.get("depth") is not None:
+            head += u"深さ%s" % _fmt_num(spec["depth"])
+    elif spec.get("drill") is not None:
+        if st["notation"] == "kiri":
+            head += u"%sキリ" % _fmt_num(spec["drill"])
+        else:
+            head += "%%%%c%s" % _fmt_num(spec["drill"])
+        if spec.get("depth") is not None:
+            head += u"深さ%s" % _fmt_num(spec["depth"])
+    cb = spec.get("counterbore")
+    if cb:
+        sep = " " if st["notation"] == "kiri" else ""
+        head += u"%sザグリ%%%%c%s" % (sep, _fmt_num(cb["dia"]))
+        if cb.get("depth") is not None:
+            head += u"深さ%s" % _fmt_num(cb["depth"])
+    lines.append(head)
+    if spec.get("placement"):
+        lines.append(str(spec["placement"]))
+    for extra in spec.get("extra_lines", []):
+        lines.append(str(extra))
+    body = "\\P".join(lines)
+    if st["width"] == "zenkaku":
+        body = _zenkaku_keep_codes(body)
+    return "\\A1;" + body
 
 
 # ---------------------------------------------------------------------------
@@ -425,6 +576,12 @@ def _text_box(doc, dim, width_factor=0.75):
     return None
 
 
+def _disp_len(s):
+    u"""表示幅の概算(全角=2・半角=1)。注記の外接矩形推定に使う。"""
+    import unicodedata
+    return sum(2 if unicodedata.east_asian_width(ch) in ("F", "W", "A") else 1 for ch in s)
+
+
 def _rect_overlap(a, b):
     return not (a[2] <= b[0] or b[2] <= a[0] or a[3] <= b[1] or b[3] <= a[1])
 
@@ -452,6 +609,10 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
     stack_step = float(defaults.get("stack_step_mm", spec["dimstyle_base"]["dimdli"]["value"]))
     snap_tol = float(defaults.get("snap_tol_mm", 0.01))
     gate_tol = float(defaults.get("gate_tol_mm", 0.01))
+    diameter_style = dict(DIAMETER_STYLE_DEFAULT)
+    diameter_style.update(defaults.get("diameter_style", {}))
+    hole_note_style = dict(HOLE_NOTE_DEFAULT)
+    hole_note_style.update(defaults.get("hole_note", {}))
 
     src = plan["source"]
     base_dxf = base_dxf_override or os.path.join(ROOT, src["base_dxf"])
@@ -513,9 +674,18 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             name = "GEN%03d" % counter[0]
         return name
 
+    resolved_kinds = {}
     for item in plan.get("dimensions", []):
         did = item["id"]
+        # kind='diameter' は文脈(context)と defaults.diameter_style から実装方式を解決する。
+        # 明示の diameter_native / diameter_linear はそのまま使う(強制指定)。
         kind = item["kind"]
+        if kind == "diameter":
+            ctx = item.get("context", "profile_view")
+            if ctx not in diameter_style:
+                raise ValueError("%s: 未知のcontext '%s'(circular_view|profile_view)" % (did, ctx))
+            kind = "diameter_native" if diameter_style[ctx] == "native" else "diameter_linear"
+        resolved_kinds[did] = kind
         view = item["view"]
         if view not in tf:
             raise ValueError("%s: 未知のview '%s'" % (did, view))
@@ -531,7 +701,7 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         dv = dict(dimvars_base)
         if "dimdec" in item:
             dv["dimdec"] = int(item["dimdec"])
-        if kind == "diameter_linear":
+        if kind in ("diameter_linear", "diameter_native"):
             dv["dimpost"] = "%%c<>"
         elif kind == "radius":
             dv["dimpost"] = item.get("dimpost", "R<>")
@@ -571,6 +741,27 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             dim.render()
             ent = dim.dimension
             meas_pts = [p1, p2]
+        elif kind == "diameter_native":
+            # 円形ビューの外径。円を斜めに貫く寸法線+両端矢印(dimtype=3)。
+            # 測定点は「円の中心」+「実在円の半径」で、任意角の円周点は特徴点にならないため
+            # snapは中心のみ。代わりに **実在円の存在確認を必須**にする(下の circle_check)。
+            center = to_draw(view, space, meas["p1"])
+            if "diameter" in meas:
+                radius = float(meas["diameter"]) / 2.0
+            elif "p2" in meas:
+                edge = to_draw(view, space, meas["p2"])
+                radius = math.hypot(edge[0] - center[0], edge[1] - center[1])
+            else:
+                radius = float(item["value_expected"]) / 2.0
+            dim = msp.add_diameter_dim(center=center, radius=radius,
+                                       angle=float(meas.get("leader_angle", 45.0)),
+                                       dimstyle=style_name, dxfattribs=attribs)
+            if text_override:
+                dim.dimension.dxf.text = text_override
+            dim.render()
+            ent = dim.dimension
+            fix_duplicate_diameter_prefix(doc, ent)
+            meas_pts = [center]
         elif kind == "radius":
             center = to_draw(view, space, meas["p1"])
             if "radius" in meas:
@@ -606,6 +797,7 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
 
         if tol and tol.get("mode") == "limit":
             fix_zero_tolerance_text(doc, ent)
+            fix_tolerance_height_factor(doc, ent, dv["dimtfac"])
 
         # ---- ゲート① ----
         snaps = [round(nearest_feature_distance(p, feats[view]), 6) for p in meas_pts]
@@ -615,7 +807,7 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         shown = parse_dim_text_value(raw_text) if not text_override else None
 
         row = {
-            "id": did, "kind": kind, "view": view,
+            "id": did, "kind": kind, "plan_kind": item["kind"], "view": view,
             "expected": expected,
             "measured": None if measured is None else round(measured, 6),
             "diff_mm": None if measured is None else round(abs(measured - expected), 6),
@@ -639,6 +831,22 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         if row["text_diff_mm"] is not None and row["text_diff_mm"] > gate_tol:
             row["errors"].append(u"寸法文字 %.4f が実測 %.4f と不一致"
                                  % (shown, measured))
+
+        if kind == "diameter_native":
+            # ネイティブDIAMETER型は「そのビューに指定中心・指定径の実在円がある」ことを必須検証する
+            # (任意角の円周点はsnap検証できないため、これがゲート①(a)の代替になる)
+            ent_o = find_circle(per_view[view], meas_pts[0], expected, snap_tol)
+            row["circle_check"] = {"ok": ent_o is not None,
+                                   "center": [round(v, 4) for v in meas_pts[0]],
+                                   "diameter": expected}
+            if ent_o is None:
+                row["errors"].append(
+                    u"ネイティブDIAMETER: %s ビューに中心%s 直径%.4f の実在円が無い"
+                    % (view, [round(v, 4) for v in meas_pts[0]], expected))
+            elif abs(ent_o.dxf.radius * 2.0 - (measured or 0.0)) > gate_tol:
+                row["errors"].append(
+                    u"ネイティブDIAMETER: 実在円φ%.4f と実測 %.4f が不一致"
+                    % (ent_o.dxf.radius * 2.0, measured))
 
         cc = item.get("cross_check")
         if cc:
@@ -677,6 +885,15 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             _new_dimstyle(doc, ldr_style, lv)
     for note in plan.get("hole_notes", []):
         view = note["view"]
+        # pattern が明示されていればそれを使う(強制指定)。無ければ spec から既定書式で組み立てる
+        pattern = note.get("pattern")
+        if pattern is None:
+            if "spec" not in note:
+                raise ValueError("%s: hole_note は pattern か spec のどちらかが必要" % note["id"])
+            style_over = dict(hole_note_style)
+            style_over.update(note.get("style", {}))
+            pattern = build_hole_note_pattern(note["spec"], style_over)
+        note = dict(note, pattern=pattern)
         space = note.get("leader", {}).get("space", "view")
         pts = [to_draw(view, space, p) for p in note["leader"]["points"]]
         leader = msp.add_leader(pts, dimstyle=ldr_style,
@@ -709,7 +926,7 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         note_rows.append(nrow)
         h = dimvars_base["dimtxt"]
         lines = note["pattern"].split("\\P")
-        w = max(len(_MTEXT_CODE_RE.sub("", l).replace("%%c", "f")) for l in lines) * h * \
+        w = max(_disp_len(_MTEXT_CODE_RE.sub("", l).replace("%%c", "f")) for l in lines) * h * \
             spec["text_style"]["width_factor"]
         text_boxes[note["id"]] = [round(ins[0], 4), round(ins[1], 4),
                                   round(ins[0] + w, 4), round(ins[1] + len(lines) * h * 1.3, 4)]
@@ -770,6 +987,8 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         "frame_check": frame_summary,
         "view_bbox": {k: [round(v, 4) for v in view_bbox[k]] for k in view_bbox},
         "layout": {"text_boxes": text_boxes, "collisions": collisions},
+        "resolved_kinds": resolved_kinds,
+        "defaults_applied": {"diameter_style": diameter_style, "hole_note": hole_note_style},
         "warnings": warnings,
     }
 
@@ -784,10 +1003,6 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         os.makedirs(out_dir, exist_ok=True)
     doc.saveas(out_dxf_path)
     return report
-
-
-def _fmt_num(v):
-    return ("%g" % v)
 
 
 def _check_dimstyles(doc, records, dimvars_base, spec):

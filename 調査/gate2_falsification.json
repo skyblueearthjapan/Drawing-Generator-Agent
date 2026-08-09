@@ -1,0 +1,813 @@
+{
+  "TEST-002": {
+    "base_ok": true,
+    "multi_drop": [
+      {
+        "dropped": [
+          "L40_total",
+          "L35_counterbore_depth"
+        ],
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -40.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -40 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ]
+      },
+      {
+        "dropped": [
+          "L40_total",
+          "L5_bore_land"
+        ],
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": 0.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 0 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -7.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -7 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ]
+      },
+      {
+        "dropped": [
+          "L35_counterbore_depth",
+          "L5_bore_land"
+        ],
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -5.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ]
+      }
+    ],
+    "base_unspecified": [],
+    "base_redundant": [
+      {
+        "axis": "X",
+        "by": "L5_bore_land(5)",
+        "from": -5.0,
+        "to": 0.0,
+        "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+      }
+    ],
+    "out_of_scope_classes": [
+      "not_implemented",
+      "view_not_axis_aligned"
+    ],
+    "falsification": [
+      {
+        "dropped": "L40_total",
+        "ok": true,
+        "unspecified": [],
+        "redundant": []
+      },
+      {
+        "dropped": "L35_counterbore_depth",
+        "ok": true,
+        "unspecified": [],
+        "redundant": []
+      },
+      {
+        "dropped": "L5_bore_land",
+        "ok": true,
+        "unspecified": [],
+        "redundant": []
+      },
+      {
+        "dropped": "D33_counterbore",
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "circle",
+            "diameter": 33.0,
+            "views": [
+              "right"
+            ],
+            "reason": "直径φ33 を指定する寸法も穴注記も無い"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": -16.5,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 -16.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": 16.5,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 16.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 16.5,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 16.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -16.5,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 -16.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ],
+        "redundant": [
+          {
+            "axis": "X",
+            "by": "L5_bore_land(5)",
+            "from": -5.0,
+            "to": 0.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+          }
+        ]
+      },
+      {
+        "dropped": "D26_bore",
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "circle",
+            "diameter": 26.0,
+            "views": [
+              "right"
+            ],
+            "reason": "直径φ26 を指定する寸法も穴注記も無い"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": -13.0,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 -13 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": 13.0,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 13 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 13.0,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 13 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -13.0,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 -13 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ],
+        "redundant": [
+          {
+            "axis": "X",
+            "by": "L5_bore_land(5)",
+            "from": -5.0,
+            "to": 0.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+          }
+        ]
+      },
+      {
+        "dropped": "D75_outer",
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "circle",
+            "diameter": 75.0,
+            "views": [
+              "right"
+            ],
+            "reason": "直径φ75 を指定する寸法も穴注記も無い"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": -37.5,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 -37.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": 37.5,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 37.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 37.5,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 37.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -37.5,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 -37.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ],
+        "redundant": [
+          {
+            "axis": "X",
+            "by": "L5_bore_land(5)",
+            "from": -5.0,
+            "to": 0.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+          }
+        ]
+      },
+      {
+        "dropped": "P60_hole_pitch",
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -35.5,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 -35.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -24.5,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 -24.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 24.5,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 24.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 35.5,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 35.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -34.0,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 -34 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -26.0,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 -26 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 26.0,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 26 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 34.0,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 34 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 30.0,
+            "sources": [
+              "right:CIRCLE_CENTER"
+            ],
+            "reason": "Z軸の位置 30 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -30.0,
+            "sources": [
+              "right:CIRCLE_CENTER"
+            ],
+            "reason": "Z軸の位置 -30 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ],
+        "redundant": [
+          {
+            "axis": "X",
+            "by": "L5_bore_land(5)",
+            "from": -5.0,
+            "to": 0.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+          }
+        ]
+      }
+    ],
+    "detected": 4,
+    "total": 7
+  },
+  "TEST-003": {
+    "base_ok": true,
+    "multi_drop": [
+      {
+        "dropped": [
+          "L78_total",
+          "L28_to_step_end"
+        ],
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -73.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -73 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -78.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -78 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ]
+      },
+      {
+        "dropped": [
+          "L78_total",
+          "L50_from_step_end"
+        ],
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -50.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -50 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -73.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -73 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -78.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -78 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ]
+      },
+      {
+        "dropped": [
+          "L28_to_step_end",
+          "L50_from_step_end"
+        ],
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -50.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -50 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ]
+      },
+      {
+        "dropped": [
+          "D25_left",
+          "D25_right"
+        ],
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "circle",
+            "diameter": 23.0,
+            "views": [
+              "right"
+            ],
+            "reason": "直径φ23 を指定する寸法も穴注記も無い"
+          },
+          {
+            "feature": "circle",
+            "diameter": 25.0,
+            "views": [
+              "right"
+            ],
+            "reason": "直径φ25 を指定する寸法も穴注記も無い"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": -12.5,
+            "sources": [
+              "front:LINE",
+              "front:OBLIQUE"
+            ],
+            "reason": "Y軸の位置 -12.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": 12.5,
+            "sources": [
+              "front:LINE",
+              "front:OBLIQUE"
+            ],
+            "reason": "Y軸の位置 12.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": 11.5,
+            "sources": [
+              "front:OBLIQUE"
+            ],
+            "reason": "Y軸の位置 11.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": -11.5,
+            "sources": [
+              "front:OBLIQUE"
+            ],
+            "reason": "Y軸の位置 -11.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": 8.124,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 8.124 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": -8.124,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 -8.124 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 12.5,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 12.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -12.5,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 -12.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ]
+      }
+    ],
+    "base_unspecified": [],
+    "base_redundant": [
+      {
+        "axis": "X",
+        "by": "L78_total(78)",
+        "from": -78.0,
+        "to": 0.0,
+        "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+      }
+    ],
+    "out_of_scope_classes": [
+      "chamfer_derived_circle",
+      "chamfer_node",
+      "curve",
+      "not_implemented",
+      "same_value_features",
+      "view_not_axis_aligned"
+    ],
+    "falsification": [
+      {
+        "dropped": "L5_left_step",
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -73.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -73 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ],
+        "redundant": [
+          {
+            "axis": "X",
+            "by": "L78_total(78)",
+            "from": -78.0,
+            "to": 0.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+          }
+        ]
+      },
+      {
+        "dropped": "L10_flat",
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "position",
+            "axis": "X",
+            "value": -10.0,
+            "sources": [
+              "front:LINE",
+              "top:LINE"
+            ],
+            "reason": "X軸の位置 -10 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ],
+        "redundant": [
+          {
+            "axis": "X",
+            "by": "L78_total(78)",
+            "from": -78.0,
+            "to": 0.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+          }
+        ]
+      },
+      {
+        "dropped": "L28_to_step_end",
+        "ok": true,
+        "unspecified": [],
+        "redundant": []
+      },
+      {
+        "dropped": "L50_from_step_end",
+        "ok": true,
+        "unspecified": [],
+        "redundant": []
+      },
+      {
+        "dropped": "L78_total",
+        "ok": true,
+        "unspecified": [],
+        "redundant": []
+      },
+      {
+        "dropped": "D25_left",
+        "ok": true,
+        "unspecified": [],
+        "redundant": [
+          {
+            "axis": "X",
+            "by": "L78_total(78)",
+            "from": -78.0,
+            "to": 0.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+          }
+        ]
+      },
+      {
+        "dropped": "D30_step",
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "circle",
+            "diameter": 30.0,
+            "views": [
+              "right"
+            ],
+            "reason": "直径φ30 を指定する寸法も穴注記も無い"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": -15.0,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 -15 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": 15.0,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 15 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 15.0,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 15 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -15.0,
+            "sources": [
+              "top:LINE"
+            ],
+            "reason": "Z軸の位置 -15 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ],
+        "redundant": [
+          {
+            "axis": "X",
+            "by": "L78_total(78)",
+            "from": -78.0,
+            "to": 0.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+          }
+        ]
+      },
+      {
+        "dropped": "D25_right",
+        "ok": true,
+        "unspecified": [],
+        "redundant": [
+          {
+            "axis": "X",
+            "by": "L78_total(78)",
+            "from": -78.0,
+            "to": 0.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+          }
+        ]
+      },
+      {
+        "dropped": "W19_flats",
+        "ok": false,
+        "unspecified": [
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": 8.124,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 8.124 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Y",
+            "value": -8.124,
+            "sources": [
+              "front:LINE"
+            ],
+            "reason": "Y軸の位置 -8.124 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": 9.5,
+            "sources": [
+              "top:LINE",
+              "right:LINE"
+            ],
+            "reason": "Z軸の位置 9.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          },
+          {
+            "feature": "position",
+            "axis": "Z",
+            "value": -9.5,
+            "sources": [
+              "top:LINE",
+              "right:LINE"
+            ],
+            "reason": "Z軸の位置 -9.5 を決める寸法が無い(他寸法の和・差でも到達できない)"
+          }
+        ],
+        "redundant": [
+          {
+            "axis": "X",
+            "by": "L78_total(78)",
+            "from": -78.0,
+            "to": 0.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+          }
+        ]
+      }
+    ],
+    "detected": 4,
+    "total": 9
+  }
+}

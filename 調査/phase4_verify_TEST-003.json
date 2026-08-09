@@ -1,45 +1,45 @@
 {
   "compose": {
-    "out_path": "生成図面/TEST-002_ホルダー.dxf",
+    "out_path": "生成図面/TEST-003_端子棒.dxf",
     "scale": 1.0,
     "frame_entity_count_loaded": 113,
     "frame_check": {
-      "total": 205,
+      "total": 228,
       "frame_matched": 113,
-      "remaining": 92,
-      "remaining_ratio": 0.44878048780487806
+      "remaining": 115,
+      "remaining_ratio": 0.5043859649122807
     },
     "view_entity_counts": {
-      "front": 17,
-      "top": 19,
-      "right": 10,
-      "iso": 36
+      "front": 27,
+      "top": 20,
+      "right": 15,
+      "iso": 43
     },
     "unclassified_entity_count": 0,
     "view_out_bbox_mm": {
       "front": [
-        141.8413600817735,
-        61.907986339381466,
-        181.8413600817735,
-        136.90798633938152
+        125.31623381592647,
+        104.20886880250063,
+        203.31623381592647,
+        134.20886880250063
       ],
       "top": [
-        141.8413600817735,
-        168.4999999999999,
-        181.8413600817735,
-        243.50000000000017
+        125.31623381592647,
+        168.49999999999991,
+        203.31623381592647,
+        198.50000000000009
       ],
       "right": [
-        199.99999999999991,
-        61.907986339381466,
-        275.0000000000001,
-        136.90798633938152
+        241.4999999999998,
+        104.20886880250063,
+        271.5000000000002,
+        134.20886880250063
       ],
       "iso": [
-        196.8413600817735,
-        151.90798633938152,
-        278.1586399182265,
-        260.09201366061853
+        218.31623381592647,
+        149.20886880250063,
+        294.68376618407353,
+        217.79113119749937
       ]
     },
     "zone_overlaps": [],
@@ -203,61 +203,29 @@
     ],
     "linetypes_missing": [],
     "weight": {
-      "volume_mm3": 139476.50364326264,
-      "density_kgm3_used": 7850.0,
-      "mass_kg": 1.0948905535996118,
-      "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+      "volume_mm3": 41431.77429182322,
+      "density_kgm3_used": 8800.0,
+      "mass_kg": 0.36459961376804434,
+      "note": "fields['密度_kgm3']=8800.0 で上書き計算"
     },
     "field_values": {
-      "品名": "ホルダー",
-      "図番": "テスト－００２",
+      "品名": "端子棒",
+      "図番": "テスト－００３",
       "装置名": "テスト装置",
       "尺度": "１：１",
       "製図者": "ＡＩ",
       "製図日付": "２６．０８．０９",
-      "連番": "０２",
-      "重量": "１．０９"
+      "連番": "０３",
+      "重量": "０．３６"
     },
     "warnings": []
   },
   "dim": {
-    "out_path": "生成図面/TEST-002_ホルダー.dxf",
-    "base_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面/TEST-002_ホルダー.dxf",
+    "out_path": "生成図面/TEST-003_端子棒.dxf",
+    "base_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面/TEST-003_端子棒.dxf",
     "gate1": [
       {
-        "id": "L40_total",
-        "kind": "linear",
-        "plan_kind": "linear",
-        "view": "front",
-        "expected": 40.0,
-        "measured": 40.0,
-        "diff_mm": 0.0,
-        "snap_max_mm": 0.0,
-        "text": "40",
-        "text_value": 40.0,
-        "text_diff_mm": 0.0,
-        "style": "GEN001",
-        "ok": true,
-        "errors": []
-      },
-      {
-        "id": "L35_counterbore_depth",
-        "kind": "linear",
-        "plan_kind": "linear",
-        "view": "front",
-        "expected": 35.0,
-        "measured": 35.0,
-        "diff_mm": 0.0,
-        "snap_max_mm": 0.0,
-        "text": "35",
-        "text_value": 35.0,
-        "text_diff_mm": 0.0,
-        "style": "GEN002",
-        "ok": true,
-        "errors": []
-      },
-      {
-        "id": "L5_bore_land",
+        "id": "L5_left_step",
         "kind": "linear",
         "plan_kind": "linear",
         "view": "front",
@@ -268,91 +236,153 @@
         "text": "5",
         "text_value": 5.0,
         "text_diff_mm": 0.0,
+        "style": "GEN001",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "L10_flat",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 10.0,
+        "measured": 10.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "10",
+        "text_value": 10.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN002",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "L28_to_step_end",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 28.0,
+        "measured": 28.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "28",
+        "text_value": 28.0,
+        "text_diff_mm": 0.0,
         "style": "GEN003",
         "ok": true,
         "errors": []
       },
       {
-        "id": "D33_counterbore",
-        "kind": "diameter_linear",
-        "plan_kind": "diameter",
+        "id": "L50_from_step_end",
+        "kind": "linear",
+        "plan_kind": "linear",
         "view": "front",
-        "expected": 33.0,
-        "measured": 33.0,
+        "expected": 50.0,
+        "measured": 50.0,
         "diff_mm": 0.0,
         "snap_max_mm": 0.0,
-        "text": "%%c33",
-        "text_value": 33.0,
+        "text": "50",
+        "text_value": 50.0,
         "text_diff_mm": 0.0,
         "style": "GEN004",
         "ok": true,
-        "errors": [],
-        "cross_check": {
-          "ok": true,
-          "view": "right",
-          "found_diameter": 33.0,
-          "diff_vs_measured_mm": 0.0
-        }
+        "errors": []
       },
       {
-        "id": "D26_bore",
-        "kind": "diameter_linear",
-        "plan_kind": "diameter",
+        "id": "L78_total",
+        "kind": "linear",
+        "plan_kind": "linear",
         "view": "front",
-        "expected": 26.0,
-        "measured": 26.0,
+        "expected": 78.0,
+        "measured": 78.0,
         "diff_mm": 0.0,
         "snap_max_mm": 0.0,
-        "text": "%%c26",
-        "text_value": 26.0,
+        "text": "78",
+        "text_value": 78.0,
         "text_diff_mm": 0.0,
         "style": "GEN005",
         "ok": true,
-        "errors": [],
-        "cross_check": {
-          "ok": true,
-          "view": "right",
-          "found_diameter": 26.0,
-          "diff_vs_measured_mm": 0.0
-        }
+        "errors": []
       },
       {
-        "id": "D75_outer",
-        "kind": "diameter_native",
+        "id": "D25_left",
+        "kind": "diameter_linear",
         "plan_kind": "diameter",
-        "view": "right",
-        "expected": 75.0,
-        "measured": 75.0,
+        "view": "front",
+        "expected": 25.0,
+        "measured": 25.0,
         "diff_mm": 0.0,
         "snap_max_mm": 0.0,
-        "text": "%%c75",
-        "text_value": 75.0,
+        "text": "%%c25",
+        "text_value": 25.0,
         "text_diff_mm": 0.0,
         "style": "GEN006",
         "ok": true,
         "errors": [],
-        "circle_check": {
+        "cross_check": {
           "ok": true,
-          "center": [
-            237.5,
-            99.408
-          ],
-          "diameter": 75.0
+          "view": "right",
+          "found_diameter": 25.0,
+          "diff_vs_measured_mm": 0.0
         }
       },
       {
-        "id": "P60_hole_pitch",
+        "id": "D30_step",
+        "kind": "diameter_linear",
+        "plan_kind": "diameter",
+        "view": "front",
+        "expected": 30.0,
+        "measured": 30.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "\\A1;%%c30{\\H0.625x;\\S 0^ -0.021;}",
+        "text_value": 30.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN007",
+        "ok": true,
+        "errors": [],
+        "cross_check": {
+          "ok": true,
+          "view": "right",
+          "found_diameter": 30.0,
+          "diff_vs_measured_mm": 0.0
+        }
+      },
+      {
+        "id": "D25_right",
+        "kind": "diameter_linear",
+        "plan_kind": "diameter",
+        "view": "front",
+        "expected": 25.0,
+        "measured": 25.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "%%c25",
+        "text_value": 25.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN008",
+        "ok": true,
+        "errors": [],
+        "cross_check": {
+          "ok": true,
+          "view": "right",
+          "found_diameter": 25.0,
+          "diff_vs_measured_mm": 0.0
+        }
+      },
+      {
+        "id": "W19_flats",
         "kind": "linear",
         "plan_kind": "linear",
         "view": "right",
-        "expected": 60.0,
-        "measured": 60.0,
+        "expected": 19.0,
+        "measured": 19.0,
         "diff_mm": 0.0,
         "snap_max_mm": 0.0,
-        "text": "60",
-        "text_value": 60.0,
+        "text": "19",
+        "text_value": 19.0,
         "text_diff_mm": 0.0,
-        "style": "GEN007",
+        "style": "GEN009",
         "ok": true,
         "errors": []
       }
@@ -360,26 +390,26 @@
     "gate1_ok": true,
     "hole_notes": [
       {
-        "id": "N_bolt_holes",
+        "id": "N_tap_M10",
         "view": "right",
-        "pattern": "\\A1;２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０",
+        "pattern": "\\A1;Ｍ１０深さ２０",
         "leader_points": [
           [
-            271.3891,
-            103.2971
+            259.5052,
+            122.2141
           ],
           [
-            288.0,
-            120.0
+            278.0,
+            132.2089
           ],
           [
-            298.0,
-            120.0
+            290.0,
+            132.2089
           ]
         ],
         "text_insert": [
-          299.0,
-          120.0
+          291.0,
+          132.2089
         ],
         "ok": true,
         "errors": [],
@@ -387,23 +417,25 @@
           "ok": true,
           "dist_err_mm": 0.0
         },
-        "leader_handle": "239"
+        "leader_handle": "258"
       }
     ],
     "dimstyles": {
-      "L40_total": "GEN001",
-      "L35_counterbore_depth": "GEN002",
-      "L5_bore_land": "GEN003",
-      "D33_counterbore": "GEN004",
-      "D26_bore": "GEN005",
-      "D75_outer": "GEN006",
-      "P60_hole_pitch": "GEN007"
+      "L5_left_step": "GEN001",
+      "L10_flat": "GEN002",
+      "L28_to_step_end": "GEN003",
+      "L50_from_step_end": "GEN004",
+      "L78_total": "GEN005",
+      "D25_left": "GEN006",
+      "D30_step": "GEN007",
+      "D25_right": "GEN008",
+      "W19_flats": "GEN009"
     },
     "style_check": {
       "ok": true,
       "mismatches": [],
       "effective": {
-        "L40_total": {
+        "L5_left_step": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -430,7 +462,7 @@
           "dimpost": "",
           "dimtol": 0
         },
-        "L35_counterbore_depth": {
+        "L10_flat": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -457,7 +489,7 @@
           "dimpost": "",
           "dimtol": 0
         },
-        "L5_bore_land": {
+        "L28_to_step_end": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -484,7 +516,61 @@
           "dimpost": "",
           "dimtol": 0
         },
-        "D33_counterbore": {
+        "L50_from_step_end": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "L78_total": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "D25_left": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -511,7 +597,34 @@
           "dimpost": "%%c<>",
           "dimtol": 0
         },
-        "D26_bore": {
+        "D30_step": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "%%c<>",
+          "dimtol": 1
+        },
+        "D25_right": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -538,34 +651,7 @@
           "dimpost": "%%c<>",
           "dimtol": 0
         },
-        "D75_outer": {
-          "dimtxt": 4.0,
-          "dimasz": 3.0,
-          "dimexo": 1.0,
-          "dimexe": 2.0,
-          "dimgap": 0.5,
-          "dimdec": 2,
-          "dimtad": 3,
-          "dimclrd": 3,
-          "dimclre": 3,
-          "dimclrt": 7,
-          "dimdli": 8.0,
-          "dimscale": 1.0,
-          "dimlfac": 1.0,
-          "dimsah": 1,
-          "dimjust": 0,
-          "dimcen": 1.0,
-          "dimatfit": 3,
-          "dimtmove": 0,
-          "dimdsep": 46,
-          "dimzin": 8,
-          "dimblk1": "_OPEN30",
-          "dimblk2": "_OPEN30",
-          "dimtxsty": "VF003",
-          "dimpost": "%%c<>",
-          "dimtol": 0
-        },
-        "P60_hole_pitch": {
+        "W19_flats": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -598,104 +684,118 @@
       "_OPEN30"
     ],
     "frame_check": {
-      "total": 205,
+      "total": 228,
       "frame_matched": 113,
-      "remaining": 92,
-      "remaining_ratio": 0.44878048780487806
+      "remaining": 115,
+      "remaining_ratio": 0.5043859649122807
     },
     "view_bbox": {
       "front": [
-        141.8414,
-        61.908,
-        181.8414,
-        136.908
+        125.3162,
+        104.2089,
+        203.3162,
+        134.2089
       ],
       "top": [
-        141.8414,
+        125.3162,
         168.5,
-        181.8414,
-        243.5
+        203.3162,
+        198.5
       ],
       "right": [
-        200.0,
-        61.908,
-        275.0,
-        136.908
+        241.5,
+        104.2089,
+        271.5,
+        134.2089
       ],
       "iso": [
-        196.8414,
-        163.6061,
-        278.1586,
-        248.3939
+        219.9391,
+        156.2137,
+        290.7947,
+        211.0703
       ]
     },
     "layout": {
       "text_boxes": {
-        "L40_total": [
-          158.8414,
-          38.408,
-          164.8414,
-          42.408
+        "L5_left_step": [
+          126.3162,
+          150.7089,
+          129.3162,
+          154.7089
         ],
-        "L35_counterbore_depth": [
-          156.3414,
-          46.408,
-          162.3414,
-          50.408
+        "L10_flat": [
+          195.3162,
+          150.7089,
+          201.3162,
+          154.7089
         ],
-        "L5_bore_land": [
-          177.8414,
-          46.408,
-          180.8414,
-          50.408
+        "L28_to_step_end": [
+          136.3162,
+          158.7089,
+          142.3162,
+          162.7089
         ],
-        "D33_counterbore": [
-          121.3414,
-          94.908,
-          125.3414,
-          103.908
+        "L50_from_step_end": [
+          175.3162,
+          158.7089,
+          181.3162,
+          162.7089
         ],
-        "D26_bore": [
-          188.3414,
-          94.908,
-          192.3414,
-          103.908
+        "L78_total": [
+          161.3162,
+          88.7089,
+          167.3162,
+          92.7089
         ],
-        "D75_outer": [
-          275.3915,
-          70.777,
-          284.3915,
-          74.777
+        "D25_left": [
+          104.8162,
+          114.7089,
+          108.8162,
+          123.7089
         ],
-        "P60_hole_pitch": [
-          234.5,
-          46.408,
-          240.5,
-          50.408
+        "D30_step": [
+          96.8162,
+          114.7089,
+          100.8162,
+          123.7089
         ],
-        "N_bolt_holes": [
-          299.0,
-          120.0,
-          386.0,
-          130.4
+        "D25_right": [
+          214.8162,
+          114.7089,
+          218.8162,
+          123.7089
+        ],
+        "W19_flats": [
+          253.5,
+          88.7089,
+          259.5,
+          92.7089
+        ],
+        "N_tap_M10": [
+          291.0,
+          132.2089,
+          333.0,
+          137.4089
         ],
         "N_paint": [
-          292.0,
-          64.35,
-          367.6,
-          78.0
+          300.0,
+          61.35,
+          375.6,
+          75.0
         ]
       },
       "collisions": []
     },
     "resolved_kinds": {
-      "L40_total": "linear",
-      "L35_counterbore_depth": "linear",
-      "L5_bore_land": "linear",
-      "D33_counterbore": "diameter_linear",
-      "D26_bore": "diameter_linear",
-      "D75_outer": "diameter_native",
-      "P60_hole_pitch": "linear"
+      "L5_left_step": "linear",
+      "L10_flat": "linear",
+      "L28_to_step_end": "linear",
+      "L50_from_step_end": "linear",
+      "L78_total": "linear",
+      "D25_left": "diameter_linear",
+      "D30_step": "diameter_linear",
+      "D25_right": "diameter_linear",
+      "W19_flats": "linear"
     },
     "defaults_applied": {
       "diameter_style": {

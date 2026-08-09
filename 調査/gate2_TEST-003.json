@@ -1,0 +1,518 @@
+{
+  "gate": "gate2_completeness_v1",
+  "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\TEST-003_端子棒.dxf",
+  "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\plan_TEST-003_端子棒.json",
+  "dropped_dimensions": [],
+  "ok": true,
+  "unspecified": [],
+  "floating_dimensions": [],
+  "redundant_dimensions": [
+    {
+      "axis": "X",
+      "by": "L78_total(78)",
+      "from": -78.0,
+      "to": 0.0,
+      "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+    }
+  ],
+  "duplicate_value_dimensions": [
+    {
+      "value": 25.0,
+      "ids": [
+        "D25_left",
+        "D25_right"
+      ]
+    }
+  ],
+  "circles": [
+    {
+      "diameter": 8.5,
+      "count": 1,
+      "views": [
+        "right"
+      ],
+      "covered_by": "dimension_or_note",
+      "ok": true
+    },
+    {
+      "diameter": 23.0,
+      "count": 1,
+      "views": [
+        "right"
+      ],
+      "covered_by": "chamfer_derived",
+      "note": "面取りC1由来(φ25-2×1)",
+      "ok": true
+    },
+    {
+      "diameter": 25.0,
+      "count": 1,
+      "views": [
+        "right"
+      ],
+      "covered_by": "dimension_or_note",
+      "ok": true
+    },
+    {
+      "diameter": 30.0,
+      "count": 1,
+      "views": [
+        "right"
+      ],
+      "covered_by": "dimension_or_note",
+      "ok": true
+    }
+  ],
+  "axes": {
+    "X": {
+      "axis": "X",
+      "node_count": 7,
+      "nodes": [
+        -78.0,
+        -73.0,
+        -50.0,
+        -20.0,
+        -10.0,
+        -1.0,
+        0.0
+      ],
+      "mode": "chain",
+      "edges": [
+        {
+          "from": -78.0,
+          "to": -73.0,
+          "by": "L5_left_step(5)",
+          "new_link": true
+        },
+        {
+          "from": -10.0,
+          "to": 0.0,
+          "by": "L10_flat(10)",
+          "new_link": true
+        },
+        {
+          "from": -78.0,
+          "to": -50.0,
+          "by": "L28_to_step_end(28)",
+          "new_link": true
+        },
+        {
+          "from": -50.0,
+          "to": 0.0,
+          "by": "L50_from_step_end(50)",
+          "new_link": true
+        },
+        {
+          "from": -78.0,
+          "to": 0.0,
+          "by": "L78_total(78)",
+          "new_link": false
+        },
+        {
+          "from": 0.0,
+          "to": -20.0,
+          "by": "注記深さ20",
+          "new_link": true
+        }
+      ],
+      "uncovered": [],
+      "out_of_scope_nodes": [
+        {
+          "value": -1.0,
+          "reason": "面取り/テーパ(front・chamfer45)の端点。到達済みの 0 から 1 ずれた位置で、面取り寸法はv1の判定対象外"
+        }
+      ],
+      "symmetry_center": null
+    },
+    "Y": {
+      "axis": "Y",
+      "node_count": 11,
+      "nodes": [
+        -15.0,
+        -12.5,
+        -11.5,
+        -8.124,
+        -4.25,
+        0.0,
+        4.25,
+        8.124,
+        11.5,
+        12.5,
+        15.0
+      ],
+      "mode": "symmetric",
+      "edges": [
+        {
+          "from": 0.0,
+          "to": -12.5,
+          "by": "D25_left(対称・径/幅25)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 12.5,
+          "by": "D25_left(対称・径/幅25)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -15.0,
+          "by": "D30_step(対称・径/幅30)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 15.0,
+          "by": "D30_step(対称・径/幅30)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -12.5,
+          "by": "D25_right(対称・径/幅25)",
+          "new_link": false
+        },
+        {
+          "from": 0.0,
+          "to": 12.5,
+          "by": "D25_right(対称・径/幅25)",
+          "new_link": false
+        },
+        {
+          "from": 0.0,
+          "to": 4.25,
+          "by": "円φ8.5(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -4.25,
+          "by": "円φ8.5(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 8.124,
+          "by": "幾何導出: 円筒φ25×二面幅19 の交線 √((25/2)²-(19/2)²)=8.1240",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -8.124,
+          "by": "幾何導出: 円筒φ25×二面幅19 の交線 √((25/2)²-(19/2)²)=8.1240",
+          "new_link": true
+        }
+      ],
+      "uncovered": [],
+      "out_of_scope_nodes": [
+        {
+          "value": 11.5,
+          "reason": "面取り/テーパ(front・chamfer45)の端点。到達済みの 12.5 から 1 ずれた位置で、面取り寸法はv1の判定対象外"
+        },
+        {
+          "value": -11.5,
+          "reason": "面取り/テーパ(front・chamfer45)の端点。到達済みの -12.5 から 1 ずれた位置で、面取り寸法はv1の判定対象外"
+        }
+      ],
+      "symmetry_center": 0.0
+    },
+    "Z": {
+      "axis": "Z",
+      "node_count": 9,
+      "nodes": [
+        -15.0,
+        -12.5,
+        -9.5,
+        -4.25,
+        0.0,
+        4.25,
+        9.5,
+        12.5,
+        15.0
+      ],
+      "mode": "symmetric",
+      "edges": [
+        {
+          "from": 0.0,
+          "to": 9.5,
+          "by": "W19_flats(対称・径/幅19)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -9.5,
+          "by": "W19_flats(対称・径/幅19)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 12.5,
+          "by": "円φ25(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -12.5,
+          "by": "円φ25(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 4.25,
+          "by": "円φ8.5(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -4.25,
+          "by": "円φ8.5(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": 15.0,
+          "by": "円φ30(right)",
+          "new_link": true
+        },
+        {
+          "from": 0.0,
+          "to": -15.0,
+          "by": "円φ30(right)",
+          "new_link": true
+        }
+      ],
+      "uncovered": [],
+      "out_of_scope_nodes": [],
+      "symmetry_center": 0.0
+    }
+  },
+  "dimensions_read": [
+    {
+      "id": "L5_left_step",
+      "role": "position_pair",
+      "axis": "X",
+      "value": 5.0,
+      "view": "front"
+    },
+    {
+      "id": "L10_flat",
+      "role": "position_pair",
+      "axis": "X",
+      "value": 10.0,
+      "view": "front"
+    },
+    {
+      "id": "L28_to_step_end",
+      "role": "position_pair",
+      "axis": "X",
+      "value": 28.0,
+      "view": "front"
+    },
+    {
+      "id": "L50_from_step_end",
+      "role": "position_pair",
+      "axis": "X",
+      "value": 50.0,
+      "view": "front"
+    },
+    {
+      "id": "L78_total",
+      "role": "position_pair",
+      "axis": "X",
+      "value": 78.0,
+      "view": "front"
+    },
+    {
+      "id": "D25_left",
+      "role": "position_pair",
+      "axis": "Y",
+      "value": 25.0,
+      "view": "front"
+    },
+    {
+      "id": "D30_step",
+      "role": "position_pair",
+      "axis": "Y",
+      "value": 30.0,
+      "view": "front"
+    },
+    {
+      "id": "D25_right",
+      "role": "position_pair",
+      "axis": "Y",
+      "value": 25.0,
+      "view": "front"
+    },
+    {
+      "id": "W19_flats",
+      "role": "position_pair",
+      "axis": "Z",
+      "value": 19.0,
+      "view": "right"
+    }
+  ],
+  "hole_notes": [
+    {
+      "raw": "\\A1;Ｍ１０深さ２０",
+      "normalized": "M10深さ20",
+      "diameters": [
+        8.5
+      ],
+      "taps": [
+        10.0
+      ],
+      "depths": [
+        20.0
+      ],
+      "pcds": []
+    }
+  ],
+  "note_diameters": [
+    8.5
+  ],
+  "note_taps": [
+    10.0
+  ],
+  "note_depths": [
+    20.0
+  ],
+  "covered_diameters": [
+    8.5,
+    25.0,
+    30.0
+  ],
+  "chamfers": [
+    {
+      "view": "front",
+      "axes": [
+        "X",
+        "Y"
+      ],
+      "d": [
+        -1.0,
+        1.0
+      ],
+      "kind": "chamfer45",
+      "leg": 1.0,
+      "pairs": {
+        "X": [
+          -2.6489033189136535e-11,
+          -1.000000000026489
+        ],
+        "Y": [
+          11.499999999999403,
+          12.499999999999403
+        ]
+      }
+    },
+    {
+      "view": "front",
+      "axes": [
+        "X",
+        "Y"
+      ],
+      "d": [
+        1.0,
+        1.0
+      ],
+      "kind": "chamfer45",
+      "leg": 1.0,
+      "pairs": {
+        "X": [
+          -1.000000000026489,
+          -2.6489033189136535e-11
+        ],
+        "Y": [
+          -12.500000000000597,
+          -11.500000000000597
+        ]
+      }
+    }
+  ],
+  "out_of_scope": [
+    {
+      "class": "view_not_axis_aligned",
+      "view": "iso",
+      "reason": "軸平行でない投影(等角投影等)。v1は寸法棚卸しの対象外"
+    },
+    {
+      "class": "curve",
+      "view": "front",
+      "type": "SPLINE",
+      "reason": "交差曲線(円筒×平面等)。v1は寸法対象としない"
+    },
+    {
+      "class": "curve",
+      "view": "front",
+      "type": "SPLINE",
+      "reason": "交差曲線(円筒×平面等)。v1は寸法対象としない"
+    },
+    {
+      "class": "curve",
+      "view": "top",
+      "type": "SPLINE",
+      "reason": "交差曲線(円筒×平面等)。v1は寸法対象としない"
+    },
+    {
+      "class": "curve",
+      "view": "top",
+      "type": "SPLINE",
+      "reason": "交差曲線(円筒×平面等)。v1は寸法対象としない"
+    },
+    {
+      "class": "curve",
+      "view": "right",
+      "type": "SPLINE",
+      "reason": "交差曲線(円筒×平面等)。v1は寸法対象としない"
+    },
+    {
+      "class": "curve",
+      "view": "right",
+      "type": "SPLINE",
+      "reason": "交差曲線(円筒×平面等)。v1は寸法対象としない"
+    },
+    {
+      "class": "curve",
+      "view": "right",
+      "type": "SPLINE",
+      "reason": "交差曲線(円筒×平面等)。v1は寸法対象としない"
+    },
+    {
+      "class": "curve",
+      "view": "right",
+      "type": "SPLINE",
+      "reason": "交差曲線(円筒×平面等)。v1は寸法対象としない"
+    },
+    {
+      "class": "chamfer_derived_circle",
+      "diameter": 23.0,
+      "reason": "面取りC1由来(φ25-2×1) / 面取り自体はv1の判定対象外"
+    },
+    {
+      "class": "chamfer_node",
+      "axis": "X",
+      "value": -1.0,
+      "reason": "面取り/テーパ(front・chamfer45)の端点。到達済みの 0 から 1 ずれた位置で、面取り寸法はv1の判定対象外"
+    },
+    {
+      "class": "chamfer_node",
+      "axis": "Y",
+      "value": 11.5,
+      "reason": "面取り/テーパ(front・chamfer45)の端点。到達済みの 12.5 から 1 ずれた位置で、面取り寸法はv1の判定対象外"
+    },
+    {
+      "class": "chamfer_node",
+      "axis": "Y",
+      "value": -11.5,
+      "reason": "面取り/テーパ(front・chamfer45)の端点。到達済みの -12.5 から 1 ずれた位置で、面取り寸法はv1の判定対象外"
+    },
+    {
+      "class": "not_implemented",
+      "reason": "表面性状記号・幾何公差・溶接記号・ねじのピッチ/等級はv1の判定対象外(生成側も未実装)"
+    },
+    {
+      "class": "same_value_features",
+      "reason": "v1の台帳は特徴を**値と座標**で持つため、同じ値の別フィーチャー(左右のφ25等)を区別しない。片方の寸法を消しても検出できない(該当: [25.0])"
+    }
+  ]
+}

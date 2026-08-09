@@ -69,6 +69,14 @@
 | `stack_step_mm` | 8.0 | 2段目以降の加算量(dimdli=8.0) |
 | `snap_tol_mm` | 0.01 | 測定点が実ジオメトリ特徴点に一致すべき許容差 |
 | `gate_tol_mm` | 0.01 | ゲート①(実測 vs 期待値)の許容差 |
+| `diameter_style` | `{"circular_view":"native","profile_view":"linear"}` | `kind:"diameter"` の実装方式(§2.1a) |
+| `hole_note` | `{"notation":"kiri","width":"zenkaku"}` | 穴注記の既定書式(§3) |
+
+> **`diameter_style` / `hole_note` は「ユーザー確認中だった流儀」を分離したパラメータ**である。
+> 既定値の実体は `engine/dim_engine.py` の `DIAMETER_STYLE_DEFAULT` / `HOLE_NOTE_DEFAULT`。
+> 裁定が変わったらこの2定数(または計画の `defaults`)を差し替えるだけで全計画に反映される。
+> 現行既定は **2026-08-09 ユーザー確定**:
+> 円形ビューの外径=ネイティブDIAMETER型 / 穴注記=キリ表記・全角。
 
 ---
 
@@ -95,11 +103,30 @@
 | kind | DXF実装 | dimpost | 根拠 |
 |---|---|---|---|
 | `linear` | rotated linear DIMENSION(dimtype=0) | `""` | §8ルール1・コーパス855本 |
-| `diameter_linear` | rotated linear DIMENSION | `"%%c<>"` | **§8ルール1・裁定Q1**(83:4でネイティブDIAMETER型より優勢) |
+| `diameter` | **`context` と `defaults.diameter_style` で下2つへ解決**(§2.1a) | `"%%c<>"` | 裁定Q1更新(2026-08-09) |
+| `diameter_linear` | rotated linear DIMENSION | `"%%c<>"` | §8ルール1(輪郭・断面ビューの径) |
+| `diameter_native` | DIAMETER DIMENSION(dimtype=3) | `"%%c<>"` | 円形ビューの外径(人間図面 GMM006 実測) |
 | `radius` | RADIUS DIMENSION(dimtype=4) | `"R<>"`(複数箇所は `"2-R<>"` 等) | §8ルール2 |
 | `angle` | ANGULAR DIMENSION(dimtype=2) | `""` | §8ルール3(値は必ず `text_override` で明示) |
 
 `aligned`(dimtype=1)は使わない(コーパス0件)。斜め辺は `linear` + `direction` で測る。
+
+#### 2.1a `kind:"diameter"` の解決(推奨の書き方)
+
+```jsonc
+{"kind": "diameter", "context": "circular_view", ...}   // 円が見えるビューの外径 → native
+{"kind": "diameter", "context": "profile_view",  ...}   // 断面・側面の径      → linear
+```
+
+`defaults.diameter_style` が `{"circular_view":"native","profile_view":"linear"}` のとき上記に解決される。
+**AIオペレータは実装方式(native/linear)ではなく文脈(context)を書くこと。** 方式は流儀パラメータであり、
+裁定が変われば `defaults.diameter_style` の差し替えだけで全図面が追随する。
+`diameter_native` / `diameter_linear` を直接書くと文脈解決を迂回して強制指定になる。
+
+`diameter_native` の `measure` は特殊で、`p1`=円中心 + (`diameter` か `p2` か `value_expected`)、
+任意で `leader_angle`(寸法線の角度deg・既定45)。任意角の円周点は特徴点にならないため
+**snap検証は中心のみ**とし、代わりに「そのビューに中心一致・直径一致の実在円がある」ことを
+必須検証する(レポートの `circle_check`)。
 
 ### 2.2 `measure` — 測定点の指定方法
 
@@ -208,11 +235,36 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
 
 ## 3. `hole_notes[]`
 
+**推奨は `spec`(構造化指定)。書式は `defaults.hole_note` が決める。**
+
 ```jsonc
 {
   "id": "N_bolt_holes",
   "view": "right",
-  "pattern": "2-%%c8ザグリ%%c11深さ7\\PPCD60",  // %%cでφ。半角統一(裁定Q5)
+  "spec": {"count": 2, "drill": 8, "counterbore": {"dia": 11, "depth": 7}, "placement": "PCD60"},
+  // -> kiri/zenkaku(既定): '\A1;２－８キリ　ザグリ%%c１１深さ７\PＰＣＤ６０'(人間図面と同文)
+  // -> phi/hankaku       : '\A1;2-%%c8ザグリ%%c11深さ7\PPCD60'
+  "leader": { ... }
+}
+{
+  "id": "N_tap",
+  "view": "right",
+  "spec": {"thread": "M10", "depth": 20},   // -> '\A1;Ｍ１０深さ２０'
+  "leader": { ... }
+}
+```
+
+`spec` のキー: `count`(個数) / `drill`(ドリル径) / `thread`(ねじ呼び) / `depth`(深さ) /
+`counterbore:{dia,depth}`(ザグリ) / `placement`(2行目=PCD等) / `extra_lines[]`。
+`style` を書くとその注記だけ書式を上書きできる(`{"notation":"phi","width":"hankaku"}`)。
+
+`pattern` を直接書けば強制指定になる(`spec` より優先):
+
+```jsonc
+{
+  "id": "N_bolt_holes",
+  "view": "right",
+  "pattern": "\\A1;２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０",
   "leader": {
     "space": "view",
     "points": [[271.389, 103.297], [288.0, 120.0], [298.0, 120.0]]
@@ -228,7 +280,9 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
 
 - `pattern` は §8ルール7 の書式。**φは必ず `%%c` 制御コード**(Unicodeのφ/Φは禁止)。
   `\P` で改行し、1行目=個数+径+加工種別+深さ、2行目=配置(PCD/振り角)。
-- 半角ハイフン・半角数字に統一(裁定Q5「穴注記は半角」)。
+- **既定はキリ表記・全角**(2026-08-09 ユーザー確定。裁定Q5「穴注記は半角」を更新)。
+  ドリル穴は `<個数>－<径>キリ`(全角)、ザグリ径は `%%c`(制御コードは半角のまま)。
+  半角/φ表記へ戻す場合は `defaults.hole_note` を `{"notation":"phi","width":"hankaku"}` にする。
 - `leader.points` は引出線の折れ点列(最後の1本が水平のランディング)。`space` は `view`/`model`。
 - `anchor_check` を書くと、引出線始点が指定円の円周上(0.01mm以内)にあることを検証する。
 
