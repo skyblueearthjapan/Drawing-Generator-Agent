@@ -1,0 +1,20 @@
+# 参考データ(約200MB・CADバイナリ)はgit管理外(ローカル保持)。共有が必要になったら方針再検討
+荏原トライ調整用/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OMC/セッション状態
+.omc/
+
+# SolidWorks一時ファイル
+~$*.SLDPRT
+~$*.SLDASM
+~$*.SLDDRW
+*.swx
+
+# OS
+Thumbs.db
+Desktop.ini

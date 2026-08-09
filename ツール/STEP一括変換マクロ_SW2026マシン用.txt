@@ -1,0 +1,90 @@
+SolidWorks用 SLDPRT→STEP一括変換マクロ(SW2026マシンで実行する版)
+====================================================================
+
+背景: 荏原トライ調整用の3Dモデル(SLDPRT 180点)はSolidWorks 2026で保存されており、
+開発機のSW2023では開けない(SolidWorksの後方互換は無い)。
+→ モデルを作成したSW2026のマシンでこのマクロを実行し、「教師STEP」フォルダを作って
+   開発機の 部品図作成agent\荏原トライ調整用\ 配下にコピーしてください。
+
+使い方:
+1. SolidWorksを起動(部品は開かなくてOK)
+2. メニュー「ツール > マクロ > 新規作成」→ 適当な名前で保存(VBAエディタが開く)
+3. 開いたエディタの中身を全部消して、下のコードを貼り付け
+4. ★SRC_ROOT を、そのマシンでの「荏原トライ調整用\3D」の実パスに書き換える
+5. F5(実行)を押す
+6. 「3D」フォルダの中の全SLDPRTが「教師STEP」フォルダに同じ構成で変換されます
+   (180個で数分〜十数分かかります。完了するとメッセージが出ます)
+7. できた「教師STEP」フォルダごと、開発機の
+   C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\荏原トライ調整用\
+   にコピーしてください
+
+-----------------------------------------(ここから下をコピー)
+
+Option Explicit
+
+' ★このマシンでの実パスに書き換えてください
+Const SRC_ROOT As String = "C:\★書き換え★\荏原トライ調整用\3D"
+Const OUT_ROOT As String = "C:\★書き換え★\荏原トライ調整用\教師STEP"
+
+Dim swApp As Object
+Dim fso As Object
+Dim nOK As Long, nNG As Long, logText As String
+
+Sub main()
+    Set swApp = Application.SldWorks
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    nOK = 0: nNG = 0: logText = ""
+
+    If Not fso.FolderExists(OUT_ROOT) Then fso.CreateFolder OUT_ROOT
+    ProcessFolder fso.GetFolder(SRC_ROOT), OUT_ROOT
+
+    Dim logPath As String
+    logPath = OUT_ROOT & "\変換ログ.txt"
+    Dim ts As Object
+    Set ts = fso.CreateTextFile(logPath, True, True)
+    ts.Write "成功: " & nOK & " / 失敗: " & nNG & vbCrLf & vbCrLf & logText
+    ts.Close
+
+    MsgBox "変換完了: 成功 " & nOK & " 件 / 失敗 " & nNG & " 件" & vbCrLf & _
+           "ログ: " & logPath
+End Sub
+
+Sub ProcessFolder(fld As Object, outDir As String)
+    If Not fso.FolderExists(outDir) Then fso.CreateFolder outDir
+
+    Dim f As Object
+    For Each f In fld.Files
+        If LCase(fso.GetExtensionName(f.Path)) = "sldprt" Then
+            ConvertOne f.Path, outDir & "\" & fso.GetBaseName(f.Path) & ".STEP"
+        End If
+    Next
+
+    Dim sub_ As Object
+    For Each sub_ In fld.SubFolders
+        ProcessFolder sub_, outDir & "\" & sub_.Name
+    Next
+End Sub
+
+Sub ConvertOne(srcPath As String, outPath As String)
+    On Error Resume Next
+    Dim errs As Long, warns As Long
+    Dim doc As Object
+    ' 1 = swDocPART, 1 = silent
+    Set doc = swApp.OpenDoc6(srcPath, 1, 1, "", errs, warns)
+    If doc Is Nothing Then
+        nNG = nNG + 1
+        logText = logText & "NG(開けない): " & srcPath & vbCrLf
+        Exit Sub
+    End If
+    Dim ok As Boolean
+    ok = doc.Extension.SaveAs(outPath, 0, 0, Nothing, errs, warns)
+    swApp.CloseDoc doc.GetTitle
+    If ok Then
+        nOK = nOK + 1
+    Else
+        nNG = nNG + 1
+        logText = logText & "NG(保存失敗 err=" & errs & "): " & srcPath & vbCrLf
+    End If
+End Sub
+
+-----------------------------------------(ここまで)
