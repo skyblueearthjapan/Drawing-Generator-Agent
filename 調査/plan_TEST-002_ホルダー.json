@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0",
+  "_note": "作図計画JSON。スキーマは engine/plan_schema.md。寸法の集合は人間の正解図面 15015-P3-012_013.dxf のホルダー(013)部分から読み取った。測定点は3Dモデル座標(space=model)で指定し、エンジンが phase2 meta の model_to_view + compose 再レイアウト変換で最終図面座標へ落とす。",
+
+  "part": {
+    "model": "15015-P3-013_ホルダー",
+    "図番": "テスト-002",
+    "品名": "ホルダー",
+    "shape_class": "旋盤物",
+    "材質": "S45C",
+    "個数": 1,
+    "形状要約": "φ75×L40の円筒。中心にφ26通し穴+φ33ザグリ深さ35(X=-40側の端面から)。PCD60上に2-φ8通し穴+φ11ザグリ深さ7(X=0側の端面から)。"
+  },
+
+  "source": {
+    "base_dxf": "生成図面/TEST-002_ホルダー.dxf",
+    "meta_json": "調査/phase2_meta_15015-P3-013_ホルダー.json",
+    "scale": 1.0
+  },
+
+  "defaults": {
+    "first_offset_mm": 16.0,
+    "stack_step_mm": 8.0,
+    "snap_tol_mm": 0.01,
+    "gate_tol_mm": 0.01
+  },
+
+  "dimensions": [
+    {
+      "id": "L40_total",
+      "comment": "全長40。front(縦断面)ビューの下側2段目。人間図面の40に対応",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-40.0, -37.5, 0.0],
+        "p2": [0.0, -37.5, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 2},
+      "value_expected": 40.0,
+      "tolerance": null
+    },
+    {
+      "id": "L35_counterbore_depth",
+      "comment": "φ33ザグリの深さ35(左端面→ザグリ底)。人間図面の35に対応",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-40.0, -37.5, 0.0],
+        "p2": [-5.0, -16.5, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 1},
+      "value_expected": 35.0,
+      "tolerance": null
+    },
+    {
+      "id": "L5_bore_land",
+      "comment": "ザグリ底から右端面までの5(φ26部の長さ)。人間図面の5に対応",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-5.0, -16.5, 0.0],
+        "p2": [0.0, -37.5, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 1},
+      "value_expected": 5.0,
+      "tolerance": null
+    },
+    {
+      "id": "D33_counterbore",
+      "comment": "ザグリ径φ33。線形+dimpost='%%c<>'(裁定Q1)。front左側1段目。人間図面のφ33に対応",
+      "kind": "diameter_linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-40.0, -16.5, 0.0],
+        "p2": [-40.0, 16.5, 0.0],
+        "direction": "vertical"
+      },
+      "placement": {"side": "left", "level": 1},
+      "value_expected": 33.0,
+      "tolerance": null,
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, 0.0],
+        "diameter": 33.0
+      }
+    },
+    {
+      "id": "D26_bore",
+      "comment": "内径φ26。front右側(右ビューとの隙間18.2mmに収めるためoffset=11mmへ詰めた)。人間図面のφ26に対応",
+      "kind": "diameter_linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [0.0, -13.0, 0.0],
+        "p2": [0.0, 13.0, 0.0],
+        "direction": "vertical"
+      },
+      "placement": {"side": "right", "level": 1, "offset_mm": 11.0},
+      "value_expected": 26.0,
+      "tolerance": null,
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, 0.0],
+        "diameter": 26.0
+      }
+    },
+    {
+      "id": "D75_outer",
+      "comment": "外径φ75。right(正面円形)ビューの下側2段目。人間図面はネイティブDIAMETER型だが、§8ルール1・裁定Q1に従い線形+dimpost方式にした",
+      "kind": "diameter_linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [0.0, 0.0, 37.5],
+        "p2": [0.0, 0.0, -37.5],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 2},
+      "value_expected": 75.0,
+      "tolerance": null,
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, 0.0],
+        "diameter": 75.0
+      }
+    },
+    {
+      "id": "P60_hole_pitch",
+      "comment": "2-φ8穴の中心間距離60(=PCD60)。rightビューの下側1段目。人間図面の60に対応",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [0.0, 0.0, 30.0],
+        "p2": [0.0, 0.0, -30.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 1},
+      "value_expected": 60.0,
+      "tolerance": null
+    }
+  ],
+
+  "hole_notes": [
+    {
+      "id": "N_bolt_holes",
+      "comment": "人間図面の『２－８キリ　ザグリ%%c１１深さ７ / ＰＣＤ６０』に対応。裁定Q5に従い半角+%%cへ統一",
+      "view": "right",
+      "pattern": "\\A1;2-%%c8ザグリ%%c11深さ7\\PPCD60",
+      "leader": {
+        "space": "view",
+        "points": [[271.3890873, 103.2970733], [288.0, 120.0], [298.0, 120.0]]
+      },
+      "text_insert": [299.0, 120.0],
+      "attachment": "bottom-left",
+      "anchor_check": {
+        "type": "on_circle",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, -30.0],
+        "diameter": 11.0
+      }
+    }
+  ],
+
+  "notes": [
+    {
+      "id": "N_paint",
+      "comment": "§8ルール10の定型注記。人間図面(013側)の注記と同文",
+      "text": "注記．\\P　塗装色は工番指定色とする。\\P　指示無き角部はＣ０．２、隅部はＲ２以下とする。",
+      "insert": [292.0, 78.0],
+      "attachment": "top-left",
+      "height": 3.5
+    }
+  ]
+}

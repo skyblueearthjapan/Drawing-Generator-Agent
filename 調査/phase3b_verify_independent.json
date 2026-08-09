@@ -1,0 +1,191 @@
+{
+  "ok": true,
+  "file_attrs_ok": true,
+  "gate1": [
+    {
+      "id": "L40_total",
+      "style": "GEN001",
+      "dimtype": 32,
+      "expected": 40.0,
+      "measured": 40.0,
+      "diff_mm": 0.0,
+      "text": "40",
+      "text_value": 40.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "L35_counterbore_depth",
+      "style": "GEN002",
+      "dimtype": 32,
+      "expected": 35.0,
+      "measured": 35.0,
+      "diff_mm": 0.0,
+      "text": "35",
+      "text_value": 35.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "L5_bore_land",
+      "style": "GEN003",
+      "dimtype": 32,
+      "expected": 5.0,
+      "measured": 5.0,
+      "diff_mm": 0.0,
+      "text": "5",
+      "text_value": 5.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "D33_counterbore",
+      "style": "GEN004",
+      "dimtype": 32,
+      "expected": 33.0,
+      "measured": 33.0,
+      "diff_mm": 0.0,
+      "text": "%%c33",
+      "text_value": 33.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "D26_bore",
+      "style": "GEN005",
+      "dimtype": 32,
+      "expected": 26.0,
+      "measured": 26.0,
+      "diff_mm": 0.0,
+      "text": "%%c26",
+      "text_value": 26.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "D75_outer",
+      "style": "GEN006",
+      "dimtype": 32,
+      "expected": 75.0,
+      "measured": 75.0,
+      "diff_mm": 0.0,
+      "text": "%%c75",
+      "text_value": 75.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    },
+    {
+      "id": "P60_hole_pitch",
+      "style": "GEN007",
+      "dimtype": 32,
+      "expected": 60.0,
+      "measured": 60.0,
+      "diff_mm": 0.0,
+      "text": "60",
+      "text_value": 60.0,
+      "text_diff_mm": 0.0,
+      "ok": true
+    }
+  ],
+  "gate1_ok": true,
+  "style_ok": true,
+  "style_mismatches": [],
+  "dimfit_equivalence": {
+    "dimfit_in_file": null,
+    "dimatfit": 3,
+    "dimtmove": 0,
+    "spec_dimfit": 3
+  },
+  "dimpost": {
+    "L40_total": "",
+    "L35_counterbore_depth": "",
+    "L5_bore_land": "",
+    "D33_counterbore": "%%c<>",
+    "D26_bore": "%%c<>",
+    "D75_outer": "%%c<>",
+    "P60_hole_pitch": ""
+  },
+  "note_ok": true,
+  "human_compare": {
+    "human": [
+      {
+        "kind": "linear",
+        "value": 40.0,
+        "dimpost": "",
+        "style": "GMM004"
+      },
+      {
+        "kind": "diameter_linear",
+        "value": 33.0,
+        "dimpost": "%%c<>",
+        "style": "GMM003"
+      },
+      {
+        "kind": "linear",
+        "value": 35.0,
+        "dimpost": "",
+        "style": "GMM004"
+      },
+      {
+        "kind": "linear",
+        "value": 5.0,
+        "dimpost": "",
+        "style": "GMM005"
+      },
+      {
+        "kind": "diameter_linear",
+        "value": 26.0,
+        "dimpost": "%%c<>",
+        "style": "GMM003"
+      },
+      {
+        "kind": "linear",
+        "value": 60.0,
+        "dimpost": "",
+        "style": "GMM002"
+      },
+      {
+        "kind": "diameter_native",
+        "value": 75.0,
+        "dimpost": "%%c<>",
+        "style": "GMM006"
+      }
+    ],
+    "generated": [
+      {
+        "kind": "L40_total",
+        "value": 40.0
+      },
+      {
+        "kind": "L35_counterbore_depth",
+        "value": 35.0
+      },
+      {
+        "kind": "L5_bore_land",
+        "value": 5.0
+      },
+      {
+        "kind": "D33_counterbore",
+        "value": 33.0
+      },
+      {
+        "kind": "D26_bore",
+        "value": 26.0
+      },
+      {
+        "kind": "D75_outer",
+        "value": 75.0
+      },
+      {
+        "kind": "P60_hole_pitch",
+        "value": 60.0
+      }
+    ],
+    "missing": [],
+    "extra": [],
+    "human_notes": [
+      "\\A1;２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０"
+    ]
+  },
+  "tolerance_smoke_ok": true
+}

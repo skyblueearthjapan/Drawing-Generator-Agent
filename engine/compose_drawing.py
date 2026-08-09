@@ -492,13 +492,24 @@ _LINETYPE_STYLE = {
 }
 _DEFAULT_LINE_STYLE = dict(color="#e6e6e6", lw=0.7, ls="-")
 _ANNOT_STYLE = dict(color="#9a6ac8", lw=0.6, ls="-")
+# 寸法(DIMENSION)/引出線(LEADER)。DXF側はdimclrd=3(緑)だが、目視ゲート用の
+# 暗背景プレビューでは寸法線を判別しやすい緑系で描く
+_DIM_LINE_STYLE = dict(color="#3fd07a", lw=0.7, ls="-")
+# dimclrt=7(白/黒)は背景依存。暗背景プレビューでは明色で描く
+# (dimstyle_spec.jsonの罠メモ: 白背景レンダラーだと白文字が埋もれる)
+_DIM_TEXT_COLOR = "#ffe98a"
 
 
 def _clean_mtext(raw):
-    u"""MTEXTの書式コード(\\Txxx; \\Wxxx; 等)と波括弧グループを取り除き、\\Pを改行にする。"""
+    u"""MTEXTの書式コード(\\Txxx; \\Wxxx; 等)と波括弧グループを取り除き、\\Pを改行にする。
+    AutoCADの制御コード(%%c=φ / %%p=± / %%d=°)と公差スタック(\\S上^ 下;)も可読化する。"""
     s = raw.replace("\\P", "\n")
+    s = re.sub(r"\\S([^^]*)\^\s*([^;]*);", lambda m: "%s/%s" % (m.group(1).strip(),
+                                                                m.group(2).strip()), s)
     s = re.sub(r"\\[A-Za-z][^;]*;", "", s)
     s = s.replace("{", "").replace("}", "")
+    s = s.replace("%%c", u"\u03c6").replace("%%C", u"\u03c6")
+    s = s.replace("%%p", u"\u00b1").replace("%%d", u"\u00b0")
     return s
 
 
@@ -529,8 +540,8 @@ def render_png(dxf_path, out_png, title=None, figsize=(16, 11.6), dpi=170):
         lt = e.dxf.linetype if e.dxf.hasattr("linetype") else "BYLAYER"
         return _LINETYPE_STYLE.get(lt, _DEFAULT_LINE_STYLE)
 
-    def draw(e, annot=False):
-        st = _ANNOT_STYLE if annot else style_of(e)
+    def draw(e, annot=False, dim=False):
+        st = _DIM_LINE_STYLE if dim else (_ANNOT_STYLE if annot else style_of(e))
         t = e.dxftype()
         if t == "LINE":
             s, en = e.dxf.start, e.dxf.end
@@ -559,12 +570,21 @@ def render_png(dxf_path, out_png, title=None, figsize=(16, 11.6), dpi=170):
         elif t == "INSERT":
             is_annot = str(e.dxf.name).upper().startswith("SW_CENTERMARKSYMBOL")
             for ve in e.virtual_entities():
-                draw(ve, annot=is_annot)
+                draw(ve, annot=is_annot, dim=dim)
+        elif t == "DIMENSION":
+            # 寸法の実体はアノニマスブロック(*Dn)。virtual_entities()で展開して描く
+            for ve in e.virtual_entities():
+                draw(ve, dim=True)
+        elif t == "LEADER":
+            pts = [(p[0], p[1]) for p in e.vertices]
+            ax.plot([p[0] for p in pts], [p[1] for p in pts], **_DIM_LINE_STYLE)
         elif t == "MTEXT":
             p = e.dxf.insert
             ha, va = _MTEXT_ATTACH_ALIGN.get(e.dxf.attachment_point, ("left", "bottom"))
+            rot = e.dxf.get("rotation", 0.0) if dim else 0.0
             ax.text(p.x, p.y, _clean_mtext(e.text), fontsize=e.dxf.char_height * 2.6,
-                     ha=ha, va=va, color="#f2f2f2", linespacing=1.3)
+                     ha=ha, va=va, color=_DIM_TEXT_COLOR if dim else "#f2f2f2",
+                     rotation=rot, rotation_mode="anchor", linespacing=1.3)
         elif t == "TEXT":
             p = e.dxf.insert
             h = e.dxf.height if e.dxf.hasattr("height") else 2.5

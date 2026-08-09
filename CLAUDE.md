@@ -171,6 +171,23 @@ engine/          恒久エンジン(sw_compat.py, sw_helper.py, dxf_dump.py, dxf
 - 裁定(調査/ディレクター裁定_フェーズ3A質問票.md): 公差は作図計画の明示指定のみ/
   タップ記号JISB0205は初期実装・仕上げ記号は第2弾/表記は文脈ごとコーパス最頻値に統一
 
+### 寸法記入エンジン(フェーズ3-B・2026-08-09実測)
+- `engine/dim_engine.py` + `engine/plan_schema.md`(作図計画JSON v1.0)。ゲート①内蔵
+  (期待値/実測/実ジオメトリの3点照合、0.01mm超で停止。反証テスト3ケースで停止動作を確認済み)
+- **❗`dimfit`(287)はezdxfがAC1015に書き出さない**(保存時に`dimatfit`+`dimtmove`へ自動変換)。
+  GMM実ファイルは逆に`dimfit`のみ持つ。読み戻し検証は`dimatfit`/`dimtmove`側で行う
+- **❗ビュー分類の前に必ず`subtract_frame()`**(図枠外枠がisoビュー領域と交差し輪郭が図枠全体に化ける)
+- `Dimension.has_xdata`はメソッド(`if e.has_xdata:`は常にTrue)。`e.xdata is not None`で判定
+- ezdxfの`add_linear_dim`はoverride無しならXDATA(DSTYLE)を書かない=「1寸法=1専用DIMSTYLE」が自然に実現
+- 公差ゼロ側「0」整形は描画後にアノニマスブロック(*Dn)内MTEXTを正規表現置換(`\S 0.000^…`→`\S 0^…`)
+- `render_png`のDIMENSION描画は`virtual_entities()`展開必須+%%c/%%p/\S公差の可読化が必要
+- 合成4ビューのfront-right間は18.16mmしかない→front右側の垂直寸法はoffset 11mmに詰める(コーパスp25内)
+- **❗人間の参考図面はジオメトリの正解ではない**: 15015-P3-012_013のホルダー断面で「２－８キリ」の穴が
+  実測φ7で作図されていた(モデルはφ8)。人間図面は「どの寸法を入れるか」の正解であり、
+  **ジオメトリ照合の基準にしてはいけない**(照合は3Dモデル実測が正)
+- 未解決→ユーザー確認中: ①円形ビュー外径のネイティブDIAMETER型 vs 線形+%%c統一
+  ②穴注記「キリ」表記 vs %%c統一。確定後に plan_schema/dim_engine の既定へ反映すること
+
 ### ❗OpenDoc6がNoneでも「ActiveDocで拾う」フォールバックは危険【2026-08-09・実害あり】
 OpenDoc6 が None(開けていない)のとき `sw.ActiveDoc` は**ユーザーが既に開いていた無関係の
 ドキュメント**を返す。そのまま処理を続けて最後に `CloseDoc(title)` したため、
