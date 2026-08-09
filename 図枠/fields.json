@@ -1,0 +1,374 @@
+{
+  "frame_variant": "bucket_A (品名ラベル基準座標 220.24,27.41 / 用紙410x287 / 尺度Ａ３)",
+  "n_fields": 15,
+  "fields": [
+    {
+      "field": "品名_値",
+      "description": "品名(部品名)。3Dモデル名を投入する想定",
+      "entity_type": "MTEXT",
+      "anchor": [
+        224.477,
+        22.51
+      ],
+      "height": 4.2124,
+      "style": "GMM008",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.8,
+        "oblique": 0.0
+      },
+      "align": "bottom-left",
+      "rotation": 0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "走行ギア",
+        "シャフト",
+        "エンドプレート",
+        "フラットフレーム追加工\\W0.400000;\\T1.000000;.\\W0.800000;\\T1.000000;１",
+        "フラットフレーム追加工\\W0.400000;\\T1.000000;.\\W0.800000;\\T1.000000;２"
+      ]
+    },
+    {
+      "field": "装置名_値",
+      "description": "装置名(プロジェクト/号機名)。本データセットでは全サンプル同一値'ラインマン200'",
+      "entity_type": "MTEXT",
+      "anchor": [
+        224.477,
+        14.877
+      ],
+      "height": 4.2124,
+      "style": "GMM008",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.8,
+        "oblique": 0.0
+      },
+      "align": "bottom-left",
+      "rotation": 0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "ＬＩＮＥＭＡＮ２００",
+        "クランプ治具",
+        "２軸位置決めＰＯＳ"
+      ]
+    },
+    {
+      "field": "図番_値",
+      "description": "図番(工番-軸番号-連番)。例: 25154-1-07",
+      "entity_type": "MTEXT",
+      "anchor": [
+        273.605,
+        20.498
+      ],
+      "height": 4.2124,
+      "style": "GMM008",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.8,
+        "oblique": 0.0
+      },
+      "align": "bottom-left",
+      "rotation": 0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "２５１５４－１－０７",
+        "２５１５４－１－０８",
+        "２５１５４－１－０９",
+        "２５１５４－１－１０６",
+        "２５１５４－１－１０７"
+      ]
+    },
+    {
+      "field": "尺度_値",
+      "description": "尺度(縮尺表記)。例: 1:2, 1:1, 1/1.5 等表記ゆれあり",
+      "entity_type": "MTEXT",
+      "anchor": [
+        176.415,
+        22.446
+      ],
+      "height": 4.2124,
+      "style": "GMM016",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.548697,
+        "oblique": 0.0
+      },
+      "align": "bottom-center",
+      "rotation": 0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "１：２",
+        "１：１"
+      ]
+    },
+    {
+      "field": "品番_番号",
+      "description": "右下ミニ表(締結部材表)の番号列。図番末尾-連番の形式",
+      "entity_type": "MTEXT",
+      "anchor": [
+        328.825,
+        24.376
+      ],
+      "height": 3.2,
+      "style": "GMM019",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.455625,
+        "oblique": 0.0
+      },
+      "align": "bottom-center",
+      "rotation": 0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "０７－１",
+        "０８－１",
+        "０９－１",
+        "１１－１",
+        "１７－１"
+      ]
+    },
+    {
+      "field": "品番_仕様",
+      "description": "右下ミニ表の仕様/規格列(ボルト規格など)",
+      "entity_type": "MTEXT",
+      "anchor": [
+        334.182,
+        24.365
+      ],
+      "height": 3.2,
+      "style": "GMM020",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.791016,
+        "oblique": 0.0
+      },
+      "align": "bottom-left",
+      "rotation": 0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "ホＭ５×１０",
+        "ＣＭ４×１０",
+        "ＨＭ６×１５　ＨＷ",
+        "ホーローＭ５×６",
+        "ＣＭ１６×３０"
+      ]
+    },
+    {
+      "field": "品番_個数",
+      "description": "右下ミニ表の個数列",
+      "entity_type": "MTEXT",
+      "anchor": [
+        394.779,
+        24.456
+      ],
+      "height": 3.2,
+      "style": "GMM003",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.91125,
+        "oblique": 0.0
+      },
+      "align": "bottom-center",
+      "rotation": 0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "２",
+        "４",
+        "１",
+        "６"
+      ]
+    },
+    {
+      "field": "REV_日付_2",
+      "description": "変更履歴(REV)テーブル2行目の日付。未使用時は'＊＊.＊＊.＊＊'のプレースホルダ",
+      "entity_type": "MTEXT",
+      "anchor": [
+        207.705,
+        14.722
+      ],
+      "height": 4.2124,
+      "style": "GMM009",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.493827,
+        "oblique": 0.0
+      },
+      "align": "bottom-center",
+      "rotation": 0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "＊＊．＊＊．＊＊",
+        "２６．０６．１７"
+      ]
+    },
+    {
+      "field": "REV_日付_3",
+      "description": "変更履歴(REV)テーブル3行目の日付",
+      "entity_type": "MTEXT",
+      "anchor": [
+        207.705,
+        22.586
+      ],
+      "height": 4.2124,
+      "style": "GMM009",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.493827,
+        "oblique": 0.0
+      },
+      "align": "bottom-center",
+      "rotation": 0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "２６．０５．２９",
+        "２６．０６．０１",
+        "２６．０４．０６",
+        "２２．０５．２７",
+        "２６．０６．２０"
+      ]
+    },
+    {
+      "field": "製図者_氏名",
+      "description": "製図欄の氏名。1e-6厳密一致では全18ファイル中1枚が0.047ずれるため'ほぼ固定'扱い(要確認)",
+      "entity_type": "MTEXT",
+      "anchor": [
+        191.878,
+        22.586
+      ],
+      "height": 4.2124,
+      "style": "GMM008",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.8,
+        "oblique": 0.0
+      },
+      "align": "bottom-center",
+      "rotation": 0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "日暮",
+        "田村"
+      ]
+    },
+    {
+      "field": "重量_値",
+      "description": "重量(kg)。バケツA(80ファイル)実測ではDXF上に数値記入例が見つからず「未記入運用」の可能性が高い。位置は品名/装置名ラベル→値のオフセット(dx≈+4.0,dy≈-5.1)から推定。SW質量特性から自動算出しこの位置に新規記入する想定(要ディレクター確認)",
+      "entity_type": "MTEXT(推定/未実測)",
+      "anchor": [
+        224.593,
+        6.704
+      ],
+      "height": 4.2124107142857,
+      "style": "GMM008",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.8,
+        "oblique": 0.0
+      },
+      "align": "bottom-left",
+      "rotation": 0.0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": []
+    },
+    {
+      "field": "連番マーク_値",
+      "description": "シート左上の丸(半径10、中心(19.324,278.844)固定)内に入る2桁の連番(図番末尾と一致)。文字がCENTER系のためテキスト幅で挿入基準点のxが微妙に動く(13.15〜19.32付近)。アンカーは丸の中心を基準にセンター配置とするのが安全",
+      "entity_type": "MTEXT",
+      "anchor": [
+        19.324,
+        275.03
+      ],
+      "height": 7.0,
+      "style": "GMM017系(ファイルにより異なる)",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.428571,
+        "oblique": 0.0
+      },
+      "align": "bottom-center(推定・ファイルによりleftの例あり)",
+      "rotation": 0.0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "０７",
+        "０８",
+        "０９",
+        "１１",
+        "１７",
+        "１８"
+      ]
+    },
+    {
+      "field": "材質個数ノート_自製品",
+      "description": "シート左上、連番マーク右の自由記述ノート。自製部品は2行 { 材質  ○○○ }\\P{ 個数  ○ } 形式。位置はほぼ固定(280.0前後)だが、内容行数がテンプレートにより変わるため厳密一致からは除外された。'材質'はこの帳票では専用セルを持たず、このノート内の自由テキストとして記入される",
+      "entity_type": "MTEXT",
+      "anchor": [
+        33.595,
+        280.001
+      ],
+      "height": 7.0,
+      "style": "GMM016系(ファイルにより異なる)",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.548697,
+        "oblique": 0.0
+      },
+      "align": "bottom-left",
+      "rotation": 0.0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "\\T1.000000;材質　Ｓ４５Ｃ　マル５０\\P\\T1.000000;個数　１",
+        "\\T1.000000;材質　ＳＳ４００　ＰＬ６\\P\\T1.000000;個数　１",
+        "\\T1.000000;材質　Ｓ４５Ｃ　ミガキマル４５\\P\\T1.000000;個数　１",
+        "\\T1.000000;材質　ＳＳ４００　ＦＢ２８×６５\\P\\T1.000000;個数　２",
+        "\\T1.000000;材質　ウレタンゴム\\P\\T1.000000;個数　２"
+      ]
+    },
+    {
+      "field": "材質個数ノート_購入品",
+      "description": "同じ左上ノート枠の購入品バリエーション。4行 メーカー/品名/型式/個数 形式。自製品ノートと排他(同じ枠を使い回すため、片方が使われる)",
+      "entity_type": "MTEXT",
+      "anchor": [
+        33.595,
+        287.001
+      ],
+      "height": 7.0,
+      "style": "GMM018系(ファイルにより異なる)",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 0.857143,
+        "oblique": 0.0
+      },
+      "align": "bottom-left",
+      "rotation": 0.0,
+      "mtext_prefix": "\\W0.428571;\\T1.000000;",
+      "sample_values": [
+        "\\W0.428571;\\T1.000000;ﾒｰｶｰ\\W0.857143;\\T1.000000;　ＫＨＫ\\P\\W0.857143;\\T1.000000;品名　平歯車\\P\\W0.857143;\\T1.000000;型式　ＳＳ３－３６　ｍ３－３６Ｔ\\P\\W0.857143;\\T1.000000;個数　１　　　歯面高周波焼き入れ　ＨＶ４８０～６００",
+        "\\T1.000000;品名　フラットフレーム\\P\\T1.000000;メーカー　ミスミ\\P\\T1.000000;型式　ＨＦＳＦＩＮ５－１０１０４－２３４\\P\\T1.000000;個数　１",
+        "\\T1.000000;品名　フラットフレーム\\P\\T1.000000;メーカー　ミスミ\\P\\T1.000000;型式　ＨＦＳＦＩＮ５－１０１０４－１８６\\P\\T1.000000;個数　１",
+        "\\T1.000000;品名　フラットフレーム\\P\\T1.000000;メーカー　ミスミ\\P\\T1.000000;型式　ＨＦＳＦＩＮ５－１０７４－１６４\\P\\T1.000000;個数　１"
+      ]
+    },
+    {
+      "field": "用紙サイズ",
+      "description": "この図枠テンプレート(バケツA: 表題欄が(220.24,27.41)に来る変種)では'Ａ３'固定でMTEXTとして図枠内に直接含まれる(frame_template.dxf内の共通エンティティ)。他の用紙サイズは図枠全体のスケール/レイアウトが異なる別バリアントとして存在する(frame_analysis.md の「用紙サイズ・尺度によるバケツ分割」参照)",
+      "entity_type": "MTEXT(frame_template.dxfに固定値として同梱済み)",
+      "anchor": [
+        176.415271,
+        14.583
+      ],
+      "height": 8.4248214285714,
+      "style": "GMM006系",
+      "style_resolved": {
+        "font": "txt.shx",
+        "width_factor": 1.0,
+        "oblique": 0.0
+      },
+      "align": "bottom-center",
+      "rotation": 0.0,
+      "mtext_prefix": "\\T1.000000;",
+      "sample_values": [
+        "Ａ３"
+      ]
+    }
+  ]
+}

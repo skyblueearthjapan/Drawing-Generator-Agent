@@ -107,6 +107,38 @@ engine/          恒久エンジン(sw_compat.py, sw_helper.py, dxf_dump.py, dxf
 - 教師STEPが届くまでのパイプライン開発は、姉妹リポジトリの `生成3D/`(SW2023保存)を代用する
 - **開けるかどうかは開く前に `VersionHistory` で判定できる**(開かずに済む)
 
+### 図枠の実態【フェーズ1・2026-08-09確立】
+- **図枠は1種類ではない**: 用紙サイズ・倍率で**34バケット**に分かれる(「品名」ラベル座標がキー)。
+  最多の**バケットA(A3実寸410×287・図枠(5,5)-(415,292)・80/190枚・全9軸に存在)**を
+  標準出力テンプレートに採用(ディレクター裁定: 新規生成はA3統一、大物は尺度で対応)
+- 成果物: `図枠/frame_template.dxf`(共通113エンティティ・AC1015・cp932)、
+  `図枠/fields.json`(可変15フィールドの座標・書式マップ)、`engine/frame_extract.py`(subtract_frame)
+- **材質は専用セルが無い**: 左上ノートに `材質　ＳＳ４００　ＰＬ６ \P 個数　１` の自由テキスト2行形式
+  (購入品は メーカー/品名/型式/個数 の4行形式で同じ枠を使い回す)
+- **重量セルは過去図面で未記入運用**(80枚に記入例ゼロ)→ 新運用として自動記入する(ユーザー仕様)
+- STYLE名(GMM0xx)はファイル毎の自動採番 → スタイルは**名前でなくフォント実体**(font/width_factor)で比較
+- ezdxfで保存する時は `doc.encoding` を明示設定しないとヘッダ変数と無関係にANSI_1252へ化ける
+- 表記は全角文字(図番２５１５４－１－０７等)。MTEXTの\T/\W書式コードを保持すること
+
+### SW図面API(フェーズ2・2026-08-09実測。詳細は 調査/phase2_pipeline_report.md)
+- **❗`IView.Position` にtuple/listを代入すると例外なしで壊れる**(xが捨てられyにx×1000が入る)。
+  `VARIANT(VT_ARRAY|VT_R8,[x,y])` 必須。**代入後は必ず読み戻して検証**
+- **❗ビュー尺度が勝手に2:1になる**: シート1:1でも `CreateDrawViewFromModelView3` のビューは
+  `ScaleDecimal=2.0`、しかも `UseSheetScale` はTrueと嘘をつく。`v.ScaleDecimal=1.0` を明示代入。
+  放置すると**寸法値と作図長が2倍ずれる最悪の事故**
+- **★`IView.ModelToViewTransform.ArrayData` は列優先 `[r0..r8, tx,ty,tz, s, ...]`**、
+  `sheet_x = s*(r0*X+r3*Y+r6*Z)+tx*1000` が誤差0.000000mm。SW実測3D座標→DXF座標が直変換でき、
+  ゲート①も同経路で閉じる
+- 図面テンプレ=`GetUserPreferenceStringValue(10)`。`ISheet.GetSize` は `GetSize(0.0,0.0)` で呼ぶ
+- 接線エッジは `SetDisplayTangentEdges2(1)` 一択(PHANTOM線種になる。2はContinuousに混ざり区別不能)
+- 隠れ線はHIDDEN線種で出る(レイヤは全て`0`なのでレイヤでは区別不可。振り分けはezdxf側の仕事)
+- 中心マークは `SW_CENTERMARKSYMBOL_*` INSERT(中身はCONTINUOUSの直線8本)。bbox計算時は除外
+- `GetOutline` はジオメトリ+11.88mm/片側。等角投影では実範囲と一致しない→実範囲はTransformから
+- SPLINE/ELLIPSEが出る(円筒×平面の交線等)→DXF読み側は平坦化必須
+- **材質未設定モデルは密度1000kg/m³(水)で質量が出る** → 重量自動算出は材質設定後に行うこと
+- 出力DXFは AC1015 / $INSUNITS=4(mm) / 用紙左下原点 / 実寸 → 図枠と同座標系で単純合成可
+- matplotlibの日本語は `MS Gothic` 全滅・`Meiryo`/`Yu Gothic` を使う
+
 ### ❗OpenDoc6がNoneでも「ActiveDocで拾う」フォールバックは危険【2026-08-09・実害あり】
 OpenDoc6 が None(開けていない)のとき `sw.ActiveDoc` は**ユーザーが既に開いていた無関係の
 ドキュメント**を返す。そのまま処理を続けて最後に `CloseDoc(title)` したため、
