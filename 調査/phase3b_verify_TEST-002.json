@@ -727,7 +727,59 @@
           78.0
         ]
       },
-      "collisions": []
+      "collisions": [],
+      "geom_boxes": {
+        "L40_total": [
+          141.8414,
+          35.908,
+          181.8414,
+          61.908
+        ],
+        "L35_counterbore_depth": [
+          141.8414,
+          43.908,
+          176.8414,
+          82.908
+        ],
+        "L5_bore_land": [
+          173.8414,
+          43.908,
+          184.8414,
+          82.908
+        ],
+        "D33_counterbore": [
+          120.7861,
+          82.908,
+          141.8414,
+          115.908
+        ],
+        "D26_bore": [
+          181.8414,
+          86.408,
+          194.8414,
+          112.408
+        ],
+        "D75_outer": [
+          206.7818,
+          65.567,
+          285.83,
+          120.9171
+        ],
+        "P60_hole_pitch": [
+          207.5,
+          43.908,
+          267.5,
+          99.408
+        ],
+        "N_bolt_holes": [
+          271.3891,
+          103.2971,
+          386.0,
+          130.4
+        ]
+      },
+      "frame_collisions": [],
+      "frame_ok": true
     },
     "resolved_kinds": {
       "L40_total": "linear",
@@ -767,7 +819,8 @@
       },
       "hole_note": {
         "notation": "kiri",
-        "width": "zenkaku"
+        "width": "zenkaku",
+        "separator": " "
       }
     },
     "warnings": []

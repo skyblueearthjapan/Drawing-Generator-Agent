@@ -21,6 +21,9 @@
       "diff_mm": 0.0,
       "text": "40",
       "text_value": 40.0,
+      "text_role": "measured",
+      "text_override": null,
+      "text_override_ok": null,
       "text_diff_mm": 0.0,
       "ok": true
     },
@@ -36,6 +39,9 @@
       "diff_mm": 0.0,
       "text": "35",
       "text_value": 35.0,
+      "text_role": "measured",
+      "text_override": null,
+      "text_override_ok": null,
       "text_diff_mm": 0.0,
       "ok": true
     },
@@ -51,6 +57,9 @@
       "diff_mm": 0.0,
       "text": "5",
       "text_value": 5.0,
+      "text_role": "measured",
+      "text_override": null,
+      "text_override_ok": null,
       "text_diff_mm": 0.0,
       "ok": true
     },
@@ -66,6 +75,9 @@
       "diff_mm": 0.0,
       "text": "%%c33",
       "text_value": 33.0,
+      "text_role": "measured",
+      "text_override": null,
+      "text_override_ok": null,
       "text_diff_mm": 0.0,
       "ok": true
     },
@@ -81,6 +93,9 @@
       "diff_mm": 0.0,
       "text": "%%c26",
       "text_value": 26.0,
+      "text_role": "measured",
+      "text_override": null,
+      "text_override_ok": null,
       "text_diff_mm": 0.0,
       "ok": true
     },
@@ -96,6 +111,9 @@
       "diff_mm": 0.0,
       "text": "%%c75",
       "text_value": 75.0,
+      "text_role": "measured",
+      "text_override": null,
+      "text_override_ok": null,
       "text_diff_mm": 0.0,
       "ok": true
     },
@@ -111,6 +129,9 @@
       "diff_mm": 0.0,
       "text": "60",
       "text_value": 60.0,
+      "text_role": "measured",
+      "text_override": null,
+      "text_override_ok": null,
       "text_diff_mm": 0.0,
       "ok": true
     }

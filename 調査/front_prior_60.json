@@ -1,0 +1,950 @@
+{
+  "observations": [
+    {
+      "key": "1-09",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-12",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-24",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-25",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-28",
+      "shape_class": "holed_block",
+      "main_axis": "Z",
+      "cand": [
+        "*平面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "2-11",
+      "shape_class": "plate",
+      "main_axis": "X",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "2-12",
+      "shape_class": "other",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "2-13",
+      "shape_class": "plate",
+      "main_axis": "X",
+      "cand": [
+        "*平面",
+        270
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "2-14",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "3-05",
+      "shape_class": "lathe",
+      "main_axis": "Y",
+      "cand": [
+        "*正面",
+        270
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "3-12",
+      "shape_class": "plate",
+      "main_axis": "Y",
+      "cand": [
+        "*右側面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "3-17",
+      "shape_class": "other",
+      "main_axis": "Y",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "3-20",
+      "shape_class": "holed_block",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "4-08",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        90
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "4-10",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*右側面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "4-14",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "4-15",
+      "shape_class": "plate",
+      "main_axis": "Y",
+      "cand": [
+        "*右側面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "5-10",
+      "shape_class": "holed_block",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "5-13",
+      "shape_class": "other",
+      "main_axis": "Y",
+      "cand": [
+        "*右側面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "5-15",
+      "shape_class": "other",
+      "main_axis": "Y",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "5-16",
+      "shape_class": "other",
+      "main_axis": "Y",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "6-16",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "7-04",
+      "shape_class": "lathe",
+      "main_axis": "Z",
+      "cand": [
+        "*右側面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "7-05",
+      "shape_class": "lathe",
+      "main_axis": "Z",
+      "cand": [
+        "*右側面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-03",
+      "shape_class": "holed_block",
+      "main_axis": "Y",
+      "cand": [
+        "*平面",
+        90
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-10",
+      "shape_class": "lathe",
+      "main_axis": "Z",
+      "cand": [
+        "*平面",
+        270
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-17",
+      "shape_class": "plate",
+      "main_axis": "Y",
+      "cand": [
+        "*左側面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-18",
+      "shape_class": "holed_block",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-19",
+      "shape_class": "other",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-26",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*平面",
+        90
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "2-04",
+      "shape_class": "lathe",
+      "main_axis": "Y",
+      "cand": [
+        "*右側面",
+        90
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "2-08",
+      "shape_class": "plate",
+      "main_axis": "Y",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "2-09",
+      "shape_class": "plate",
+      "main_axis": "Y",
+      "cand": [
+        "*平面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "2-10",
+      "shape_class": "plate",
+      "main_axis": "X",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "2-15",
+      "shape_class": "plate",
+      "main_axis": "Y",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "3-06",
+      "shape_class": "other",
+      "main_axis": "Y",
+      "cand": [
+        "*右側面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "3-15",
+      "shape_class": "plate",
+      "main_axis": "X",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "3-16",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "3-18",
+      "shape_class": "lathe",
+      "main_axis": "X",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "3-22",
+      "shape_class": "other",
+      "main_axis": "Z",
+      "cand": [
+        "*左側面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "4-11",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "4-13",
+      "shape_class": "holed_block",
+      "main_axis": "Y",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "5-07",
+      "shape_class": "lathe",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "5-09",
+      "shape_class": "plate",
+      "main_axis": "Y",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "5-12",
+      "shape_class": "other",
+      "main_axis": "Y",
+      "cand": [
+        "*右側面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "6-08",
+      "shape_class": "lathe",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "6-11",
+      "shape_class": "other",
+      "main_axis": "X",
+      "cand": [
+        "*右側面",
+        180
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "6-13",
+      "shape_class": "lathe",
+      "main_axis": "Y",
+      "cand": [
+        "*正面",
+        270
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "7-07",
+      "shape_class": "other",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "7-09",
+      "shape_class": "other",
+      "main_axis": "X",
+      "cand": [
+        "*平面",
+        0
+      ],
+      "src": "phase4"
+    },
+    {
+      "key": "1-04",
+      "shape_class": "other",
+      "main_axis": "Y",
+      "cand": [
+        "*平面",
+        270
+      ],
+      "src": "blind"
+    },
+    {
+      "key": "2-06",
+      "shape_class": "lathe",
+      "main_axis": "Z",
+      "cand": [
+        "*平面",
+        270
+      ],
+      "src": "blind"
+    },
+    {
+      "key": "3-04",
+      "shape_class": "holed_block",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "blind"
+    },
+    {
+      "key": "3-09",
+      "shape_class": "lathe",
+      "main_axis": "Y",
+      "cand": [
+        "*平面",
+        180
+      ],
+      "src": "blind"
+    },
+    {
+      "key": "4-07",
+      "shape_class": "plate",
+      "main_axis": "Y",
+      "cand": [
+        "*平面",
+        0
+      ],
+      "src": "blind"
+    },
+    {
+      "key": "4-12",
+      "shape_class": "plate",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "blind"
+    },
+    {
+      "key": "5-04",
+      "shape_class": "lathe",
+      "main_axis": "Y",
+      "cand": [
+        "*左側面",
+        180
+      ],
+      "src": "blind"
+    },
+    {
+      "key": "5-08",
+      "shape_class": "other",
+      "main_axis": "Y",
+      "cand": [
+        "*右側面",
+        0
+      ],
+      "src": "blind"
+    },
+    {
+      "key": "6-02",
+      "shape_class": "lathe",
+      "main_axis": "Z",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "blind"
+    },
+    {
+      "key": "7-06",
+      "shape_class": "other",
+      "main_axis": "Y",
+      "cand": [
+        "*正面",
+        0
+      ],
+      "src": "blind"
+    }
+  ],
+  "overall": [
+    {
+      "sw_view": "*正面",
+      "rot": 0,
+      "count": 32,
+      "pct": 53.3,
+      "cum_pct": 53.3
+    },
+    {
+      "sw_view": "*右側面",
+      "rot": 0,
+      "count": 9,
+      "pct": 15.0,
+      "cum_pct": 68.3
+    },
+    {
+      "sw_view": "*平面",
+      "rot": 0,
+      "count": 4,
+      "pct": 6.7,
+      "cum_pct": 75.0
+    },
+    {
+      "sw_view": "*平面",
+      "rot": 270,
+      "count": 4,
+      "pct": 6.7,
+      "cum_pct": 81.7
+    },
+    {
+      "sw_view": "*正面",
+      "rot": 270,
+      "count": 2,
+      "pct": 3.3,
+      "cum_pct": 85.0
+    },
+    {
+      "sw_view": "*平面",
+      "rot": 90,
+      "count": 2,
+      "pct": 3.3,
+      "cum_pct": 88.3
+    },
+    {
+      "sw_view": "*左側面",
+      "rot": 0,
+      "count": 2,
+      "pct": 3.3,
+      "cum_pct": 91.7
+    },
+    {
+      "sw_view": "*正面",
+      "rot": 90,
+      "count": 1,
+      "pct": 1.7,
+      "cum_pct": 93.3
+    },
+    {
+      "sw_view": "*右側面",
+      "rot": 90,
+      "count": 1,
+      "pct": 1.7,
+      "cum_pct": 95.0
+    },
+    {
+      "sw_view": "*右側面",
+      "rot": 180,
+      "count": 1,
+      "pct": 1.7,
+      "cum_pct": 96.7
+    },
+    {
+      "sw_view": "*平面",
+      "rot": 180,
+      "count": 1,
+      "pct": 1.7,
+      "cum_pct": 98.3
+    },
+    {
+      "sw_view": "*左側面",
+      "rot": 180,
+      "count": 1,
+      "pct": 1.7,
+      "cum_pct": 100.0
+    }
+  ],
+  "per_class": {
+    "holed_block": [
+      {
+        "sw_view": "*正面",
+        "rot": 0,
+        "count": 5,
+        "pct": 71.4,
+        "cum_pct": 71.4
+      },
+      {
+        "sw_view": "*平面",
+        "rot": 0,
+        "count": 1,
+        "pct": 14.3,
+        "cum_pct": 85.7
+      },
+      {
+        "sw_view": "*平面",
+        "rot": 90,
+        "count": 1,
+        "pct": 14.3,
+        "cum_pct": 100.0
+      }
+    ],
+    "lathe": [
+      {
+        "sw_view": "*正面",
+        "rot": 0,
+        "count": 4,
+        "pct": 30.8,
+        "cum_pct": 30.8
+      },
+      {
+        "sw_view": "*正面",
+        "rot": 270,
+        "count": 2,
+        "pct": 15.4,
+        "cum_pct": 46.2
+      },
+      {
+        "sw_view": "*右側面",
+        "rot": 0,
+        "count": 2,
+        "pct": 15.4,
+        "cum_pct": 61.5
+      },
+      {
+        "sw_view": "*平面",
+        "rot": 270,
+        "count": 2,
+        "pct": 15.4,
+        "cum_pct": 76.9
+      },
+      {
+        "sw_view": "*右側面",
+        "rot": 90,
+        "count": 1,
+        "pct": 7.7,
+        "cum_pct": 84.6
+      },
+      {
+        "sw_view": "*平面",
+        "rot": 180,
+        "count": 1,
+        "pct": 7.7,
+        "cum_pct": 92.3
+      },
+      {
+        "sw_view": "*左側面",
+        "rot": 180,
+        "count": 1,
+        "pct": 7.7,
+        "cum_pct": 100.0
+      }
+    ],
+    "other": [
+      {
+        "sw_view": "*正面",
+        "rot": 0,
+        "count": 7,
+        "pct": 46.7,
+        "cum_pct": 46.7
+      },
+      {
+        "sw_view": "*右側面",
+        "rot": 0,
+        "count": 4,
+        "pct": 26.7,
+        "cum_pct": 73.3
+      },
+      {
+        "sw_view": "*左側面",
+        "rot": 0,
+        "count": 1,
+        "pct": 6.7,
+        "cum_pct": 80.0
+      },
+      {
+        "sw_view": "*右側面",
+        "rot": 180,
+        "count": 1,
+        "pct": 6.7,
+        "cum_pct": 86.7
+      },
+      {
+        "sw_view": "*平面",
+        "rot": 0,
+        "count": 1,
+        "pct": 6.7,
+        "cum_pct": 93.3
+      },
+      {
+        "sw_view": "*平面",
+        "rot": 270,
+        "count": 1,
+        "pct": 6.7,
+        "cum_pct": 100.0
+      }
+    ],
+    "plate": [
+      {
+        "sw_view": "*正面",
+        "rot": 0,
+        "count": 16,
+        "pct": 64.0,
+        "cum_pct": 64.0
+      },
+      {
+        "sw_view": "*右側面",
+        "rot": 0,
+        "count": 3,
+        "pct": 12.0,
+        "cum_pct": 76.0
+      },
+      {
+        "sw_view": "*平面",
+        "rot": 0,
+        "count": 2,
+        "pct": 8.0,
+        "cum_pct": 84.0
+      },
+      {
+        "sw_view": "*平面",
+        "rot": 270,
+        "count": 1,
+        "pct": 4.0,
+        "cum_pct": 88.0
+      },
+      {
+        "sw_view": "*正面",
+        "rot": 90,
+        "count": 1,
+        "pct": 4.0,
+        "cum_pct": 92.0
+      },
+      {
+        "sw_view": "*左側面",
+        "rot": 0,
+        "count": 1,
+        "pct": 4.0,
+        "cum_pct": 96.0
+      },
+      {
+        "sw_view": "*平面",
+        "rot": 90,
+        "count": 1,
+        "pct": 4.0,
+        "cum_pct": 100.0
+      }
+    ]
+  },
+  "lathe_axis_roles": {
+    "horizontal": 8,
+    "circular": 4,
+    "vertical": 1
+  },
+  "coverage_all60": {
+    "1": {
+      "hit": 33,
+      "total": 60,
+      "pct": 55.0
+    },
+    "2": {
+      "hit": 43,
+      "total": 60,
+      "pct": 71.7
+    },
+    "3": {
+      "hit": 50,
+      "total": 60,
+      "pct": 83.3
+    },
+    "4": {
+      "hit": 52,
+      "total": 60,
+      "pct": 86.7
+    },
+    "5": {
+      "hit": 53,
+      "total": 60,
+      "pct": 88.3
+    },
+    "6": {
+      "hit": 55,
+      "total": 60,
+      "pct": 91.7
+    },
+    "7": {
+      "hit": 57,
+      "total": 60,
+      "pct": 95.0
+    },
+    "8": {
+      "hit": 57,
+      "total": 60,
+      "pct": 95.0
+    }
+  },
+  "coverage_blind10": {
+    "1": {
+      "hit": 3,
+      "total": 10,
+      "pct": 30.0
+    },
+    "2": {
+      "hit": 5,
+      "total": 10,
+      "pct": 50.0
+    },
+    "3": {
+      "hit": 7,
+      "total": 10,
+      "pct": 70.0
+    },
+    "4": {
+      "hit": 8,
+      "total": 10,
+      "pct": 80.0
+    },
+    "5": {
+      "hit": 9,
+      "total": 10,
+      "pct": 90.0
+    },
+    "6": {
+      "hit": 9,
+      "total": 10,
+      "pct": 90.0
+    },
+    "7": {
+      "hit": 9,
+      "total": 10,
+      "pct": 90.0
+    },
+    "8": {
+      "hit": 9,
+      "total": 10,
+      "pct": 90.0
+    }
+  }
+}

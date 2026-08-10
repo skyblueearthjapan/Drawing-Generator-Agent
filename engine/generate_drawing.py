@@ -218,7 +218,23 @@ def independent_verify(dxf_path, plan_path):
         exp = float(item["value_expected"])
         m = dim_engine.measure_model_value(dim, scale)
         t = dim_engine.dim_text_of(doc, dim)
-        tv = dim_engine.parse_dim_text_value(t)
+        # ❗寸法文字の照合は「計画が text_override を指定しているか」で3通りに分かれる。
+        #   参考寸法ラベル `(ＰＣＤ３３３)` の 333 を実測 321.6533 と比べて不合格にしていたのが
+        #   盲検で誤不合格4件を出したバグ(調査/blind_test_report.md §4)。
+        #   参考寸法は数値照合の対象外にし、代わりに**指定文字が入っているか**を検査する。
+        override = dim_engine.effective_text_override(item)
+        override_ok = None
+        if override is None:
+            text_role = "measured"
+            tv = dim_engine.parse_dim_text_value(t)
+        else:
+            override_ok = dim_engine.text_override_applied(t, override)
+            if dim_engine.is_reference_text(override):
+                text_role = "reference"      # 参考寸法/注記文字列 -> 数値照合しない
+                tv = None
+            else:
+                text_role = "override"       # 対称公差 `30%%p0.1` 等 -> 数値は照合する
+                tv = dim_engine.parse_dim_text_value(override)
         diff = None if m is None else abs(m - exp)
         tdiff = None if (tv is None or m is None) else abs(tv - m)
         base = dim.dxf.dimtype & 7
@@ -226,13 +242,15 @@ def independent_verify(dxf_path, plan_path):
                    or (kind in ("linear", "diameter_linear") and base == 0)
                    or (kind == "radius" and base == 4)
                    or (kind == "angle" and base == 2))
-        ok = (diff is not None and diff <= 0.01) and (tdiff is None or tdiff <= 0.01) and kind_ok
+        ok = ((diff is not None and diff <= 0.01) and (tdiff is None or tdiff <= 0.01)
+              and kind_ok and (override_ok is not False))
         gate_ok = gate_ok and ok
         rows.append({"id": did, "style": style, "kind": kind, "dimtype": dim.dxf.dimtype,
                      "dimtype_base": base, "kind_impl_ok": kind_ok,
                      "expected": exp, "measured": None if m is None else round(m, 6),
                      "diff_mm": None if diff is None else round(diff, 6),
-                     "text": t, "text_value": tv,
+                     "text": t, "text_value": tv, "text_role": text_role,
+                     "text_override": override, "text_override_ok": override_ok,
                      "text_diff_mm": None if tdiff is None else round(tdiff, 6), "ok": ok})
     result["scale"] = scale
     result["gate1"] = rows
@@ -270,6 +288,17 @@ def independent_verify(dxf_path, plan_path):
         and len(gen_styles) == len(dims) and all(r["kind_impl_ok"] for r in rows)
     result["style_ok"] = style_ok
     result["style_mismatches"] = mism
+
+    # ---- L. レイアウト: 図枠・表題欄との衝突(保存済みDXFから独立に判定) ----
+    def _id_of(dim):
+        m_idx = re.sub(r"\D", "", str(dim.dxf.dimstyle))
+        i = int(m_idx) - 1 if m_idx else -1
+        return order[i] if 0 <= i < len(order) else str(dim.dxf.dimstyle)
+
+    frame_collisions = dim_engine.check_frame_collisions(doc, id_of_dim=_id_of,
+                                                         template_path=FRAME_TEMPLATE)
+    result["frame_collisions"] = frame_collisions
+    result["layout_ok"] = not frame_collisions
 
     # ---- B2. 注記の書式 ----
     note_ok = True
@@ -421,19 +450,32 @@ def main(argv):
 
     # ---- 4) dim_engine(寸法・注記。ゲート①内蔵) ----
     gate1_ok = False
+    layout_ok = False
+    frame_collisions = []
     dim_report = None
     dim_error = None
     try:
         dim_report = dim_engine.apply_plan(args.plan, out_dxf, base_dxf_override=out_dxf)
         gate1_ok = dim_report["gate1_ok"]
+        frame_collisions = dim_report["layout"]["frame_collisions"]
+        layout_ok = not frame_collisions
         summary["steps"]["dim_engine"] = {
             "gate1_ok": gate1_ok, "warnings": dim_report["warnings"],
             "style_check_ok": dim_report["style_check"]["ok"],
             "layout_collisions": dim_report["layout"]["collisions"],
+            "frame_collisions": frame_collisions,
             "resolved_kinds": dim_report["resolved_kinds"]}
     except dim_engine.DimensionGateError as e:
         dim_error = str(e)
         summary["steps"]["dim_engine"] = {"gate1_ok": False, "error": dim_error}
+    # ❗レイアウト検証: 寸法が図枠・表題欄に重なる図面は納品しない
+    #   (盲検 25154-5-08 で寸法が表題欄に載ったまま「合格」で納品された実害。
+    #    自動で段/向きを付け替えるのは次段。まずは**検出して不合格理由に出す**)
+    summary["steps"]["layout_verify"] = {
+        "ok": layout_ok,
+        "frame_collision_count": len(frame_collisions),
+        "reasons": [u"%s が %s に重なっている(実体bbox %s)"
+                    % (c["id"], c["zone"], c["box"]) for c in frame_collisions]}
 
     # ---- 5) ゲート②(寸法完全性) ----
     gate2_ok = False
@@ -453,6 +495,17 @@ def main(argv):
     if gate1_ok:
         verify_report = independent_verify(out_dxf, args.plan)
         verify_ok = verify_report["ok"]
+        # 保存済みDXFから独立に取り直した図枠衝突を正とする(自己申告を信用しない)
+        if verify_report["frame_collisions"] != frame_collisions:
+            summary["steps"]["layout_verify"]["disagreement"] = {
+                "dim_engine": frame_collisions,
+                "independent": verify_report["frame_collisions"]}
+        frame_collisions = verify_report["frame_collisions"]
+        layout_ok = verify_report["layout_ok"]
+        summary["steps"]["layout_verify"].update({
+            "ok": layout_ok, "frame_collision_count": len(frame_collisions),
+            "reasons": [u"%s が %s に重なっている(実体bbox %s)"
+                        % (c["id"], c["zone"], c["box"]) for c in frame_collisions]})
         summary["steps"]["independent_verify"] = {
             "ok": verify_ok, "file_attrs_ok": verify_report["file_attrs_ok"],
             "gate1_ok": verify_report["gate1_ok"],
@@ -462,7 +515,7 @@ def main(argv):
         summary["steps"]["independent_verify"] = {"ok": False,
                                                    "skipped_reason": u"ゲート①不合格のため未実施"}
 
-    overall_ok = gate1_ok and gate2_ok and verify_ok
+    overall_ok = gate1_ok and gate2_ok and verify_ok and layout_ok
 
     # ---- 7) PNG化(現存する最終dxfに対して実施。失敗しても処理は継続) ----
     png_path = None
@@ -495,6 +548,7 @@ def main(argv):
     summary["gate1_ok"] = gate1_ok
     summary["gate2_ok"] = gate2_ok
     summary["verify_ok"] = verify_ok
+    summary["layout_ok"] = layout_ok
     summary["overall_ok"] = overall_ok
     summary["status"] = u"検証通過" if overall_ok else u"不合格"
     if dim_error:
@@ -513,7 +567,8 @@ def main(argv):
     gate2_text = (u"合格(未指定0件)" if gate2_ok
                   else (u"不合格(未指定%d件)" % len(gate2_report["unspecified"])
                         if gate2_report else u"未実施"))
-    gate3_text = u"PNG生成済み(要目視)" if final_png else u"PNG未生成"
+    gate3_text = ((u"PNG生成済み(要目視)" if final_png else u"PNG未生成")
+                  + (u" / ❗図枠衝突%d件" % len(frame_collisions) if frame_collisions else ""))
     gate4_text = u"未実施(バッチ生成のためスキップ)"
     def _relslash(p):
         return os.path.relpath(p, ROOT).replace(os.sep, "/")

@@ -1,0 +1,135 @@
+{
+  "F0_base_4-07": {
+    "gate2_ok": true,
+    "unspecified": 0,
+    "pcd_groups_ok": [
+      true
+    ],
+    "expect": "gate2_ok=True",
+    "pass": true
+  },
+  "F1_pcd_value_wrong": {
+    "replaced_notes": 1,
+    "gate2_ok": false,
+    "unspecified": 16,
+    "pcd_reasons": [
+      "注記のＰＣＤ130 と実ジオメトリの穴中心円 φ129.0000 が一致しない(許容0.01mm)"
+    ],
+    "expect": "注記PCD130 vs 実ジオメトリPCD129 -> 却下されゲート②不合格",
+    "pass": true
+  },
+  "F2_pcd_count_wrong": {
+    "replaced_notes": 1,
+    "gate2_ok": false,
+    "unspecified": 16,
+    "pcd_reasons": [
+      "注記の個数 8 と実ジオメトリのφ5穴 12 個が一致しない"
+    ],
+    "expect": "注記8個 vs 実ジオメトリ12個 -> 却下されゲート②不合格",
+    "pass": true
+  },
+  "F3_not_equally_spaced": {
+    "moved_circles": 2,
+    "gate2_ok": false,
+    "unspecified": 24,
+    "pcd_reasons": [
+      "注記のＰＣＤ129 と実ジオメトリの穴中心円 φ128.8391 が一致しない(許容0.01mm)"
+    ],
+    "expect": "φ5穴を1つ1mm動かす -> 半径/等配の検算に落ちてゲート②不合格",
+    "pass": true
+  },
+  "F4_polygon": {
+    "detected": [
+      {
+        "view": "front",
+        "n": 6,
+        "across_flats": 23.999723,
+        "ok": false
+      }
+    ],
+    "expect": "六角形(二面幅24)を1特徴として検出し、二面幅寸法が無いので未指定1件で報告する",
+    "pass": true
+  },
+  "F4b_polygon_rule": {
+    "across_flats": 23.999723,
+    "with_correct_width": "二面幅24",
+    "with_wrong_width(+0.5mm)": null,
+    "with_across_corners": "対角27.71",
+    "expect": "正しい二面幅/対角では合格・0.5mmずれた寸法では不合格",
+    "pass": true
+  },
+  "F5_reference_text_tampered": {
+    "style": "GEN008",
+    "replaced": 1,
+    "verify_ok": false,
+    "row": {
+      "id": "PCD129_x",
+      "text": "\\A1;(ＰＣＤ９９９)",
+      "text_role": "reference",
+      "text_override_ok": false,
+      "ok": false
+    },
+    "expect": "参考寸法は数値照合しないが、**計画と違う文字**なら不合格",
+    "pass": true
+  },
+  "F5b_reference_text_intact": {
+    "verify_ok": true,
+    "text_role": "reference",
+    "text_diff_mm": null,
+    "expect": "参考寸法(ＰＣＤ１２９)を実測124.6と比較しない -> 合格",
+    "pass": true
+  },
+  "F6_plain_text_tampered": {
+    "style": "GEN001",
+    "replaced": 1,
+    "verify_ok": false,
+    "row": {
+      "id": "X173",
+      "text": "999",
+      "text_role": "measured",
+      "text_diff_mm": 826.0,
+      "ok": false
+    },
+    "expect": "通常寸法の文字改竄は従来どおり数値照合で検出",
+    "pass": true
+  },
+  "F7_frame_collision": {
+    "clean_collisions": [],
+    "moved_style": "GEN001",
+    "moved_entities": 9,
+    "collisions_after": [
+      {
+        "id": "GEN001",
+        "zone": "title_block",
+        "box": [
+          115.75,
+          -5.25,
+          265.75,
+          12.75
+        ]
+      },
+      {
+        "id": "GEN001",
+        "zone": "outside_frame",
+        "box": [
+          115.75,
+          -5.25,
+          265.75,
+          12.75
+        ]
+      },
+      {
+        "id": "GEN001",
+        "zone": "frame_entity:INSERT,MTEXT",
+        "box": [
+          115.75,
+          -5.25,
+          265.75,
+          12.75
+        ]
+      }
+    ],
+    "expect": "衝突0の図面(4-12)で0件・寸法を表題欄へ100mm下げると検出",
+    "pass": true
+  }
+}

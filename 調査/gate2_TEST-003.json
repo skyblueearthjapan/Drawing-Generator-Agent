@@ -356,7 +356,8 @@
       "raw": "\\A1;Ｍ１０深さ２０",
       "normalized": "M10深さ20",
       "diameters": [
-        8.5
+        8.5,
+        10.0
       ],
       "taps": [
         10.0
@@ -364,11 +365,16 @@
       "depths": [
         20.0
       ],
-      "pcds": []
+      "pcds": [],
+      "count": null,
+      "equal_spacing_declared": false
     }
   ],
+  "pcd_groups": [],
+  "polygons": [],
   "note_diameters": [
-    8.5
+    8.5,
+    10.0
   ],
   "note_taps": [
     10.0
@@ -378,6 +384,7 @@
   ],
   "covered_diameters": [
     8.5,
+    10.0,
     25.0,
     30.0
   ],

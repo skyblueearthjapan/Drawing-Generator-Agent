@@ -181,10 +181,19 @@ _NOTE_RE_PHI = re.compile(r"%%[cC](\d+(?:\.\d+)?)")
 _NOTE_RE_TAP = re.compile(r"M(\d+(?:\.\d+)?)")
 _NOTE_RE_DEPTH = re.compile(u"深さ\\s*(\\d+(?:\\.\\d+)?)")
 _NOTE_RE_PCD = re.compile(r"PCD\s*(\d+(?:\.\d+)?)")
+# 個数は注記の先頭 `12-` `4-` に出る(『１２－%%c５通し ＰＣＤ１２９』→ 12個)
+_NOTE_RE_COUNT = re.compile(r"^\s*(\d+)\s*[-−]")
+# 円周等分配置の明示語(自社流儀。無くてもPCD+実ジオメトリの等配検算で代替する)
+_NOTE_EQ_WORDS = (u"円周等分", u"等配", u"等分配置")
 
 
 def parse_hole_note(raw):
-    u"""穴注記MTEXTを解釈して、カバーする直径・深さ・PCDを取り出す。全角は半角へ正規化する。"""
+    u"""穴注記MTEXTを解釈して、カバーする直径・個数・深さ・PCDを取り出す。全角は半角へ正規化する。
+
+    ❗ねじ注記(`Ｍ６`)は **下穴径(JIS B 0205)と呼び径の両方**をカバー直径として返す。
+    荏原の設計者は3Dに下穴でなく**呼び径ちょうどの穴**を立てる(盲検10部品で6/6一致・
+    調査/blind_test_report.md §6.1)ため、下穴径だけではモデル側のφ6穴を取りこぼす。
+    """
     s = raw.translate(_ZEN2HAN)
     s = re.sub(r"\\P", " ", s)
     s = re.sub(r"\\[A-Za-z][^;]*;", "", s)
@@ -199,16 +208,198 @@ def parse_hole_note(raw):
     for m in _NOTE_RE_TAP.finditer(s):
         nominal = float(m.group(1))
         taps.append(nominal)
+        dias.append(nominal)             # 呼び径ちょうどの穴(自社の3Dモデルの流儀)
         drill = TAP_DRILL.get(int(nominal))
         if drill:
-            dias.append(drill)
+            dias.append(drill)           # 下穴径(JIS B 0205)
     for m in _NOTE_RE_DEPTH.finditer(s):
         depths.append(float(m.group(1)))
     for m in _NOTE_RE_PCD.finditer(s):
         pcds.append(float(m.group(1)))
+    mc = _NOTE_RE_COUNT.match(s)
     return {"raw": raw, "normalized": s, "diameters": sorted(set(dias)),
             "taps": sorted(set(taps)), "depths": sorted(set(depths)),
-            "pcds": sorted(set(pcds))}
+            "pcds": sorted(set(pcds)),
+            "count": int(mc.group(1)) if mc else None,
+            "equal_spacing_declared": any(w in raw or w in s for w in _NOTE_EQ_WORDS)}
+
+
+# ---------------------------------------------------------------------------
+# PCD穴群(円周等分)の同定と検算
+# ---------------------------------------------------------------------------
+# PCD半径・等配角の許容差。注記のPCDは丸め値・実ジオメトリは厳密値なので、
+# 「注記が実ジオメトリと違う」を確実に落とすため VALUE_TOL(0.01mm)を使う。
+PCD_ANGLE_TOL_DEG = 0.05
+# PCD注記を「位置カバレッジの根拠」として採用する最小の穴数。
+# ❗2個(=180度対向)は数学的にはPCDで決まるが、**採用すると検出力が落ちる**:
+#   TEST-002(2-8キリ ザグリ%%c11深さ7 / PCD60)で `P60_hole_pitch` を消しても
+#   合格のままになり、反証テストの検出が 4/7 -> 3/7 に低下した(2026-08-10 実測)。
+#   blind_test_report §6.1 も「同径の穴が3個以上等配」を確度の条件に挙げているので、
+#   **2個は従来どおり寸法で指定させる**(安全側)。
+PCD_MIN_COUNT = 3
+
+
+def find_pcd_groups(circles, notes):
+    u"""穴注記の構造化情報(個数・径・PCD)を **実ジオメトリで検算した上で** 穴群として同定する。
+
+    判定モデル(b)の拡張。円周等分に並ぶ穴は中心が `R·cos15°` のような非丸め座標を生むため、
+    v1の「軸方向の寸法チェーン」では 1本のPCD寸法で1組(2個)しか固定できなかった
+    (12穴でX/Y合わせて6本の無意味な弦寸法が要る)。人間はPCD1本で済ませているので、
+    **注記のPCD値が実ジオメトリと一致することを検算できた場合に限り**、その円周上の穴中心を
+    「PCD注記で位置が決まっている」とみなす。
+
+    ❗検算(=反証テストが効く条件)は3つ全部を満たすこと:
+      1. 同径の穴が PCD_MIN_COUNT 個以上あり、注記の個数と一致する(個数が書いてあれば)
+      2. 全ての穴中心が共通中心から等距離で、その直径が **注記のPCD値と 0.01mm 以内で一致**
+      3. 円周方向に等分(隣り合う角度差が 360/n と 0.05度以内で一致)
+    注記のPCDが実ジオメトリと違えば 2 で落ち、穴が等配でなければ 3 で落ちる。
+
+    Returns: list of dict(ok/reason/view/diameter/pcd/count/center/axes/hole_centers)
+    """
+    groups = []
+    for n in notes:
+        if not n["pcds"]:
+            continue
+        for pcd in n["pcds"]:
+            for dia in n["diameters"]:
+                byview = {}
+                for c in circles:
+                    if abs(c["diameter"] - dia) <= VALUE_TOL:
+                        byview.setdefault(c["view"], []).append(c)
+                for view in sorted(byview):
+                    group = byview[view]
+                    ax, ay = group[0]["axes"]
+                    g = {"note": n["raw"], "view": view, "axes": [ax, ay],
+                         "diameter": dia, "pcd": pcd, "count_in_note": n["count"],
+                         "count_found": len(group), "ok": False, "reason": None}
+                    if len(group) < PCD_MIN_COUNT:
+                        g["reason"] = (u"φ%g の穴が %d 個(採用の最小 %d 個未満)。"
+                                       u"2個以下は寸法で指定させる(安全側)"
+                                       % (dia, len(group), PCD_MIN_COUNT))
+                        groups.append(g)
+                        continue
+                    if n["count"] is not None and n["count"] != len(group):
+                        g["reason"] = u"注記の個数 %d と実ジオメトリのφ%g穴 %d 個が一致しない" % (
+                            n["count"], dia, len(group))
+                        groups.append(g)
+                        continue
+                    cx = sum(c["center"][ax] for c in group) / len(group)
+                    cy = sum(c["center"][ay] for c in group) / len(group)
+                    rs = [math.hypot(c["center"][ax] - cx, c["center"][ay] - cy) for c in group]
+                    g["center"] = {ax: round(cx, 6) + 0.0, ay: round(cy, 6) + 0.0}
+                    g["pcd_measured"] = round(2.0 * (sum(rs) / len(rs)), 4)
+                    if max(abs(2.0 * r - pcd) for r in rs) > VALUE_TOL:
+                        g["reason"] = (u"注記のＰＣＤ%g と実ジオメトリの穴中心円 φ%.4f が"
+                                       u"一致しない(許容%.2fmm)"
+                                       % (pcd, g["pcd_measured"], VALUE_TOL))
+                        groups.append(g)
+                        continue
+                    angs = sorted(math.degrees(math.atan2(c["center"][ay] - cy,
+                                                          c["center"][ax] - cx)) % 360.0
+                                  for c in group)
+                    step = 360.0 / len(angs)
+                    diffs = [(angs[(i + 1) % len(angs)] - angs[i]) % 360.0
+                             for i in range(len(angs))]
+                    if max(abs(d - step) for d in diffs) > PCD_ANGLE_TOL_DEG:
+                        g["reason"] = (u"φ%g の穴 %d 個がＰＣＤ%g 上で円周等分になっていない"
+                                       u"(隣接角 %s)"
+                                       % (dia, len(group), pcd, [round(d, 3) for d in diffs]))
+                        groups.append(g)
+                        continue
+                    g["ok"] = True
+                    g["angles_deg"] = [round(a, 4) for a in angs]
+                    g["hole_centers"] = [c["center"] for c in group]
+                    g["reason"] = (u"ＰＣＤ%g・φ%g×%d個・円周等分を実ジオメトリで検算(実測φ%.4f)"
+                                   % (pcd, dia, len(group), g["pcd_measured"]))
+                    groups.append(g)
+    return groups
+
+
+# ---------------------------------------------------------------------------
+# 正多角形(六角座・角形)の同定
+# ---------------------------------------------------------------------------
+POLY_MIN_R = 0.5      # これより小さい多角形は拾わない(mm)
+POLY_MAX_N = 12
+POLY_ANGLE_TOL_DEG = 0.2
+
+
+def find_regular_polygons(segments):
+    u"""ビュー内の線分から**閉じた正多角形**(六角座・角形)を1つの特徴として取り出す。
+
+    v1には多角形の概念が無く、六角座(二面幅24のM16座)の6本の斜線の端点が全て
+    「未指定の位置ノード」として並んでしまっていた(盲検 25154-1-04)。
+    多角形は **二面幅(または対角)1本**で決まるので、1特徴として扱う。
+
+    segments: [((u1,v1),(u2,v2)), ...](そのビューの2軸のモデル座標)
+    Returns: [{"n","center":(cu,cv),"circum_r","across_flats","vertices":[(u,v)...]}]
+    """
+    def q(p):
+        return (round(p[0], 3) + 0.0, round(p[1], 3) + 0.0)
+
+    adj = {}
+    for a, b in segments:
+        ka, kb = q(a), q(b)
+        if ka == kb:
+            continue
+        adj.setdefault(ka, set()).add(kb)
+        adj.setdefault(kb, set()).add(ka)
+
+    out, seen = [], set()
+    for start in sorted(adj):
+        if start in seen or len(adj[start]) != 2:
+            continue
+        cycle, prev, cur, closed = [start], None, start, False
+        while True:
+            if len(adj[cur]) != 2:
+                break
+            nbrs = [x for x in adj[cur] if x != prev]
+            if not nbrs:
+                break
+            nxt = nbrs[0]
+            if nxt == start:
+                closed = True
+                break
+            if nxt in cycle or len(cycle) > POLY_MAX_N:
+                break
+            cycle.append(nxt)
+            prev, cur = cur, nxt
+        if not closed or not (3 <= len(cycle) <= POLY_MAX_N):
+            continue
+        for v in cycle:
+            seen.add(v)
+        n = len(cycle)
+        cu = sum(p[0] for p in cycle) / n
+        cv = sum(p[1] for p in cycle) / n
+        rs = [math.hypot(p[0] - cu, p[1] - cv) for p in cycle]
+        r = sum(rs) / n
+        if r < POLY_MIN_R or max(abs(x - r) for x in rs) > NODE_TOL:
+            continue
+        angs = sorted(math.degrees(math.atan2(p[1] - cv, p[0] - cu)) % 360.0 for p in cycle)
+        step = 360.0 / n
+        diffs = [(angs[(i + 1) % n] - angs[i]) % 360.0 for i in range(n)]
+        if max(abs(d - step) for d in diffs) > POLY_ANGLE_TOL_DEG:
+            continue
+        out.append({"n": n, "center": (round(cu, 6) + 0.0, round(cv, 6) + 0.0),
+                    "circum_r": round(r, 6),
+                    "across_flats": round(2.0 * r * math.cos(math.pi / n), 6),
+                    "across_corners": round(2.0 * r, 6),
+                    "vertices": [(round(p[0], 6) + 0.0, round(p[1], 6) + 0.0) for p in cycle]})
+    return out
+
+
+def polygon_covered(poly, widths, diameters):
+    u"""正多角形が「二面幅」か「対角」の寸法で決まっているか。決まっていれば説明文を返す。
+
+    多角形は1本の寸法(二面幅 or 対角)で全頂点が決まる。逆に**どちらの寸法も無ければ
+    頂点位置は決まらない**ので未指定(=ゲート②不合格)にする。
+    """
+    w, dd = poly["across_flats"], poly["across_corners"]
+    for x in list(widths) + list(diameters):
+        if abs(x - w) <= VALUE_TOL:
+            return u"二面幅%.4g" % w
+        if abs(x - dd) <= VALUE_TOL:
+            return u"対角%.4g" % dd
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -247,6 +438,7 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
     nodes = {a: AxisNodes(a) for a in AXES}
     circles = []      # {"view","center":{axis:val},"diameter","entity"}
     obliques = []     # 斜線(面取り/テーパ)
+    segments = {k: [] for k in amaps}   # 多角形検出用(ビューの2軸のモデル座標)
     for k, am in amaps.items():
         ax, ay = am["x"][0], am["y"][0]
         for e in per_view[k]:
@@ -254,6 +446,7 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
             if t == "LINE":
                 a = to_model_coords(am, (e.dxf.start.x, e.dxf.start.y))
                 b = to_model_coords(am, (e.dxf.end.x, e.dxf.end.y))
+                segments[k].append(((a[ax], a[ay]), (b[ax], b[ay])))
                 dx, dy = b[ax] - a[ax], b[ay] - a[ay]
                 if abs(dx) <= ORTHO_TOL and abs(dy) > ORTHO_TOL:
                     nodes[ax].add(a[ax], "%s:LINE" % k)
@@ -291,6 +484,7 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                 for i in range(len(pts) - 1):
                     a = to_model_coords(am, pts[i])
                     b = to_model_coords(am, pts[i + 1])
+                    segments[k].append(((a[ax], a[ay]), (b[ax], b[ay])))
                     if abs(b[ax] - a[ax]) <= ORTHO_TOL:
                         nodes[ax].add(a[ax], "%s:PLINE" % k)
                     elif abs(b[ay] - a[ay]) <= ORTHO_TOL:
@@ -401,10 +595,15 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
             row["ok"] = True
         else:
             derived = None
+            # ❗面取りは径を減らす側(軸の外周C面取り)だけでなく**増やす側**にも出る
+            #   (穴の口元C1で φ72 → φ74。盲検 25154-3-04 で実害)。両方向を見る
             for d0 in covered_dias:
                 for leg in chamfer_legs:
                     if abs((d0 - 2.0 * leg) - d) <= VALUE_TOL:
                         derived = u"面取りC%g由来(φ%g-2×%g)" % (leg, d0, leg)
+                        break
+                    if abs((d0 + 2.0 * leg) - d) <= VALUE_TOL:
+                        derived = u"面取りC%g由来(穴口元・φ%g+2×%g)" % (leg, d0, leg)
                         break
                 if derived:
                     break
@@ -421,6 +620,49 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                                     "views": row["views"],
                                     "reason": u"直径φ%g を指定する寸法も穴注記も無い" % d})
         circle_report.append(row)
+
+    # --- 3b) PCD穴群・正多角形の同定(位置カバレッジの根拠) -----------------
+    # (b)の拡張。**注記の自己申告をそのまま信じるのではなく実ジオメトリで検算する**
+    pcd_groups = find_pcd_groups(circles, notes)
+    for g in pcd_groups:
+        if not g["ok"]:
+            out_of_scope.append({"class": "pcd_group_rejected", "view": g["view"],
+                                 "diameter": g["diameter"],
+                                 "reason": u"ＰＣＤ注記を位置の根拠に採用できない: %s"
+                                           % g["reason"]})
+    if any(g["ok"] for g in pcd_groups):
+        out_of_scope.append(
+            {"class": "pcd_phase",
+             "reason": u"円周等分穴群の**位相(基準角)**はv1の判定対象外。"
+                       u"PCD+等配+個数までを実ジオメトリで検算して位置カバレッジに採用している"})
+
+    # 幅(位置対の距離)は多角形の二面幅照合にも使うので先に集める
+    covered_widths = _covered_widths(dims)
+    polygons = []
+    for k in sorted(segments):
+        am = amaps[k]
+        pax, pay = am["x"][0], am["y"][0]
+        for pg in find_regular_polygons(segments[k]):
+            pg = dict(pg, view=k, axes=[pax, pay])
+            hit = polygon_covered(pg, covered_widths, covered_dias)
+            pg["ok"] = hit is not None
+            pg["covered_by"] = hit
+            polygons.append(pg)
+    # 未指定の多角形は「1特徴」として1件で報告する(頂点ノードをバラバラに並べない)
+    poly_uncovered_nodes = {a: set() for a in AXES}
+    for pg in polygons:
+        if pg["ok"]:
+            continue
+        pax, pay = pg["axes"]
+        for i, ax_ in enumerate(pg["axes"]):
+            for v in {p[i] for p in pg["vertices"]}:
+                poly_uncovered_nodes[ax_].add(round(v, 6) + 0.0)
+        unspecified.append({"feature": "polygon", "view": pg["view"], "n": pg["n"],
+                            "across_flats": pg["across_flats"],
+                            "center": list(pg["center"]),
+                            "reason": u"%sビューの正%d角形(二面幅%.4g・対角%.4g)を決める寸法が無い"
+                                      % (pg["view"], pg["n"], pg["across_flats"],
+                                         pg["across_corners"])})
 
     # --- 4) 位置ノードのカバレッジ ----------------------------------------
     axis_report = {}
@@ -497,6 +739,37 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
             if symmetric and ic is not None and abs(c["center"][a] - c0) <= NODE_TOL:
                 add_edge(idx_c0, ic, u"円φ%g中心" % c["diameter"], allow_cycle_report=False)
 
+        # (b拡張) PCD穴群: 検算に通った円周等分穴は、PCD中心から各穴中心の位置が決まる。
+        #   人間はPCD1本で済ませる流儀なので、弦寸法を何本も要求しない
+        #   (中心そのものが図面上で決まっていない場合は連結されないので合格にはならない)
+        for g in pcd_groups:
+            if not g["ok"] or a not in g["axes"]:
+                continue
+            ic = an.index(g["center"][a])
+            if ic is None:
+                continue
+            for hc in g["hole_centers"]:
+                ih = an.index(hc[a])
+                if ih is not None:
+                    add_edge(ic, ih,
+                             u"ＰＣＤ%g注記(φ%g×%d・円周等分・%s)"
+                             % (g["pcd"], g["diameter"], g["count_found"], g["view"]),
+                             allow_cycle_report=False)
+
+        # (b拡張) 正多角形: 二面幅(または対角)1本で全頂点の位置が決まる
+        for pg in polygons:
+            if not pg["ok"] or a not in pg["axes"]:
+                continue
+            ai = pg["axes"].index(a)
+            ic = an.index(pg["center"][ai])
+            if ic is None:
+                continue
+            for v in {p[ai] for p in pg["vertices"]}:
+                iv = an.index(v)
+                if iv is not None:
+                    add_edge(ic, iv, u"正%d角形(%s・%s)" % (pg["n"], pg["covered_by"], pg["view"]),
+                             allow_cycle_report=False)
+
         # (b) 穴注記の「深さ」がカバーする位置(距離が一致するノード対を結ぶ)
         for dep in note_depths:
             cand = []
@@ -519,7 +792,7 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                 counts[uf.find(i)] = counts.get(uf.find(i), 0) + 1
             root = max(counts, key=lambda r_: counts[r_]) if counts else None
         # (e) 幾何導出: 円筒×平面の交線(二面取りの見え掛かり) y=√((D/2)²-(W/2)²)
-        widths = _covered_widths(dims)
+        widths = covered_widths
         for i, v in enumerate(an.values):
             if root is not None and uf.find(i) == root:
                 continue
@@ -539,6 +812,11 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                 rep["out_of_scope_nodes"].append({"value": round(v, 4), "reason": ch})
                 out_of_scope.append({"class": "chamfer_node", "axis": a,
                                      "value": round(v, 4), "reason": ch})
+                continue
+            if any(abs(v - pv) <= NODE_TOL for pv in poly_uncovered_nodes[a]):
+                # 未指定の多角形の頂点。特徴1件として既に unspecified に計上済み
+                rep["uncovered"].append({"value": round(v, 4), "sources": an.sources[i],
+                                         "grouped_into": "polygon"})
                 continue
             rep["uncovered"].append({"value": round(v, 4), "sources": an.sources[i]})
             unspecified.append({"feature": "position", "axis": a, "value": round(v, 4),
@@ -591,6 +869,8 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
         "dimensions_read": [{"id": r["id"], "role": r["role"], "axis": r["axis"],
                              "value": r["value"], "view": r["view"]} for r in dims],
         "hole_notes": notes,
+        "pcd_groups": pcd_groups,
+        "polygons": polygons,
         "note_diameters": note_dias,
         "note_taps": note_taps,
         "note_depths": note_depths,
@@ -701,8 +981,22 @@ def print_report(rep):
 
     print(u"\n-- 穴注記の解釈 --")
     for n in rep["hole_notes"]:
-        print(u"   %r -> φ%s / タップM%s / 深さ%s / PCD%s"
-              % (n["raw"], n["diameters"], n["taps"], n["depths"], n["pcds"]))
+        print(u"   %r -> 個数%s / φ%s / タップM%s / 深さ%s / PCD%s"
+              % (n["raw"], n.get("count"), n["diameters"], n["taps"], n["depths"], n["pcds"]))
+
+    if rep.get("pcd_groups"):
+        print(u"\n-- PCD穴群の検算(注記を位置の根拠に採用してよいか) --")
+        for g in rep["pcd_groups"]:
+            print(u"   [%s] %s φ%g×%s PCD%g : %s"
+                  % (u"採用" if g["ok"] else u"却下", g["view"], g["diameter"],
+                     g["count_found"], g["pcd"], g["reason"]))
+    if rep.get("polygons"):
+        print(u"\n-- 正多角形の検出 --")
+        for p in rep["polygons"]:
+            print(u"   [%s] %s 正%d角形 二面幅%.4g 対角%.4g 中心%s : %s"
+                  % (u"OK" if p["ok"] else u"** 未指定 **", p["view"], p["n"],
+                     p["across_flats"], p["across_corners"], p["center"],
+                     p["covered_by"] or u"二面幅/対角を指定する寸法が無い"))
 
     print(u"\n-- 判定対象外(v1で判定できない特徴。黙って無視していないことの明示) --")
     seen = set()

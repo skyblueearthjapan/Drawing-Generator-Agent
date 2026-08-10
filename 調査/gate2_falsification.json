@@ -82,6 +82,7 @@
     ],
     "out_of_scope_classes": [
       "not_implemented",
+      "pcd_group_rejected",
       "view_not_axis_aligned"
     ],
     "falsification": [

@@ -230,8 +230,9 @@ def step_measure_classify(rd, model_path):
 # ---------------------------------------------------------------------------
 # 2) 候補6投影+PNG(project_candidates/render_candidates相当)
 # ---------------------------------------------------------------------------
-def step_candidates(rd, model_path, shape_class, title):
-    cand_list = candidate_sets.candidates_for(shape_class)
+def step_candidates(rd, model_path, shape_class, title, main_axis=None):
+    # 旋盤物は主軸の見え方(水平/円形/垂直)で候補順が変わる(app/candidates.py)
+    cand_list = candidate_sets.candidates_for(shape_class, main_axis)
     cand_input = os.path.join(rd, u"候補設定.json")
     _write_json(cand_input, cand_list)
 
@@ -651,7 +652,8 @@ def advance_one(rd):
             ev = _read_json(os.path.join(rd, u"分類.json"))
             zuban = request.get(u"図番", request_id)
             title = u"%s %s" % (zuban, request.get(u"品名", ""))
-            info = step_candidates(rd, model_path, ev.get("shape_class"), title)
+            info = step_candidates(rd, model_path, ev.get("shape_class"), title,
+                                   main_axis=ev.get("main_axis"))
             set_state(st, u"計画待ち",
                      note=(u"候補%d/%d件成功。AIオペレータの choice.json/plan.json 待ち"
                           % (info["n_ok"], info["n_total"])))

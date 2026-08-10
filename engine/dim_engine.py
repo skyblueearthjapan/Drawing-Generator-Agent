@@ -17,9 +17,9 @@ u"""寸法記入エンジン(恒久モジュール・フェーズ3-B)。
   3. _OPEN30 矢印は ARROWS.create_block() で明示生成(ezdxfの罠)
   4. dimdsep=46(明示しないとカンマ区切りになるezdxfの罠)
   5. 寸法線オフセットは輪郭から16mm、2段目以降 +8mm 刻み
-  6. 穴注記は**キリ表記・全角**が既定(2026-08-09 ユーザー確定。裁定Q5の更新)。
-     人間図面の `２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０` を踏襲する。
-     φ表記/半角へ戻す場合は defaults.hole_note(HOLE_NOTE_DEFAULT)を差し替える
+  6. 穴注記は**φ(%%c)表記・全角**が既定(2026-08-10 ユーザー裁定。2026-08-09のキリ既定を更新)。
+     人間図面の `２－%%c８　ザグリ%%c１１深さ７\\PＰＣＤ６０` を踏襲する。
+     キリ表記へ戻す場合は defaults.hole_note(HOLE_NOTE_DEFAULT)を差し替える(1定数/計画1行)
   7. 公差ゼロ側は描画後に text を「0」へ整形(裁定の追記。dimtzinでは再現不可)
   8. **ゲート①内蔵**: 各寸法について
        (a) 測定点が実ジオメトリの特徴点に一致するか(snap検証)
@@ -73,10 +73,18 @@ DIAMETER_STYLE_DEFAULT = {
     "circular_view": "native",   # native | linear
     "profile_view": "linear",    # native | linear
 }
-# 穴注記の書式: ドリル穴は「キリ」表記、文字は全角(%%c/\P/\A1;等の制御コードは半角のまま)
+# 穴注記の書式: **φ(%%c)表記・全角が既定**(2026-08-10 ユーザー裁定。2026-08-09 の
+# 「キリ表記が既定」を更新)。制御コード(%%c/\P/\A1;)は半角のまま。
+#   例: `２－%%c８　ザグリ%%c１１深さ７\PＰＣＤ６０`
+# 根拠: 盲検10部品の人間図面に **キリ表記は1件も無く**(調査/blind_test_report.md §6.2)、
+#       AUTO-001 の人間図面も `%%c５．５ザグリ%%c９．５深さ１２` だった。
+# ❗キリ表記は**オプションとして温存**する(計画JSONの defaults.hole_note で
+#   {"notation":"kiri"} と書けば従来どおり。切替はこの1定数 or 計画1行で済む)。
 HOLE_NOTE_DEFAULT = {
-    "notation": "kiri",   # kiri(=8キリ) | phi(=%%c8)
+    "notation": "phi",    # phi(=%%c8) | kiri(=8キリ)
     "width": "zenkaku",   # zenkaku | hankaku
+    # 穴仕様とザグリ仕様の区切り(全角化されて `　` になる)。詰めたい場合は "" にする
+    "separator": " ",
 }
 
 
@@ -453,12 +461,14 @@ def build_hole_note_pattern(spec, style=None):
 
     spec 例:
       {"count":2, "drill":8, "counterbore":{"dia":11,"depth":7}, "placement":"PCD60"}
-        -> キリ/全角: '\\A1;２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０'
-        -> φ/半角  : '\\A1;2-%%c8ザグリ%%c11深さ7\\PPCD60'
+        -> φ/全角(既定): '\\A1;２－%%c８　ザグリ%%c１１深さ７\\PＰＣＤ６０'
+        -> キリ/全角   : '\\A1;２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０'
+        -> φ/半角     : '\\A1;2-%%c8 ザグリ%%c11深さ7\\PPCD60'
       {"thread":"M10", "depth":20}
         -> '\\A1;Ｍ１０深さ２０'
 
-    style: {"notation": "kiri"|"phi", "width": "zenkaku"|"hankaku"}(既定 HOLE_NOTE_DEFAULT)
+    style: {"notation": "phi"|"kiri", "width": "zenkaku"|"hankaku", "separator": " "}
+           (既定 HOLE_NOTE_DEFAULT)
     """
     st = dict(HOLE_NOTE_DEFAULT)
     st.update(style or {})
@@ -480,7 +490,7 @@ def build_hole_note_pattern(spec, style=None):
             head += u"深さ%s" % _fmt_num(spec["depth"])
     cb = spec.get("counterbore")
     if cb:
-        sep = " " if st["notation"] == "kiri" else ""
+        sep = st.get("separator", HOLE_NOTE_DEFAULT["separator"])
         head += u"%sザグリ%%%%c%s" % (sep, _fmt_num(cb["dia"]))
         if cb.get("depth") is not None:
             head += u"深さ%s" % _fmt_num(cb["depth"])
@@ -514,7 +524,12 @@ def dim_text_of(doc, dim):
 
 
 def parse_dim_text_value(raw):
-    u"""寸法文字から数値部分を取り出す(dimpost接頭辞・公差スタック・書式コードを除去)。"""
+    u"""寸法文字から数値部分を取り出す(dimpost接頭辞・公差スタック・書式コードを除去)。
+
+    ❗この関数は**括弧も剥がす**ので、`(ＰＣＤ３３３)` のような参考寸法ラベルからも 333 を返す。
+    照合側は `effective_text_override()` / `is_reference_text()` で
+    **参考寸法を先に除外してから**呼ぶこと(盲検で誤不合格4件を出した欠陥)。
+    """
     if raw is None:
         return None
     s = re.sub(r"\{[^{}]*\}", "", raw)          # 公差スタック {\H0.62x;\S...;}
@@ -523,6 +538,59 @@ def parse_dim_text_value(raw):
     s = s.replace("(", "").replace(")", "")
     m = re.search(r"\d+(?:\.\d+)?", s)
     return float(m.group(0)) if m else None
+
+
+# ---------------------------------------------------------------------------
+# 寸法文字オーバーライド(参考寸法ラベル・注記文字列)の扱い
+# ---------------------------------------------------------------------------
+# 全角ASCII -> 半角(照合用の正規化。注記/参考値は全角で書かれる)
+_TXT_ZEN2HAN = {c: c - 0xFEE0 for c in range(0xFF01, 0xFF5F)}
+_TXT_ZEN2HAN[0x3000] = 0x20
+
+
+def strip_mtext_codes(raw):
+    u"""MTEXT書式コード・公差スタック・空白を落として比較用の素の文字列にする(全角は半角へ)。"""
+    if raw is None:
+        return ""
+    s = re.sub(r"\{[^{}]*\}", "", raw)
+    s = _MTEXT_CODE_RE.sub("", s)
+    s = s.translate(_TXT_ZEN2HAN)
+    return re.sub(r"\s+", "", s)
+
+
+def effective_text_override(item):
+    u"""計画の1寸法から、実際に DIMENSION.text へ入る override 文字列を解決する。
+
+    apply_plan と**同じ規則**(明示の text_override / 対称公差の自動生成)を公開して、
+    独立検証が同じ結論に到達できるようにする。無ければ None。
+    """
+    t = item.get("text_override")
+    if t:
+        return t
+    tol = item.get("tolerance")
+    if tol and tol.get("mode") == "symmetric":
+        return "\\A1;%s%%%%p%s" % (_fmt_num(item["value_expected"]), _fmt_num(tol["value"]))
+    return None
+
+
+def is_reference_text(raw):
+    u"""`(ＰＣＤ３３３)` のように**括弧で囲まれた参考値/注記文字列**か。
+
+    plan_schema.md §2.5 が明示的に認めた用途(PCD・OD等のラベル)。
+    参考寸法は「その位置に実測値を書かない」ことが目的なので、
+    **寸法文字の数値と実測値の照合対象にしてはいけない**。
+    """
+    s = strip_mtext_codes(raw)
+    return len(s) >= 2 and s.startswith("(") and s.endswith(")")
+
+
+def text_override_applied(drawn_text, override):
+    u"""計画が指定した override が、実DXFの描画文字にそのまま入っているか(独立検証用)。
+
+    数値照合を外す代わりに**『計画どおりの文字が描かれているか』は必ず検査する**ので、
+    参考寸法を除外しても検証の穴にはならない。
+    """
+    return strip_mtext_codes(drawn_text) == strip_mtext_codes(override)
 
 
 # ---------------------------------------------------------------------------
@@ -625,6 +693,134 @@ def _rect_inside(a, b):
     return a[0] >= b[0] and a[1] >= b[1] and a[2] <= b[2] and a[3] <= b[3]
 
 
+def _entity_box(entities):
+    u"""エンティティ群のワールド座標外接矩形。空なら None。"""
+    ents = [e for e in entities if e is not None]
+    if not ents:
+        return None
+    bb = bbox_extents(ents, fast=False)
+    if bb is None or not bb.has_data:
+        return None
+    return (bb.extmin.x, bb.extmin.y, bb.extmax.x, bb.extmax.y)
+
+
+def dim_geometry_box(dim):
+    u"""DIMENSION の**描画実体全体**(寸法線・矢印・補助線・文字)の外接矩形。
+
+    ❗`_text_box` は寸法**文字**しか見ていない。盲検 25154-5-08 では寸法文字は表題欄の外なのに
+    補助線と寸法線が表題欄に食い込んでいて、`layout.collisions` に何も出なかった
+    (調査/blind_test_report.md §7)。衝突判定は必ず展開実体(virtual_entities)で行う。
+    """
+    try:
+        return _entity_box(list(dim.virtual_entities()))
+    except Exception:
+        return None
+
+
+def dim_primitive_boxes(dim):
+    u"""DIMENSION を展開した**1プリミティブごと**の外接矩形リスト。
+
+    ❗寸法全体の1つのbboxで図枠要素と当てると、細い補助線しか通っていない広い空白まで
+    「重なった」ことになり偽陽性を量産する(2ビューをまたぐ長い寸法で顕著)。
+    線1本ずつのbboxで見れば、軸平行の線・矢印・文字については実交差とほぼ一致する。
+    """
+    out = []
+    try:
+        prims = list(dim.virtual_entities())
+    except Exception:
+        return out
+    for p in prims:
+        b = _entity_box([p])
+        if b is not None:
+            out.append(b)
+    return out
+
+
+# 図枠エンティティのうち「ページ全体を囲む枠」(外形LWPOLYLINE等)はbbox交差が無意味なので
+# 個別照合から外し、FRAME_RECT への内包判定(outside_frame)に委ねる
+FRAME_CONTAINER_W_MM = 200.0
+FRAME_CONTAINER_H_MM = 100.0
+
+
+def frame_entity_boxes(entities):
+    u"""図枠エンティティの外接矩形リスト(ページ全体を囲む容器エンティティは除外)。"""
+    out = []
+    for e in entities:
+        b = _entity_box([e])
+        if b is None:
+            continue
+        if (b[2] - b[0]) > FRAME_CONTAINER_W_MM and (b[3] - b[1]) > FRAME_CONTAINER_H_MM:
+            continue
+        out.append((b, e.dxftype(), str(e.dxf.get("handle", ""))))
+    return out
+
+
+def frame_zone_collisions(frame_boxes, boxes):
+    u"""実体矩形が図枠要素に重なるものを列挙する。
+
+    boxes: id -> プリミティブ矩形のリスト [(x0,y0,x1,y1), ...]
+           (1要素だけのリストを渡せば従来どおり全体bboxでの判定になる)
+    """
+    out = []
+    for did in sorted(boxes):
+        prims = boxes[did]
+        if not prims:
+            continue
+        union = (min(p[0] for p in prims), min(p[1] for p in prims),
+                 max(p[2] for p in prims), max(p[3] for p in prims))
+        hits = []
+        if any(_rect_overlap(p, TITLE_BLOCK_RECT) for p in prims):
+            hits.append("title_block")
+        if any(_rect_overlap(p, NOTE_ZONE_RECT) for p in prims):
+            hits.append("note_zone")
+        if not _rect_inside(union, FRAME_RECT):
+            hits.append("outside_frame")
+        fe = sorted({t for (b, t, _h) in frame_boxes
+                     if any(_rect_overlap(p, b) for p in prims)})
+        if fe:
+            hits.append("frame_entity:%s" % ",".join(fe))
+        for h in hits:
+            out.append({"id": did, "zone": h, "box": [round(v, 4) for v in union]})
+    return out
+
+
+def check_frame_collisions(doc, id_of_dim=None, template_path=None):
+    u"""**保存済みDXFを読み直して**、寸法・引出線・注記が図枠/表題欄に重なっていないか検査する。
+
+    dim_engine の自己申告を信用せず独立に判定するための入口(独立検証から呼ぶ)。
+    id_of_dim: DIMENSION -> レポート用ID を返す関数(既定は DIMSTYLE名)。
+    """
+    tmpl = template_path or os.path.join(ROOT, u"図枠", u"frame_template.dxf")
+    msp = doc.modelspace()
+    all_ents = list(msp)
+    part_entities, _summary = subtract_frame(doc, template_path=tmpl)
+    part_ids = {id(e) for e in part_entities}
+    frame_boxes = frame_entity_boxes([e for e in all_ents if id(e) not in part_ids])
+
+    boxes = {}
+    for e in part_entities:
+        t = e.dxftype()
+        if t == "DIMENSION":
+            b = dim_primitive_boxes(e)
+            key = id_of_dim(e) if id_of_dim else str(e.dxf.dimstyle)
+        elif t == "LEADER":
+            # 引出線は折れ線なので、区間ごとの矩形で見る(全体bboxだと空白を含む)
+            vs = [(p[0], p[1]) for p in e.vertices]
+            b = [(min(a[0], c[0]), min(a[1], c[1]), max(a[0], c[0]), max(a[1], c[1]))
+                 for a, c in zip(vs, vs[1:])]
+            key = "LEADER:%s" % e.dxf.handle
+        elif t == "MTEXT" and ("%%c" in e.text or u"キリ" in e.text or u"ザグリ" in e.text
+                               or u"深さ" in e.text):
+            bb = _entity_box([e])
+            b = [bb] if bb else []
+            key = "NOTE:%s" % e.dxf.handle
+        else:
+            continue
+        if b:
+            boxes[key] = b
+    return frame_zone_collisions(frame_boxes, boxes)
+
+
 # ---------------------------------------------------------------------------
 # 本体
 # ---------------------------------------------------------------------------
@@ -663,9 +859,14 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
 
     tf = build_view_transforms(meta_json, scale, views=use_views, reserves=reserves)
     regions = {k: tf[k]["region"] for k in tf}
+    msp_before = list(msp)
     part_entities, frame_summary = subtract_frame(
         doc, template_path=os.path.join(ROOT, u"図枠", u"frame_template.dxf"))
     per_view = classify_view_geometry(part_entities, regions)
+    # 図枠側の実エンティティ(表題欄の罫線・左上ノートの丸など)。寸法との衝突判定に使う
+    _part_ids = {id(e) for e in part_entities}
+    frame_entities = [e for e in msp_before if id(e) not in _part_ids]
+    frame_boxes = frame_entity_boxes(frame_entities)
     feats = {k: feature_points(per_view[k]) for k in per_view}
 
     # ビュー実輪郭(分類済み実ジオメトリの外接矩形)。寸法線オフセットの基準にする
@@ -704,6 +905,8 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
     gate_rows = []
     dimstyle_records = {}
     text_boxes = {}
+    geom_boxes = {}      # 寸法・引出線の**描画実体**の外接矩形(レポート表示用)
+    prim_boxes = {}      # 同・プリミティブ単位の矩形リスト(図枠衝突判定用)
     counter = [0]
 
     def next_style_name():
@@ -916,6 +1119,12 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         tb = _text_box(doc, ent, spec["text_style"]["width_factor"])
         if tb:
             text_boxes[did] = [round(v, 4) for v in tb]
+        pbs = dim_primitive_boxes(ent)
+        if pbs:
+            prim_boxes[did] = pbs
+            geom_boxes[did] = [round(v, 4) for v in (
+                min(p[0] for p in pbs), min(p[1] for p in pbs),
+                max(p[2] for p in pbs), max(p[3] for p in pbs))]
 
     # --- 5) 穴注記(LEADER + MTEXT) --------------------------------------
     note_rows = []
@@ -974,6 +1183,16 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         text_boxes[note["id"]] = [round(ins[0], 4), round(ins[1], 4),
                                   round(ins[0] + w, 4), round(ins[1] + len(lines) * h * 1.3, 4)]
         nrow["leader_handle"] = leader.dxf.handle
+        # 引出線は区間ごと・注記は文字枠を1つの矩形として扱う(空白を巻き込まないため)
+        tbn = text_boxes[note["id"]]
+        segs = [(min(a[0], b[0]), min(a[1], b[1]), max(a[0], b[0]), max(a[1], b[1]))
+                for a, b in zip(pts, pts[1:])]
+        prim_boxes[note["id"]] = segs + [tuple(tbn)]
+        pbs = prim_boxes[note["id"]]
+        geom_boxes[note["id"]] = [round(min(p[0] for p in pbs), 4),
+                                  round(min(p[1] for p in pbs), 4),
+                                  round(max(p[2] for p in pbs), 4),
+                                  round(max(p[3] for p in pbs), 4)]
 
     # --- 6) 自由注記 ------------------------------------------------------
     for n in plan.get("notes", []):
@@ -993,7 +1212,8 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         text_boxes[n["id"]] = [round(ins[0], 4), round(top - len(lines) * h * 1.3, 4),
                                round(ins[0] + w, 4), round(top, 4)]
 
-    # --- 7) レイアウト衝突チェック(初歩的) --------------------------------
+    # --- 7) レイアウト衝突チェック ------------------------------------------
+    # (7-1) 文字枠どうし・文字枠とビュー(従来からの初歩的チェック。互換のため残す)
     collisions = []
     keys = list(text_boxes)
     for i in range(len(keys)):
@@ -1010,8 +1230,19 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         for j in range(i + 1, len(keys)):
             if _rect_overlap(a, text_boxes[keys[j]]):
                 collisions.append([keys[i], keys[j]])
+
+    # (7-2) ❗図枠・表題欄との衝突(2026-08-10 追加)。
+    #   判定対象は**寸法の描画実体全体**(virtual_entities展開の外接矩形)であって文字枠ではない。
+    #   盲検 25154-5-08 で「下側の寸法が表題欄に重なる」実害が出たのに警告が出なかったのは、
+    #   (a)文字枠しか見ていない (b)図枠エンティティを見ていない、の2点が原因だった。
+    frame_collisions = frame_zone_collisions(frame_boxes, prim_boxes)
     if collisions:
         warnings.append(u"レイアウト衝突(要目視確認) %d件: %s" % (len(collisions), collisions))
+    if frame_collisions:
+        warnings.append(
+            u"❗図枠・表題欄との衝突 %d件(寸法が図枠要素に重なっている): %s"
+            % (len(frame_collisions),
+               [(c["id"], c["zone"]) for c in frame_collisions]))
 
     # --- 8) スタイル読み戻し検証 -------------------------------------------
     style_check = _check_dimstyles(doc, dimstyle_records, dimvars_base, spec)
@@ -1029,7 +1260,9 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         "arrow_blocks_created": arrows_created,
         "frame_check": frame_summary,
         "view_bbox": {k: [round(v, 4) for v in view_bbox[k]] for k in view_bbox},
-        "layout": {"text_boxes": text_boxes, "collisions": collisions},
+        "layout": {"text_boxes": text_boxes, "collisions": collisions,
+                   "geom_boxes": geom_boxes, "frame_collisions": frame_collisions,
+                   "frame_ok": not frame_collisions},
         "resolved_kinds": resolved_kinds,
         "scale": scale,
         "dimlfac": dimvars_base["dimlfac"],

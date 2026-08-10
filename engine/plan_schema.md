@@ -128,6 +128,11 @@
 - v1の限界: 予約帯は**寸法だけ**を見込む。穴注記・引出線・自由注記は絶対座標指定のため
   見込んでいない(衝突は `layout.collisions` の報告で拾う)。
   紙面中央への配置も**ビュー幾何だけ**で計算する(外周の寸法帯は含めない)
+- ❗2026-08-10: **この限界が実害になった**(盲検 25154-5-08 で下側の寸法が表題欄に重なった)。
+  当面の対処は自動再配置ではなく **検出**: `layout.frame_collisions` に
+  表題欄・左上ノート・図枠エンティティ・図枠外との衝突を出し、1件でもあれば
+  `generate_drawing.py` が **不合格(`layout_ok=false`)** にして納品させない。
+  判定は寸法文字ではなく**寸法の描画実体(補助線・寸法線・矢印を含む)**で行う
 
 ### 1.4 `defaults`(省略可)
 
@@ -138,13 +143,16 @@
 | `snap_tol_mm` | 0.01 | 測定点が実ジオメトリ特徴点に一致すべき許容差 |
 | `gate_tol_mm` | 0.01 | ゲート①(実測 vs 期待値)の許容差 |
 | `diameter_style` | `{"circular_view":"native","profile_view":"linear"}` | `kind:"diameter"` の実装方式(§2.1a) |
-| `hole_note` | `{"notation":"kiri","width":"zenkaku"}` | 穴注記の既定書式(§3) |
+| `hole_note` | `{"notation":"phi","width":"zenkaku","separator":" "}` | 穴注記の既定書式(§3) |
 
 > **`diameter_style` / `hole_note` は「ユーザー確認中だった流儀」を分離したパラメータ**である。
 > 既定値の実体は `engine/dim_engine.py` の `DIAMETER_STYLE_DEFAULT` / `HOLE_NOTE_DEFAULT`。
 > 裁定が変わったらこの2定数(または計画の `defaults`)を差し替えるだけで全計画に反映される。
-> 現行既定は **2026-08-09 ユーザー確定**:
-> 円形ビューの外径=ネイティブDIAMETER型 / 穴注記=キリ表記・全角。
+> 現行既定:
+> 円形ビューの外径=ネイティブDIAMETER型(2026-08-09 ユーザー確定) /
+> **穴注記=φ(`%%c`)表記・全角(2026-08-10 ユーザー裁定。2026-08-09の「キリ既定」を更新)**。
+> キリ表記は**オプションとして温存**しており、`defaults.hole_note` に
+> `{"notation":"kiri"}` と書けば従来どおり `２－８キリ　…` になる。
 
 ---
 
@@ -294,6 +302,13 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
 | PCD/OD ラベル | `"\\A1;(PCD108)"` |
 | 対称公差 | `"\\A1;20%%p0.026"`(`tolerance.mode=symmetric` から自動生成される) |
 
+> ❗**括弧で囲んだ参考値(`(45)` / `(ＰＣＤ１０８)`)は、検証側で「寸法文字の数値 vs 実測値」の
+> 照合対象から外れる**(`dim_engine.is_reference_text`)。代わりに
+> **「計画が指定した文字がそのままDXFに描かれているか」**を検査する(`text_override_applied`)。
+> 括弧を付けないと数値照合が走る(対称公差 `20%%p0.026` は数値照合されるのが正しい)。
+> 2026-08-10: 括弧付き参考値から数値を読んで実測と比較し、
+> **盲検4件を誤って不合格にした**バグを修正した(調査/blind_test_report.md §4)。
+
 ### 2.6 `cross_check` — 実ジオメトリとの独立照合(ゲート①(b))
 
 測定点のスナップ検証に加えて、**別ビューの実ジオメトリ**と突き合わせる任意の追加検証。
@@ -322,8 +337,9 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
   "id": "N_bolt_holes",
   "view": "right",
   "spec": {"count": 2, "drill": 8, "counterbore": {"dia": 11, "depth": 7}, "placement": "PCD60"},
-  // -> kiri/zenkaku(既定): '\A1;２－８キリ　ザグリ%%c１１深さ７\PＰＣＤ６０'(人間図面と同文)
-  // -> phi/hankaku       : '\A1;2-%%c8ザグリ%%c11深さ7\PPCD60'
+  // -> phi/zenkaku(既定): '\A1;２－%%c８　ザグリ%%c１１深さ７\PＰＣＤ６０'
+  // -> kiri/zenkaku     : '\A1;２－８キリ　ザグリ%%c１１深さ７\PＰＣＤ６０'(2026-08-09までの既定)
+  // -> phi/hankaku      : '\A1;2-%%c8 ザグリ%%c11深さ7\PPCD60'
   "leader": { ... }
 }
 {
@@ -336,7 +352,13 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
 
 `spec` のキー: `count`(個数) / `drill`(ドリル径) / `thread`(ねじ呼び) / `depth`(深さ) /
 `counterbore:{dia,depth}`(ザグリ) / `placement`(2行目=PCD等) / `extra_lines[]`。
-`style` を書くとその注記だけ書式を上書きできる(`{"notation":"phi","width":"hankaku"}`)。
+`style` を書くとその注記だけ書式を上書きできる(`{"notation":"kiri","width":"hankaku"}`)。
+
+> ❗**`placement` に `PCD<値>` を書くと、ゲート②が「その円周上の穴中心の位置は決まっている」と
+> 判定できる**(円周等分穴群対応・2026-08-10)。ただし採用されるのは
+> **注記のPCD値と個数が実ジオメトリと一致し、かつ穴が円周等分に並んでいることを
+> エンジンが検算できた場合だけ**。PCD値が実物と違う注記や等配でない穴群は却下され、
+> 各穴の位置は従来どおり未指定(=ゲート②不合格)になる。
 
 `pattern` を直接書けば強制指定になる(`spec` より優先):
 
@@ -360,9 +382,10 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
 
 - `pattern` は §8ルール7 の書式。**φは必ず `%%c` 制御コード**(Unicodeのφ/Φは禁止)。
   `\P` で改行し、1行目=個数+径+加工種別+深さ、2行目=配置(PCD/振り角)。
-- **既定はキリ表記・全角**(2026-08-09 ユーザー確定。裁定Q5「穴注記は半角」を更新)。
-  ドリル穴は `<個数>－<径>キリ`(全角)、ザグリ径は `%%c`(制御コードは半角のまま)。
-  半角/φ表記へ戻す場合は `defaults.hole_note` を `{"notation":"phi","width":"hankaku"}` にする。
+- **既定はφ(`%%c`)表記・全角**(2026-08-10 ユーザー裁定。2026-08-09の「キリ既定」を更新)。
+  ドリル穴は `<個数>－%%c<径>`(全角)、ザグリ径も `%%c`(制御コードは半角のまま)。
+  根拠: 盲検10部品の人間図面に**キリ表記は1件も無かった**(調査/blind_test_report.md §6.2)。
+  キリ表記へ戻す場合は `defaults.hole_note` を `{"notation":"kiri","width":"zenkaku"}` にする。
 - `leader.points` は引出線の折れ点列(最後の1本が水平のランディング)。`space` は `view`/`model`。
 - `anchor_check` を書くと、引出線始点が指定円の円周上(0.01mm以内)にあることを検証する。
 
@@ -411,7 +434,10 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
   "gate1_ok": true,
   "dimstyles": { "<id>": {"name": "GEN001", "effective": {...}} },
   "style_check": {"ok": true, "mismatches": []},
-  "layout": {"text_boxes": {...}, "collisions": [...]},
+  "layout": {"text_boxes": {...}, "collisions": [...],
+             "geom_boxes": {...},        // 寸法の描画実体(virtual_entities展開)の外接矩形
+             "frame_collisions": [{"id": "...", "zone": "title_block", "box": [...]}, ...],
+             "frame_ok": true},          // 偽なら generate_drawing が不合格にする(§1.3a)
   "scale": 0.5,                  // 適用した尺度
   "dimlfac": 2.0,                // = 1/scale(全DIMSTYLEに入る。寸法値=モデル実寸の担保)
   "views": ["front", "right"],   // 実際に使ったビュー

@@ -167,7 +167,19 @@ def verify(test_id, cfg):
         exp = float(item["value_expected"])
         m = dim_engine.measure_model_value(dim, scale)
         t = dim_engine.dim_text_of(doc, dim)
-        tv = dim_engine.parse_dim_text_value(t)
+        # ❗参考寸法ラベル `(ＰＣＤ３３３)` を実測と数値比較してはいけない(盲検で誤不合格4件)。
+        #   engine/generate_drawing.independent_verify と同じ規則で3通りに分ける。
+        override = dim_engine.effective_text_override(item)
+        override_ok = None
+        if override is None:
+            text_role = "measured"
+            tv = dim_engine.parse_dim_text_value(t)
+        else:
+            override_ok = dim_engine.text_override_applied(t, override)
+            if dim_engine.is_reference_text(override):
+                text_role, tv = "reference", None
+            else:
+                text_role, tv = "override", dim_engine.parse_dim_text_value(override)
         diff = abs(m - exp)
         tdiff = abs(tv - m) if tv is not None else None
         # 実装方式の一致(円形ビュー=ネイティブDIAMETER(base=3) / 輪郭ビュー=線形(base=0))
@@ -176,12 +188,14 @@ def verify(test_id, cfg):
                    or (kind in ("linear", "diameter_linear") and base == 0)
                    or (kind == "radius" and base == 4)
                    or (kind == "angle" and base == 2))
-        ok = diff <= 0.01 and (tdiff is None or tdiff <= 0.01) and kind_ok
+        ok = (diff <= 0.01 and (tdiff is None or tdiff <= 0.01) and kind_ok
+              and (override_ok is not False))
         gate_ok = gate_ok and ok
         rows.append({"id": did, "style": style, "kind": kind, "dimtype": dim.dxf.dimtype,
                      "dimtype_base": base, "kind_impl_ok": kind_ok,
                      "expected": exp, "measured": round(m, 6), "diff_mm": round(diff, 6),
-                     "text": t, "text_value": tv,
+                     "text": t, "text_value": tv, "text_role": text_role,
+                     "text_override": override, "text_override_ok": override_ok,
                      "text_diff_mm": None if tdiff is None else round(tdiff, 6), "ok": ok})
         print(u"%-20s %-8s %-16s %-7d %10.4f %10.4f %10.6f  %s%s"
               % (did, style, kind, dim.dxf.dimtype, exp, m, diff, t,

@@ -378,9 +378,42 @@
       ],
       "pcds": [
         60.0
-      ]
+      ],
+      "count": 2,
+      "equal_spacing_declared": false
     }
   ],
+  "pcd_groups": [
+    {
+      "note": "\\A1;２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０",
+      "view": "right",
+      "axes": [
+        "Z",
+        "Y"
+      ],
+      "diameter": 8.0,
+      "pcd": 60.0,
+      "count_in_note": 2,
+      "count_found": 2,
+      "ok": false,
+      "reason": "φ8 の穴が 2 個(採用の最小 3 個未満)。2個以下は寸法で指定させる(安全側)"
+    },
+    {
+      "note": "\\A1;２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０",
+      "view": "right",
+      "axes": [
+        "Z",
+        "Y"
+      ],
+      "diameter": 11.0,
+      "pcd": 60.0,
+      "count_in_note": 2,
+      "count_found": 2,
+      "ok": false,
+      "reason": "φ11 の穴が 2 個(採用の最小 3 個未満)。2個以下は寸法で指定させる(安全側)"
+    }
+  ],
+  "polygons": [],
   "note_diameters": [
     8.0,
     11.0
@@ -402,6 +435,18 @@
       "class": "view_not_axis_aligned",
       "view": "iso",
       "reason": "軸平行でない投影(等角投影等)。v1は寸法棚卸しの対象外"
+    },
+    {
+      "class": "pcd_group_rejected",
+      "view": "right",
+      "diameter": 8.0,
+      "reason": "ＰＣＤ注記を位置の根拠に採用できない: φ8 の穴が 2 個(採用の最小 3 個未満)。2個以下は寸法で指定させる(安全側)"
+    },
+    {
+      "class": "pcd_group_rejected",
+      "view": "right",
+      "diameter": 11.0,
+      "reason": "ＰＣＤ注記を位置の根拠に採用できない: φ11 の穴が 2 個(採用の最小 3 個未満)。2個以下は寸法で指定させる(安全側)"
     },
     {
       "class": "not_implemented",
