@@ -4,6 +4,8 @@ u"""工房ループ CLI(フェーズ5・依頼受付→処理→納品→台帳)
     python app/workshop.py scan               依頼箱を走査し、決定論で進められる段を全部進める
     python app/workshop.py status             全依頼の状態一覧を表示(不合格は理由サマリ付き)
     python app/workshop.py retry <依頼ID>      不合格/質問あり/エラーを再試行可能な状態へ戻す
+        --force        「合格」済みも巻き戻す(検証強化後の再判定。納品箱の複製も消す)
+        --向き再選択     choice.json/meta.json/views.dxf も消して向きから選び直す
     python app/workshop.py new <依頼ID> ...    依頼.json雛形+3Dモデル配置(--model/--材質は必須)
 
 思想: 1依頼 = data/依頼箱/<依頼ID>/ フォルダ。状態機械を status.json に持ち、
@@ -378,14 +380,18 @@ def deliver(rd, request_id, request, zuban, result):
 def write_reject_reason(rd, result):
     summary = result["summary"]
     gate2 = result.get("gate2") or {}
+    verify = result.get("independent_verify") or {}
     reasons = {
         "at": now_iso(),
         "gate1_ok": summary.get("gate1_ok"),
         "gate2_ok": summary.get("gate2_ok"),
         "verify_ok": summary.get("verify_ok"),
+        "layout_ok": summary.get("layout_ok"),
         "dim_error": summary.get("dim_error"),
         "gate2_unspecified": gate2.get("unspecified"),
         "gate2_redundant_dimensions": gate2.get("redundant_dimensions"),
+        # 図枠/表題欄/左上ノート/図枠外との衝突(layout_ok=false の唯一の原因)
+        "frame_collisions": verify.get("frame_collisions"),
         "result_json": summary.get("result_json"),
     }
     _write_json(os.path.join(rd, u"不合格理由.json"), reasons)
@@ -438,6 +444,18 @@ def summarize_reject_reason(rd):
 
     if reasons.get("verify_ok") is False:
         parts.append(u"独立検証不合格")
+
+    collisions = reasons.get("frame_collisions") or []
+    if collisions:
+        zones = {}
+        for c in collisions:
+            zone = str(c.get("zone", "?")).split(":")[0]
+            zones.setdefault(zone, []).append(str(c.get("id", "?")))
+        segs = [u"%s%d件(%s)" % (z, len(ids), u"・".join(sorted(set(ids))[:3]))
+                for z, ids in sorted(zones.items(), key=lambda kv: -len(kv[1]))]
+        parts.append(u"図枠衝突%d件[%s]" % (len(collisions), u"、".join(segs)))
+    elif reasons.get("layout_ok") is False:
+        parts.append(u"レイアウト検証不合格(詳細不明)")
 
     if not parts:
         parts.append(u"不合格(理由詳細なし)")
@@ -607,6 +625,19 @@ def _cleanup_generation_artifacts(rd):
         shutil.rmtree(gen_dir)
         removed.append(u"生成/")
     for name in (u"不合格理由.json", GEN_MARKER_FILENAME):
+        p = os.path.join(rd, name)
+        if os.path.exists(p):
+            os.remove(p)
+            removed.append(name)
+    return removed
+
+
+def _cleanup_orientation_artifacts(rd):
+    u"""retry --向き再選択 用: 向き選択の成果物(choice.json)と、それを反映した投影
+    (views.dxf/meta.json)を消す。次のscanで materialize が走り直す(SolidWorksを再度叩く)。
+    候補PNG・候補設定はAIオペレータが選び直すのに必要なので残す。"""
+    removed = []
+    for name in ("choice.json", "meta.json", "views.dxf"):
         p = os.path.join(rd, name)
         if os.path.exists(p):
             os.remove(p)
@@ -800,7 +831,7 @@ def cmd_status():
 # ---------------------------------------------------------------------------
 # CLI: retry
 # ---------------------------------------------------------------------------
-def cmd_retry(request_id):
+def cmd_retry(request_id, force=False, reselect=False):
     rd = os.path.join(INBOX_DIR, request_id)
     if not os.path.isdir(rd):
         print(u"依頼フォルダが見つかりません: %s" % rd)
@@ -808,8 +839,17 @@ def cmd_retry(request_id):
     st = load_status(rd)
     state = st["state"]
 
-    if state in (u"不合格", u"質問あり"):
+    if state in (u"不合格", u"質問あり") or (state == u"合格" and force):
         removed = _cleanup_generation_artifacts(rd)
+        if reselect:
+            removed += _cleanup_orientation_artifacts(rd)
+        if state == u"合格":
+            # ❗合格済みを巻き戻す時は納品箱の複製も消す。
+            #   消さないと「検証を通っていない旧DXFが納品箱に残ったまま」になる。
+            dest = os.path.join(DELIVERY_DIR, request_id)
+            if os.path.isdir(dest):
+                shutil.rmtree(dest)
+                removed.append(u"納品箱/%s/" % request_id)
         if state == u"質問あり":
             qpath = os.path.join(rd, QUESTION_FILENAME)
             if os.path.exists(qpath):
@@ -933,6 +973,12 @@ def main(argv):
     retry_p = sub.add_parser(
         "retry", help=u"不合格/質問あり/エラーの依頼を安全に再試行可能な状態へ戻す")
     retry_p.add_argument("request_id", help=u"依頼ID(data/依頼箱/<ID>/)")
+    retry_p.add_argument("--force", action="store_true",
+                         help=u"「合格」済みも巻き戻す(検証が強化された時の再判定用。"
+                              u"納品箱の複製も消す)")
+    retry_p.add_argument(u"--向き再選択", dest="reselect", action="store_true",
+                         help=u"choice.json/meta.json/views.dxf も消して向きから選び直す"
+                              u"(次のscanでSolidWorks投影が走る)")
 
     new_p = sub.add_parser("new", help=u"新規依頼を作成する(依頼.json雛形+3Dモデル配置)")
     new_p.add_argument("request_id", help=u"依頼ID(data/依頼箱/<ID>/ を作成)")
@@ -956,7 +1002,7 @@ def main(argv):
     elif args.cmd == "status":
         cmd_status()
     elif args.cmd == "retry":
-        return cmd_retry(args.request_id)
+        return cmd_retry(args.request_id, force=args.force, reselect=args.reselect)
     elif args.cmd == "new":
         return cmd_new(args)
     return 0
