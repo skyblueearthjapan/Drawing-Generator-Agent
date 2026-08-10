@@ -6,6 +6,12 @@
 >
 > 準拠元: `調査/dimension_style_analysis.md` §8(ルール10項目)、`図枠/dimstyle_spec.json`、
 > `調査/ディレクター裁定_フェーズ3A質問票.md`(Q1〜Q5)。
+>
+> **2026-08-10 追記(後方互換・`schema_version` は "1.0" のまま)**:
+> ①尺度(`source.scale`)が 1.0 以外でも使えるようになった(§1.2。寸法値は常にモデル実寸)/
+> ②`layout` セクションを追加(§1.3。使用ビュー集合・寸法予約帯によるビュー間隔決定)/
+> ③`placement` の段数がビュー間隔の根拠になった(§2.3)。
+> **既存の計画JSONは1文字も変えずに従来と同一の出力になる**(回帰確認済み)。
 
 ---
 
@@ -32,12 +38,18 @@
   "schema_version": "1.0",
   "part":   { ... },   // 部品メタ情報(表題欄はcompose側の責務。ここは参照用)
   "source": { ... },   // 入力(合成済みDXF・phase2 meta・尺度)
+  "layout": { ... },   // 省略可。使用ビュー集合・寸法予約帯(§1.3)
   "defaults": { ... }, // 配置の既定値(省略可)
   "dimensions": [ ... ],
   "hole_notes": [ ... ],
   "notes":      [ ... ]  // 省略可(塗装注記等の自由注記)
 }
 ```
+
+> **❗レイアウトの正はこの計画JSON**(`source.scale` + `layout`)。compose / dim_engine /
+> gate2 / generate_drawing はすべて `dim_engine.plan_layout(plan)` から同じ3点セット
+> (尺度・使用ビュー・寸法予約帯)を読む。依頼JSONの `尺度` と食い違うと
+> generate_drawing がエラーで止まる(レイアウトがずれた図面を作らないため)。
 
 ### 1.1 `part`
 
@@ -55,13 +67,69 @@
 |---|---|---|---|
 | `base_dxf` | path | ○ | 寸法を足す土台の合成済みDXF(`engine/compose_drawing.py` の出力) |
 | `meta_json` | path | ○ | フェーズ2の meta json。**3Dモデル座標→ビュー座標の変換行列 `model_to_view` の供給元** |
-| `scale` | float | ○ | compose に渡した尺度(モデル座標→図面座標変換の再構成に必要) |
+| `scale` | float | ○ | 尺度(1.0=実寸、0.5=1:2)。**作図(ジオメトリ)だけが scale 倍**される |
 
-> エンジンは `meta_json` + `scale` から compose と同じレイアウト計算を再実行し、
+> エンジンは `meta_json` + `scale`(+ `layout`)から compose と同じレイアウト計算を再実行し、
 > **モデル3D座標 → 最終A3図面座標** のアフィン変換を各ビューについて復元する
 > (`調査/phase2_5_compose_report.md` §5.1 の経路)。計画JSON側に座標変換行列を焼き込まない。
 
-### 1.3 `defaults`(省略可)
+#### ❗尺度と寸法値の関係(2026-08-10 確立。自社流儀)
+
+**寸法値は尺度に関係なく「モデル実寸」を表示する**(人間図面も1:2図面に実寸を記入する)。
+実装は **DIMSTYLE の `dimlfac = 1/scale`**(寸法測定値の倍率)。したがって:
+
+- 計画JSONに書く値(`value_expected` / `measure` の座標・`diameter` / `radius` /
+  `tolerance` / `cross_check.diameter` / `anchor_check.diameter`)は**すべてモデル実寸mm**。
+  尺度を意識して書き換える必要はない(1:1の計画は `source.scale` を変えるだけで1:2になる)
+- ゲート①の照合も**モデル実寸空間**で行う(`dim_engine.measure_model_value(dim, scale)` が
+  図面上の実測を 1/scale して戻す)。図面座標のまま比較すると scale≠1 で全寸法が落ちる
+- 実ジオメトリとの突き合わせ(円の実在確認)だけは図面座標(=実寸×scale)で探す
+- 表題欄の尺度欄は compose が `_scale_text(scale)` で全角表記にする(0.5 → 「１：２」)
+
+### 1.3 `layout`(省略可・2026-08-10 追加)
+
+```jsonc
+"layout": {
+  "views": ["front", "right"],   // 使用ビュー集合。省略=従来どおり4ビュー(後方互換)
+  "dim_reserve": true,           // 省略=true。寸法予約帯からビュー間隔を決める
+  "dim_band_mm": 5.5             // 省略=5.5。寸法線から外側へ食い出す帯(下記)
+}
+```
+
+| キー | 既定 | 内容 |
+|---|---|---|
+| `views` | 省略(=`["front","top","right","iso"]`) | 使うビュー。`front`/`top`/`right`/`iso` の部分集合。**人間図面は2ビュー(正面+右側面)が普通**なので、2ビューで足りる部品は `["front","right"]` と書く |
+| `dim_reserve` | `true` | ビュー間隔を寸法の段数から計算する(§1.3a)。`false` で従来の固定15mm |
+| `dim_band_mm` | `5.5` | 寸法線から**さらに外側**へ食い出す帯 |
+
+- **使わないビューのエンティティは取り込まれない**(compose の戻り値
+  `dropped_view_entity_counts` に除外数が出る)。ビュー数が減った分は
+  **残ったビューが紙面中央へバランス配置**される(第三角法の相対整列は保持)。
+- 計画の `dimensions[].view` / `hole_notes[].view` に使用ビュー外を書くとエンジンがエラーで止まる。
+
+#### 1.3a ビュー間隔は「寸法の予約帯」から決まる(固定値の握り合わせをやめた)
+
+`compose_drawing.plan_view_reserves(plan)` が `dimensions[].placement` から
+**ビュー×辺(above/below/left/right)ごとの予約帯**を作る:
+
+```
+予約帯 = max(そのビュー・その辺の寸法線オフセット) + dim_band_mm
+       ( オフセット = offset_mm、無ければ first_offset_mm + (level-1) * stack_step_mm )
+```
+
+`_layout_targets` は「隣り合うビューの実ジオメトリの隙間 ≧ 双方の予約帯の和」を満たす
+最小の間隔を採る(下限は `VIEW_GAP_MM=15`)。これで
+**`VIEW_GAP_MM=15 < first_offset_mm=16` に起因する『寸法線が隣のビューへ食い込む』欠陥**が
+構造的に消える(反証つき実証: `調査/run_layout_interference_test.py`)。
+
+- `dim_band_mm=5.5` の根拠(実測): 文字が寸法線の外に出るケースで
+  `dimgap 0.5 + 文字の実描画高さ 4.5552`(= `dimtxt 4.0 × 1.1388`。ezdxfのフォント実測値で、
+  char_height そのままではない)= 5.0552mm。これに余裕0.45mmを足した値
+- v1の限界: 予約帯は**寸法だけ**を見込む。穴注記・引出線・自由注記は絶対座標指定のため
+  見込んでいない(衝突は `layout.collisions` の報告で拾う)。
+  紙面中央への配置も**ビュー幾何だけ**で計算する(外周の寸法帯は含めない)
+
+### 1.4 `defaults`(省略可)
 
 | キー | 既定 | 内容 |
 |---|---|---|
@@ -145,6 +213,13 @@
 
 最終A3図面座標(mm)。合成済みDXFを読んで測定点を決めた場合はこちら。
 
+> **❗`space:"view"` はレイアウトが変わると壊れる**(2026-08-10 実害)。図面座標は
+> 尺度・使用ビュー・寸法予約帯で動くため、`source.scale` や `layout` を変えた瞬間に
+> 実ジオメトリから外れて `snap` / `anchor_check` が落ちる。
+> **`space:"model"` で書けば座標変換はエンジンが追随する**ので、原則モデル座標で書くこと
+> (引出線 `hole_notes[].leader` / `text_insert` も同じ。`notes[].insert` だけは
+> 図枠基準の絶対座標で構わない)。
+
 #### (b) 3Dモデル座標指定 `"space": "model"`
 
 ```jsonc
@@ -164,7 +239,9 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
   - `horizontal` → rotated dimension の `angle=0`
   - `vertical` → `angle=90`
   - 数値 → その角度(度)方向に投影して測る
-- `radius` の場合は `p1`=円中心、`p2`=円周上の点(または `radius` を直接指定)
+- `radius` の場合は `p1`=円中心、`p2`=円周上の点(または `radius` を直接指定)。
+  **`radius` / `diameter` のスカラー値は `space` に関係なく常にモデル実寸mm**
+  (エンジンが scale 倍して作図する)
 - `angle` の場合は `vertex` / `p1` / `p2`(2辺の端点)を指定する
 
 > **どちらの指定方法でも、変換後の点は §0-2 のスナップ検証を受ける。**
@@ -184,6 +261,9 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
   (`level=1` → 16mm、`level=2` → 24mm、`level=3` → 32mm …)
 - `side` は寸法の向きも決める:`above`/`below` → 水平寸法線、`left`/`right` → 垂直寸法線。
   `measure.direction` と矛盾する場合はエンジンがエラーにする。
+- **`side` と段数(`level`/`offset_mm`)は同時に『ビュー間隔』の根拠にもなる**(§1.3a)。
+  隣のビュー側へ何段積んでも、ビュー間隔がその分だけ広がるので**干渉を避けるために
+  `offset_mm` を人手で詰める必要はない**(TEST-002 の `offset_mm: 11` は修正前の名残)。
 
 ### 2.4 `tolerance`
 
@@ -312,7 +392,8 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
 | 仕上げ記号(JIS B 0031) | 裁定Q4-2でフェーズ3-C |
 | 溶接記号 | 裁定Q4-3で保留 |
 | 中心線・PCD円の自動生成(§5.2) | ビュー側(compose/SW)の責務として整理待ち |
-| 自動レイアウト最適化 | v1.0は「段数明示+衝突検出(報告)」まで。フェーズ4で改善 |
+| 自動レイアウト最適化 | 2026-08-10: **ビュー間隔は計画駆動(寸法予約帯)で自動化済み**(§1.3a)。残る未対応は「段数・辺の自動決定」「注記/引出線の予約」「紙面中央寄せに寸法帯を含める」 |
+| 尺度の自動選択 | `source.scale` は計画側の明示指定のみ(A3に収まらなければ compose が例外)。bboxから 1/2・1/2.5・1/5 … を自動で選ぶ機構は未実装 |
 
 ---
 
@@ -331,8 +412,16 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
   "dimstyles": { "<id>": {"name": "GEN001", "effective": {...}} },
   "style_check": {"ok": true, "mismatches": []},
   "layout": {"text_boxes": {...}, "collisions": [...]},
+  "scale": 0.5,                  // 適用した尺度
+  "dimlfac": 2.0,                // = 1/scale(全DIMSTYLEに入る。寸法値=モデル実寸の担保)
+  "views": ["front", "right"],   // 実際に使ったビュー
+  "view_reserves": {"front": {"above":0.0,"below":21.5,"left":21.5,"right":21.5}, ...},
   "warnings": [...]
 }
 ```
 
 `gate1_ok` が偽なら `apply_plan()` は例外を送出し、DXFを保存しない(不合格品を出さない)。
+`gate1[].expected` / `measured` / `diff_mm` は**モデル実寸mm**(尺度を戻した値)。
+
+compose 側の戻り値にも `views` / `dropped_view_entity_counts` /
+`layout`(`gap_x_mm` `gap_y_mm` `group_wh_mm` `reserves`)が入る。

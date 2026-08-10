@@ -414,17 +414,61 @@ engine/          恒久エンジン(sw_compat.py, sw_helper.py, dxf_dump.py, dxf
 - **❗STEPインポート体では `IEdge.GetCurveParams3` が例外**(端点が取れない)。
   円エッジの中心・軸・径は `ICurve.CircleParams` で取れるので穴台帳はこちらで作る。
   直線エッジの端点が要るなら別経路が必要(bboxと面のGetBoxで代用できる)
-- **❗尺度は 1.0 しか使えない**(現行実装): `dim_engine.build_view_transforms` は図面座標を
-  `scale` 倍するのに、ゲート①は図面座標の実測を**モデルmmの期待値**と直接比較する
-  (`dimlfac` で補正していない)。**scale≠1 にすると全寸法がゲート①で落ちる**。
-  大物をA3に載せるには dimlfac / 期待値側のスケール補正を入れてから
-- **❗`compose_drawing.VIEW_GAP_MM=15` < `first_offset_mm=16`**: 4ビュー合成では
-  **front の上側・右側の1段目の寸法線が隣のビュー領域に食い込む**。
-  寸法は外周側(below / left)へ回すか offset を詰めること。
-  そもそも**使わないビュー(2ビュー図で足りる部品の top / iso)を出さない選択肢**が要る
-  (人間図面は両部品とも2ビューだった)
+- **❗尺度は 1.0 しか使えない**(→ **2026-08-10 修正済み。下記「尺度・レイアウト」節参照**):
+  `dim_engine.build_view_transforms` は図面座標を `scale` 倍するのに、ゲート①は図面座標の実測を
+  **モデルmmの期待値**と直接比較していた(`dimlfac` で補正していない)ため scale≠1 で全滅した
+- **❗`compose_drawing.VIEW_GAP_MM=15` < `first_offset_mm=16`**(→ **2026-08-10 修正済み**):
+  4ビュー合成では **front の上側・右側の1段目の寸法線が隣のビュー領域に食い込んで**いた。
+  当時の回避策は「寸法を外周側(below/left)へ回す」「offset を人手で詰める」(TEST-002 の
+  `offset_mm: 11` はその名残)。**使わないビューを出さない選択肢**も無かった
 - **❗ezdxf の Vec3 はスライス不可**(`e.dxf.defpoint[:2]` が `TypeError: slicing not supported`)。
   `.x` `.y` で読む
+
+### 尺度・ビュー間隔・ビュー数選択の3欠陥を修正【2026-08-10・engine貫通。回帰は既存5図面で数値一致を確認】
+
+対象: `engine/compose_drawing.py` / `dim_engine.py` / `gate2_completeness.py` /
+`generate_drawing.py` / `plan_schema.md`。試験は
+`調査/run_scale_test.py`(1:2)・`run_layout_interference_test.py`(干渉・反証つき)・
+`run_twoview_test.py`(2ビュー)・`run_regression_all.py`(既存5図面の回帰スナップショット)。
+
+- **①尺度: 寸法値は尺度に関係なく『モデル実寸』を表示する**(自社流儀。人間も1:2図面に実寸を書く)。
+  実装は **DIMSTYLE `dimlfac = 1/scale`**。ezdxfは描画時に `measurement × dimlfac` を文字にする
+  (`render/dim_base.py` 実測)。**ゲート①②・独立検証はすべて『モデル実寸空間』で照合する**
+  (`dim_engine.measure_model_value(dim, scale)` が図面実測を 1/scale して戻す)。
+  ❗**実ジオメトリとの突き合わせ(実在円の探索)だけは図面座標=実寸×scale で探す**。
+  ここを混ぜると `circle_check` / `cross_check` / `anchor_check` が偽陰性になる。
+  ❗**ゲート②も単位が混在していた**: 位置ノードは `to_model_coords` で実寸へ戻るのに
+  **円の直径だけ図面座標のまま**だった(scale≠1 で「φ40の円をφ40の寸法がカバーしない」と誤判定)。
+  実測: ホルダーを1:2生成 → 作図は全て1/2・寸法文字は 40/35/5/φ33/φ26/φ75/60(実寸)・
+  ゲート①②③+独立検証すべて合格・尺度欄「１：２」
+- **②ビュー間隔は『寸法の予約帯』から計画駆動で決める**(固定値の握り合わせをやめた)。
+  `予約帯 = そのビュー・その辺の最大寸法線オフセット + 5.5mm`、
+  「隣り合うビューの隙間 ≧ 双方の予約帯の和」を満たす最小の間隔を採る(下限は従来の15mm)。
+  ❗**帯の実測値**: 寸法文字が寸法線の外に出るケースで `dimgap 0.5 + 文字の実描画高さ 4.5552`
+  (=`dimtxt 4.0 × 1.1388`。**ezdxfのフォント実測でchar_heightそのままではない**)= 5.0552mm。
+  文字が内側に収まるケースは `dimexe 2.0`。**4.5mm(=dimtxt+dimgap)で見積もると0.56mm足りず干渉が残る**。
+  反証つき実証: 同じ計画で `layout.dim_reserve=false`(従来固定15mm)=干渉1件 →
+  `true`(新既定)=干渉0件。判定は生成DXFの DIMENSION を `virtual_entities()` 展開した
+  bbox と他ビューの実ジオメトリ bbox の交差で機械確認
+- **③使用ビュー集合を計画JSONで指定できる**(`layout.views`。省略=従来4ビューで後方互換)。
+  compose/dim_engine/gate2/generate_drawing を貫通。使わないビューのエンティティは取り込まず、
+  残ビューは紙面中央へバランス配置(第三角の相対整列は保持)。
+  実測: AUTO-002 を front+right の2ビューで再生成し全ゲート合格(人間図面と同じ2ビュー構成)
+- **❗計画JSONの `space:"view"`(図面絶対座標)はレイアウトが変わると壊れる**: 尺度・ビュー集合・
+  予約帯のどれを変えても図面座標が動くため、`snap`/`anchor_check` が落ちる。
+  **測定点・引出線は原則 `space:"model"` で書く**(TEST-002 の穴注記引出線が唯一の view 指定で、
+  1:2版を作る際に再計算が必要になった)
+- **❗レイアウトの正は計画JSON**(`source.scale` + `layout`)。compose と dim_engine が
+  **違う引数でレイアウトを計算したら全寸法がゲート①で落ちる**ので、
+  4者とも `dim_engine.plan_layout(plan)` から同じ3点セット(尺度・ビュー集合・予約帯)を読む。
+  依頼JSONの `尺度` が計画と食い違ったら generate_drawing がエラーで止まる
+- **回帰の作法**: `調査/run_regression_all.py --out <snap.json>` で既存5図面
+  (TEST-002/003・テスト-004・AUTO-001/002)を再生成し、ゲート①全行・ゲート②反証一式・
+  ビューbbox・独立検証を1つのJSONへ正規化する。**修正前後で差分0件**を確認した
+  (DXF実体もタイムスタンプとFINGERPRINTGUID以外バイト一致)。
+  ❗**generate_drawing.py は実行のたび台帳へ1行追記する** → 回帰試験では `--no-ledger` を使う
+- **❗生成図面/のDXFはユーザーがeDrawings等で開いているとロックされ `PermissionError` で上書きできない**。
+  回帰試験は `--gen-out-dir` で別フォルダへ出す(納品物を壊さない)
 
 ### ❗OpenDoc6がNoneでも「ActiveDocで拾う」フォールバックは危険【2026-08-09・実害あり】
 OpenDoc6 が None(開けていない)のとき `sw.ActiveDoc` は**ユーザーが既に開いていた無関係の

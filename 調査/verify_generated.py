@@ -4,7 +4,7 @@ u"""生成図面の独立検証(汎用版。調査/verify_TEST-002.py を部品�
 **dim_engine の自己申告を信用せず、保存済みDXFを新規に読み直して**検証する:
   A. 全DIMENSIONの実測値(defpointから独立再計算)vs 計画期待値 vs 描画テキスト(=ゲート①再現)
   B. 全DIMSTYLEの実効値 vs 図枠/dimstyle_spec.json(1寸法=1スタイル・XDATA不使用・dimpost割当)
-  C. 図枠113エンティティの保持 / DXFバージョン・コードページ
+  C. 図枠112エンティティの保持 / DXFバージョン・コードページ(2026-08-10: 113→112, BLOCK002除去)
   D. 人間の正解図面との寸法対応表(どの寸法を入れるかの正解との突き合わせ)
   E. 公差機構(ネイティブdimtol + ゼロ側「0」整形 + \\H係数整形)のスモークテスト
 
@@ -123,6 +123,9 @@ def verify(test_id, cfg):
     defaults = plan.get("defaults", {})
     spec = dim_engine.load_dimstyle_spec()
     want = dim_engine.base_dimvars(spec)
+    # 尺度対応: 作図は scale 倍・寸法値はモデル実寸(dimlfac=1/scale)。照合はモデル実寸空間で行う
+    scale = float(plan.get("source", {}).get("scale", 1.0))
+    want["dimlfac"] = 1.0 / scale
 
     doc = ezdxf.readfile(cfg["dxf"])
     msp = doc.modelspace()
@@ -135,11 +138,13 @@ def verify(test_id, cfg):
     _, fsum = subtract_frame(doc, template_path=os.path.join(ROOT, u"図枠", u"frame_template.dxf"))
     print(u"dxfversion=%s / encoding=%s / $DWGCODEPAGE=%s"
           % (doc.dxfversion, doc.encoding, doc.header.get("$DWGCODEPAGE")))
-    print(u"図枠一致: %d/113 (total=%d, remaining=%d)"
+    print(u"図枠一致: %d/112 (total=%d, remaining=%d)"
           % (fsum["frame_matched"], fsum["total"], fsum["remaining"]))
     print(u"DIMENSION=%d本 / LEADER=%d本 / _OPEN30ブロック=%s"
           % (len(dims), len(leaders), "_OPEN30" in doc.blocks))
-    ok_c = (doc.dxfversion == "AC1015" and fsum["frame_matched"] == 113
+    # 図枠共通エンティティ数は112(2026-08-10: frame_template.dxfからピニオン断面図の
+    # 残骸BLOCK002(枠外, 32エンティティ)を除去したため113→112に変更)
+    ok_c = (doc.dxfversion == "AC1015" and fsum["frame_matched"] == 112
             and "_OPEN30" in doc.blocks)
     result["file_attrs_ok"] = ok_c
     result["frame"] = fsum
@@ -160,7 +165,7 @@ def verify(test_id, cfg):
         item = by_id[did]
         kind = resolve_kind(item, defaults)
         exp = float(item["value_expected"])
-        m = dim_engine.measure_from_defpoints(dim)
+        m = dim_engine.measure_model_value(dim, scale)
         t = dim_engine.dim_text_of(doc, dim)
         tv = dim_engine.parse_dim_text_value(t)
         diff = abs(m - exp)

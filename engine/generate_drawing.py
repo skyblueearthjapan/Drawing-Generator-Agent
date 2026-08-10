@@ -181,6 +181,10 @@ def independent_verify(dxf_path, plan_path):
     defaults = plan.get("defaults", {})
     spec = dim_engine.load_dimstyle_spec()
     want = dim_engine.base_dimvars(spec)
+    # 尺度対応: 作図は scale 倍だが寸法値はモデル実寸(dimlfac=1/scale)。
+    # 照合は必ずモデル実寸空間で行う
+    scale = float(plan.get("source", {}).get("scale", 1.0))
+    want["dimlfac"] = 1.0 / scale
 
     doc = ezdxf.readfile(dxf_path)
     msp = doc.modelspace()
@@ -212,7 +216,7 @@ def independent_verify(dxf_path, plan_path):
             continue
         kind = _resolve_kind(item, defaults)
         exp = float(item["value_expected"])
-        m = dim_engine.measure_from_defpoints(dim)
+        m = dim_engine.measure_model_value(dim, scale)
         t = dim_engine.dim_text_of(doc, dim)
         tv = dim_engine.parse_dim_text_value(t)
         diff = None if m is None else abs(m - exp)
@@ -230,6 +234,7 @@ def independent_verify(dxf_path, plan_path):
                      "diff_mm": None if diff is None else round(diff, 6),
                      "text": t, "text_value": tv,
                      "text_diff_mm": None if tdiff is None else round(tdiff, 6), "ok": ok})
+    result["scale"] = scale
     result["gate1"] = rows
     result["gate1_ok"] = gate_ok
     result["gate1_max_diff_mm"] = (max((r["diff_mm"] for r in rows if r["diff_mm"] is not None),
@@ -327,6 +332,8 @@ def main(argv):
     ap.add_argument("--skip-sw", action="store_true", help=u"SW投影を省略し既存DXF/metaを再利用")
     ap.add_argument("--views-dxf", default=None, help=u"(既定=調査/phase2_out_<モデル名>.dxf)")
     ap.add_argument("--meta-json", default=None, help=u"(既定=調査/phase2_meta_<モデル名>.json)")
+    ap.add_argument("--no-ledger", action="store_true",
+                    help=u"台帳.mdへ追記しない(回帰試験など納品でない生成用)")
     args = ap.parse_args(argv[1:])
 
     model_path = os.path.abspath(args.model)
@@ -393,9 +400,21 @@ def main(argv):
     if density is not None:
         fields[u"密度_kgm3"] = density
 
-    scale = float(request.get(u"尺度", 1.0))
-    comp = compose_drawing.compose(views_dxf, meta_json, fields, scale=scale, out_path=out_dxf)
+    # ❗レイアウト(尺度・使用ビュー・寸法予約帯)の**正は作図計画JSON**。
+    #   dim_engine / gate2 も plan_layout() から同じ値を読むので、ここで計画から取らないと
+    #   compose と寸法エンジンでレイアウトがずれる(=全寸法がゲート①で落ちる)。
+    with io.open(args.plan, encoding="utf-8") as f:
+        plan_doc = json.load(f)
+    scale, use_views, view_reserves = dim_engine.plan_layout(plan_doc)
+    req_scale = request.get(u"尺度")
+    if req_scale is not None and abs(float(req_scale) - scale) > 1e-9:
+        raise ValueError(u"依頼JSONの尺度 %s と計画JSONの source.scale %s が食い違っています"
+                         u"(計画を正とするため、依頼側を合わせるか計画を直してください)"
+                         % (req_scale, scale))
+    comp = compose_drawing.compose(views_dxf, meta_json, fields, scale=scale, out_path=out_dxf,
+                                   views=use_views, view_reserves=view_reserves)
     summary["steps"]["compose"] = {
+        "scale": scale, "views": comp["views"], "layout": comp["layout"],
         "frame_check": comp["frame_check"], "zone_overlaps": comp["zone_overlaps"],
         "view_pair_overlaps": comp["view_pair_overlaps"], "weight": comp["weight"],
         "warnings": comp["warnings"]}
@@ -498,6 +517,11 @@ def main(argv):
     gate4_text = u"未実施(バッチ生成のためスキップ)"
     def _relslash(p):
         return os.path.relpath(p, ROOT).replace(os.sep, "/")
+
+    if args.no_ledger:
+        summary["ledger"] = u"--no-ledger のため追記せず"
+        print(json.dumps(summary, ensure_ascii=False, indent=2, default=str))
+        return 0 if overall_ok else 1
 
     append_ledger({
         "date": datetime.date.today().isoformat(),

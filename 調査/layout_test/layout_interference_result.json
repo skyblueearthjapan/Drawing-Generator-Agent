@@ -1,0 +1,155 @@
+{
+  "A_fixed15": {
+    "case": "A_fixed15",
+    "dim_reserve": false,
+    "gate1_ok": true,
+    "layout": {
+      "views": [
+        "front",
+        "top",
+        "right",
+        "iso"
+      ],
+      "gap_x_mm": 15.0,
+      "gap_y_mm": 15.0,
+      "group_wh_mm": [
+        136.317279836453,
+        198.18402732123707
+      ],
+      "avail_wh_mm": [
+        410.0,
+        262.0
+      ],
+      "reserves": {
+        "front": {},
+        "top": {},
+        "right": {},
+        "iso": {}
+      }
+    },
+    "view_bbox": {
+      "front": [
+        141.8414,
+        61.908,
+        181.8414,
+        136.908
+      ],
+      "top": [
+        141.8414,
+        168.5,
+        181.8414,
+        243.5
+      ],
+      "right": [
+        200.0,
+        61.908,
+        275.0,
+        136.908
+      ],
+      "iso": [
+        196.8414,
+        163.6061,
+        278.1586,
+        248.3939
+      ]
+    },
+    "interference_count": 1,
+    "interference": [
+      {
+        "dim": "L40_total",
+        "dim_view": "front",
+        "intruded_view": "top",
+        "dim_bbox": [
+          141.8414,
+          61.908,
+          181.8414,
+          173.9632
+        ],
+        "view_bbox": [
+          141.8414,
+          168.5,
+          181.8414,
+          243.5
+        ]
+      }
+    ],
+    "collisions": [
+      [
+        "L40_total",
+        "view:top"
+      ]
+    ],
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\layout_test\\レイアウト-A_fixed15.dxf",
+    "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\layout_test\\レイアウト-A_fixed15.png"
+  },
+  "B_reserve": {
+    "case": "B_reserve",
+    "dim_reserve": true,
+    "gate1_ok": true,
+    "layout": {
+      "views": [
+        "front",
+        "top",
+        "right",
+        "iso"
+      ],
+      "gap_x_mm": 18.341360081773587,
+      "gap_y_mm": 20.907986339381637,
+      "group_wh_mm": [
+        139.65863991822658,
+        204.0920136606187
+      ],
+      "avail_wh_mm": [
+        410.0,
+        262.0
+      ],
+      "reserves": {
+        "front": {
+          "above": 37.5,
+          "below": 21.5,
+          "left": 21.5,
+          "right": 21.5
+        },
+        "top": {},
+        "right": {
+          "above": 0.0,
+          "below": 21.5,
+          "left": 0.0,
+          "right": 0.0
+        },
+        "iso": {}
+      }
+    },
+    "view_bbox": {
+      "front": [
+        140.1707,
+        58.954,
+        180.1707,
+        133.954
+      ],
+      "top": [
+        140.1707,
+        171.454,
+        180.1707,
+        246.454
+      ],
+      "right": [
+        201.6707,
+        58.954,
+        276.6707,
+        133.954
+      ],
+      "iso": [
+        198.512,
+        166.5601,
+        279.8293,
+        251.3479
+      ]
+    },
+    "interference_count": 0,
+    "interference": [],
+    "collisions": [],
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\layout_test\\レイアウト-B_reserve.dxf",
+    "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\layout_test\\レイアウト-B_reserve.png"
+  }
+}

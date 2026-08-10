@@ -133,24 +133,48 @@ def base_dimvars(spec):
 # ---------------------------------------------------------------------------
 # 座標変換(モデル3D → 最終A3図面)
 # ---------------------------------------------------------------------------
-def build_view_transforms(meta_json_path, scale):
+def plan_layout(plan):
+    u"""計画JSONから「レイアウトを決める3点セット」を取り出す(compose と完全に同じ値を使う)。
+
+    Returns: (scale, views, reserves)
+      scale   : source.scale(既定1.0)。図面幾何の尺度。**寸法値は常にモデル実寸**
+      views   : layout.views(既定 None = 従来4ビュー)
+      reserves: dimensions[].placement から算出した寸法予約帯(ビュー間隔の根拠)
+    """
+    scale = float(plan.get("source", {}).get("scale", 1.0))
+    layout = plan.get("layout") or {}
+    views = compose_drawing.resolve_views(layout.get("views"))
+    if layout.get("dim_reserve", True):
+        reserves = compose_drawing.plan_view_reserves(
+            plan, band_mm=float(layout.get("dim_band_mm", compose_drawing.DIM_BAND_MM)))
+    else:
+        reserves = {}
+    return scale, views, reserves
+
+
+def build_view_transforms(meta_json_path, scale, views=None, reserves=None):
     u"""phase2 meta + compose の再レイアウト計算から、各ビューの
     「モデル3D座標 → 最終A3図面座標」変換と、ビュー幾何外接矩形を復元する。
+
+    ❗compose と同じ引数(scale/views/reserves)を渡さないとレイアウトがずれる。
+    計画JSONからは `plan_layout(plan)` で3点セットを取り出すこと。
 
     Returns: dict view_key -> {
         "model_to_sheet": callable((x,y,z)) -> (sx, sy)   # phase2シート座標
         "sheet_to_draw":  callable((sx,sy)) -> (dx, dy)   # 最終図面座標
-        "model_to_draw":  callable((x,y,z)) -> (dx, dy)
+        "model_to_draw":  callable((x,y,z)) -> (dx, dy)   # 尺度込み(scale倍された図面座標)
         "region":         (x0,y0,x1,y1)  # ビュー幾何の外接矩形(最終図面座標)
     }
     """
     with io.open(meta_json_path, encoding="utf-8") as f:
         meta = json.load(f)
-    geoms = {k: meta["views"][k]["geom_mm"] for k in VIEW_KEYS}
-    targets, centers, sizes = compose_drawing._layout_targets(geoms, scale)
+    use_views = compose_drawing.resolve_views(views)
+    geoms = {k: meta["views"][k]["geom_mm"] for k in use_views}
+    targets, centers, sizes, _info = compose_drawing._layout_targets(
+        geoms, scale, views=use_views, reserves=reserves)
 
     out = {}
-    for k in VIEW_KEYS:
+    for k in use_views:
         arr = meta["views"][k]["model_to_view"]
         r = arr[0:9]
         tx, ty = arr[9], arr[10]
@@ -522,6 +546,17 @@ def measure_from_defpoints(dim):
     return None
 
 
+def measure_model_value(dim, scale=1.0):
+    u"""defpointから再計算した図面上の実測(draw mm)を**モデル実寸(mm)**へ戻す。
+
+    ❗尺度1:2の図面でも**寸法値はモデル実寸を表示する**(自社流儀。DIMSTYLEの
+    dimlfac=1/scale で実現している)。したがってゲート①の照合(期待値・寸法文字・
+    実在円)は**すべてモデル実寸空間**で行う。図面座標のまま比較すると scale≠1 で全滅する。
+    """
+    v = measure_from_defpoints(dim)
+    return None if v is None else v / float(scale)
+
+
 # ---------------------------------------------------------------------------
 # 配置
 # ---------------------------------------------------------------------------
@@ -617,7 +652,7 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
     src = plan["source"]
     base_dxf = base_dxf_override or os.path.join(ROOT, src["base_dxf"])
     meta_json = os.path.join(ROOT, src["meta_json"])
-    scale = float(src.get("scale", 1.0))
+    scale, use_views, reserves = plan_layout(plan)
 
     warnings = []
 
@@ -626,7 +661,7 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
     doc.encoding = "cp932"
     msp = doc.modelspace()
 
-    tf = build_view_transforms(meta_json, scale)
+    tf = build_view_transforms(meta_json, scale, views=use_views, reserves=reserves)
     regions = {k: tf[k]["region"] for k in tf}
     part_entities, frame_summary = subtract_frame(
         doc, template_path=os.path.join(ROOT, u"図枠", u"frame_template.dxf"))
@@ -648,6 +683,11 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         doc, tuple({spec["arrow"]["dimblk1"]["value"], spec["arrow"]["dimblk2"]["value"]}))
     dimvars_base = base_dimvars(spec)
     dimvars_base["dimtxsty"] = text_style
+    # ❗尺度対応の要: 作図は scale 倍だが**寸法値はモデル実寸を表示する**(自社流儀。
+    #   人間図面も1:2図面に実寸を記入する)。DIMSTYLEの dimlfac(寸法測定値の倍率)を
+    #   1/scale にすることで、CADが再計測しても表示値がモデル実寸のまま保たれる。
+    #   ezdxf も描画時に measurement * dimlfac を文字にする(render/dim_base.py 実測)。
+    dimvars_base["dimlfac"] = 1.0 / scale
     dim_layer = spec["color_layer"]["dimension_entity_layer"]["value"]
     leader_layer = spec["color_layer"]["leader_entity_layer"]["value"]
     for lname in {dim_layer, leader_layer}:
@@ -746,13 +786,14 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             # 測定点は「円の中心」+「実在円の半径」で、任意角の円周点は特徴点にならないため
             # snapは中心のみ。代わりに **実在円の存在確認を必須**にする(下の circle_check)。
             center = to_draw(view, space, meas["p1"])
+            # measure.diameter / value_expected は**モデル実寸**。作図半径は scale 倍する
             if "diameter" in meas:
-                radius = float(meas["diameter"]) / 2.0
+                radius = float(meas["diameter"]) / 2.0 * scale
             elif "p2" in meas:
                 edge = to_draw(view, space, meas["p2"])
                 radius = math.hypot(edge[0] - center[0], edge[1] - center[1])
             else:
-                radius = float(item["value_expected"]) / 2.0
+                radius = float(item["value_expected"]) / 2.0 * scale
             dim = msp.add_diameter_dim(center=center, radius=radius,
                                        angle=float(meas.get("leader_angle", 45.0)),
                                        dimstyle=style_name, dxfattribs=attribs)
@@ -765,7 +806,7 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         elif kind == "radius":
             center = to_draw(view, space, meas["p1"])
             if "radius" in meas:
-                radius = float(meas["radius"])
+                radius = float(meas["radius"]) * scale   # measure.radius はモデル実寸
                 edge = None
             else:
                 edge = to_draw(view, space, meas["p2"])
@@ -799,9 +840,9 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             fix_zero_tolerance_text(doc, ent)
             fix_tolerance_height_factor(doc, ent, dv["dimtfac"])
 
-        # ---- ゲート① ----
+        # ---- ゲート①(照合は**モデル実寸空間**。尺度はここで戻す) ----
         snaps = [round(nearest_feature_distance(p, feats[view]), 6) for p in meas_pts]
-        measured = measure_from_defpoints(ent)
+        measured = measure_model_value(ent, scale)
         expected = float(item["value_expected"])
         raw_text = dim_text_of(doc, ent)
         shown = parse_dim_text_value(raw_text) if not text_override else None
@@ -835,31 +876,32 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         if kind == "diameter_native":
             # ネイティブDIAMETER型は「そのビューに指定中心・指定径の実在円がある」ことを必須検証する
             # (任意角の円周点はsnap検証できないため、これがゲート①(a)の代替になる)
-            ent_o = find_circle(per_view[view], meas_pts[0], expected, snap_tol)
+            # 実在円の探索は図面座標(=モデル実寸×scale)で行い、比較はモデル実寸へ戻す
+            ent_o = find_circle(per_view[view], meas_pts[0], expected * scale, snap_tol)
             row["circle_check"] = {"ok": ent_o is not None,
                                    "center": [round(v, 4) for v in meas_pts[0]],
                                    "diameter": expected}
             if ent_o is None:
                 row["errors"].append(
-                    u"ネイティブDIAMETER: %s ビューに中心%s 直径%.4f の実在円が無い"
-                    % (view, [round(v, 4) for v in meas_pts[0]], expected))
-            elif abs(ent_o.dxf.radius * 2.0 - (measured or 0.0)) > gate_tol:
+                    u"ネイティブDIAMETER: %s ビューに中心%s 直径%.4f(図面上φ%.4f)の実在円が無い"
+                    % (view, [round(v, 4) for v in meas_pts[0]], expected, expected * scale))
+            elif abs(ent_o.dxf.radius * 2.0 / scale - (measured or 0.0)) > gate_tol:
                 row["errors"].append(
                     u"ネイティブDIAMETER: 実在円φ%.4f と実測 %.4f が不一致"
-                    % (ent_o.dxf.radius * 2.0, measured))
+                    % (ent_o.dxf.radius * 2.0 / scale, measured))
 
         cc = item.get("cross_check")
         if cc:
             ccv = cc["view"]
             ent_c = find_circle(per_view[ccv], to_draw(ccv, cc.get("space", "view"), cc["center"]),
-                                float(cc["diameter"]), snap_tol)
+                                float(cc["diameter"]) * scale, snap_tol)
             if ent_c is None:
                 row["errors"].append(
                     u"cross_check: %s ビューに中心%s 直径%.4f の円が実在しない"
                     % (ccv, cc["center"], float(cc["diameter"])))
                 row["cross_check"] = {"ok": False}
             else:
-                real_d = ent_c.dxf.radius * 2.0
+                real_d = ent_c.dxf.radius * 2.0 / scale
                 d = abs(real_d - (measured if measured is not None else float("nan")))
                 row["cross_check"] = {"ok": d <= gate_tol, "view": ccv,
                                       "found_diameter": round(real_d, 6),
@@ -915,10 +957,11 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         ac = note.get("anchor_check")
         if ac:
             c = to_draw(ac["view"], ac.get("space", "view"), ac["center"])
-            r = float(ac["diameter"]) / 2.0
+            r = float(ac["diameter"]) / 2.0 * scale   # anchor_check.diameter はモデル実寸
             d = abs(math.hypot(pts[0][0] - c[0], pts[0][1] - c[1]) - r)
             nrow["anchor_check"] = {"ok": d <= snap_tol, "dist_err_mm": round(d, 6)}
-            if find_circle(per_view[ac["view"]], c, float(ac["diameter"]), snap_tol) is None:
+            if find_circle(per_view[ac["view"]], c, float(ac["diameter"]) * scale,
+                           snap_tol) is None:
                 nrow["errors"].append(u"anchor_check: 指定の円が実在しない")
             if d > snap_tol:
                 nrow["errors"].append(u"anchor_check: 引出線始点が円周上にない(%.4fmm)" % d)
@@ -988,6 +1031,10 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         "view_bbox": {k: [round(v, 4) for v in view_bbox[k]] for k in view_bbox},
         "layout": {"text_boxes": text_boxes, "collisions": collisions},
         "resolved_kinds": resolved_kinds,
+        "scale": scale,
+        "dimlfac": dimvars_base["dimlfac"],
+        "views": list(use_views),
+        "view_reserves": reserves,
         "defaults_applied": {"diameter_style": diameter_style, "hole_note": hole_note_style},
         "warnings": warnings,
     }

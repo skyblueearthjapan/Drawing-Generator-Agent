@@ -3,10 +3,10 @@
   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\TEST-003_端子棒.dxf",
   "file_attrs_ok": true,
   "frame": {
-    "total": 240,
-    "frame_matched": 113,
+    "total": 239,
+    "frame_matched": 112,
     "remaining": 127,
-    "remaining_ratio": 0.5291666666666667
+    "remaining_ratio": 0.5313807531380753
   },
   "gate1": [
     {

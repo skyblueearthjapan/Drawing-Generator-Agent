@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0",
+  "_note": "調査/run_layout_interference_test.py が自動生成(ケースA_fixed15)。front右側の寸法を規定の1段目(16mm)に戻し、全長を上側3段目へ移した干渉試験用の計画。穴注記・自由注記は絶対座標のため除外。",
+  "part": {
+    "model": "15015-P3-013_ホルダー",
+    "図番": "レイアウト-A_fixed15",
+    "品名": "ホルダー",
+    "shape_class": "旋盤物",
+    "材質": "S45C",
+    "個数": 1,
+    "形状要約": "φ75×L40の円筒。中心にφ26通し穴+φ33ザグリ深さ35(X=-40側の端面から)。PCD60上に2-φ8通し穴+φ11ザグリ深さ7(X=0側の端面から)。"
+  },
+  "source": {
+    "base_dxf": "調査/layout_test/レイアウト-A_fixed15.dxf",
+    "meta_json": "調査/phase2_meta_15015-P3-013_ホルダー.json",
+    "scale": 1.0
+  },
+  "defaults": {
+    "first_offset_mm": 16.0,
+    "stack_step_mm": 8.0,
+    "snap_tol_mm": 0.01,
+    "gate_tol_mm": 0.01,
+    "_note_style": "2026-08-09ユーザー確定の流儀。既定は engine/dim_engine.py の DIAMETER_STYLE_DEFAULT / HOLE_NOTE_DEFAULT。ここに書くと計画単位で上書きできる",
+    "diameter_style": {
+      "circular_view": "native",
+      "profile_view": "linear"
+    },
+    "hole_note": {
+      "notation": "kiri",
+      "width": "zenkaku"
+    }
+  },
+  "dimensions": [
+    {
+      "id": "L40_total",
+      "comment": "全長40。front(縦断面)ビューの下側2段目。人間図面の40に対応",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -40.0,
+          -37.5,
+          0.0
+        ],
+        "p2": [
+          0.0,
+          -37.5,
+          0.0
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 3
+      },
+      "value_expected": 40.0,
+      "tolerance": null
+    },
+    {
+      "id": "L35_counterbore_depth",
+      "comment": "φ33ザグリの深さ35(左端面→ザグリ底)。人間図面の35に対応",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -40.0,
+          -37.5,
+          0.0
+        ],
+        "p2": [
+          -5.0,
+          -16.5,
+          0.0
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "level": 1
+      },
+      "value_expected": 35.0,
+      "tolerance": null
+    },
+    {
+      "id": "L5_bore_land",
+      "comment": "ザグリ底から右端面までの5(φ26部の長さ)。人間図面の5に対応",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -5.0,
+          -16.5,
+          0.0
+        ],
+        "p2": [
+          0.0,
+          -37.5,
+          0.0
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "level": 1
+      },
+      "value_expected": 5.0,
+      "tolerance": null
+    },
+    {
+      "id": "D33_counterbore",
+      "comment": "ザグリ径φ33。front(輪郭ビュー)なので線形+dimpost='%%c<>'。front左側1段目。人間図面のφ33に対応",
+      "kind": "diameter",
+      "context": "profile_view",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -40.0,
+          -16.5,
+          0.0
+        ],
+        "p2": [
+          -40.0,
+          16.5,
+          0.0
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "level": 1
+      },
+      "value_expected": 33.0,
+      "tolerance": null,
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "diameter": 33.0
+      }
+    },
+    {
+      "id": "D26_bore",
+      "comment": "内径φ26。front(輪郭ビュー)なので線形+dimpost。右側(右ビューとの隙間18.2mmに収めるためoffset=11mmへ詰めた)。人間図面のφ26に対応",
+      "kind": "diameter",
+      "context": "profile_view",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0.0,
+          -13.0,
+          0.0
+        ],
+        "p2": [
+          0.0,
+          13.0,
+          0.0
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "level": 1
+      },
+      "value_expected": 26.0,
+      "tolerance": null,
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "diameter": 26.0
+      }
+    },
+    {
+      "id": "D75_outer",
+      "comment": "外径φ75。right(円形ビュー)なのでネイティブDIAMETER型(円を斜めに貫く寸法線+両矢印)。人間図面 GMM006(dimtype=131/base=3)と同方式。2026-08-09ユーザー確定",
+      "kind": "diameter",
+      "context": "circular_view",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "diameter": 75.0,
+        "leader_angle": 145.0
+      },
+      "value_expected": 75.0,
+      "tolerance": null
+    },
+    {
+      "id": "P60_hole_pitch",
+      "comment": "2-φ8穴の中心間距離60(=PCD60)。rightビューの下側1段目。人間図面の60に対応",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0.0,
+          0.0,
+          30.0
+        ],
+        "p2": [
+          0.0,
+          0.0,
+          -30.0
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "level": 1
+      },
+      "value_expected": 60.0,
+      "tolerance": null
+    }
+  ],
+  "layout": {
+    "dim_reserve": false
+  }
+}

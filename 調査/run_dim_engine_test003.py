@@ -44,7 +44,12 @@ def main():
         "製図者": "AI",
     }
 
-    comp = compose_drawing.compose(views_dxf, meta_json, fields, scale=1.0, out_path=out_dxf)
+    # レイアウト(尺度・使用ビュー・寸法予約帯)は計画JSONが正。dim_engine と同じ値を渡す
+    with io.open(plan_json, encoding="utf-8") as f:
+        plan_doc = json.load(f)
+    scale, use_views, view_reserves = dim_engine.plan_layout(plan_doc)
+    comp = compose_drawing.compose(views_dxf, meta_json, fields, scale=scale, out_path=out_dxf,
+                                   views=use_views, view_reserves=view_reserves)
     print(u"[1] compose: frame_check=%s / zone_overlaps=%s / view_pair_overlaps=%s"
           % (comp["frame_check"], comp["zone_overlaps"], comp["view_pair_overlaps"]))
 

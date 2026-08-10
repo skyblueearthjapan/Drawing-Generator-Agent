@@ -219,8 +219,9 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
         plan = json.load(f)
     src = plan["source"]
     meta_json = os.path.join(ROOT, src["meta_json"])
-    scale = float(src.get("scale", 1.0))
-    tf = dim_engine.build_view_transforms(meta_json, scale)
+    # レイアウト(尺度・使用ビュー・寸法予約帯)は計画から compose と同じ値を取り出す
+    scale, use_views, reserves = dim_engine.plan_layout(plan)
+    tf = dim_engine.build_view_transforms(meta_json, scale, views=use_views, reserves=reserves)
     regions = {k: tf[k]["region"] for k in tf}
 
     doc = ezdxf.readfile(dxf_path)
@@ -276,8 +277,10 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                     nodes[ay].add(b[ay], "%s:OBLIQUE" % k)
             elif t in ("CIRCLE", "ARC"):
                 c = to_model_coords(am, (e.dxf.center.x, e.dxf.center.y))
+                # 直径も**モデル実寸**へ戻す(位置は to_model_coords が既に戻している)。
+                # 尺度1:2の図面では図面上の実体径はモデル径の半分になる
                 circles.append({"view": k, "center": c, "axes": [ax, ay],
-                                "diameter": round(e.dxf.radius * 2.0, 4)})
+                                "diameter": round(e.dxf.radius * 2.0 / scale, 4)})
                 nodes[ax].add(c[ax], "%s:CIRCLE_CENTER" % k)
                 nodes[ay].add(c[ay], "%s:CIRCLE_CENTER" % k)
             elif t in ("SPLINE", "ELLIPSE"):
@@ -320,7 +323,7 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
         if did in drop_dim_ids:
             continue
         base = e.dxf.dimtype & 7
-        val = dim_engine.measure_from_defpoints(e)
+        val = dim_engine.measure_model_value(e, scale)   # モデル実寸(尺度を戻した値)
         rec = {"id": did, "style": str(style), "dimtype_base": base,
                "value": None if val is None else round(val, 6), "view": None,
                "axis": None, "coords": None, "role": None}

@@ -52,10 +52,21 @@ TITLE_BLOCK_RECT = (FRAME_X0, FRAME_Y0, FRAME_X1, 30.0)
 # 実測: 丸はx[9.3,29.3]/y[268.8,288.8]、自製品2行ノート(attach=middle-left)はy[268.3,291.7]付近。
 # 購入品4行ノートはより幅広になり得るため、x方向は保守的に115mmまで確保する。
 NOTE_ZONE_RECT = (FRAME_X0, 255.0, 115.0, FRAME_Y1)
-# ビュー間の目標余白(A1由来の40mm gapをA3向けに詰め直す。第三角整列は保持)
+# ビュー間の**最小**余白(A1由来の40mm gapをA3向けに詰め直す。第三角整列は保持)。
+# 寸法の予約帯(view_reserves)が必要ならこの値より広げる(_layout_targets)
 VIEW_GAP_MM = 15.0
+# 寸法線から**さらに外側**へ食い出す帯。予約帯 = 寸法線オフセット + この値。
+# 実測(調査/run_layout_interference_test.py で全寸法のbboxを計測):
+#   文字が寸法線の外へ出るケース = dimgap 0.5 + 文字の実描画高さ 4.5552
+#     (=dimtxt 4.0 × 1.1388。ezdxfのフォント実測値。char_heightそのままではない)= 5.0552mm
+#   文字が内側に収まるケース = dimexe 2.0(補助線の突き出し)
+# 最大の 5.0552 に余裕 0.45mm を足して 5.5 とする
+DIM_BAND_MM = 5.5
 
 VIEW_KEYS = ("front", "top", "right", "iso")
+# 第三角法の2x2グリッド上の位置 (col, row)。col0=左(front/top), row0=下(front/right)
+VIEW_GRID = {"front": (0, 0), "right": (1, 0), "top": (0, 1), "iso": (1, 1)}
+DIM_SIDES = ("above", "below", "left", "right")
 
 ATTACH = {
     "top-left": 1, "top-center": 2, "top-right": 3,
@@ -182,8 +193,53 @@ def _ensure_linetypes(doc, src_doc, importer, names=("HIDDEN", "PHANTOM", "CENTE
 # ---------------------------------------------------------------------------
 # ビュー分類・再配置
 # ---------------------------------------------------------------------------
+def resolve_views(views):
+    u"""使用ビュー集合を正規化する(None=従来どおり4ビュー)。VIEW_KEYSの順序を保つ。"""
+    if not views:
+        return tuple(VIEW_KEYS)
+    unknown = [v for v in views if v not in VIEW_KEYS]
+    if unknown:
+        raise ValueError(u"未知のビュー: %s(使えるのは %s)" % (unknown, list(VIEW_KEYS)))
+    out = tuple(k for k in VIEW_KEYS if k in views)
+    if not out:
+        raise ValueError(u"使用ビューが空です")
+    return out
+
+
+def plan_view_reserves(plan, band_mm=DIM_BAND_MM):
+    u"""作図計画JSONの `dimensions[].placement` から、ビュー×辺ごとの**寸法予約帯**(mm)を作る。
+
+    予約帯 = そのビュー・その辺で最も外側に来る寸法線のオフセット + band_mm(寸法文字の帯)。
+    これを `_layout_targets` に渡すと、ビュー間隔が「寸法線が隣のビューに食い込まない」
+    幅まで自動的に広がる(固定値 VIEW_GAP_MM の握り合わせをやめ、計画駆動にする)。
+
+    ネイティブDIAMETER/RADIUS(placement.side を持たない)はビュー輪郭の内側に描かれるため
+    予約帯を作らない。穴注記・自由注記は絶対座標指定のため v1 では見込まない。
+    """
+    defaults = plan.get("defaults", {})
+    # ❗既定値は dim_engine.apply_plan のオフセット計算と同じでなければならない
+    #   (dim_engine 側の stack_step 既定は dimstyle_spec.json の dimdli=8.0)。
+    #   どちらかを変えるときは必ず両方を合わせること
+    fo = float(defaults.get("first_offset_mm", 16.0))
+    ss = float(defaults.get("stack_step_mm", 8.0))
+    reserves = {}
+    for item in plan.get("dimensions", []):
+        pl = item.get("placement") or {}
+        side = pl.get("side")
+        if side not in DIM_SIDES:
+            continue
+        off = pl.get("offset_mm")
+        off = fo + (int(pl.get("level", 1)) - 1) * ss if off is None else float(off)
+        d = reserves.setdefault(item["view"], {s: 0.0 for s in DIM_SIDES})
+        d[side] = max(d[side], off + band_mm)
+    return reserves
+
+
 def _classify_entities(src_msp, outlines):
-    per_view = {k: [] for k in VIEW_KEYS}
+    u"""ビュー投影DXFのエンティティを meta の outline_mm でビュー別に分類する。
+    outlines に載っているビュー全て(=投影された4ビュー)で分類し、実際に使うビューの
+    選別は呼び出し側が行う(使わないビューのエンティティを『分類不能』と混同しないため)。"""
+    per_view = {k: [] for k in outlines}
     unclassified = []
     for e in src_msp:
         bb = bbox_extents([e], fast=True)
@@ -193,7 +249,7 @@ def _classify_entities(src_msp, outlines):
         cx = (bb.extmin.x + bb.extmax.x) / 2.0
         cy = (bb.extmin.y + bb.extmax.y) / 2.0
         placed = False
-        for k in VIEW_KEYS:
+        for k in outlines:
             x0, y0, x1, y1 = outlines[k]
             if x0 - 1e-6 <= cx <= x1 + 1e-6 and y0 - 1e-6 <= cy <= y1 + 1e-6:
                 per_view[k].append(e)
@@ -204,24 +260,65 @@ def _classify_entities(src_msp, outlines):
     return per_view, unclassified
 
 
-def _layout_targets(geoms, scale):
+def _layout_targets(geoms, scale, views=None, reserves=None):
     u"""第三角整列(front-top同一x中心/front-right同一y中心)を保ったまま、
-    A3向けの詰めた間隔で4ビューの新しい中心座標を計算する。"""
+    A3向けの詰めた間隔でビューの新しい中心座標を計算する。
+
+    Args:
+        geoms:    view -> (x0,y0,x1,y1) 投影DXF上のビュー幾何外接矩形
+        scale:    尺度(幾何に掛かる。予約帯・間隔は紙面mmなので掛からない)
+        views:    使用ビュー集合(None=4ビュー)。減った分は残ビューが紙面中央に寄る
+        reserves: view -> {above,below,left,right} 寸法予約帯(mm)。
+                  隣り合うビューの予約帯が重ならない幅までビュー間隔を広げる
+
+    Returns: (targets, centers, sizes, info)
+    """
+    views = resolve_views(views)
+    reserves = reserves or {}
+
+    def res(k, side):
+        return float((reserves.get(k) or {}).get(side, 0.0))
+
     sizes = {}
     centers = {}
-    for k in VIEW_KEYS:
+    for k in views:
         x0, y0, x1, y1 = geoms[k]
         sizes[k] = ((x1 - x0) * scale, (y1 - y0) * scale)
         centers[k] = ((x0 + x1) / 2.0, (y0 + y1) / 2.0)
 
-    col0_w = max(sizes["front"][0], sizes["top"][0])
-    col1_w = max(sizes["right"][0], sizes["iso"][0])
-    row0_h = max(sizes["front"][1], sizes["right"][1])
-    row1_h = max(sizes["top"][1], sizes["iso"][1])
+    cols = {c: [k for k in views if VIEW_GRID[k][0] == c] for c in (0, 1)}
+    rows = {r: [k for k in views if VIEW_GRID[k][1] == r] for r in (0, 1)}
+    col_w = {c: (max(sizes[k][0] for k in cols[c]) if cols[c] else 0.0) for c in (0, 1)}
+    row_h = {r: (max(sizes[k][1] for k in rows[r]) if rows[r] else 0.0) for r in (0, 1)}
 
-    gap = VIEW_GAP_MM
-    group_w = col0_w + gap + col1_w
-    group_h = row0_h + gap + row1_h
+    # 列間・行間: 「隣り合うビューの実幾何の隙間 >= 双方の予約帯の和」を満たす最小の間隔
+    gap_x = 0.0
+    if cols[0] and cols[1]:
+        gap_x = VIEW_GAP_MM
+        for r in (0, 1):
+            a = [k for k in cols[0] if VIEW_GRID[k][1] == r]
+            b = [k for k in cols[1] if VIEW_GRID[k][1] == r]
+            if not a or not b:
+                continue
+            need = (res(a[0], "right") + res(b[0], "left")
+                    + sizes[a[0]][0] / 2.0 + sizes[b[0]][0] / 2.0
+                    - col_w[0] / 2.0 - col_w[1] / 2.0)
+            gap_x = max(gap_x, need)
+    gap_y = 0.0
+    if rows[0] and rows[1]:
+        gap_y = VIEW_GAP_MM
+        for c in (0, 1):
+            a = [k for k in rows[0] if VIEW_GRID[k][0] == c]
+            b = [k for k in rows[1] if VIEW_GRID[k][0] == c]
+            if not a or not b:
+                continue
+            need = (res(a[0], "above") + res(b[0], "below")
+                    + sizes[a[0]][1] / 2.0 + sizes[b[0]][1] / 2.0
+                    - row_h[0] / 2.0 - row_h[1] / 2.0)
+            gap_y = max(gap_y, need)
+
+    group_w = col_w[0] + gap_x + col_w[1]
+    group_h = row_h[0] + gap_y + row_h[1]
 
     avail_x0, avail_y0 = FRAME_X0, TITLE_BLOCK_RECT[3]
     avail_x1, avail_y1 = FRAME_X1, FRAME_Y1
@@ -229,24 +326,23 @@ def _layout_targets(geoms, scale):
     avail_h = avail_y1 - avail_y0
     if group_w > avail_w or group_h > avail_h:
         raise ValueError(
-            "scale=%.4g ではビュー群(%.1fx%.1fmm)が図枠の作図エリア(%.1fx%.1fmm)に収まりません"
+            "scale=%.4g ではビュー群(%.1fx%.1fmm・寸法予約帯込みの間隔)が"
+            "図枠の作図エリア(%.1fx%.1fmm)に収まりません"
             % (scale, group_w, group_h, avail_w, avail_h))
 
     tx0 = avail_x0 + (avail_w - group_w) / 2.0
     ty0 = avail_y0 + (avail_h - group_h) / 2.0
 
-    col0_cx = tx0 + col0_w / 2.0
-    col1_cx = tx0 + col0_w + gap + col1_w / 2.0
-    row0_cy = ty0 + row0_h / 2.0
-    row1_cy = ty0 + row0_h + gap + row1_h / 2.0
+    col_cx = {0: tx0 + col_w[0] / 2.0,
+              1: tx0 + col_w[0] + gap_x + col_w[1] / 2.0}
+    row_cy = {0: ty0 + row_h[0] / 2.0,
+              1: ty0 + row_h[0] + gap_y + row_h[1] / 2.0}
 
-    targets = {
-        "front": (col0_cx, row0_cy),
-        "right": (col1_cx, row0_cy),
-        "top": (col0_cx, row1_cy),
-        "iso": (col1_cx, row1_cy),
-    }
-    return targets, centers, sizes
+    targets = {k: (col_cx[VIEW_GRID[k][0]], row_cy[VIEW_GRID[k][1]]) for k in views}
+    info = {"views": list(views), "gap_x_mm": gap_x, "gap_y_mm": gap_y,
+            "group_wh_mm": [group_w, group_h], "avail_wh_mm": [avail_w, avail_h],
+            "reserves": {k: dict(reserves.get(k, {})) for k in views}}
+    return targets, centers, sizes, info
 
 
 def _rect_overlap(a, b):
@@ -260,7 +356,8 @@ def _rect_overlap(a, b):
 # ---------------------------------------------------------------------------
 def compose(views_dxf_path, meta_json_path, fields, scale, out_path,
             frame_template_path=FRAME_TEMPLATE_DEFAULT,
-            fields_json_path=FIELDS_JSON_DEFAULT):
+            fields_json_path=FIELDS_JSON_DEFAULT,
+            views=None, view_reserves=None):
     u"""
     図枠+ビュー+表題欄を合成してDXFへ保存する。
 
@@ -275,14 +372,20 @@ def compose(views_dxf_path, meta_json_path, fields, scale, out_path,
             製図者                               : 既定"ＡＩ"
             製図日付                             : 既定=実行日(YY.MM.DD)
         scale: 図の尺度(1.0=実寸)。ジオメトリに一様スケールとして適用する
+            (**寸法値は尺度に関係なくモデル実寸を表示する**。dim_engine が dimlfac=1/scale で行う)
         out_path: 出力DXFパス
         frame_template_path / fields_json_path: 読み取り専用の入力(既定値で通常上書き不要)
+        views: 使用ビューの集合(例 ("front","right"))。None=従来どおり4ビュー。
+            使わないビューのエンティティは取り込まず、残ビューを紙面中央へバランス配置する
+        view_reserves: ビュー×辺の寸法予約帯(mm)。`plan_view_reserves(plan)` で作る。
+            指定するとビュー間隔が寸法線と干渉しない幅まで自動的に広がる
 
     Returns:
         検証情報dict(frame_check, geometry_check, view_regions, field_anchors,
         weight, linetypes, scale, warnings 等)
     """
     warnings = []
+    use_views = resolve_views(views)
 
     with io.open(meta_json_path, encoding="utf-8") as f:
         meta = json.load(f)
@@ -298,17 +401,25 @@ def compose(views_dxf_path, meta_json_path, fields, scale, out_path,
     # 2) ビューDXF読み込み+領域分類
     src_doc = ezdxf.readfile(views_dxf_path)
     src_msp = src_doc.modelspace()
-    outlines = {k: meta["views"][k]["outline_mm"] for k in VIEW_KEYS}
-    geoms = {k: meta["views"][k]["geom_mm"] for k in VIEW_KEYS}
+    avail_views = [k for k in VIEW_KEYS if k in meta["views"]]
+    missing = [k for k in use_views if k not in avail_views]
+    if missing:
+        raise ValueError(u"meta json に無いビューが指定されています: %s" % missing)
+    outlines = {k: meta["views"][k]["outline_mm"] for k in avail_views}
+    geoms = {k: meta["views"][k]["geom_mm"] for k in avail_views}
     per_view, unclassified = _classify_entities(src_msp, outlines)
     if unclassified:
         warnings.append(
             "ビュー領域に分類できなかったエンティティ %d 個(取り込み対象外)" % len(unclassified))
+    dropped = {k: len(per_view[k]) for k in avail_views if k not in use_views}
+    if dropped:
+        warnings.append(u"使用しないビューのエンティティを除外: %s" % dropped)
 
     # 3) 第三角整列を保ったままA3向けに再配置(平行移動+一様スケール)
-    targets, centers, sizes = _layout_targets(geoms, scale)
+    targets, centers, sizes, layout_info = _layout_targets(
+        geoms, scale, views=use_views, reserves=view_reserves)
     view_out_bbox = {}
-    for k in VIEW_KEYS:
+    for k in use_views:
         ocx, ocy = centers[k]
         ncx, ncy = targets[k]
         m = Matrix44.chain(
@@ -327,7 +438,7 @@ def compose(views_dxf_path, meta_json_path, fields, scale, out_path,
     if lt_missing:
         warnings.append(u"線種未定義のまま(要手当): %s" % ", ".join(lt_missing))
 
-    all_view_entities = [e for k in VIEW_KEYS for e in per_view[k]]
+    all_view_entities = [e for k in use_views for e in per_view[k]]
     importer.import_entities(all_view_entities, target_layout=msp)
     importer.finalize()
 
@@ -420,7 +531,7 @@ def compose(views_dxf_path, meta_json_path, fields, scale, out_path,
             zone_overlaps.append((k, "title_block"))
         if _rect_overlap(bb, NOTE_ZONE_RECT):
             zone_overlaps.append((k, "note_zone"))
-    pairs = list(VIEW_KEYS)
+    pairs = list(use_views)
     view_pair_overlaps = []
     for i in range(len(pairs)):
         for j in range(i + 1, len(pairs)):
@@ -442,9 +553,12 @@ def compose(views_dxf_path, meta_json_path, fields, scale, out_path,
     result = {
         "out_path": out_path,
         "scale": scale,
+        "views": list(use_views),
+        "layout": layout_info,
         "frame_entity_count_loaded": frame_entity_count,
         "frame_check": frame_summary,  # frame_matchedが112なら合格(2026-08-10: 113→112)
-        "view_entity_counts": {k: len(v) for k, v in per_view.items()},
+        "view_entity_counts": {k: len(per_view[k]) for k in use_views},
+        "dropped_view_entity_counts": dropped,
         "unclassified_entity_count": len(unclassified),
         "view_out_bbox_mm": view_out_bbox,
         "zone_overlaps": zone_overlaps,

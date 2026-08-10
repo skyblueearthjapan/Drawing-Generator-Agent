@@ -3,10 +3,10 @@
   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\TEST-002_ホルダー.dxf",
   "file_attrs_ok": true,
   "frame": {
-    "total": 215,
-    "frame_matched": 113,
+    "total": 214,
+    "frame_matched": 112,
     "remaining": 102,
-    "remaining_ratio": 0.4744186046511628
+    "remaining_ratio": 0.4766355140186916
   },
   "gate1": [
     {

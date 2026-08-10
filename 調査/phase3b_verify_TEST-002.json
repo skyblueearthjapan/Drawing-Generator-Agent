@@ -2,12 +2,52 @@
   "compose": {
     "out_path": "生成図面/TEST-002_ホルダー.dxf",
     "scale": 1.0,
-    "frame_entity_count_loaded": 113,
+    "views": [
+      "front",
+      "top",
+      "right",
+      "iso"
+    ],
+    "layout": {
+      "views": [
+        "front",
+        "top",
+        "right",
+        "iso"
+      ],
+      "gap_x_mm": 15.0,
+      "gap_y_mm": 15.0,
+      "group_wh_mm": [
+        136.317279836453,
+        198.18402732123707
+      ],
+      "avail_wh_mm": [
+        410.0,
+        262.0
+      ],
+      "reserves": {
+        "front": {
+          "above": 0.0,
+          "below": 29.5,
+          "left": 21.5,
+          "right": 16.5
+        },
+        "top": {},
+        "right": {
+          "above": 0.0,
+          "below": 21.5,
+          "left": 0.0,
+          "right": 0.0
+        },
+        "iso": {}
+      }
+    },
+    "frame_entity_count_loaded": 112,
     "frame_check": {
-      "total": 205,
-      "frame_matched": 113,
+      "total": 204,
+      "frame_matched": 112,
       "remaining": 92,
-      "remaining_ratio": 0.44878048780487806
+      "remaining_ratio": 0.45098039215686275
     },
     "view_entity_counts": {
       "front": 17,
@@ -15,6 +55,7 @@
       "right": 10,
       "iso": 36
     },
+    "dropped_view_entity_counts": {},
     "unclassified_entity_count": 0,
     "view_out_bbox_mm": {
       "front": [
@@ -214,7 +255,7 @@
       "装置名": "テスト装置",
       "尺度": "１：１",
       "製図者": "ＡＩ",
-      "製図日付": "２６．０８．０９",
+      "製図日付": "２６．０８．１０",
       "連番": "０２",
       "重量": "１．０９"
     },
@@ -387,7 +428,7 @@
           "ok": true,
           "dist_err_mm": 0.0
         },
-        "leader_handle": "239"
+        "leader_handle": "23C"
       }
     ],
     "dimstyles": {
@@ -598,10 +639,10 @@
       "_OPEN30"
     ],
     "frame_check": {
-      "total": 205,
-      "frame_matched": 113,
+      "total": 204,
+      "frame_matched": 112,
       "remaining": 92,
-      "remaining_ratio": 0.44878048780487806
+      "remaining_ratio": 0.45098039215686275
     },
     "view_bbox": {
       "front": [
@@ -696,6 +737,28 @@
       "D26_bore": "diameter_linear",
       "D75_outer": "diameter_native",
       "P60_hole_pitch": "linear"
+    },
+    "scale": 1.0,
+    "dimlfac": 1.0,
+    "views": [
+      "front",
+      "top",
+      "right",
+      "iso"
+    ],
+    "view_reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 29.5,
+        "left": 21.5,
+        "right": 16.5
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
     },
     "defaults_applied": {
       "diameter_style": {

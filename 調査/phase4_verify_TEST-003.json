@@ -2,12 +2,52 @@
   "compose": {
     "out_path": "生成図面/TEST-003_端子棒.dxf",
     "scale": 1.0,
-    "frame_entity_count_loaded": 113,
+    "views": [
+      "front",
+      "top",
+      "right",
+      "iso"
+    ],
+    "layout": {
+      "views": [
+        "front",
+        "top",
+        "right",
+        "iso"
+      ],
+      "gap_x_mm": 15.0,
+      "gap_y_mm": 15.0,
+      "group_wh_mm": [
+        169.36753236814707,
+        113.58226239499874
+      ],
+      "avail_wh_mm": [
+        410.0,
+        262.0
+      ],
+      "reserves": {
+        "front": {
+          "above": 29.5,
+          "below": 21.5,
+          "left": 29.5,
+          "right": 21.5
+        },
+        "top": {},
+        "right": {
+          "above": 0.0,
+          "below": 21.5,
+          "left": 0.0,
+          "right": 0.0
+        },
+        "iso": {}
+      }
+    },
+    "frame_entity_count_loaded": 112,
     "frame_check": {
-      "total": 228,
-      "frame_matched": 113,
+      "total": 227,
+      "frame_matched": 112,
       "remaining": 115,
-      "remaining_ratio": 0.5043859649122807
+      "remaining_ratio": 0.5066079295154186
     },
     "view_entity_counts": {
       "front": 27,
@@ -15,6 +55,7 @@
       "right": 15,
       "iso": 43
     },
+    "dropped_view_entity_counts": {},
     "unclassified_entity_count": 0,
     "view_out_bbox_mm": {
       "front": [
@@ -214,7 +255,7 @@
       "装置名": "テスト装置",
       "尺度": "１：１",
       "製図者": "ＡＩ",
-      "製図日付": "２６．０８．０９",
+      "製図日付": "２６．０８．１０",
       "連番": "０３",
       "重量": "０．３６"
     },
@@ -417,7 +458,7 @@
           "ok": true,
           "dist_err_mm": 0.0
         },
-        "leader_handle": "258"
+        "leader_handle": "25B"
       }
     ],
     "dimstyles": {
@@ -684,10 +725,10 @@
       "_OPEN30"
     ],
     "frame_check": {
-      "total": 228,
-      "frame_matched": 113,
+      "total": 227,
+      "frame_matched": 112,
       "remaining": 115,
-      "remaining_ratio": 0.5043859649122807
+      "remaining_ratio": 0.5066079295154186
     },
     "view_bbox": {
       "front": [
@@ -796,6 +837,28 @@
       "D30_step": "diameter_linear",
       "D25_right": "diameter_linear",
       "W19_flats": "linear"
+    },
+    "scale": 1.0,
+    "dimlfac": 1.0,
+    "views": [
+      "front",
+      "top",
+      "right",
+      "iso"
+    ],
+    "view_reserves": {
+      "front": {
+        "above": 29.5,
+        "below": 21.5,
+        "left": 29.5,
+        "right": 21.5
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
     },
     "defaults_applied": {
       "diameter_style": {
