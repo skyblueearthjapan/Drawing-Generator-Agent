@@ -65,6 +65,39 @@ TAP_DRILL = {
     16: 14.0, 18: 15.5, 20: 17.5, 22: 19.5, 24: 21.0, 27: 24.0, 30: 26.5,
 }
 
+# JIS B 0203 管用テーパねじ / JIS B 0202 管用平行ねじ の基準山形(基準径の位置での値)。
+#   呼び -> (ピッチ p, おねじ外径 d, おねじ有効径 d2, おねじ谷径 d1)  単位mm
+# ❗テーパねじ(R/Rc/PT)は 1/16 のテーパを持つので、図面に現れる輪郭径は
+#   軸方向位置によって連続的に変わる。したがって**単一の値ではなく範囲**で照合する
+#   (`pipe_thread_envelope`)。範囲の外側の径はこの注記では説明できない = 不合格に落ちる。
+PIPE_THREAD = {
+    "1/16": (0.9071, 7.723, 7.142, 6.561),
+    "1/8": (0.9071, 9.728, 9.147, 8.566),
+    "1/4": (1.3368, 13.157, 12.301, 11.445),
+    "3/8": (1.3368, 16.662, 15.806, 14.950),
+    "1/2": (1.8143, 20.955, 19.793, 18.631),
+    "3/4": (1.8143, 26.441, 25.279, 24.117),
+    "1": (2.3091, 33.249, 31.770, 30.291),
+    "1-1/4": (2.3091, 41.910, 40.431, 38.952),
+    "1-1/2": (2.3091, 47.803, 46.324, 44.845),
+    "2": (2.3091, 59.614, 58.135, 56.656),
+}
+# 管用ねじの記号(JIS B 0203 R/Rc、旧JIS PT/PS、JIS B 0202 G/PF)。
+# Rp(テーパおねじにはまる平行めねじ)も同じ基準径を使う。
+PIPE_THREAD_SYMBOLS = ("Rc", "Rp", "PT", "PS", "PF", "G", "R")
+
+
+def pipe_thread_envelope(size):
+    u"""管用ねじの呼びから、図面の輪郭径が取り得る範囲 [下限, 上限] を返す。
+
+    テーパねじの輪郭(下穴・谷径・山径・口元の面取り)は基準径の位置から前後にずれるが、
+    **ねじ山1ピッチぶんの余裕**を見れば全て収まる(1/16テーパでは有効ねじ部の
+    前後でも径差はピッチ程度)。呼びが実径と桁違い(Rc1/4 と書いて実体がφ9等)なら
+    この範囲から外れて不合格になる = 反証が効く。
+    """
+    p, d, _d2, d1 = PIPE_THREAD[size]
+    return (round(d1 - p, 4), round(d + p, 4))
+
 # 全角ASCII(Ｕ+FF01..FF5E)→半角、全角空白→半角空白、全角マイナス→ハイフン。
 # ❗キリ表記の注記は全角(2026-08-09裁定)なので、注記解釈の前に必ず正規化すること
 # (『ＰＣＤ６０』が半角前提の正規表現に一切引っかからない実害を確認済み)
@@ -181,6 +214,12 @@ _NOTE_RE_PHI = re.compile(r"%%[cC](\d+(?:\.\d+)?)")
 _NOTE_RE_TAP = re.compile(r"M(\d+(?:\.\d+)?)")
 _NOTE_RE_DEPTH = re.compile(u"深さ\\s*(\\d+(?:\\.\\d+)?)")
 _NOTE_RE_PCD = re.compile(r"PCD\s*(\d+(?:\.\d+)?)")
+# 管用ねじ(Rc1/8・PT1/4・G1/2 等)。呼びは PIPE_THREAD の表に載っているものだけ採用する
+# (`R10` のような半径表記を誤って拾わないための実質的なフィルタ)
+_NOTE_RE_PIPE = re.compile(r"(Rc|Rp|PT|PS|PF|G|R)\s*(\d(?:-\d/\d{1,2})?(?:/\d{1,2})?)")
+# ❗記号 `R` `G` に整数が続くだけの表記(`Ｒ２`=隅アール、`Ｇ1`)は半径指示と区別できない。
+#   分数呼び(1/8・1-1/4 等)を要求して誤検出を防ぐ。Rc/Rp/PT/PS/PF は曖昧さが無いので整数も可
+_PIPE_NEEDS_FRACTION = ("R", "G")
 # 個数は注記の先頭 `12-` `4-` に出る(『１２－%%c５通し ＰＣＤ１２９』→ 12個)
 _NOTE_RE_COUNT = re.compile(r"^\s*(\d+)\s*[-−]")
 # 円周等分配置の明示語(自社流儀。無くてもPCD+実ジオメトリの等配検算で代替する)
@@ -216,10 +255,23 @@ def parse_hole_note(raw):
         depths.append(float(m.group(1)))
     for m in _NOTE_RE_PCD.finditer(s):
         pcds.append(float(m.group(1)))
+    pipes = []
+    for m in _NOTE_RE_PIPE.finditer(s):
+        size = m.group(2)
+        if size not in PIPE_THREAD:
+            continue
+        if m.group(1) in _PIPE_NEEDS_FRACTION and "/" not in size:
+            continue
+        lo, hi = pipe_thread_envelope(size)
+        p, d, d2, d1 = PIPE_THREAD[size]
+        pipes.append({"designation": "%s%s" % (m.group(1), size), "symbol": m.group(1),
+                      "size": size, "pitch": p, "major": d, "pitch_dia": d2, "minor": d1,
+                      "env": [lo, hi]})
     mc = _NOTE_RE_COUNT.match(s)
     return {"raw": raw, "normalized": s, "diameters": sorted(set(dias)),
             "taps": sorted(set(taps)), "depths": sorted(set(depths)),
             "pcds": sorted(set(pcds)),
+            "pipe_threads": pipes,
             "count": int(mc.group(1)) if mc else None,
             "equal_spacing_declared": any(w in raw or w in s for w in _NOTE_EQ_WORDS)}
 
@@ -387,11 +439,20 @@ def find_regular_polygons(segments):
     return out
 
 
-def polygon_covered(poly, widths, diameters):
+def polygon_covered(poly, widths, diameters, oblique_dims=()):
     u"""正多角形が「二面幅」か「対角」の寸法で決まっているか。決まっていれば説明文を返す。
 
     多角形は1本の寸法(二面幅 or 対角)で全頂点が決まる。逆に**どちらの寸法も無ければ
     頂点位置は決まらない**ので未指定(=ゲート②不合格)にする。
+
+    ❗**紙面内で任意角に回転した正多角形**(盲検 25154-1-04 の六角座)は、軸平行の
+    幅寸法では二面幅にも対角にも一致しない(頂点間の軸平行距離が最大24.756/27.666で
+    二面幅24・対角27.712 のどちらとも0.01mm以内で一致しない)。そこで
+    **斜め線形寸法(`measure.direction` に角度を書いた寸法)** を受け付ける。
+    自己申告は信じず、実ジオメトリで検算する:
+      - 対角  : 寸法の測定点2つが **その多角形の相対する頂点2つ**と一致すること
+      - 二面幅: 寸法の測定方向が **対辺の法線方向**と一致すること(正n角形では
+                頂点方向から180/n度回った向き)
     """
     w, dd = poly["across_flats"], poly["across_corners"]
     for x in list(widths) + list(diameters):
@@ -399,7 +460,154 @@ def polygon_covered(poly, widths, diameters):
             return u"二面幅%.4g" % w
         if abs(x - dd) <= VALUE_TOL:
             return u"対角%.4g" % dd
+    for od in oblique_dims:
+        if list(od.get("axes") or []) != list(poly["axes"]) or od.get("value") is None:
+            continue
+        if abs(od["value"] - dd) <= VALUE_TOL and _oblique_hits_opposite_vertices(poly, od):
+            return u"対角%.4g(斜め寸法%s・測定点が相対する頂点と一致)" % (dd, od["id"])
+        if abs(od["value"] - w) <= VALUE_TOL and _oblique_is_across_flats(poly, od):
+            return u"二面幅%.4g(斜め寸法%s・測定方向が対辺の法線と一致)" % (w, od["id"])
     return None
+
+
+def _oblique_hits_opposite_vertices(poly, od):
+    u"""斜め寸法の測定点2つが、この多角形の**相対する頂点**の対と一致するか。"""
+    pts = od.get("points") or []
+    if len(pts) != 2:
+        return False
+    cu, cv = poly["center"]
+    for p in pts:
+        if not any(abs(p[0] - q[0]) <= NODE_TOL and abs(p[1] - q[1]) <= NODE_TOL
+                   for q in poly["vertices"]):
+            return False
+    # 中点が多角形中心 = 相対する頂点対(隣り合う頂点ではない)
+    mu = (pts[0][0] + pts[1][0]) / 2.0
+    mv = (pts[0][1] + pts[1][1]) / 2.0
+    return abs(mu - cu) <= NODE_TOL and abs(mv - cv) <= NODE_TOL
+
+
+def _oblique_is_across_flats(poly, od):
+    u"""斜め寸法が「対辺どうしの中点を結ぶ向き」= 二面幅の向きか。
+
+    向きは**そのビューのモデル2軸**で判定する(図面座標の角度は鏡像ビューで符号が
+    反転するため使わない)。中点が多角形中心に一致することも併せて要求する。
+    """
+    n = poly["n"]
+    if n % 2:
+        return False       # 奇数角形に「対辺」は無い
+    pts = od.get("points") or []
+    if len(pts) != 2:
+        return False
+    cu, cv = poly["center"]
+    if abs((pts[0][0] + pts[1][0]) / 2.0 - cu) > NODE_TOL or \
+            abs((pts[0][1] + pts[1][1]) / 2.0 - cv) > NODE_TOL:
+        return False
+    ang = math.degrees(math.atan2(pts[1][1] - pts[0][1], pts[1][0] - pts[0][0])) % 180.0
+    for p in poly["vertices"]:
+        va = math.degrees(math.atan2(p[1] - cv, p[0] - cu))
+        flat_normal = (va + 180.0 / n) % 180.0
+        diff = abs(flat_normal - ang)
+        if min(diff, 180.0 - diff) <= POLY_ANGLE_TOL_DEG:
+            return True
+    return False
+
+
+# ---------------------------------------------------------------------------
+# 管用(テーパ)ねじ穴の同心群を1特徴として同定する
+# ---------------------------------------------------------------------------
+# 「同心群」と認めるのに必要な径の種類数。1種類だけ(単なる対の位置)では
+# ねじ穴の輪郭群と区別できないので採用しない(安全側)。
+THREAD_MIN_DIAMETERS = 2
+
+
+def _profile_clusters(nodes, env):
+    u"""ある径範囲に入る**同心の位置ノード対**を軸ごとに集める(輪郭ビューのねじ穴)。
+
+    ねじ穴が円として見えないビュー(側面・断面)では、下穴・谷径・山径・口元の面取りが
+    HIDDEN線分の対として現れる。中心(=ねじ軸)は線分の端点でしかないので位置ノードには
+    ならない。そこで「同じ中心に対して径違いの対が2種類以上ある」ことを同心群の条件にする。
+    """
+    lo, hi = env
+    out = {}
+    for a in AXES:
+        vals = sorted(nodes[a].values)
+        groups = {}
+        for i in range(len(vals)):
+            for j in range(i + 1, len(vals)):
+                d = vals[j] - vals[i]
+                if d < lo - VALUE_TOL:
+                    continue
+                if d > hi + VALUE_TOL:
+                    break                      # 昇順なのでこれ以上は必ず範囲外
+                c = round((vals[i] + vals[j]) / 2.0, 4) + 0.0
+                groups.setdefault(c, []).append((vals[i], vals[j], round(d, 4)))
+        for c, prs in sorted(groups.items()):
+            dias = sorted({p[2] for p in prs})
+            if len(dias) >= THREAD_MIN_DIAMETERS:
+                out.setdefault(a, []).append(
+                    {"center": c, "diameters": dias,
+                     "nodes": sorted({v for p in prs for v in p[:2]})})
+    return out
+
+
+def find_thread_features(circles, nodes, pipe_threads):
+    u"""管用ねじ注記(Rc/PT/G…)の呼びで説明できる**同心群**を1つのフィーチャーとして返す。
+
+    ねじ穴の内部径(下穴・谷径・山径)は**ねじの呼びが決めるもので、図面に寸法を入れない**。
+    したがって「呼びが書いてあり、その基準山形の範囲に収まる同心群が実在する」なら
+    その群は1特徴としてカバー済みとする(位置は別途チェーンで到達している必要がある)。
+
+    ❗自己申告は信じない: 呼びから引いた径範囲(`pipe_thread_envelope`)に**実ジオメトリが
+    収まること**が採用条件。Rc1/4 と書いて実体がφ9なら範囲外で採用されず不合格に落ちる。
+
+    Returns: [{"kind","designation","env","axes","center","diameters","nodes","view"}]
+    """
+    feats = []
+    by_center = {}
+    for c in circles:
+        ax, ay = c["axes"]
+        key = (c["view"], ax, ay, round(c["center"][ax], 4), round(c["center"][ay], 4))
+        by_center.setdefault(key, []).append(c)
+
+    for t in pipe_threads:
+        lo, hi = t["env"]
+        # (a) 同心円群(ねじ穴が円として見えるビュー)
+        for key, group in sorted(by_center.items()):
+            view, ax, ay, cx, cy = key
+            dias = sorted({g["diameter"] for g in group
+                           if lo - VALUE_TOL <= g["diameter"] <= hi + VALUE_TOL})
+            if len(dias) < THREAD_MIN_DIAMETERS:
+                continue
+            feats.append({"kind": "concentric_circles", "designation": t["designation"],
+                          "env": [lo, hi], "view": view, "axes": [ax, ay],
+                          "center": {ax: cx, ay: cy}, "diameters": dias,
+                          "nodes": {ax: [], ay: []}})
+        # (b) 輪郭の同心群(円として見えないビュー)。**2軸で同じ径集合を持つ**ことを
+        #     要求して初めて「1本の円筒」と認める(片方の軸だけの偶然一致を排除)
+        clusters = _profile_clusters(nodes, (lo, hi))
+        axes_present = [a for a in AXES if a in clusters]
+        for i, a1 in enumerate(axes_present):
+            for a2 in axes_present[i + 1:]:
+                for c1 in clusters[a1]:
+                    for c2 in clusters[a2]:
+                        common = sorted(d for d in c1["diameters"]
+                                        if any(abs(d - e) <= VALUE_TOL
+                                               for e in c2["diameters"]))
+                        if len(common) < THREAD_MIN_DIAMETERS:
+                            continue
+                        n1 = [v for v in c1["nodes"]
+                              if any(abs(abs(v - c1["center"]) - d / 2.0) <= NODE_TOL
+                                     for d in common)]
+                        n2 = [v for v in c2["nodes"]
+                              if any(abs(abs(v - c2["center"]) - d / 2.0) <= NODE_TOL
+                                     for d in common)]
+                        feats.append({"kind": "profile_cluster",
+                                      "designation": t["designation"], "env": [lo, hi],
+                                      "view": None, "axes": [a1, a2],
+                                      "center": {a1: c1["center"], a2: c2["center"]},
+                                      "diameters": common,
+                                      "nodes": {a1: n1, a2: n2}})
+    return feats
 
 
 # ---------------------------------------------------------------------------
@@ -439,6 +647,16 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
     circles = []      # {"view","center":{axis:val},"diameter","entity"}
     obliques = []     # 斜線(面取り/テーパ)
     segments = {k: [] for k in amaps}   # 多角形検出用(ビューの2軸のモデル座標)
+    # ❗F1: 位置ノードが「どの線分から生まれたか」を控えておく。
+    #   多角形として1特徴化した頂点を**対称判定から除外**するのに使う
+    #   (多角形の頂点だけを見て『非対称』と判定すると、対寸法で解ける軸が解けなくなる)。
+    seg_nodes = []          # [(axis, value, view, seg_key)]
+    hard_node_values = {a: set() for a in AXES}   # 線分以外(円中心)由来のノード値
+
+    def _seg_key(k_, p, q):
+        return (k_, frozenset(((round(p[0], 3) + 0.0, round(p[1], 3) + 0.0),
+                               (round(q[0], 3) + 0.0, round(q[1], 3) + 0.0))))
+
     for k, am in amaps.items():
         ax, ay = am["x"][0], am["y"][0]
         for e in per_view[k]:
@@ -446,12 +664,16 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
             if t == "LINE":
                 a = to_model_coords(am, (e.dxf.start.x, e.dxf.start.y))
                 b = to_model_coords(am, (e.dxf.end.x, e.dxf.end.y))
-                segments[k].append(((a[ax], a[ay]), (b[ax], b[ay])))
+                pa, pb = (a[ax], a[ay]), (b[ax], b[ay])
+                segments[k].append((pa, pb))
+                sk = _seg_key(k, pa, pb)
                 dx, dy = b[ax] - a[ax], b[ay] - a[ay]
                 if abs(dx) <= ORTHO_TOL and abs(dy) > ORTHO_TOL:
                     nodes[ax].add(a[ax], "%s:LINE" % k)
+                    seg_nodes.append((ax, a[ax], k, sk))
                 elif abs(dy) <= ORTHO_TOL and abs(dx) > ORTHO_TOL:
                     nodes[ay].add(a[ay], "%s:LINE" % k)
+                    seg_nodes.append((ay, a[ay], k, sk))
                 elif abs(dx) > ORTHO_TOL and abs(dy) > ORTHO_TOL:
                     leg = min(abs(dx), abs(dy))
                     is45 = abs(abs(dx) - abs(dy)) <= CHAMFER_RATIO_TOL * max(abs(dx), abs(dy))
@@ -468,6 +690,9 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                     nodes[ax].add(b[ax], "%s:OBLIQUE" % k)
                     nodes[ay].add(a[ay], "%s:OBLIQUE" % k)
                     nodes[ay].add(b[ay], "%s:OBLIQUE" % k)
+                    for axis_, val_ in ((ax, a[ax]), (ax, b[ax]),
+                                        (ay, a[ay]), (ay, b[ay])):
+                        seg_nodes.append((axis_, val_, k, sk))
             elif t in ("CIRCLE", "ARC"):
                 c = to_model_coords(am, (e.dxf.center.x, e.dxf.center.y))
                 # 直径も**モデル実寸**へ戻す(位置は to_model_coords が既に戻している)。
@@ -476,6 +701,8 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                                 "diameter": round(e.dxf.radius * 2.0 / scale, 4)})
                 nodes[ax].add(c[ax], "%s:CIRCLE_CENTER" % k)
                 nodes[ay].add(c[ay], "%s:CIRCLE_CENTER" % k)
+                hard_node_values[ax].add(round(c[ax], 6) + 0.0)
+                hard_node_values[ay].add(round(c[ay], 6) + 0.0)
             elif t in ("SPLINE", "ELLIPSE"):
                 out_of_scope.append({"class": "curve", "view": k, "type": t,
                                      "reason": u"交差曲線(円筒×平面等)。v1は寸法対象としない"})
@@ -484,11 +711,15 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                 for i in range(len(pts) - 1):
                     a = to_model_coords(am, pts[i])
                     b = to_model_coords(am, pts[i + 1])
-                    segments[k].append(((a[ax], a[ay]), (b[ax], b[ay])))
+                    pa, pb = (a[ax], a[ay]), (b[ax], b[ay])
+                    segments[k].append((pa, pb))
+                    sk = _seg_key(k, pa, pb)
                     if abs(b[ax] - a[ax]) <= ORTHO_TOL:
                         nodes[ax].add(a[ax], "%s:PLINE" % k)
+                        seg_nodes.append((ax, a[ax], k, sk))
                     elif abs(b[ay] - a[ay]) <= ORTHO_TOL:
                         nodes[ay].add(a[ay], "%s:PLINE" % k)
+                        seg_nodes.append((ay, a[ay], k, sk))
 
     # 同一ビュー・同一中心・同一直径の円弧群は1つの円として扱う(円は4分割されて出る)
     uniq = {}
@@ -538,8 +769,19 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                 axis = am["y"][0]
             else:
                 axis = None
-                out_of_scope.append({"class": "oblique_dimension", "id": did, "angle": ang,
-                                     "reason": u"軸平行でない方向の線形寸法。v1は棚卸し対象外"})
+                # ❗E4: 斜め方向の線形寸法は「位置チェーン」には使えない(1本で2軸を
+                #   同時に動かすため和差の到達判定に載らない)が、**回転した正多角形の
+                #   二面幅/対角**を決める寸法としては有効。測定点をビューの2軸の
+                #   モデル座標で持ち、多角形カバレッジ側で実ジオメトリと突き合わせる
+                ax_, ay_ = am["x"][0], am["y"][0]
+                rec["role"] = "oblique_width"
+                rec["axes"] = [ax_, ay_]
+                rec["angle_deg"] = round(ang, 6)
+                rec["points"] = [[p2[ax_], p2[ay_]], [p3[ax_], p3[ay_]]]
+                out_of_scope.append({
+                    "class": "oblique_dimension", "id": did, "angle": ang,
+                    "reason": u"軸平行でない方向の線形寸法。位置チェーンの辺には使わない"
+                              u"(正多角形の二面幅/対角の照合にのみ使う)"})
             if axis:
                 rec["axis"] = axis
                 rec["coords"] = [p2[axis], p3[axis]]
@@ -554,16 +796,19 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
         if e.dxftype() != "MTEXT":
             continue
         t = e.text
-        if not ("%%c" in t or u"キリ" in t or u"ザグリ" in t or u"深さ" in t
-                or re.search(u"[ＭM][０-９0-9]", t)):
-            continue
         if u"注記" in t:
+            continue
+        if not ("%%c" in t or u"キリ" in t or u"ザグリ" in t or u"深さ" in t
+                or re.search(u"[ＭM][０-９0-9]", t)
+                # 管用ねじだけの注記(『Ｒｃ１／８』)は上のどれにも当たらない
+                or _NOTE_RE_PIPE.search(t.translate(_ZEN2HAN))):
             continue
         notes.append(parse_hole_note(t))
 
     note_dias = sorted({d for n in notes for d in n["diameters"]})
     note_depths = sorted({d for n in notes for d in n["depths"]})
     note_taps = sorted({d for n in notes for d in n["taps"]})
+    pipe_threads = [t for n in notes for t in n.get("pipe_threads", [])]
 
     # 直径として通用する寸法値(径寸法 or dimpostが%%c<>の線形寸法)
     dim_dias = []
@@ -576,12 +821,29 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                 dim_dias.append(round(abs(r["coords"][1] - r["coords"][0]), 6))
     covered_dias = sorted(set(dim_dias) | set(note_dias))
 
+    # --- 2b) 管用(テーパ)ねじ穴の同心群を1特徴化する(E3) --------------------
+    # ねじの内部径は**呼びが決める**ので図面に寸法は入らない。呼びの基準山形の範囲に
+    # 実ジオメトリが収まることを検算した上で、その同心群を1特徴として扱う。
+    thread_features = find_thread_features(circles, nodes, pipe_threads)
+    thread_dias = sorted({d for f in thread_features for d in f["diameters"]})
+    # 輪郭同心群の中心(=ねじ軸)は線分の端点でしかなく位置ノードにならないので、
+    # **仮想ノード**として登録する(これが寸法で到達できて初めて群がカバーされる)。
+    for f in thread_features:
+        if f["kind"] != "profile_cluster":
+            continue
+        for a in f["axes"]:
+            if nodes[a].index(f["center"][a]) is None:
+                nodes[a].add(f["center"][a], "virtual:thread_axis")
+
     # --- 3) 円(直径)のカバレッジ ---------------------------------------
     def dia_covered(d):
         for x in covered_dias:
             if abs(x - d) <= VALUE_TOL:
                 return True
         return False
+
+    def thread_dia_covered(d):
+        return any(abs(x - d) <= VALUE_TOL for x in thread_dias)
 
     chamfer_legs = sorted({o["leg"] for o in obliques if o["kind"] == "chamfer45"})
 
@@ -593,6 +855,13 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
         if dia_covered(d):
             row["covered_by"] = "dimension_or_note"
             row["ok"] = True
+        elif thread_dia_covered(d):
+            # 管用ねじの同心群。径は呼び(Rc1/8等)が決めるので寸法は要らない
+            row["covered_by"] = "taper_thread_note"
+            row["ok"] = True
+            row["note"] = u"管用ねじ%s の同心群" % ",".join(
+                sorted({f["designation"] for f in thread_features
+                        if any(abs(x - d) <= VALUE_TOL for x in f["diameters"])}))
         else:
             derived = None
             # ❗面取りは径を減らす側(軸の外周C面取り)だけでなく**増やす側**にも出る
@@ -638,16 +907,55 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
 
     # 幅(位置対の距離)は多角形の二面幅照合にも使うので先に集める
     covered_widths = _covered_widths(dims)
+    oblique_widths = _covered_oblique_widths(dims)
     polygons = []
     for k in sorted(segments):
         am = amaps[k]
         pax, pay = am["x"][0], am["y"][0]
         for pg in find_regular_polygons(segments[k]):
             pg = dict(pg, view=k, axes=[pax, pay])
-            hit = polygon_covered(pg, covered_widths, covered_dias)
+            hit = polygon_covered(pg, covered_widths, covered_dias, oblique_widths)
             pg["ok"] = hit is not None
             pg["covered_by"] = hit
             polygons.append(pg)
+    # 斜め寸法が実際にどの多角形を決めたか(決めていない斜め寸法は「宙に浮いた寸法」警告)
+    used_oblique_ids = set()
+    for pg in polygons:
+        if not pg["ok"]:
+            continue
+        for od in oblique_widths:
+            if list(od.get("axes") or []) != list(pg["axes"]) or od.get("value") is None:
+                continue
+            if (abs(od["value"] - pg["across_corners"]) <= VALUE_TOL
+                    and _oblique_hits_opposite_vertices(pg, od)) or \
+               (abs(od["value"] - pg["across_flats"]) <= VALUE_TOL
+                    and _oblique_is_across_flats(pg, od)):
+                used_oblique_ids.add(od["id"])
+
+    # ❗F1: 多角形の頂点は「多角形1特徴」として別扱いしているので、**軸の対称判定から外す**。
+    #   外さないと、六角座が斜めに付いているだけで軸全体が非対称と判定され、
+    #   対寸法(150/140/100/50 等)で解けるはずの位置チェーンが解けなくなる
+    #   (盲検 25154-1-04 のX軸。修理パス報告 F1)。
+    #   ただし**多角形以外の線分・円からも生まれているノード値は除外しない**
+    #   (同じ座標に実在する別フィーチャーまで対称判定から消してしまうため)。
+    poly_edge_keys = set()
+    poly_vertex_values = {a: set() for a in AXES}
+    for pg in polygons:
+        vs = pg["vertices"]
+        for i in range(len(vs)):
+            poly_edge_keys.add(_seg_key(pg["view"], vs[i], vs[(i + 1) % len(vs)]))
+        for i, ax_ in enumerate(pg["axes"]):
+            for v in {p[i] for p in vs}:
+                poly_vertex_values[ax_].add(round(v, 6) + 0.0)
+    nonpoly_values = {a: set(hard_node_values[a]) for a in AXES}
+    for axis_, val_, _k_, sk_ in seg_nodes:
+        if sk_ not in poly_edge_keys:
+            nonpoly_values[axis_].add(round(val_, 6) + 0.0)
+    polygon_only_values = {
+        a: {v for v in poly_vertex_values[a]
+            if not any(abs(v - w) <= NODE_TOL for w in nonpoly_values[a])}
+        for a in AXES}
+
     # 未指定の多角形は「1特徴」として1件で報告する(頂点ノードをバラバラに並べない)
     poly_uncovered_nodes = {a: set() for a in AXES}
     for pg in polygons:
@@ -668,6 +976,7 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
     axis_report = {}
     redundant, floating = [], []
     used_dim_ids = set()
+    axis_state = {}
 
     for a in AXES:
         an = nodes[a]
@@ -677,11 +986,20 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                "edges": [], "uncovered": [], "out_of_scope_nodes": []}
         if n == 0:
             axis_report[a] = rep
+            axis_state[a] = None
             continue
 
-        lo, hi = min(an.values), max(an.values)
+        # ❗F1: 対称判定は「多角形の頂点(=多角形1特徴として別扱いしたノード)」を除いた
+        #   集合で行う。除かないと、斜めに付いた六角座1個で軸全体が非対称になる
+        excluded = sorted(v for v in an.values
+                          if any(abs(v - w) <= NODE_TOL for w in polygon_only_values[a]))
+        base_vals = [v for v in an.values if v not in excluded] or list(an.values)
+        if excluded:
+            rep["symmetry_excluded_polygon_nodes"] = [round(v, 4) for v in excluded]
+        lo, hi = min(base_vals), max(base_vals)
         c0 = (lo + hi) / 2.0
-        symmetric = all(an.index(2.0 * c0 - v) is not None for v in an.values)
+        symmetric = all(any(abs(2.0 * c0 - v - w) <= an.tol for w in base_vals)
+                        for v in base_vals)
         rep["mode"] = "symmetric" if symmetric else "chain"
         rep["symmetry_center"] = round(c0, 4) if symmetric else None
 
@@ -770,6 +1088,26 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                     add_edge(ic, iv, u"正%d角形(%s・%s)" % (pg["n"], pg["covered_by"], pg["view"]),
                              allow_cycle_report=False)
 
+        # (b拡張) 管用(テーパ)ねじ穴の同心群: 呼び1つで内部径が全部決まる(E3)。
+        #   ねじ軸(中心)が寸法で到達していることが前提(到達していなければ群ごと未到達のまま)
+        for f in thread_features:
+            if a not in f["axes"]:
+                continue
+            ic = an.index(f["center"][a])
+            if ic is None:
+                continue
+            vals = list(f["nodes"].get(a) or [])
+            for d in f["diameters"]:
+                for s in (+1, -1):
+                    vals.append(f["center"][a] + s * d / 2.0)
+            for v in vals:
+                iv = an.index(v)
+                if iv is not None:
+                    add_edge(ic, iv,
+                             u"管用ねじ%s注記(呼びが内部径を決める・%s)"
+                             % (f["designation"], f["kind"]),
+                             allow_cycle_report=False)
+
         # (b) 穴注記の「深さ」がカバーする位置(距離が一致するノード対を結ぶ)
         for dep in note_depths:
             cand = []
@@ -791,19 +1129,23 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
             for i in range(len(an.values)):
                 counts[uf.find(i)] = counts.get(uf.find(i), 0) + 1
             root = max(counts, key=lambda r_: counts[r_]) if counts else None
-        # (e) 幾何導出: 円筒×平面の交線(二面取りの見え掛かり) y=√((D/2)²-(W/2)²)
-        widths = covered_widths
-        for i, v in enumerate(an.values):
-            if root is not None and uf.find(i) == root:
-                continue
-            derived = _chord_derivation(abs(v - c0) if symmetric else None,
-                                        covered_dias, widths)
-            if derived:
-                rep["edges"].append({"from": round(c0, 4), "to": round(v, 4),
-                                     "by": derived, "new_link": True})
-                uf.union(root, i)
+        axis_state[a] = {"an": an, "uf": uf, "root": root, "rep": rep,
+                         "symmetric": symmetric, "c0": c0}
 
-        # 未到達ノードの最終仕分け。「面取りの反対側が到達済み」なら面取り由来 = 判定対象外
+    # --- 4b) 幾何導出(**軸をまたぐ**ので全軸の到達判定が出そろってから行う) --------
+    #   (e) 円筒×平面の交線(二面取り・左右対称)      … 従来
+    #   (f) 円×直線(片側の弦) h=√((D/2)²-Δ²)        … E5(b)
+    #   (g) 円×円の交点                              … E5(a)
+    geo_feats = _circle_features(circles, dia_covered, thread_features)
+    _apply_geometric_derivations(axis_state, geo_feats, covered_dias, covered_widths)
+
+    # --- 4c) 未到達ノードの最終仕分け ---------------------------------------
+    for a in AXES:
+        stt = axis_state.get(a)
+        if stt is None:
+            continue
+        an, uf, root, rep = stt["an"], stt["uf"], stt["root"], stt["rep"]
+        # 「面取りの反対側が到達済み」なら面取り由来 = 判定対象外
         for i, v in enumerate(an.values):
             if root is not None and uf.find(i) == root:
                 continue
@@ -825,6 +1167,11 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                                           u"(他寸法の和・差でも到達できない)" % (a, v)})
         axis_report[a] = rep
 
+    for r in dims:
+        if r["role"] == "oblique_width" and r["id"] not in used_oblique_ids:
+            floating.append({"id": r["id"], "axis": None,
+                             "reason": u"斜め線形寸法だが、どの正多角形の二面幅/対角とも"
+                                       u"一致しない(位置チェーンの辺にもならない)"})
     for r in dims:
         if r["role"] == "position_pair" and r["id"] not in used_dim_ids \
                 and not any(f["id"] == r["id"] for f in floating):
@@ -871,6 +1218,8 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
         "hole_notes": notes,
         "pcd_groups": pcd_groups,
         "polygons": polygons,
+        "oblique_width_dimensions": oblique_widths,
+        "thread_features": thread_features,
         "note_diameters": note_dias,
         "note_taps": note_taps,
         "note_depths": note_depths,
@@ -888,6 +1237,160 @@ def _covered_widths(dims):
         if r["role"] == "position_pair" and r["value"]:
             out.append(round(abs(r["value"]), 6))
     return sorted(set(out))
+
+
+def _covered_oblique_widths(dims):
+    u"""斜め方向の線形寸法(`measure.direction`に角度を書いた寸法)を、測定点つきで集める。
+
+    ❗値だけを `_covered_widths` に混ぜてはいけない。幅の値は
+    `_chord_derivation`(円筒×平面の交線)の入力にもなっており、そこへ
+    「どこを測ったか分からない値」を足すと幾何導出が偽陽性を出す。
+    斜め寸法は**測定点を実ジオメトリと突き合わせられる多角形の照合にだけ**使う。
+    """
+    out = []
+    for r in dims:
+        if r["role"] != "oblique_width" or not r.get("value"):
+            continue
+        out.append({"id": r["id"], "view": r.get("view"), "axes": r.get("axes"),
+                    "value": round(abs(r["value"]), 6),
+                    "angle_deg": r.get("angle_deg"),
+                    "points": r.get("points")})
+    return out
+
+
+def _circle_features(circles, dia_covered, thread_features):
+    u"""幾何導出に使える「位置と径が図面から確定している円」を集める。
+
+    実在円(直径が寸法/注記でカバー済み)に加えて、**管用ねじの同心群**(輪郭ビューでしか
+    見えない円筒。呼びが径を決める)も同じ形にして扱う。
+    """
+    out = []
+    for c in circles:
+        if not dia_covered(c["diameter"]):
+            continue
+        out.append({"axes": list(c["axes"]), "center": dict(c["center"]),
+                    "diameter": c["diameter"],
+                    "label": u"円φ%g(%s)" % (c["diameter"], c["view"])})
+    for f in thread_features:
+        if f["kind"] != "profile_cluster":
+            continue
+        for d in f["diameters"]:
+            out.append({"axes": list(f["axes"]), "center": dict(f["center"]),
+                        "diameter": d,
+                        "label": u"管用ねじ%s の円筒φ%g" % (f["designation"], d)})
+    return out
+
+
+def _apply_geometric_derivations(axis_state, feats, covered_dias, covered_widths,
+                                 max_rounds=6):
+    u"""**幾何的に一意に決まる**位置を導出して到達済みへ繰り入れる(判定モデル(e)(f)(g))。
+
+    (e) 円筒φD を幅W の平面2枚で切った交線 √((D/2)²-(W/2)²)(左右対称の二面取り。従来)
+    (f) **片側だけの弦**: 位置と径が確定した円を、到達済みの位置 u で切った交点
+        h=√((D/2)²-(u-cx)²)(盲検 25154-6-02 の φ420 を x=161 で切った Y=±134.829)
+    (g) **円×円の交点**: 位置と径が確定した円2つの交点(同 φ12穴×φ360インロー円の
+        Y=±161.919 / ±166.788)
+
+    どれも「図面から確定した要素だけで**作図的に一意に決まる**点」であり、
+    加工者が電卓を叩く必要がない = ゲート②の趣旨に合う。逆に、円の中心位置や直径が
+    図面で決まっていなければ導出は起きない(そこで不合格になる)。
+
+    軸をまたぐ(円の中心は2軸ぶんの到達が要る)ため、全軸の到達判定が出そろってから
+    **不動点になるまで**繰り返す。
+    """
+    def reached(a, v):
+        st = axis_state.get(a)
+        if st is None or st["root"] is None:
+            return False
+        i = st["an"].index(v)
+        return i is not None and st["uf"].find(i) == st["root"]
+
+    def derive(a, v, label, src):
+        st = axis_state.get(a)
+        if st is None or st["root"] is None:
+            return False
+        i = st["an"].index(v)
+        if i is None or st["uf"].find(i) == st["root"]:
+            return False
+        st["uf"].union(st["root"], i)
+        st["rep"]["edges"].append({"from": round(src, 4), "to": round(st["an"].values[i], 4),
+                                   "by": label, "new_link": True})
+        return True
+
+    for _round in range(max_rounds):
+        changed = False
+
+        # (e) 従来の二面取り導出(対称軸まわり)
+        for a in AXES:
+            st = axis_state.get(a)
+            if st is None or not st["symmetric"]:
+                continue
+            for v in list(st["an"].values):
+                if reached(a, v):
+                    continue
+                d_ = _chord_derivation(abs(v - st["c0"]), covered_dias, covered_widths)
+                if d_ and derive(a, v, d_, st["c0"]):
+                    changed = True
+
+        for f in feats:
+            ax, ay = f["axes"]
+            if axis_state.get(ax) is None or axis_state.get(ay) is None:
+                continue
+            if not reached(ax, f["center"][ax]) or not reached(ay, f["center"][ay]):
+                continue
+            r = f["diameter"] / 2.0
+            # (f) 円 × 到達済みの直線
+            for a1, a2 in ((ax, ay), (ay, ax)):
+                for u in list(axis_state[a1]["an"].values):
+                    if not reached(a1, u):
+                        continue
+                    dd = abs(u - f["center"][a1])
+                    if dd >= r - 1e-9:
+                        continue
+                    h = math.sqrt(max(0.0, r * r - dd * dd))
+                    if h <= 1e-6:
+                        continue
+                    for s in (+1, -1):
+                        lbl = (u"幾何導出: %s を %s=%.4g で切った交点 √((%g/2)²-%.4g²)=%.4f"
+                               % (f["label"], a1, u, f["diameter"], dd, h))
+                        if derive(a2, f["center"][a2] + s * h, lbl, f["center"][a2]):
+                            changed = True
+
+        # (g) 円 × 円
+        for i, f1 in enumerate(feats):
+            for f2 in feats[i + 1:]:
+                if f1["axes"] != f2["axes"]:
+                    continue
+                ax, ay = f1["axes"]
+                if axis_state.get(ax) is None or axis_state.get(ay) is None:
+                    continue
+                if not (reached(ax, f1["center"][ax]) and reached(ay, f1["center"][ay])
+                        and reached(ax, f2["center"][ax]) and reached(ay, f2["center"][ay])):
+                    continue
+                r1, r2 = f1["diameter"] / 2.0, f2["diameter"] / 2.0
+                dx = f2["center"][ax] - f1["center"][ax]
+                dy = f2["center"][ay] - f1["center"][ay]
+                dist = math.hypot(dx, dy)
+                if dist <= 1e-9 or dist > r1 + r2 - 1e-9 or dist < abs(r1 - r2) + 1e-9:
+                    continue
+                aa = (dist * dist + r1 * r1 - r2 * r2) / (2.0 * dist)
+                h2 = r1 * r1 - aa * aa
+                if h2 <= 1e-12:
+                    continue
+                h = math.sqrt(h2)
+                px = f1["center"][ax] + aa * dx / dist
+                py = f1["center"][ay] + aa * dy / dist
+                for s in (+1, -1):
+                    qx = px + s * h * (-dy / dist)
+                    qy = py + s * h * (dx / dist)
+                    lbl = u"幾何導出: %s と %s の交点" % (f1["label"], f2["label"])
+                    if derive(ax, qx, lbl, f1["center"][ax]):
+                        changed = True
+                    if derive(ay, qy, lbl, f1["center"][ay]):
+                        changed = True
+
+        if not changed:
+            break
 
 
 def _chamfer_origin(v, axis, obliques, an, uf, root):
@@ -997,6 +1500,20 @@ def print_report(rep):
                   % (u"OK" if p["ok"] else u"** 未指定 **", p["view"], p["n"],
                      p["across_flats"], p["across_corners"], p["center"],
                      p["covered_by"] or u"二面幅/対角を指定する寸法が無い"))
+
+    if rep.get("thread_features"):
+        print(u"\n-- 管用(テーパ)ねじの同心群 --")
+        for f in rep["thread_features"]:
+            print(u"   %s %s 軸%s 中心%s 径%s 範囲%s"
+                  % (f["designation"], f["kind"], f["axes"],
+                     {k: round(v, 4) for k, v in f["center"].items()},
+                     f["diameters"], f["env"]))
+    if rep.get("oblique_width_dimensions"):
+        print(u"\n-- 斜め線形寸法(多角形の二面幅/対角) --")
+        for od in rep["oblique_width_dimensions"]:
+            print(u"   %s %s 実測%.4g 角度%.4g度 測定点%s"
+                  % (od["id"], od["view"], od["value"], od["angle_deg"] or 0.0,
+                     [[round(x, 3) for x in p] for p in (od["points"] or [])]))
 
     print(u"\n-- 判定対象外(v1で判定できない特徴。黙って無視していないことの明示) --")
     seen = set()
