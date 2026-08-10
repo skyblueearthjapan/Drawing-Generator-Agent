@@ -7,7 +7,8 @@ u"""改善サイクルAの**反証テスト**(「直したことで検出力が�
   F1. ゲート②のPCD穴群: 注記のPCD値を実ジオメトリと違う値に書き換えると **不合格に戻る**
   F2. ゲート②のPCD穴群: 注記の個数を実ジオメトリと違う値にすると **却下される**
   F3. ゲート②のPCD穴群: 穴を1つ動かして等配でなくすると **却下される**
-  F4. ゲート②の多角形: 二面幅寸法があると合格・その寸法値を狂わせると **未指定に戻る**
+  F4. ゲート②の多角形: 六角形を**1特徴として検出**し続けている(頂点バラバラに戻っていない)
+  F4b. ゲート②の多角形: 二面幅/対角が正しければ合格・0.5mmずれた寸法では **不合格**
   F5. 独立検証: 参考寸法 `(ＰＣＤ１２９)` を計画と違う文字に差し替えると **不合格になる**
   F6. 独立検証: 参考寸法でない寸法の文字を狂わせると **従来どおり不合格になる**
   F7. 図枠衝突: 衝突ゼロの図面の寸法を表題欄へ移すと **検出される**
@@ -33,21 +34,23 @@ from engine import dim_engine            # noqa: E402
 from engine import gate2_completeness    # noqa: E402
 from engine import generate_drawing      # noqa: E402
 
-PCD_CASE = {
-    "dxf": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-4-07", u"生成", u"不合格",
-                        u"25154-4-07_減速機ブラケット.dxf"),
-    "plan": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-4-07", u"plan.json"),
-}
-POLY_CASE = {
-    "dxf": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-1-04", u"生成", u"不合格",
-                        u"25154-1-04_ケーブルベア側ジャッキプレート.dxf"),
-    "plan": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-1-04", u"plan.json"),
-}
-CLEAN_CASE = {
-    "dxf": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-4-12", u"生成",
-                        u"25154-4-12_LSブラケット2.dxf"),
-    "plan": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-4-12", u"plan.json"),
-}
+def _case(request_id, dxf_name):
+    u"""依頼フォルダの生成DXFを探す。
+
+    ❗合否で置き場所が変わる(合格=`生成/`、不合格=`生成/不合格/`)ので、
+    どちらにあってもよいように**両方を探す**。ハードコードすると、部品が納品化した
+    (=検証が強化されて合格に変わった)瞬間に反証テストが FileNotFoundError で死ぬ。
+    """
+    base = os.path.join(ROOT, u"data", u"依頼箱", request_id)
+    cands = [os.path.join(base, u"生成", dxf_name),
+             os.path.join(base, u"生成", u"不合格", dxf_name)]
+    dxf = next((p for p in cands if os.path.exists(p)), cands[0])
+    return {"dxf": dxf, "plan": os.path.join(base, u"plan.json")}
+
+
+PCD_CASE = _case(u"BLIND-25154-4-07", u"25154-4-07_減速機ブラケット.dxf")
+POLY_CASE = _case(u"BLIND-25154-1-04", u"25154-1-04_ケーブルベア側ジャッキプレート.dxf")
+CLEAN_CASE = _case(u"BLIND-25154-4-12", u"25154-4-12_LSブラケット2.dxf")
 
 ZEN = u"０１２３４５６７８９"
 
@@ -201,17 +204,26 @@ def main(argv):
     # ---------- F4: 多角形の二面幅 ----------
     _ok, _n, rep0 = gate2_ok(POLY_CASE["dxf"], POLY_CASE["plan"])
     polys = rep0["polygons"]
+    # ❗2026-08-10(改善サイクル2/E4)で期待値を更新した。
+    #   旧: 「二面幅寸法が無いので未指定1件で報告する」(ok is False)
+    #   新: 1-04の計画に**斜め寸法HEXD(相対する頂点間の対角27.712)**が入ったので、
+    #       同じ六角形が「1特徴として検出され、かつ対角寸法でカバー済み」になる。
+    #   ここで見張るのは **多角形を1特徴として検出し続けているか**(バラバラの頂点ノードに
+    #   戻っていないか)。カバレッジ規則自体の反証は F4b と run_cycle2_falsification.py。
     res["F4_polygon"] = {"detected": [{"view": p_["view"], "n": p_["n"],
-                                       "across_flats": p_["across_flats"], "ok": p_["ok"]}
+                                       "across_flats": p_["across_flats"], "ok": p_["ok"],
+                                       "covered_by": p_["covered_by"]}
                                       for p_ in polys],
                          "expect": u"六角形(二面幅24)を1特徴として検出し、"
-                                   u"二面幅寸法が無いので未指定1件で報告する",
+                                   u"斜め寸法HEXD(対角)でカバー済みと判定する。"
+                                   u"未指定に多角形は残らない",
                          "pass": (len(polys) == 1 and polys[0]["n"] == 6
                                   and abs(polys[0]["across_flats"] - 24.0) <= 0.01
-                                  and polys[0]["ok"] is False
-                                  and any(u_["feature"] == "polygon"
-                                          for u_ in rep0["unspecified"]))}
-    print(u"F4 六角形の検出と未指定報告: %s -> %s"
+                                  and polys[0]["ok"] is True
+                                  and u"HEXD" in (polys[0]["covered_by"] or u"")
+                                  and not any(u_["feature"] == "polygon"
+                                              for u_ in rep0["unspecified"]))}
+    print(u"F4 六角形の検出と対角カバレッジ: %s -> %s"
           % (res["F4_polygon"]["detected"], u"OK" if res["F4_polygon"]["pass"] else u"NG"))
 
     # ---------- F4b: 二面幅寸法があれば合格・値が違えば不合格(多角形カバレッジの反証) ----------

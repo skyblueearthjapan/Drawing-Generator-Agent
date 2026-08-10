@@ -366,12 +366,15 @@
         20.0
       ],
       "pcds": [],
+      "pipe_threads": [],
       "count": null,
       "equal_spacing_declared": false
     }
   ],
   "pcd_groups": [],
   "polygons": [],
+  "oblique_width_dimensions": [],
+  "thread_features": [],
   "note_diameters": [
     8.5,
     10.0

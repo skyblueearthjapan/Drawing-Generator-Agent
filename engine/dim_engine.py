@@ -641,6 +641,31 @@ def resolve_direction(measure, side):
     return _DIRECTION_ANGLE[d]
 
 
+def is_oblique_direction(angle):
+    u"""測定方向が図面の軸(0度/90度)に平行でないか。"""
+    a = float(angle) % 180.0
+    return min(abs(a - 0.0), abs(a - 90.0), abs(a - 180.0)) > 1e-6
+
+
+def oblique_base_point(side, p1, p2, angle, offset):
+    u"""斜め線形寸法(紙面内で回転した正多角形の対角など)の寸法線の位置。
+
+    軸平行寸法はビュー外周から offset だけ外へ逃がすが、斜め寸法には外周に対する
+    「上下左右」が定義できない。そこで**測定点の中点から測定方向の法線向きへ offset**
+    だけ離す(向きの符号だけを placement.side から決める)。
+    結果としてフィーチャーの真横に置かれるので、ビュー外周の寸法予約帯には算入しない
+    (`compose_drawing.plan_view_reserves` 側も同じ判定で除外している。判定式を
+    片方だけ変えるとレイアウトと作図がずれるので、必ず両方同時に直すこと)。
+    """
+    a = math.radians(float(angle))
+    nx, ny = -math.sin(a), math.cos(a)     # 測定方向の左手法線
+    if side in ("below", "left"):
+        nx, ny = -nx, -ny
+    mx = (p1[0] + p2[0]) / 2.0
+    my = (p1[1] + p2[1]) / 2.0
+    return (mx + nx * offset, my + ny * offset)
+
+
 def base_point(region, side, p1, p2, offset):
     x0, y0, x1, y1 = region
     mx = (p1[0] + p2[0]) / 2.0
@@ -973,10 +998,16 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             p1 = to_draw(view, space, meas["p1"])
             p2 = to_draw(view, space, meas["p2"])
             angle = resolve_direction(meas, side)
-            if abs((angle % 180.0) - (_SIDE_ANGLE[side] % 180.0)) > 1e-6:
-                raise ValueError(
-                    "%s: placement.side='%s' と measure.direction が矛盾しています" % (did, side))
-            base = base_point(view_bbox[view], side, p1, p2, offset)
+            if is_oblique_direction(angle):
+                # 斜め線形寸法(紙面内で回転した正多角形の対角/二面幅。ゲート②E4)。
+                # side は「中点からどちら側へ寸法線を逃がすか」の符号としてだけ使う
+                base = oblique_base_point(side, p1, p2, angle, offset)
+            else:
+                if abs((angle % 180.0) - (_SIDE_ANGLE[side] % 180.0)) > 1e-6:
+                    raise ValueError(
+                        "%s: placement.side='%s' と measure.direction が矛盾しています"
+                        % (did, side))
+                base = base_point(view_bbox[view], side, p1, p2, offset)
             dim = msp.add_linear_dim(base=base, p1=p1, p2=p2, angle=angle,
                                      dimstyle=style_name, dxfattribs=attribs)
             if text_override:

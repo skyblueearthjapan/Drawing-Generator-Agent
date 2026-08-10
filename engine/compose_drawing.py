@@ -228,6 +228,15 @@ def plan_view_reserves(plan, band_mm=DIM_BAND_MM):
         side = pl.get("side")
         if side not in DIM_SIDES:
             continue
+        # 斜め線形寸法(measure.direction が数値で軸平行でないもの)はビュー外周ではなく
+        # **フィーチャーの真横**に置かれる(dim_engine.oblique_base_point)ので、
+        # 外向きの予約帯を作らない。
+        # ❗ここと dim_engine.is_oblique_direction の判定は必ず同じにすること
+        d_ = (item.get("measure") or {}).get("direction")
+        if isinstance(d_, (int, float)) and not isinstance(d_, bool):
+            a_ = float(d_) % 180.0
+            if min(abs(a_), abs(a_ - 90.0), abs(a_ - 180.0)) > 1e-6:
+                continue
         off = pl.get("offset_mm")
         off = fo + (int(pl.get("level", 1)) - 1) * ss if off is None else float(off)
         d = reserves.setdefault(item["view"], {s: 0.0 for s in DIM_SIDES})

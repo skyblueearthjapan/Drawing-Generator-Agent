@@ -1,0 +1,141 @@
+{
+ "passed": 9,
+ "total": 9,
+ "cases": {
+  "C1_poly_base": {
+   "gate2_ok": true,
+   "unspecified": 0,
+   "polygons": [
+    {
+     "n": 6,
+     "ok": true,
+     "covered_by": "対角27.71(斜め寸法HEXD・測定点が相対する頂点と一致)"
+    }
+   ],
+   "oblique_dims": [
+    {
+     "id": "HEXD",
+     "view": "front",
+     "axes": [
+      "Z",
+      "X"
+     ],
+     "value": 27.711882,
+     "angle_deg": 3.297499,
+     "points": [
+      [
+       -240.83299999999957,
+       -50.79699999999997
+      ],
+      [
+       -213.16699999999963,
+       -49.20299999999992
+      ]
+     ]
+    }
+   ],
+   "expect": "合格・六角形が斜め寸法(対角)でカバーされる",
+   "pass": true
+  },
+  "C2_poly_dim_dropped": {
+   "dropped": "HEXD",
+   "gate2_ok": false,
+   "unspecified": 1,
+   "polygon_unspecified": 1,
+   "expect": "斜め寸法HEXD を消すと六角形が未指定に戻り不合格",
+   "pass": true
+  },
+  "C3_C4_oblique_forgery": {
+   "across_corners": 27.712493,
+   "across_flats": 23.999723,
+   "adjacent_len": 13.855353,
+   "real_opposite_vertices": "対角27.71(斜め寸法REAL・測定点が相対する頂点と一致)",
+   "adjacent_vertices": null,
+   "fake_diagonal_same_length": null,
+   "fake_flats_same_length": null,
+   "expect": "実在の相対頂点対だけが採用される。隣接頂点/頂点でない点対/辺中点でない点対は、長さが一致していても採用しない",
+   "pass": true
+  },
+  "C5_pipe_base": {
+   "gate2_ok": true,
+   "unspecified": 0,
+   "thread_features": [
+    {
+     "designation": "Rc1/8",
+     "kind": "profile_cluster",
+     "center": {
+      "Y": -2.0,
+      "Z": 0.0
+     },
+     "diameters": [
+      7.9,
+      8.7224,
+      8.9347,
+      10.1338
+     ]
+    }
+   ],
+   "expect": "合格・Ｒｃ１／８の同心群(中心Y=-2,Z=0)が1件同定される",
+   "pass": true
+  },
+  "C6_pipe_designation_too_big": {
+   "replaced_notes": 1,
+   "designation": "Ｒｃ１／４",
+   "gate2_ok": false,
+   "unspecified": 18,
+   "thread_features": [],
+   "expect": "実ジオメトリ(φ7.9〜10.13)はＲｃ１／４では説明できない -> 同心群を採用せず不合格",
+   "pass": true
+  },
+  "C7_pipe_designation_too_small": {
+   "replaced_notes": 1,
+   "designation": "Ｒｃ１／１６",
+   "gate2_ok": false,
+   "unspecified": 18,
+   "thread_features": [],
+   "expect": "実ジオメトリ(φ7.9〜10.13)はＲｃ１／１６では説明できない -> 同心群を採用せず不合格",
+   "pass": true
+  },
+  "C8_designation_inequality": {
+   "radii": [
+    3.95,
+    4.3612,
+    4.4673,
+    5.0669
+   ],
+   "judged": {
+    "1/16": false,
+    "1/8": true,
+    "1/4": false,
+    "3/8": false
+   },
+   "expect": "実測半径群に対し 1/8 のみ True(範囲照合だけでは隣の呼びも通るため、この不等式が呼びを一意にしている)",
+   "pass": true
+  },
+  "C9_geo_base": {
+   "gate2_ok": true,
+   "unspecified": 0,
+   "chord_edges": [
+    "幾何導出: 円φ420(front) を X=161 で切った交点 √((420/2)²-161²)=134.8295",
+    "幾何導出: 円φ420(front) を X=161 で切った交点 √((420/2)²-161²)=134.8295"
+   ],
+   "circle_circle_edges": [
+    "幾何導出: 円φ12(front) と 円φ360(front) の交点",
+    "幾何導出: 円φ12(front) と 円φ360(front) の交点",
+    "幾何導出: 円φ12(front) と 円φ360(front) の交点",
+    "幾何導出: 円φ12(front) と 円φ360(front) の交点"
+   ],
+   "expect": "合格・片側弦(円φ420をX=161で切る)と円×円(φ360×φ12)の導出が出る",
+   "pass": true
+  },
+  "C10_intersection_shifted": {
+   "moved_arcs": 2,
+   "gate2_ok": false,
+   "unspecified": 3,
+   "circle_circle_edges_before": 4,
+   "circle_circle_edges_after": 2,
+   "expect": "モデル(73,164)のφ12穴を1mm動かすと円×円の交点が実ジオメトリに当たらなくなり、その側の位置ノードが未指定になって不合格",
+   "pass": true
+  }
+ }
+}
