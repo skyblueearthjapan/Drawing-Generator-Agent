@@ -19,10 +19,10 @@
       },
       "compose": {
         "frame_check": {
-          "total": 205,
-          "frame_matched": 113,
+          "total": 204,
+          "frame_matched": 112,
           "remaining": 92,
-          "remaining_ratio": 0.44878048780487806
+          "remaining_ratio": 0.45098039215686275
         },
         "zone_overlaps": [],
         "view_pair_overlaps": [],
@@ -74,12 +74,12 @@
   "compose": {
     "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\テスト-004_ホルダー.dxf",
     "scale": 1.0,
-    "frame_entity_count_loaded": 113,
+    "frame_entity_count_loaded": 112,
     "frame_check": {
-      "total": 205,
-      "frame_matched": 113,
+      "total": 204,
+      "frame_matched": 112,
       "remaining": 92,
-      "remaining_ratio": 0.44878048780487806
+      "remaining_ratio": 0.45098039215686275
     },
     "view_entity_counts": {
       "front": 17,
@@ -286,7 +286,7 @@
       "装置名": "テスト装置",
       "尺度": "１：１",
       "製図者": "ＡＩ",
-      "製図日付": "２６．０８．０９",
+      "製図日付": "２６．０８．１０",
       "連番": "０４",
       "重量": "１．０９"
     },
@@ -459,7 +459,7 @@
           "ok": true,
           "dist_err_mm": 0.0
         },
-        "leader_handle": "239"
+        "leader_handle": "23C"
       }
     ],
     "dimstyles": {
@@ -670,10 +670,10 @@
       "_OPEN30"
     ],
     "frame_check": {
-      "total": 205,
-      "frame_matched": 113,
+      "total": 204,
+      "frame_matched": 112,
       "remaining": 92,
-      "remaining_ratio": 0.44878048780487806
+      "remaining_ratio": 0.45098039215686275
     },
     "view_bbox": {
       "front": [
@@ -784,7 +784,7 @@
   "gate2": {
     "gate": "gate2_completeness_v1",
     "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\テスト-004_ホルダー.dxf",
-    "plan": "調査\\plan_TEST-002_ホルダー.json",
+    "plan": "調査/plan_TEST-002_ホルダー.json",
     "dropped_dimensions": [],
     "ok": true,
     "unspecified": [],
@@ -1194,13 +1194,13 @@
   },
   "independent_verify": {
     "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\テスト-004_ホルダー.dxf",
-    "plan": "調査\\plan_TEST-002_ホルダー.json",
+    "plan": "調査/plan_TEST-002_ホルダー.json",
     "file_attrs_ok": true,
     "frame": {
-      "total": 215,
-      "frame_matched": 113,
+      "total": 214,
+      "frame_matched": 112,
       "remaining": 102,
-      "remaining_ratio": 0.4744186046511628
+      "remaining_ratio": 0.4766355140186916
     },
     "gate1": [
       {

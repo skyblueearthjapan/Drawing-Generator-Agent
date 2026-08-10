@@ -9,8 +9,8 @@
     "steps": {
       "sw_projection": {
         "skipped": true,
-        "views_dxf": "調査\\phase5_ai_operator\\views_1-18.dxf",
-        "meta_json": "調査\\phase5_ai_operator\\meta_1-18.json"
+        "views_dxf": "調査/phase5_ai_operator/views_1-18.dxf",
+        "meta_json": "調査/phase5_ai_operator/meta_1-18.json"
       },
       "density": {
         "material": "MCナイロン",
@@ -19,10 +19,10 @@
       },
       "compose": {
         "frame_check": {
-          "total": 174,
-          "frame_matched": 113,
+          "total": 173,
+          "frame_matched": 112,
           "remaining": 61,
-          "remaining_ratio": 0.3505747126436782
+          "remaining_ratio": 0.35260115606936415
         },
         "zone_overlaps": [],
         "view_pair_overlaps": [],
@@ -70,12 +70,12 @@
   "compose": {
     "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-001_クッション.dxf",
     "scale": 1.0,
-    "frame_entity_count_loaded": 113,
+    "frame_entity_count_loaded": 112,
     "frame_check": {
-      "total": 174,
-      "frame_matched": 113,
+      "total": 173,
+      "frame_matched": 112,
       "remaining": 61,
-      "remaining_ratio": 0.3505747126436782
+      "remaining_ratio": 0.35260115606936415
     },
     "view_entity_counts": {
       "front": 8,
@@ -371,7 +371,7 @@
           "ok": true,
           "dist_err_mm": 0.0002
         },
-        "leader_handle": "1B5"
+        "leader_handle": "1B8"
       }
     ],
     "dimstyles": {
@@ -470,10 +470,10 @@
       "_OPEN30"
     ],
     "frame_check": {
-      "total": 174,
-      "frame_matched": 113,
+      "total": 173,
+      "frame_matched": 112,
       "remaining": 61,
-      "remaining_ratio": 0.3505747126436782
+      "remaining_ratio": 0.35260115606936415
     },
     "view_bbox": {
       "front": [
@@ -556,7 +556,7 @@
   "gate2": {
     "gate": "gate2_completeness_v1",
     "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-001_クッション.dxf",
-    "plan": "調査\\phase5_ai_operator\\plan_AUTO-001_クッション.json",
+    "plan": "調査/phase5_ai_operator/plan_AUTO-001_クッション.json",
     "dropped_dimensions": [],
     "ok": true,
     "unspecified": [],
@@ -799,13 +799,13 @@
   },
   "independent_verify": {
     "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-001_クッション.dxf",
-    "plan": "調査\\phase5_ai_operator\\plan_AUTO-001_クッション.json",
+    "plan": "調査/phase5_ai_operator/plan_AUTO-001_クッション.json",
     "file_attrs_ok": true,
     "frame": {
-      "total": 180,
-      "frame_matched": 113,
+      "total": 179,
+      "frame_matched": 112,
       "remaining": 67,
-      "remaining_ratio": 0.37222222222222223
+      "remaining_ratio": 0.3743016759776536
     },
     "gate1": [
       {

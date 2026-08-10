@@ -8,7 +8,8 @@ u"""
 compose(views_dxf_path, meta_json_path, fields, scale, out_path) -> 検証情報dict
 
 設計方針(再利用可能に。ハードコードは図枠バケツA固有の定数のみ):
-  1. 図枠(frame_template.dxf)をそのまま読み込み、共通113エンティティを土台にする
+  1. 図枠(frame_template.dxf)をそのまま読み込み、共通112エンティティを土台にする
+     (2026-08-10: ピニオン断面図の残骸BLOCK002(枠外, 32エンティティ)を除去したため113→112)
      (AC1015/cp932を明示維持。CLAUDE.md知見: doc.encodingを明示しないとANSI_1252へ化ける)
   2. ビューDXF(調査/phase2_out_*.dxf)の4ビューをmeta jsonのoutline_mmで領域分類し、
      第三角法の相対整列(front-top同一x中心/front-right同一y中心)を保ったまま、
@@ -45,7 +46,7 @@ FRAME_TEMPLATE_DEFAULT = "図枠/frame_template.dxf"
 FIELDS_JSON_DEFAULT = "図枠/fields.json"
 
 FRAME_X0, FRAME_Y0, FRAME_X1, FRAME_Y1 = 5.0, 5.0, 415.0, 292.0
-# 表題欄の実測上端は28.59mm(全113共通エンティティのLINE最大y)。余裕を見て30.0とする
+# 表題欄の実測上端は28.59mm(全112共通エンティティのLINE最大y)。余裕を見て30.0とする
 TITLE_BLOCK_RECT = (FRAME_X0, FRAME_Y0, FRAME_X1, 30.0)
 # 左上ノート(連番マーク丸 中心(19.324,278.844) r=10 + 材質/個数ノート)の占有域。
 # 実測: 丸はx[9.3,29.3]/y[268.8,288.8]、自製品2行ノート(attach=middle-left)はy[268.3,291.7]付近。
@@ -442,7 +443,7 @@ def compose(views_dxf_path, meta_json_path, fields, scale, out_path,
         "out_path": out_path,
         "scale": scale,
         "frame_entity_count_loaded": frame_entity_count,
-        "frame_check": frame_summary,  # frame_matchedが113なら合格
+        "frame_check": frame_summary,  # frame_matchedが112なら合格(2026-08-10: 113→112)
         "view_entity_counts": {k: len(v) for k, v in per_view.items()},
         "unclassified_entity_count": len(unclassified),
         "view_out_bbox_mm": view_out_bbox,

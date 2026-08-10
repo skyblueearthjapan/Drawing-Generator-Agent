@@ -189,8 +189,10 @@ def independent_verify(dxf_path, plan_path):
     result = {"dxf": dxf_path, "plan": plan_path}
 
     # ---- C. ファイル属性・図枠保持 ----
+    # 図枠共通エンティティ数は112(2026-08-10: frame_template.dxfからピニオン断面図の
+    # 残骸BLOCK002(枠外, 32エンティティ)を除去したため113→112に変更)
     _, fsum = subtract_frame(doc, template_path=FRAME_TEMPLATE)
-    ok_c = (doc.dxfversion == "AC1015" and fsum["frame_matched"] == 113
+    ok_c = (doc.dxfversion == "AC1015" and fsum["frame_matched"] == 112
             and "_OPEN30" in doc.blocks)
     result["file_attrs_ok"] = ok_c
     result["frame"] = fsum

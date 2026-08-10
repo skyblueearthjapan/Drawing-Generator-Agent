@@ -9,8 +9,8 @@
     "steps": {
       "sw_projection": {
         "skipped": true,
-        "views_dxf": "調査\\phase5_ai_operator\\views_3-05.dxf",
-        "meta_json": "調査\\phase5_ai_operator\\meta_3-05.json"
+        "views_dxf": "調査/phase5_ai_operator/views_3-05.dxf",
+        "meta_json": "調査/phase5_ai_operator/meta_3-05.json"
       },
       "density": {
         "material": "S45C",
@@ -19,10 +19,10 @@
       },
       "compose": {
         "frame_check": {
-          "total": 176,
-          "frame_matched": 113,
+          "total": 175,
+          "frame_matched": 112,
           "remaining": 63,
-          "remaining_ratio": 0.35795454545454547
+          "remaining_ratio": 0.36
         },
         "zone_overlaps": [],
         "view_pair_overlaps": [],
@@ -72,12 +72,12 @@
   "compose": {
     "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-002_ベアリングカラー.dxf",
     "scale": 1.0,
-    "frame_entity_count_loaded": 113,
+    "frame_entity_count_loaded": 112,
     "frame_check": {
-      "total": 176,
-      "frame_matched": 113,
+      "total": 175,
+      "frame_matched": 112,
       "remaining": 63,
-      "remaining_ratio": 0.35795454545454547
+      "remaining_ratio": 0.36
     },
     "view_entity_counts": {
       "front": 12,
@@ -547,10 +547,10 @@
       "_OPEN30"
     ],
     "frame_check": {
-      "total": 176,
-      "frame_matched": 113,
+      "total": 175,
+      "frame_matched": 112,
       "remaining": 63,
-      "remaining_ratio": 0.35795454545454547
+      "remaining_ratio": 0.36
     },
     "view_bbox": {
       "front": [
@@ -641,7 +641,7 @@
   "gate2": {
     "gate": "gate2_completeness_v1",
     "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-002_ベアリングカラー.dxf",
-    "plan": "調査\\phase5_ai_operator\\plan_AUTO-002_ベアリングカラー.json",
+    "plan": "調査/phase5_ai_operator/plan_AUTO-002_ベアリングカラー.json",
     "dropped_dimensions": [],
     "ok": true,
     "unspecified": [],
@@ -877,13 +877,13 @@
   },
   "independent_verify": {
     "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-002_ベアリングカラー.dxf",
-    "plan": "調査\\phase5_ai_operator\\plan_AUTO-002_ベアリングカラー.json",
+    "plan": "調査/phase5_ai_operator/plan_AUTO-002_ベアリングカラー.json",
     "file_attrs_ok": true,
     "frame": {
-      "total": 182,
-      "frame_matched": 113,
+      "total": 181,
+      "frame_matched": 112,
       "remaining": 69,
-      "remaining_ratio": 0.3791208791208791
+      "remaining_ratio": 0.3812154696132597
     },
     "gate1": [
       {

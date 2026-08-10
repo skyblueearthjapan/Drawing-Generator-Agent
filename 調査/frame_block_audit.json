@@ -1,0 +1,99 @@
+{
+  "verdicts": [
+    {
+      "template_block": "BLOCK002",
+      "n_ents": 32,
+      "bbox": [
+        519.24262760435,
+        813.17298408725,
+        639.24262760435,
+        1077.1729840873
+      ],
+      "in_frame": false,
+      "match": false,
+      "total_votes": 80,
+      "n_distinct_contents": 2,
+      "majority_desc": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-08_シャフト.dxf (block=(なし/不在), n_ents=0, 78/80票)"
+    },
+    {
+      "template_block": "BLOCK004",
+      "n_ents": 11,
+      "bbox": [
+        168.03987259152,
+        7.6687870559977,
+        181.17172699337,
+        12.751764531148
+      ],
+      "in_frame": true,
+      "match": true,
+      "total_votes": 80,
+      "n_distinct_contents": 1,
+      "majority_desc": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-07_走行ギア.dxf (block=BLOCK004, n_ents=11, 80/80票)"
+    },
+    {
+      "template_block": "BLOCK005",
+      "n_ents": 56,
+      "bbox": [
+        92.759851837957,
+        4.9999999999998,
+        166.43737735483,
+        28.5895
+      ],
+      "in_frame": true,
+      "match": true,
+      "total_votes": 80,
+      "n_distinct_contents": 1,
+      "majority_desc": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-07_走行ギア.dxf (block=BLOCK005, n_ents=56, 80/80票)"
+    },
+    {
+      "template_block": "BLOCK006",
+      "n_ents": 4,
+      "bbox": [
+        6.7003419901737,
+        12.029538831528,
+        11.33285798981,
+        15.967177431219
+      ],
+      "in_frame": true,
+      "match": true,
+      "total_votes": 80,
+      "n_distinct_contents": 1,
+      "majority_desc": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-07_走行ギア.dxf (block=BLOCK006, n_ents=4, 80/80票)"
+    },
+    {
+      "template_block": "BLOCK007",
+      "n_ents": 4,
+      "bbox": [
+        6.7003419901737,
+        17.926913831528,
+        11.33285798981,
+        21.864552431219
+      ],
+      "in_frame": true,
+      "match": true,
+      "total_votes": 80,
+      "n_distinct_contents": 1,
+      "majority_desc": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-07_走行ギア.dxf (block=BLOCK007, n_ents=4, 80/80票)"
+    }
+  ],
+  "mismatches": [
+    {
+      "template_block": "BLOCK002",
+      "n_ents": 32,
+      "bbox": [
+        519.24262760435,
+        813.17298408725,
+        639.24262760435,
+        1077.1729840873
+      ],
+      "in_frame": false,
+      "total_votes": 80,
+      "n_distinct_contents": 2,
+      "majority_file": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-08_シャフト.dxf",
+      "majority_block_name": "(なし/不在)",
+      "majority_n_ents": 0,
+      "majority_bbox": null,
+      "majority_votes": 78
+    }
+  ]
+}
