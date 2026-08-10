@@ -33,21 +33,23 @@ from engine import dim_engine            # noqa: E402
 from engine import gate2_completeness    # noqa: E402
 from engine import generate_drawing      # noqa: E402
 
-PCD_CASE = {
-    "dxf": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-4-07", u"生成", u"不合格",
-                        u"25154-4-07_減速機ブラケット.dxf"),
-    "plan": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-4-07", u"plan.json"),
-}
-POLY_CASE = {
-    "dxf": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-1-04", u"生成", u"不合格",
-                        u"25154-1-04_ケーブルベア側ジャッキプレート.dxf"),
-    "plan": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-1-04", u"plan.json"),
-}
-CLEAN_CASE = {
-    "dxf": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-4-12", u"生成",
-                        u"25154-4-12_LSブラケット2.dxf"),
-    "plan": os.path.join(ROOT, u"data", u"依頼箱", u"BLIND-25154-4-12", u"plan.json"),
-}
+def _case(request_id, dxf_name):
+    u"""依頼フォルダの生成DXFを探す。
+
+    ❗合否で置き場所が変わる(合格=`生成/`、不合格=`生成/不合格/`)ので、
+    どちらにあってもよいように**両方を探す**。ハードコードすると、部品が納品化した
+    (=検証が強化されて合格に変わった)瞬間に反証テストが FileNotFoundError で死ぬ。
+    """
+    base = os.path.join(ROOT, u"data", u"依頼箱", request_id)
+    cands = [os.path.join(base, u"生成", dxf_name),
+             os.path.join(base, u"生成", u"不合格", dxf_name)]
+    dxf = next((p for p in cands if os.path.exists(p)), cands[0])
+    return {"dxf": dxf, "plan": os.path.join(base, u"plan.json")}
+
+
+PCD_CASE = _case(u"BLIND-25154-4-07", u"25154-4-07_減速機ブラケット.dxf")
+POLY_CASE = _case(u"BLIND-25154-1-04", u"25154-1-04_ケーブルベア側ジャッキプレート.dxf")
+CLEAN_CASE = _case(u"BLIND-25154-4-12", u"25154-4-12_LSブラケット2.dxf")
 
 ZEN = u"０１２３４５６７８９"
 
