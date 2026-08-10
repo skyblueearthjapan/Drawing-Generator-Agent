@@ -1,0 +1,69 @@
+{
+  "key": "5-03",
+  "name": "ひねりギア",
+  "axis": "5.ひねり軸",
+  "bucket_a": false,
+  "shape_class": "lathe",
+  "reason": "断面が丸く(外径φ125.00/直交辺[125.0, 125.0])、同軸径4種・軸方向長短い",
+  "frame": {
+    "ex": [
+      0,
+      1,
+      0
+    ],
+    "ey": [
+      -1,
+      0,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "Y",
+    "ez_axis": "Z",
+    "rule": "主軸Yを紙面水平(正面=輪郭図 / 右側面=円が見える図)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 270
+    },
+    "top": {
+      "sw_view": "*左側面",
+      "rotation_deg": 270
+    },
+    "right": {
+      "sw_view": "*平面",
+      "rotation_deg": 270
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    125.0,
+    60.00000000000001,
+    125.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "verdict": "判定不能",
+      "reason": "照合が成立していない"
+    },
+    "orientation": {
+      "verdict": "判定不能",
+      "reason": "人間図面のfront役ビューが取れない"
+    },
+    "verdict": "要調査"
+  },
+  "rule_version": "v2",
+  "v2_source": {
+    "dir": "調査\\phase4_batch\\5-03",
+    "reason": "v1 と同一フレーム(ex=+Y ez=+Z)"
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "key": "5-09",
+  "name": "メカストッパー",
+  "axis": "5.ひねり軸",
+  "bucket_a": true,
+  "shape_class": "plate",
+  "reason": "最小辺19.000/中間辺52.000=0.365 < 0.50",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      0,
+      -1
+    ],
+    "ez": [
+      0,
+      1,
+      0
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Y",
+    "rule": "最小辺Y(板厚)を紙面法線(正面=広い面)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*背面",
+      "rotation_deg": 180
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 90
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    79.0,
+    19.0,
+    52.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "0",
+          "role": "top",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 1.0,
+          "cov_sw": 1.0,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              11.0,
+              11.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "2",
+          "role": "front",
+          "sw_view": "top",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.7486,
+          "cov_sw": 0.7486,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "3",
+          "role": "right",
+          "sw_view": "right",
+          "transform": "回転270",
+          "det": 1,
+          "iou": 0.7152,
+          "cov_sw": 0.7152,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              4.134,
+              5.0,
+              0.866
+            ],
+            [
+              5.0,
+              5.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            4.134
+          ]
+        }
+      ],
+      "worst": {
+        "iou": 0.7152,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 1.0,
+        "cov_sw": 0.7152
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [
+        4.134
+      ],
+      "fails": [
+        "SW側に対応円が無い人間側の円 1 個: [4.134](ねじ表現の可能性)"
+      ],
+      "warns": [
+        "SW側被覆 0.7152 < 0.85(隠れ線の流儀差の可能性)"
+      ],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "2",
+      "matched_sw_view": "top",
+      "matched_transform": "恒等",
+      "ties": [
+        "恒等",
+        "鏡像(上下反転)"
+      ],
+      "n_ties": 2,
+      "planned_sw_view": "*平面",
+      "planned_rotation_deg": 0,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "別ビュー方向(top)"
+    },
+    "verdict": "不合格"
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "key": "3-22",
+  "name": "カップリングカバー",
+  "axis": "3.昇降軸",
+  "bucket_a": false,
+  "shape_class": "other",
+  "reason": "支配的な軸も薄さも無い(円筒面積比0.004)",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      1,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Z",
+    "rule": "[対照] STEPの座標系そのまま"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 0
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    206.00000000000003,
+    107.00000000000001,
+    165.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "2",
+          "role": "left",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9974,
+          "cov_sw": 0.9974,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "3",
+          "role": "front",
+          "sw_view": "right",
+          "transform": "鏡像(左右反転)",
+          "det": -1,
+          "iou": 0.9922,
+          "cov_sw": 0.9922,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.9922,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 1.0,
+        "cov_sw": 0.9922
+      },
+      "mirror_required": true,
+      "unmatched_human_circles": [],
+      "fails": [
+        "鏡像が最良(det=-1)→即停止"
+      ],
+      "warns": [],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "3",
+      "matched_sw_view": "right",
+      "matched_transform": "鏡像(左右反転)",
+      "ties": [
+        "鏡像(左右反転)"
+      ],
+      "n_ties": 1,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 0,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "別ビュー方向(right)"
+    },
+    "verdict": "不合格"
+  },
+  "rule_version": "v2",
+  "v2_source": {
+    "dir": "調査\\phase4_batch2\\_baseline\\3-22",
+    "reason": "恒等 = 対照実験と同一"
+  }
+}

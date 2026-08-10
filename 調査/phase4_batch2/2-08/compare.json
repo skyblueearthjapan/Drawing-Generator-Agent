@@ -1,0 +1,452 @@
+{
+  "label": "2-08",
+  "human_dxf": "25154-2-08_ギヤカバーフタ.dxf",
+  "frame_summary": {
+    "total": 169,
+    "frame_matched": 113,
+    "remaining": 56,
+    "remaining_ratio": 0.33136094674556216
+  },
+  "scale_text": "\\T1.000000;１：１",
+  "scale_factor": 1.0,
+  "paper_magnification": 1.0,
+  "use_frame": true,
+  "model_size_mm": [
+    120.00835002063377,
+    50.008351033012765,
+    6.064252061605657
+  ],
+  "model_volume_mm3": 9344.875386503307,
+  "model_bbox_mm": [
+    -60.00417501031724,
+    -0.004175516506487244,
+    396.53577293839436,
+    60.00417501031652,
+    50.00417551650628,
+    402.600025
+  ],
+  "human_roles": {
+    "0": "front",
+    "2": "top"
+  },
+  "human_role_score": {
+    "front_idx": 0,
+    "score": 3,
+    "all_scores": {
+      "0": 3,
+      "2": 3
+    }
+  },
+  "human_to_sw": {
+    "0": {
+      "human_role": "front",
+      "human_size": [
+        120.0,
+        50.0
+      ],
+      "human_circle_d": [
+        8.0,
+        8.0
+      ],
+      "sw_circle_d": [],
+      "sw_size": [
+        120.0,
+        50.0
+      ],
+      "sw_view": "front",
+      "transform": "恒等",
+      "det": 1,
+      "iou": 0.9966,
+      "cov_sw": 0.9966,
+      "cov_human": 1.0,
+      "size_err_mm": 0.0,
+      "ties": [
+        "恒等",
+        "回転180",
+        "鏡像(左右反転)",
+        "鏡像(上下反転)"
+      ],
+      "mirror_required": false,
+      "ranking": [
+        {
+          "sw_view": "front",
+          "iou": 0.9966,
+          "transform": "恒等"
+        },
+        {
+          "sw_view": "right",
+          "iou": 0.142,
+          "transform": "回転180"
+        },
+        {
+          "sw_view": "top",
+          "iou": 0.1367,
+          "transform": "恒等"
+        }
+      ]
+    },
+    "2": {
+      "human_role": "top",
+      "human_size": [
+        120.0,
+        6.073
+      ],
+      "human_circle_d": [],
+      "sw_circle_d": [],
+      "sw_size": [
+        120.0,
+        6.06
+      ],
+      "sw_view": "top",
+      "transform": "恒等",
+      "det": 1,
+      "iou": 0.9937,
+      "cov_sw": 0.9937,
+      "cov_human": 1.0,
+      "size_err_mm": 0.0134,
+      "ties": [
+        "恒等",
+        "鏡像(左右反転)"
+      ],
+      "mirror_required": false,
+      "ranking": [
+        {
+          "sw_view": "top",
+          "iou": 0.9937,
+          "transform": "恒等"
+        },
+        {
+          "sw_view": "right",
+          "iou": 0.2823,
+          "transform": "回転90"
+        },
+        {
+          "sw_view": "front",
+          "iou": 0.122,
+          "transform": "恒等"
+        }
+      ]
+    }
+  },
+  "sw_views": {
+    "front": {
+      "size": [
+        120.00000000000722,
+        50.000000000016115
+      ],
+      "circles": []
+    },
+    "top": {
+      "size": [
+        120.00000000000722,
+        6.060051545102965
+      ],
+      "circles": []
+    },
+    "right": {
+      "size": [
+        6.060051545113197,
+        50.000000000016115
+      ],
+      "circles": []
+    }
+  },
+  "human_views": [
+    {
+      "size": [
+        120.0,
+        49.999999999997996
+      ],
+      "circles": [
+        [
+          8.0,
+          10.0,
+          25.0
+        ],
+        [
+          8.0,
+          110.0,
+          25.0
+        ]
+      ],
+      "bbox": [
+        148.6767460981,
+        80.038328125142,
+        268.6767460981,
+        130.03832812514
+      ],
+      "is_part_view": true
+    },
+    {
+      "size": [
+        73.677525516873,
+        23.5895000000002
+      ],
+      "circles": [],
+      "bbox": [
+        92.759851837957,
+        4.9999999999998,
+        166.43737735483,
+        28.5895
+      ],
+      "is_part_view": false
+    },
+    {
+      "size": [
+        120.00000000000824,
+        6.073488464318018
+      ],
+      "circles": [],
+      "bbox": [
+        148.67674609810632,
+        195.5134649025137,
+        268.67674609811456,
+        201.58695336683172
+      ],
+      "is_part_view": true
+    },
+    {
+      "size": [
+        34.590582,
+        10.039078360525735
+      ],
+      "circles": [],
+      "bbox": [
+        -86.795622157626,
+        252.62547239154,
+        -52.205040157626,
+        262.66455075206574
+      ],
+      "is_part_view": false
+    },
+    {
+      "size": [
+        10.75157453743003,
+        8.881735487443
+      ],
+      "circles": [],
+      "bbox": [
+        341.0791720932,
+        7.110205085831,
+        351.83074663063,
+        15.991940573274
+      ],
+      "is_part_view": false
+    },
+    {
+      "size": [
+        11.898665999999,
+        4.986680821852701
+      ],
+      "circles": [],
+      "bbox": [
+        28.785314340943,
+        252.60258472759,
+        40.683980340942,
+        257.5892655494427
+      ],
+      "is_part_view": false
+    }
+  ],
+  "match": {
+    "front": {
+      "best_human_idx": 0,
+      "human_role": "front",
+      "identity_iou": 0.9966,
+      "identity_is_best": true,
+      "human_size": [
+        120.0,
+        50.0
+      ],
+      "sw_size": [
+        120.0,
+        50.0
+      ],
+      "iou": 0.9966,
+      "cov_sw": 0.9966,
+      "cov_human": 1.0,
+      "transform": "恒等",
+      "det": 1,
+      "size_err_mm": 0.0,
+      "tie_transforms": [
+        "恒等",
+        "回転180",
+        "鏡像(左右反転)",
+        "鏡像(上下反転)"
+      ],
+      "mirror_required": false,
+      "sw_circle_d": [],
+      "human_circle_d": [
+        8.0,
+        8.0
+      ],
+      "ranking": [
+        {
+          "human_idx": 0,
+          "iou": 0.9966,
+          "transform": "恒等"
+        },
+        {
+          "human_idx": 2,
+          "iou": 0.122,
+          "transform": "恒等"
+        }
+      ],
+      "role_match": {
+        "human_idx": 0,
+        "best": {
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9966,
+          "cov_sw": 0.9966,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "size": [
+            120.0,
+            50.0
+          ]
+        },
+        "identity": {
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9966,
+          "cov_sw": 0.9966,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "size": [
+            120.0,
+            50.0
+          ]
+        },
+        "ties": [
+          "恒等",
+          "回転180",
+          "鏡像(左右反転)",
+          "鏡像(上下反転)"
+        ],
+        "human_circle_d": [
+          8.0,
+          8.0
+        ],
+        "size_human": [
+          120.0,
+          50.0
+        ]
+      }
+    },
+    "top": {
+      "best_human_idx": 2,
+      "human_role": "top",
+      "identity_iou": 0.9937,
+      "identity_is_best": true,
+      "human_size": [
+        120.0,
+        6.073
+      ],
+      "sw_size": [
+        120.0,
+        6.06
+      ],
+      "iou": 0.9937,
+      "cov_sw": 0.9937,
+      "cov_human": 1.0,
+      "transform": "恒等",
+      "det": 1,
+      "size_err_mm": 0.0134,
+      "tie_transforms": [
+        "恒等",
+        "鏡像(左右反転)"
+      ],
+      "mirror_required": false,
+      "sw_circle_d": [],
+      "human_circle_d": [],
+      "ranking": [
+        {
+          "human_idx": 2,
+          "iou": 0.9937,
+          "transform": "恒等"
+        },
+        {
+          "human_idx": 0,
+          "iou": 0.1367,
+          "transform": "恒等"
+        }
+      ],
+      "role_match": {
+        "human_idx": 2,
+        "best": {
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9937,
+          "cov_sw": 0.9937,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0134,
+          "size": [
+            120.0,
+            6.06
+          ]
+        },
+        "identity": {
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9937,
+          "cov_sw": 0.9937,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0134,
+          "size": [
+            120.0,
+            6.06
+          ]
+        },
+        "ties": [
+          "恒等",
+          "鏡像(左右反転)"
+        ],
+        "human_circle_d": [],
+        "size_human": [
+          120.0,
+          6.073
+        ]
+      }
+    },
+    "right": {
+      "best_human_idx": 2,
+      "human_role": "top",
+      "identity_iou": 0.0403,
+      "identity_is_best": false,
+      "human_size": [
+        120.0,
+        6.073
+      ],
+      "sw_size": [
+        6.06,
+        50.0
+      ],
+      "iou": 0.2823,
+      "cov_sw": 0.3276,
+      "cov_human": 0.2823,
+      "transform": "回転90",
+      "det": 1,
+      "size_err_mm": 70.0,
+      "tie_transforms": [
+        "回転90",
+        "鏡像+回転90"
+      ],
+      "mirror_required": false,
+      "sw_circle_d": [],
+      "human_circle_d": [],
+      "ranking": [
+        {
+          "human_idx": 2,
+          "iou": 0.2823,
+          "transform": "回転90"
+        },
+        {
+          "human_idx": 0,
+          "iou": 0.142,
+          "transform": "回転180"
+        }
+      ]
+    }
+  }
+}

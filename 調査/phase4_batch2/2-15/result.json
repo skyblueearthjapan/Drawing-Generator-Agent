@@ -1,0 +1,150 @@
+{
+  "key": "2-15",
+  "name": "LSカバー",
+  "axis": "2.ターン軸",
+  "bucket_a": false,
+  "shape_class": "plate",
+  "reason": "最小辺115.000/中間辺266.000=0.432 < 0.50",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      1,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Z",
+    "rule": "最小辺Z(板厚)を紙面法線(正面=広い面)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 0
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    364.0,
+    266.00000000000006,
+    115.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "1",
+          "role": "front",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9992,
+          "cov_sw": 0.9992,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "2",
+          "role": "top",
+          "sw_view": "top",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 1.0,
+          "cov_sw": 1.0,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0001,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "3",
+          "role": "right",
+          "sw_view": "right",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9987,
+          "cov_sw": 0.9987,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0001,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.9987,
+        "size_err": 0.0001,
+        "circle": 0.0,
+        "cov_human": 1.0,
+        "cov_sw": 0.9987
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [],
+      "fails": [],
+      "warns": [],
+      "verdict": "合格"
+    },
+    "orientation": {
+      "human_front_idx": "1",
+      "matched_sw_view": "front",
+      "matched_transform": "恒等",
+      "ties": [
+        "恒等",
+        "鏡像(左右反転)"
+      ],
+      "n_ties": 2,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 0,
+      "correct": true,
+      "ambiguous": true,
+      "verdict": "正解"
+    },
+    "verdict": "合格"
+  }
+}

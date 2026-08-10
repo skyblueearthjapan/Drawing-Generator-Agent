@@ -1,0 +1,253 @@
+{
+  "key": "2-04",
+  "name": "中間シャフト",
+  "axis": "2.ターン軸",
+  "bucket_a": false,
+  "shape_class": "lathe",
+  "reason": "断面が丸く(外径φ158.00/直交辺[158.0, 158.0])、同軸径6種・軸方向長短い",
+  "frame": {
+    "ex": [
+      0,
+      1,
+      0
+    ],
+    "ey": [
+      -1,
+      0,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "Y",
+    "ez_axis": "Z",
+    "rule": "主軸Yを紙面水平(正面=輪郭図 / 右側面=円が見える図)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 270
+    },
+    "top": {
+      "sw_view": "*左側面",
+      "rotation_deg": 270
+    },
+    "right": {
+      "sw_view": "*平面",
+      "rotation_deg": 270
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    158.0,
+    89.0,
+    158.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "2",
+          "role": "left",
+          "sw_view": "right",
+          "transform": "回転90",
+          "det": 1,
+          "iou": 0.5421,
+          "cov_sw": 0.5421,
+          "cov_human": 0.9848,
+          "size_err_mm": 0.0003,
+          "circle_diff_mm": 0.38700000000000045,
+          "circle_pairs": [
+            [
+              8.566,
+              8.179,
+              0.387
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.0,
+              9.0,
+              0.0
+            ],
+            [
+              9.728,
+              9.0,
+              0.728
+            ],
+            [
+              11.0,
+              11.0,
+              0.0
+            ],
+            [
+              11.0,
+              11.0,
+              0.0
+            ],
+            [
+              11.0,
+              11.0,
+              0.0
+            ],
+            [
+              11.0,
+              11.0,
+              0.0
+            ],
+            [
+              11.0,
+              11.0,
+              0.0
+            ],
+            [
+              11.0,
+              11.0,
+              0.0
+            ],
+            [
+              25.0,
+              25.0,
+              0.0
+            ],
+            [
+              158.0,
+              158.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            9.728
+          ]
+        },
+        {
+          "human_idx": "9",
+          "role": "front",
+          "sw_view": "top",
+          "transform": "回転180",
+          "det": 1,
+          "iou": 0.7379,
+          "cov_sw": 0.7379,
+          "cov_human": 0.9625,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              4.134,
+              null,
+              null
+            ],
+            [
+              5.0,
+              null,
+              null
+            ]
+          ],
+          "circle_unmatched_human": [
+            4.134,
+            5.0
+          ]
+        }
+      ],
+      "worst": {
+        "iou": 0.5421,
+        "size_err": 0.0003,
+        "circle": 0.38700000000000045,
+        "cov_human": 0.9625,
+        "cov_sw": 0.5421
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [
+        9.728,
+        4.134,
+        5.0
+      ],
+      "fails": [
+        "円直径差 0.3870mm > 0.05",
+        "人間側被覆 0.9625 < 1.0000",
+        "SW側に対応円が無い人間側の円 3 個: [9.728, 4.134, 5.0](ねじ表現の可能性)"
+      ],
+      "warns": [
+        "SW側被覆 0.5421 < 0.85(隠れ線の流儀差の可能性)"
+      ],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "9",
+      "matched_sw_view": "top",
+      "matched_transform": "回転180",
+      "ties": [
+        "回転180",
+        "鏡像(左右反転)"
+      ],
+      "n_ties": 2,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 270,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "別ビュー方向(top)"
+    },
+    "verdict": "不合格"
+  }
+}

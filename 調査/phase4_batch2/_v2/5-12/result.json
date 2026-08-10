@@ -1,0 +1,122 @@
+{
+  "key": "5-12",
+  "name": "原点ドグ",
+  "axis": "5.ひねり軸",
+  "bucket_a": true,
+  "shape_class": "other",
+  "reason": "支配的な軸も薄さも無い(円筒面積比0.045)",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      1,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Z",
+    "rule": "[対照] STEPの座標系そのまま"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 0
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    20.0,
+    28.0,
+    56.00000000000001
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "7",
+          "role": "right",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.8286,
+          "cov_sw": 0.8286,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0001,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "20",
+          "role": "front",
+          "sw_view": "right",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9414,
+          "cov_sw": 0.9414,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0001,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.8286,
+        "size_err": 0.0001,
+        "circle": 0.0,
+        "cov_human": 1.0,
+        "cov_sw": 0.8286
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [],
+      "fails": [],
+      "warns": [
+        "SW側被覆 0.8286 < 0.85(隠れ線の流儀差の可能性)"
+      ],
+      "verdict": "合格"
+    },
+    "orientation": {
+      "human_front_idx": "20",
+      "matched_sw_view": "right",
+      "matched_transform": "恒等",
+      "ties": [
+        "恒等"
+      ],
+      "n_ties": 1,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 0,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "別ビュー方向(right)"
+    },
+    "verdict": "向き外し"
+  },
+  "rule_version": "v2",
+  "v2_source": {
+    "dir": "調査\\phase4_batch2\\_baseline\\5-12",
+    "reason": "恒等 = 対照実験と同一"
+  }
+}

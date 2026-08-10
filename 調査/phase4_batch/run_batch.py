@@ -315,15 +315,16 @@ def process(sw, mod, tgt, out_dir, tangent=dp.swTangentEdgesHidden, baseline=Fal
     return meta
 
 
-def recompare(targets):
+def recompare(targets, base_dir=None):
     u"""保存済みの views.dxf / meta.json だけで照合と判定をやり直す(SolidWorks不要)。
 
     照合ロジック(役割推定・尺度換算・ゲート④)を直したときに、投影をやり直さずに
     30点ぶんの判定を作り直せる。投影は決定論なので結果は同一になる。
     """
     n = 0
+    base_dir = base_dir or HERE
     for t in targets:
-        d = os.path.join(HERE, t["key"])
+        d = os.path.join(base_dir, t["key"])
         meta_p = os.path.join(d, "meta.json")
         dxf_p = os.path.join(d, "views.dxf")
         if not (os.path.exists(meta_p) and os.path.exists(dxf_p)):
@@ -364,17 +365,20 @@ def recompare(targets):
 
 # ------------------------------------------------------------------ main
 def main():
-    with io.open(os.path.join(HERE, "targets.json"), encoding="utf-8") as f:
+    # `--dir=<絶対パス or ROOT相対>` で別バッチ(第2弾など)の targets.json / 出力先へ切り替える
+    work = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--dir=")), None)
+    work = HERE if not work else (work if os.path.isabs(work) else os.path.join(ROOT, work))
+    with io.open(os.path.join(work, "targets.json"), encoding="utf-8") as f:
         targets = json.load(f)["targets"]
-    if "--recompare" in sys.argv:
-        return recompare(targets)
     baseline = "--baseline" in sys.argv
     rule = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--rule=")), None)
-    base_dir = HERE
+    base_dir = work
     if baseline:
-        base_dir = os.path.join(HERE, "_baseline")
+        base_dir = os.path.join(work, "_baseline")
     elif rule and rule != vo.RULE_VERSION_DEFAULT:
-        base_dir = os.path.join(HERE, "_" + rule)
+        base_dir = os.path.join(work, "_" + rule)
+    if "--recompare" in sys.argv:
+        return recompare(targets, base_dir)
     n_want = int(next((a for a in sys.argv[1:] if not a.startswith("-")), 3))
     state = load_state()
 

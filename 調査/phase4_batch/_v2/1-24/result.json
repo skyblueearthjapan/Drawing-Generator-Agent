@@ -1,0 +1,134 @@
+{
+  "key": "1-24",
+  "name": "リミットスイッチ間座",
+  "axis": "1.走行軸",
+  "bucket_a": true,
+  "shape_class": "plate",
+  "reason": "最小辺4.500/中間辺40.000=0.113 < 0.50",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      1,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Z",
+    "rule": "[対照] STEPの座標系そのまま"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 0
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    164.0,
+    40.0,
+    4.5
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "1",
+          "role": "front",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 1.0,
+          "cov_sw": 1.0,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              4.134,
+              5.0,
+              0.866
+            ],
+            [
+              4.134,
+              5.0,
+              0.866
+            ],
+            [
+              5.0,
+              5.0,
+              0.0
+            ],
+            [
+              5.0,
+              5.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            4.134,
+            4.134
+          ]
+        }
+      ],
+      "worst": {
+        "iou": 1.0,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 1.0,
+        "cov_sw": 1.0
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [
+        4.134,
+        4.134
+      ],
+      "fails": [
+        "SW側に対応円が無い人間側の円 2 個: [4.134, 4.134](ねじ表現の可能性)"
+      ],
+      "warns": [],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "1",
+      "matched_sw_view": "front",
+      "matched_transform": "恒等",
+      "ties": [
+        "恒等"
+      ],
+      "n_ties": 1,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 0,
+      "correct": true,
+      "ambiguous": false,
+      "verdict": "正解"
+    },
+    "verdict": "不合格"
+  },
+  "rule_version": "v2",
+  "v2_source": {
+    "dir": "調査\\phase4_batch\\_baseline\\1-24",
+    "reason": "恒等 = 対照実験と同一"
+  }
+}

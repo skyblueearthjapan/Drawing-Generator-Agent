@@ -1,0 +1,166 @@
+{
+  "key": "4-13",
+  "name": "押しボルト座",
+  "axis": "4.前後軸",
+  "bucket_a": true,
+  "shape_class": "holed_block",
+  "reason": "板でも旋盤物でもないが Y軸の円筒面が支配的(面積比0.216)",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      0,
+      -1
+    ],
+    "ez": [
+      0,
+      1,
+      0
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Y",
+    "rule": "穴軸Yを紙面法線(正面=穴が円に見える面)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*背面",
+      "rotation_deg": 180
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 90
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    34.0,
+    12.0,
+    12.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "2",
+          "role": "front",
+          "sw_view": "top",
+          "transform": "回転180",
+          "det": 1,
+          "iou": 0.7231,
+          "cov_sw": 0.7231,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              4.134,
+              5.0,
+              0.866
+            ],
+            [
+              5.0,
+              5.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            4.134
+          ]
+        },
+        {
+          "human_idx": "3",
+          "role": "top",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.8196,
+          "cov_sw": 0.8196,
+          "cov_human": 0.9503,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              6.0,
+              7.0,
+              1.0
+            ],
+            [
+              6.0,
+              7.0,
+              1.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            6.0,
+            6.0
+          ]
+        },
+        {
+          "human_idx": "4",
+          "role": "right",
+          "sw_view": "right",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.5517,
+          "cov_sw": 0.5517,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.5517,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 0.9503,
+        "cov_sw": 0.5517
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [
+        4.134,
+        6.0,
+        6.0
+      ],
+      "fails": [
+        "人間側被覆 0.9503 < 1.0000",
+        "SW側に対応円が無い人間側の円 3 個: [4.134, 6.0, 6.0](ねじ表現の可能性)"
+      ],
+      "warns": [
+        "SW側被覆 0.5517 < 0.85(隠れ線の流儀差の可能性)"
+      ],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "2",
+      "matched_sw_view": "top",
+      "matched_transform": "回転180",
+      "ties": [
+        "回転180",
+        "鏡像(上下反転)"
+      ],
+      "n_ties": 2,
+      "planned_sw_view": "*平面",
+      "planned_rotation_deg": 0,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "別ビュー方向(top)"
+    },
+    "verdict": "不合格"
+  }
+}

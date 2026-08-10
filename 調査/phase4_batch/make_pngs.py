@@ -21,11 +21,15 @@ import render_step_check as rsc  # noqa: E402
 
 def main():
     want = [a for a in sys.argv[1:] if not a.startswith("-")]
-    with io.open(os.path.join(HERE, "targets.json"), encoding="utf-8") as f:
+    # `--dir=` で別バッチ(第2弾など)の成果物を描く。`--sub=` で対照/_v2 の成果物を指す
+    work = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--dir=")), None)
+    work = HERE if not work else (work if os.path.isabs(work) else os.path.join(ROOT, work))
+    sub = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--sub=")), "")
+    with io.open(os.path.join(work, "targets.json"), encoding="utf-8") as f:
         targets = json.load(f)["targets"]
     n = 0
     for t in targets:
-        d = os.path.join(HERE, t["key"])
+        d = os.path.join(work, sub, t["key"])
         rp = os.path.join(d, "result.json")
         if not os.path.exists(rp):
             continue

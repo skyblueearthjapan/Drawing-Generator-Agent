@@ -1,0 +1,146 @@
+{
+  "key": "6-11",
+  "name": "LSブラケット",
+  "axis": "6.傾動軸",
+  "bucket_a": true,
+  "shape_class": "other",
+  "reason": "支配的な軸も薄さも無い(円筒面積比0.053)",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      1,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Z",
+    "rule": "[対照] STEPの座標系そのまま"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 0
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    46.5,
+    46.0,
+    47.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "0",
+          "role": "top",
+          "sw_view": "top",
+          "transform": "回転270",
+          "det": 1,
+          "iou": 0.9638,
+          "cov_sw": 0.9638,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0007,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              3.242,
+              4.0,
+              0.758
+            ],
+            [
+              4.0,
+              4.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            3.242
+          ]
+        },
+        {
+          "human_idx": "1",
+          "role": "front",
+          "sw_view": "right",
+          "transform": "回転180",
+          "det": 1,
+          "iou": 0.9591,
+          "cov_sw": 0.9591,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "2",
+          "role": "right",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9591,
+          "cov_sw": 0.9591,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0007,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.9591,
+        "size_err": 0.0007,
+        "circle": 0.0,
+        "cov_human": 1.0,
+        "cov_sw": 0.9591
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [
+        3.242
+      ],
+      "fails": [
+        "SW側に対応円が無い人間側の円 1 個: [3.242](ねじ表現の可能性)"
+      ],
+      "warns": [],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "1",
+      "matched_sw_view": "right",
+      "matched_transform": "回転180",
+      "ties": [
+        "回転180"
+      ],
+      "n_ties": 1,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 0,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "別ビュー方向(right)"
+    },
+    "verdict": "不合格"
+  }
+}

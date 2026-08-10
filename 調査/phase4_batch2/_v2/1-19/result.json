@@ -1,0 +1,222 @@
+{
+  "key": "1-19",
+  "name": "ケーブルベアブラケット",
+  "axis": "1.走行軸",
+  "bucket_a": false,
+  "shape_class": "other",
+  "reason": "支配的な軸も薄さも無い(円筒面積比0.028)",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      1,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Z",
+    "rule": "[対照] STEPの座標系そのまま"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 0
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    390.0,
+    217.0,
+    170.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "2",
+          "role": "front",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9485,
+          "cov_sw": 0.9485,
+          "cov_human": 0.9852,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "3",
+          "role": "top",
+          "sw_view": "top",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9784,
+          "cov_sw": 0.9784,
+          "cov_human": 0.9916,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              4.917,
+              6.0,
+              1.083
+            ],
+            [
+              4.917,
+              6.0,
+              1.083
+            ],
+            [
+              4.917,
+              6.0,
+              1.083
+            ],
+            [
+              4.917,
+              6.0,
+              1.083
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.647,
+              6.0,
+              0.647
+            ],
+            [
+              6.647,
+              6.0,
+              0.647
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            4.917,
+            4.917,
+            4.917,
+            4.917,
+            6.647,
+            6.647
+          ]
+        },
+        {
+          "human_idx": "4",
+          "role": "right",
+          "sw_view": "right",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9489,
+          "cov_sw": 0.9489,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              14.0,
+              14.0,
+              0.0
+            ],
+            [
+              14.0,
+              14.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.9485,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 0.9852,
+        "cov_sw": 0.9485
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [
+        4.917,
+        4.917,
+        4.917,
+        4.917,
+        6.647,
+        6.647
+      ],
+      "fails": [
+        "人間側被覆 0.9852 < 1.0000",
+        "SW側に対応円が無い人間側の円 6 個: [4.917, 4.917, 4.917, 4.917, 6.647, 6.647](ねじ表現の可能性)"
+      ],
+      "warns": [],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "2",
+      "matched_sw_view": "front",
+      "matched_transform": "恒等",
+      "ties": [
+        "恒等"
+      ],
+      "n_ties": 1,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 0,
+      "correct": true,
+      "ambiguous": false,
+      "verdict": "正解"
+    },
+    "verdict": "不合格"
+  },
+  "rule_version": "v2",
+  "v2_source": {
+    "dir": "調査\\phase4_batch2\\_baseline\\1-19",
+    "reason": "恒等 = 対照実験と同一"
+  }
+}

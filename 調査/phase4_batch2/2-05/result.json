@@ -1,0 +1,247 @@
+{
+  "key": "2-05",
+  "name": "減速機フランジ",
+  "axis": "2.ターン軸",
+  "bucket_a": false,
+  "shape_class": "plate",
+  "reason": "最小辺41.000/中間辺235.000=0.174 < 0.50",
+  "frame": {
+    "ex": [
+      0,
+      0,
+      1
+    ],
+    "ey": [
+      1,
+      0,
+      0
+    ],
+    "ez": [
+      0,
+      1,
+      0
+    ],
+    "ex_axis": "Z",
+    "ez_axis": "Y",
+    "rule": "最小辺Y(板厚)を紙面法線(正面=広い面)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*平面",
+      "rotation_deg": 90
+    },
+    "top": {
+      "sw_view": "*右側面",
+      "rotation_deg": 180
+    },
+    "right": {
+      "sw_view": "*正面",
+      "rotation_deg": 90
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    235.0,
+    41.0,
+    240.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "2",
+          "role": "left",
+          "sw_view": "front",
+          "transform": "回転90",
+          "det": 1,
+          "iou": 0.5184,
+          "cov_sw": 0.5184,
+          "cov_human": 0.9751,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              6.647,
+              8.0,
+              1.353
+            ],
+            [
+              6.647,
+              8.0,
+              1.353
+            ],
+            [
+              6.647,
+              8.0,
+              1.353
+            ],
+            [
+              6.647,
+              8.0,
+              1.353
+            ],
+            [
+              6.647,
+              8.0,
+              1.353
+            ],
+            [
+              6.647,
+              8.0,
+              1.353
+            ],
+            [
+              6.647,
+              8.0,
+              1.353
+            ],
+            [
+              6.647,
+              8.0,
+              1.353
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              190.0,
+              190.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            6.647,
+            6.647,
+            6.647,
+            6.647,
+            6.647,
+            6.647,
+            6.647,
+            6.647
+          ]
+        },
+        {
+          "human_idx": "3",
+          "role": "front",
+          "sw_view": "front",
+          "transform": "回転90",
+          "det": 1,
+          "iou": 0.4684,
+          "cov_sw": 0.4684,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              200.0,
+              200.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "4",
+          "role": "left",
+          "sw_view": "top",
+          "transform": "回転90",
+          "det": 1,
+          "iou": 0.7287,
+          "cov_sw": 0.7287,
+          "cov_human": 0.9397,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.4684,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 0.9397,
+        "cov_sw": 0.4684
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [
+        6.647,
+        6.647,
+        6.647,
+        6.647,
+        6.647,
+        6.647,
+        6.647,
+        6.647
+      ],
+      "fails": [
+        "人間側被覆 0.9397 < 1.0000",
+        "SW側に対応円が無い人間側の円 8 個: [6.647, 6.647, 6.647, 6.647, 6.647, 6.647](ねじ表現の可能性)"
+      ],
+      "warns": [
+        "SW側被覆 0.4684 < 0.85(隠れ線の流儀差の可能性)"
+      ],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "3",
+      "matched_sw_view": "front",
+      "matched_transform": "回転90",
+      "ties": [
+        "回転90",
+        "回転270",
+        "鏡像+回転90",
+        "鏡像+回転270"
+      ],
+      "n_ties": 4,
+      "planned_sw_view": "*平面",
+      "planned_rotation_deg": 90,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "紙面内回転(回転90)"
+    },
+    "verdict": "不合格"
+  }
+}

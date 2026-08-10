@@ -1,0 +1,137 @@
+{
+  "key": "5-10",
+  "name": "クッション",
+  "axis": "5.ひねり軸",
+  "bucket_a": true,
+  "shape_class": "holed_block",
+  "reason": "板でも旋盤物でもないが Z軸の円筒面が支配的(面積比0.175)",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      1,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Z",
+    "rule": "[対照] STEPの座標系そのまま"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 0
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    19.0,
+    19.0,
+    14.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "1",
+          "role": "front",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 1.0,
+          "cov_sw": 1.0,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              5.5,
+              5.5,
+              0.0
+            ],
+            [
+              9.5,
+              9.5,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "2",
+          "role": "right",
+          "sw_view": "right",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 1.0,
+          "cov_sw": 1.0,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 1.0,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 1.0,
+        "cov_sw": 1.0
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [],
+      "fails": [],
+      "warns": [],
+      "verdict": "合格"
+    },
+    "orientation": {
+      "human_front_idx": "1",
+      "matched_sw_view": "front",
+      "matched_transform": "恒等",
+      "ties": [
+        "恒等",
+        "回転90",
+        "回転180",
+        "回転270",
+        "鏡像(左右反転)",
+        "鏡像+回転90",
+        "鏡像(上下反転)",
+        "鏡像+回転270"
+      ],
+      "n_ties": 8,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 0,
+      "correct": true,
+      "ambiguous": true,
+      "verdict": "正解"
+    },
+    "verdict": "合格"
+  },
+  "rule_version": "v2",
+  "v2_source": {
+    "dir": "調査\\phase4_batch\\_baseline\\5-10",
+    "reason": "恒等 = 対照実験と同一"
+  }
+}

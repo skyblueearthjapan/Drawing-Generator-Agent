@@ -1,0 +1,129 @@
+{
+  "key": "3-18",
+  "name": "シャフト",
+  "axis": "3.昇降軸",
+  "bucket_a": true,
+  "shape_class": "lathe",
+  "reason": "断面が丸く(外径φ49.00/直交辺[49.0, 49.0])、同軸径3種・軸方向長長い",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      1,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Z",
+    "rule": "主軸Xを紙面水平(正面=輪郭図 / 右側面=円が見える図)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 0
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    190.0,
+    49.0,
+    49.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "8",
+          "role": "front",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9748,
+          "cov_sw": 0.9748,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.242,
+          "circle_pairs": [
+            [
+              2.459,
+              3.0,
+              0.541
+            ],
+            [
+              3.0,
+              3.0,
+              0.0
+            ],
+            [
+              3.242,
+              3.0,
+              0.242
+            ],
+            [
+              4.0,
+              4.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            2.459
+          ]
+        }
+      ],
+      "worst": {
+        "iou": 0.9748,
+        "size_err": 0.0,
+        "circle": 0.242,
+        "cov_human": 1.0,
+        "cov_sw": 0.9748
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [
+        2.459
+      ],
+      "fails": [
+        "円直径差 0.2420mm > 0.05",
+        "SW側に対応円が無い人間側の円 1 個: [2.459](ねじ表現の可能性)"
+      ],
+      "warns": [],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "8",
+      "matched_sw_view": "front",
+      "matched_transform": "恒等",
+      "ties": [
+        "恒等",
+        "鏡像(上下反転)"
+      ],
+      "n_ties": 2,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 0,
+      "correct": true,
+      "ambiguous": true,
+      "verdict": "正解"
+    },
+    "verdict": "不合格"
+  }
+}

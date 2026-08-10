@@ -274,6 +274,12 @@ def scale_factor_from_text(t):
 #: 第三角法の整合(隣り合うビューは幅または高さを共有する)の許容差(mm)
 ROLE_SIZE_TOL = 0.5
 
+#: sf(DXF1単位→実物mm)が取り得る離散値。`(尺度分母/分子)/用紙倍率` の実在の組み合わせ。
+#: 図枠が引けず用紙倍率が確定できない図面で、部品ビュー数を最大化する値を選ぶのに使う。
+SF_CANDIDATES = (1.0, 0.5, 2.0, 1.0 / 3.0, 3.0, 0.25, 4.0, 1.0 / 2.5, 2.5, 5.0)
+#: 1枚の図面に載る部品ビューの現実的な上限。これを超える sf 候補は偽陽性として捨てる
+SF_MAX_PART_VIEWS = 8
+
 
 def assign_roles(h_rec, part_idx):
     u"""人間図面のビュー群から「どれが正面図か」を第三角法の整合で決める。
@@ -384,16 +390,42 @@ def run_compare(label, sw_dxf, meta, human_p, scale=None, use_frame=True,
         print(u"  %-5s size=%.3fx%.3f 円d=%r %s" % (
             key, r["size"][0], r["size"][1], [c0 for c0, _, _ in r["circles"]], r["types"]))
 
+    sw_sizes = [tuple(round(v, 3) for v in sw_rec[k]["size"]) for k in ("front", "top", "right")]
+
+    def _is_part_view(w, h):
+        return any((abs(w - a) < SIZE_TOL and abs(h - b) < SIZE_TOL) or
+                   (abs(w - b) < SIZE_TOL and abs(h - a) < SIZE_TOL) for a, b in sw_sizes)
+
+    def _n_part_views(f):
+        return sum(1 for c in hcl if _is_part_view(*view_record(c, f)["size"]))
+
+    # ❗**図枠テンプレートが引けない図面では sf(DXF1単位→実物mm)が決められない**
+    #   (実測 2026-08-10・第1弾3点+第2弾12点が「部品ビュー0個=判定不能」になっていた主因)。
+    #   用紙倍率を作図範囲の幅から推定すると 2/3/4/18 倍と出鱈目に外れ、尺度セルも
+    #   その外れた倍率のアンカーを見に行くので連鎖して壊れる。
+    #   sf は `(尺度分母/分子)/用紙倍率` なので**取り得る値は離散的**。候補を走査して
+    #   「部品ビューが最も多く同定できる sf」を採る。**モデル実測のビュー外形3つとの一致で
+    #   検算している**ので当てずっぽうではない(0個のままなら素直に判定不能へ落とす)。
+    if scale is None and _n_part_views(sf) == 0:
+        raw = [(_n_part_views(f), -abs(f - 1.0), f) for f in SF_CANDIDATES]
+        # ❗部品ビューが十数個も採れる sf は**偽陽性**(寸法文字の枠などが偶然一致している)。
+        #   1枚の図面に載る部品ビューは多くても6個程度なので、上限を超える候補は捨てる。
+        cands = [c for c in raw if c[0] <= SF_MAX_PART_VIEWS] or [(0, 0.0, sf)]
+        n_best, _, f_best = max(cands)
+        out["sf_search"] = {"tried": {("%.4g" % f): n for n, _, f in raw}}
+        out["sf_search"].update({"original": sf, "chosen": f_best})
+        if n_best > 0:
+            print(u"❗sf=%.4g では部品ビューが0個 → 候補走査で sf=%.4g を採用(部品ビュー%d個)"
+                  % (sf, f_best, n_best))
+            sf = f_best
+            out["scale_factor"] = sf
+
     print(u"\n-- 人間図面のビュー候補(実物mm換算) --")
     h_rec = []
-    sw_sizes = [tuple(round(v, 3) for v in sw_rec[k]["size"]) for k in ("front", "top", "right")]
     for i, c in enumerate(hcl):
         r = view_record(c, sf)
         # SWのどれかのビュー外形(またはその転置)と一致するものだけを部品ビューとみなす
-        w, h = r["size"]
-        r["is_part_view"] = any(
-            (abs(w - a) < SIZE_TOL and abs(h - b) < SIZE_TOL) or
-            (abs(w - b) < SIZE_TOL and abs(h - a) < SIZE_TOL) for a, b in sw_sizes)
+        r["is_part_view"] = _is_part_view(*r["size"])
         h_rec.append(r)
         print(u"  [%d] size=%.3fx%.3f bbox=(%.2f,%.2f) 円d=%r n=%d %s %s" % (
             i, r["size"][0], r["size"][1], c["bbox"][0], c["bbox"][1],

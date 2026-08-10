@@ -1,0 +1,211 @@
+{
+  "key": "1-17",
+  "name": "メカストッパー",
+  "axis": "1.走行軸",
+  "bucket_a": true,
+  "shape_class": "plate",
+  "reason": "最小辺28.000/中間辺65.000=0.431 < 0.50",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      1,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Z",
+    "rule": "[対照] STEPの座標系そのまま"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 0
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    28.0,
+    67.0,
+    65.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "2",
+          "role": "left",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.7638,
+          "cov_sw": 1.0,
+          "cov_human": 0.7638,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "3",
+          "role": "top",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.6217,
+          "cov_sw": 0.7704,
+          "cov_human": 0.6217,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              4.917,
+              null,
+              null
+            ],
+            [
+              6.0,
+              null,
+              null
+            ],
+            [
+              6.6,
+              null,
+              null
+            ],
+            [
+              11.0,
+              null,
+              null
+            ]
+          ],
+          "circle_unmatched_human": [
+            4.917,
+            6.0,
+            6.6,
+            11.0
+          ]
+        },
+        {
+          "human_idx": "4",
+          "role": "top",
+          "sw_view": "top",
+          "transform": "回転90",
+          "det": 1,
+          "iou": 0.7912,
+          "cov_sw": 1.0,
+          "cov_human": 0.7912,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              13.835,
+              16.0,
+              2.165
+            ],
+            [
+              13.835,
+              16.0,
+              2.165
+            ],
+            [
+              16.0,
+              16.0,
+              0.0
+            ],
+            [
+              16.0,
+              16.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            13.835,
+            13.835
+          ]
+        },
+        {
+          "human_idx": "14",
+          "role": "front",
+          "sw_view": "right",
+          "transform": "鏡像(左右反転)",
+          "det": -1,
+          "iou": 0.6912,
+          "cov_sw": 1.0,
+          "cov_human": 0.6912,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.6217,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 0.6217,
+        "cov_sw": 0.7704
+      },
+      "mirror_required": true,
+      "unmatched_human_circles": [
+        4.917,
+        6.0,
+        6.6,
+        11.0,
+        13.835,
+        13.835
+      ],
+      "fails": [
+        "鏡像が最良(det=-1)→即停止",
+        "人間側被覆 0.6217 < 1.0000",
+        "SW側に対応円が無い人間側の円 6 個: [4.917, 6.0, 6.6, 11.0, 13.835, 13.835](ねじ表現の可能性)"
+      ],
+      "warns": [
+        "SW側被覆 0.7704 < 0.85(隠れ線の流儀差の可能性)"
+      ],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "14",
+      "matched_sw_view": "right",
+      "matched_transform": "鏡像(左右反転)",
+      "ties": [
+        "鏡像(左右反転)"
+      ],
+      "n_ties": 1,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 0,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "別ビュー方向(right)"
+    },
+    "verdict": "不合格"
+  },
+  "rule_version": "v2",
+  "v2_source": {
+    "dir": "調査\\phase4_batch2\\_baseline\\1-17",
+    "reason": "恒等 = 対照実験と同一"
+  }
+}

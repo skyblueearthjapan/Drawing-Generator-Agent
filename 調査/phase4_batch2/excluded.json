@@ -1,0 +1,109 @@
+{
+  "excluded": [
+    {
+      "key": "1-07",
+      "axis": "1.走行軸",
+      "step": "荏原トライ調整用\\教師STEP\\1.走行軸\\1-07.STEP",
+      "human_dxf": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-07_走行ギア.dxf",
+      "name": "走行ギア",
+      "bucket_a": true,
+      "step_bytes": 91696,
+      "dxf_bytes": 1122735,
+      "name_class": "other",
+      "excluded_reason": "図面に歯車要目表の語 ['歯車']"
+    },
+    {
+      "key": "1-13",
+      "axis": "1.走行軸",
+      "step": "荏原トライ調整用\\教師STEP\\1.走行軸\\1-13.STEP",
+      "human_dxf": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-13_ﾗｯｸ3-2000.dxf",
+      "name": "ﾗｯｸ3-2000",
+      "bucket_a": false,
+      "step_bytes": 186557,
+      "dxf_bytes": 172148,
+      "name_class": "other",
+      "excluded_reason": "品名に ['ﾗｯｸ'](付属部品語なし)"
+    },
+    {
+      "key": "1-15",
+      "axis": "1.走行軸",
+      "step": "荏原トライ調整用\\教師STEP\\1.走行軸\\1-15.STEP",
+      "human_dxf": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-15_ﾗｯｸ3-1500.dxf",
+      "name": "ﾗｯｸ3-1500",
+      "bucket_a": false,
+      "step_bytes": 152477,
+      "dxf_bytes": 170339,
+      "name_class": "other",
+      "excluded_reason": "品名に ['ﾗｯｸ'](付属部品語なし)"
+    },
+    {
+      "key": "2-03",
+      "axis": "2.ターン軸",
+      "step": "荏原トライ調整用\\教師STEP\\2.ターン軸\\2-03.STEP",
+      "human_dxf": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\2.ターン軸\\25154-2-03_ターンギア.dxf",
+      "name": "ターンギア",
+      "bucket_a": false,
+      "step_bytes": 46872,
+      "dxf_bytes": 504956,
+      "name_class": "other",
+      "excluded_reason": "図面に歯車要目表の語 ['圧力角', '歯車']"
+    }
+  ],
+  "too_big": [
+    {
+      "key": "1-01",
+      "axis": "1.走行軸",
+      "step": "荏原トライ調整用\\教師STEP\\1.走行軸\\1-01.STEP",
+      "human_dxf": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-01_走行フレーム.dxf",
+      "name": "走行フレーム",
+      "bucket_a": false,
+      "step_bytes": 2193716,
+      "dxf_bytes": 6269599,
+      "name_class": "other"
+    },
+    {
+      "key": "1-02",
+      "axis": "1.走行軸",
+      "step": "荏原トライ調整用\\教師STEP\\1.走行軸\\1-02.STEP",
+      "human_dxf": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-02_スライドベース.dxf",
+      "name": "スライドベース",
+      "bucket_a": false,
+      "step_bytes": 595499,
+      "dxf_bytes": 2245963,
+      "name_class": "bend_bracket"
+    },
+    {
+      "key": "4-01",
+      "axis": "4.前後軸",
+      "step": "荏原トライ調整用\\教師STEP\\4.前後軸\\4-01.STEP",
+      "human_dxf": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\4.前後軸\\25154-4-01_前後フレーム.1.dxf",
+      "name": "前後フレーム.1",
+      "bucket_a": false,
+      "step_bytes": 368964,
+      "dxf_bytes": 2794984,
+      "name_class": "other"
+    },
+    {
+      "key": "4-02",
+      "axis": "4.前後軸",
+      "step": "荏原トライ調整用\\教師STEP\\4.前後軸\\4-02.STEP",
+      "human_dxf": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\4.前後軸\\25154-4-02_前後フレーム.2.dxf",
+      "name": "前後フレーム.2",
+      "bucket_a": false,
+      "step_bytes": 272236,
+      "dxf_bytes": 2678132,
+      "name_class": "other"
+    },
+    {
+      "key": "5-08",
+      "axis": "5.ひねり軸",
+      "step": "荏原トライ調整用\\教師STEP\\5.ひねり軸\\5-08.STEP",
+      "human_dxf": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\5.ひねり軸\\25154-5-08_メカストッパー受け.dxf",
+      "name": "メカストッパー受け",
+      "bucket_a": true,
+      "step_bytes": 56808,
+      "dxf_bytes": 20526297,
+      "name_class": "block_like"
+    }
+  ]
+}

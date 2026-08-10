@@ -1,0 +1,104 @@
+{
+  "key": "1-03",
+  "name": "ジャッキプレート",
+  "axis": "1.走行軸",
+  "bucket_a": false,
+  "shape_class": "holed_block",
+  "reason": "板でも旋盤物でもないが Y軸の円筒面が支配的(面積比0.191)",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      0,
+      -1
+    ],
+    "ez": [
+      0,
+      1,
+      0
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Y",
+    "rule": "穴軸Yを紙面法線(正面=穴が円に見える面)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*背面",
+      "rotation_deg": 180
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 90
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    150.00000000000003,
+    114.0,
+    110.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "3",
+          "role": "front",
+          "sw_view": "front",
+          "transform": "回転90",
+          "det": 1,
+          "iou": 1.0,
+          "cov_sw": 1.0,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 1.0,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 1.0,
+        "cov_sw": 1.0
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [],
+      "fails": [],
+      "warns": [],
+      "verdict": "合格"
+    },
+    "orientation": {
+      "human_front_idx": "3",
+      "matched_sw_view": "front",
+      "matched_transform": "回転90",
+      "ties": [
+        "回転90",
+        "回転270",
+        "鏡像+回転90",
+        "鏡像+回転270"
+      ],
+      "n_ties": 4,
+      "planned_sw_view": "*平面",
+      "planned_rotation_deg": 0,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "紙面内回転(回転90)"
+    },
+    "verdict": "向き外し"
+  }
+}

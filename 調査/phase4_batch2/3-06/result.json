@@ -1,0 +1,211 @@
+{
+  "key": "3-06",
+  "name": "下部ボールネジ受け",
+  "axis": "3.昇降軸",
+  "bucket_a": false,
+  "shape_class": "other",
+  "reason": "支配的な軸も薄さも無い(円筒面積比0.050)",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      0,
+      -1
+    ],
+    "ez": [
+      0,
+      1,
+      0
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Y",
+    "rule": "最小辺Y(板厚)を紙面法線(正面=広い面)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*背面",
+      "rotation_deg": 180
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 90
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    110.0,
+    77.0,
+    110.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "1",
+          "role": "right",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 0.9006,
+          "cov_sw": 0.9006,
+          "cov_human": 0.9986,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              4.917,
+              6.0,
+              1.083
+            ],
+            [
+              4.917,
+              6.0,
+              1.083
+            ],
+            [
+              4.917,
+              6.0,
+              1.083
+            ],
+            [
+              4.917,
+              6.0,
+              1.083
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              41.0,
+              41.0,
+              0.0
+            ],
+            [
+              47.0,
+              47.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            4.917,
+            4.917,
+            4.917,
+            4.917
+          ]
+        },
+        {
+          "human_idx": "3",
+          "role": "front",
+          "sw_view": "right",
+          "transform": "回転270",
+          "det": 1,
+          "iou": 0.8824,
+          "cov_sw": 0.8824,
+          "cov_human": 0.9605,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              8.0,
+              8.0,
+              0.0
+            ],
+            [
+              11.0,
+              11.0,
+              0.0
+            ],
+            [
+              11.0,
+              11.0,
+              0.0
+            ],
+            [
+              11.0,
+              11.0,
+              0.0
+            ],
+            [
+              11.0,
+              11.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.8824,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 0.9605,
+        "cov_sw": 0.8824
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [
+        4.917,
+        4.917,
+        4.917,
+        4.917
+      ],
+      "fails": [
+        "人間側被覆 0.9605 < 1.0000",
+        "SW側に対応円が無い人間側の円 4 個: [4.917, 4.917, 4.917, 4.917](ねじ表現の可能性)"
+      ],
+      "warns": [],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "3",
+      "matched_sw_view": "right",
+      "matched_transform": "回転270",
+      "ties": [
+        "回転270",
+        "鏡像+回転270"
+      ],
+      "n_ties": 2,
+      "planned_sw_view": "*平面",
+      "planned_rotation_deg": 0,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "別ビュー方向(right)"
+    },
+    "verdict": "不合格"
+  }
+}
