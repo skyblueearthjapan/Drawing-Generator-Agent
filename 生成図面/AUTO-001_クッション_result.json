@@ -1,0 +1,867 @@
+{
+  "summary": {
+    "model": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\荏原トライ調整用\\教師STEP\\1.走行軸\\1-18.STEP",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\phase5_ai_operator\\plan_AUTO-001_クッション.json",
+    "request": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\phase5_ai_operator\\request_AUTO-001.json",
+    "zuban": "AUTO-001",
+    "part_name": "クッション",
+    "skip_sw": true,
+    "steps": {
+      "sw_projection": {
+        "skipped": true,
+        "views_dxf": "調査\\phase5_ai_operator\\views_1-18.dxf",
+        "meta_json": "調査\\phase5_ai_operator\\meta_1-18.json"
+      },
+      "density": {
+        "material": "MCナイロン",
+        "resolved_kgm3": 1150.0,
+        "note": "依頼JSON明示指定 密度_kgm3=1150.0"
+      },
+      "compose": {
+        "frame_check": {
+          "total": 174,
+          "frame_matched": 113,
+          "remaining": 61,
+          "remaining_ratio": 0.3505747126436782
+        },
+        "zone_overlaps": [],
+        "view_pair_overlaps": [],
+        "weight": {
+          "volume_mm3": 15668.039372398976,
+          "density_kgm3_used": 1150.0,
+          "mass_kg": 0.018018245278258824,
+          "note": "fields['密度_kgm3']=1150.0 で上書き計算"
+        },
+        "warnings": []
+      },
+      "dim_engine": {
+        "gate1_ok": true,
+        "warnings": [],
+        "style_check_ok": true,
+        "layout_collisions": [],
+        "resolved_kinds": {
+          "W25_x": "linear",
+          "H25_y": "linear",
+          "L27_z": "linear"
+        }
+      },
+      "gate2": {
+        "ok": true,
+        "unspecified_count": 0,
+        "redundant_count": 0
+      },
+      "independent_verify": {
+        "ok": true,
+        "file_attrs_ok": true,
+        "gate1_ok": true,
+        "gate1_max_diff_mm": 0.0,
+        "style_ok": true,
+        "note_ok": true
+      }
+    },
+    "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-001_クッション.dxf",
+    "final_png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-001_クッション.png",
+    "gate1_ok": true,
+    "gate2_ok": true,
+    "verify_ok": true,
+    "overall_ok": true,
+    "status": "検証通過"
+  },
+  "compose": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-001_クッション.dxf",
+    "scale": 1.0,
+    "frame_entity_count_loaded": 113,
+    "frame_check": {
+      "total": 174,
+      "frame_matched": 113,
+      "remaining": 61,
+      "remaining_ratio": 0.3505747126436782
+    },
+    "view_entity_counts": {
+      "front": 8,
+      "top": 9,
+      "right": 10,
+      "iso": 24
+    },
+    "unclassified_entity_count": 0,
+    "view_out_bbox_mm": {
+      "front": [
+        171.61522368914976,
+        120.17993439773292,
+        196.61522368914976,
+        145.17993439773292
+      ],
+      "top": [
+        171.61522368914976,
+        167.49999999999991,
+        196.61522368914976,
+        194.50000000000009
+      ],
+      "right": [
+        216.49999999999991,
+        120.17993439773292,
+        243.50000000000009,
+        145.17993439773292
+      ],
+      "iso": [
+        211.61522368914976,
+        160.17993439773292,
+        248.38477631085024,
+        201.82006560226708
+      ]
+    },
+    "zone_overlaps": [],
+    "view_pair_overlaps": [],
+    "field_anchor_check": {
+      "品名_値": {
+        "expected": [
+          224.477,
+          22.51
+        ],
+        "actual": [
+          224.477,
+          22.51
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "装置名_値": {
+        "expected": [
+          224.477,
+          14.877
+        ],
+        "actual": [
+          224.477,
+          14.877
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "図番_値": {
+        "expected": [
+          273.605,
+          20.498
+        ],
+        "actual": [
+          273.605,
+          20.498
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "製図者_氏名": {
+        "expected": [
+          191.878,
+          22.586
+        ],
+        "actual": [
+          191.878,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_3": {
+        "expected": [
+          207.705,
+          22.586
+        ],
+        "actual": [
+          207.705,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_2": {
+        "expected": [
+          207.705,
+          14.722
+        ],
+        "actual": [
+          207.705,
+          14.722
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "尺度_値": {
+        "expected": [
+          176.415,
+          22.446
+        ],
+        "actual": [
+          176.415,
+          22.446
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "連番マーク_値": {
+        "expected": [
+          19.324,
+          275.03
+        ],
+        "actual": [
+          19.324,
+          275.03
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "材質個数ノート_自製品": {
+        "expected": [
+          33.595,
+          280.001
+        ],
+        "actual": [
+          33.595,
+          280.001
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "重量_値": {
+        "expected": [
+          224.593,
+          6.704
+        ],
+        "actual": [
+          224.593,
+          6.704
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      }
+    },
+    "linetypes_added": [
+      "HIDDEN",
+      "PHANTOM",
+      "CENTER"
+    ],
+    "linetypes_missing": [],
+    "weight": {
+      "volume_mm3": 15668.039372398976,
+      "density_kgm3_used": 1150.0,
+      "mass_kg": 0.018018245278258824,
+      "note": "fields['密度_kgm3']=1150.0 で上書き計算"
+    },
+    "field_values": {
+      "品名": "クッション",
+      "図番": "ＡＵＴＯ－００１",
+      "装置名": "走行軸",
+      "尺度": "１：１",
+      "製図者": "ＡＩ",
+      "製図日付": "２６．０８．１０",
+      "連番": "０１",
+      "重量": "０．０２"
+    },
+    "warnings": []
+  },
+  "dim": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-001_クッション.dxf",
+    "base_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-001_クッション.dxf",
+    "gate1": [
+      {
+        "id": "W25_x",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 25.0,
+        "measured": 25.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "25",
+        "text_value": 25.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN001",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "H25_y",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 25.0,
+        "measured": 25.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "25",
+        "text_value": 25.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN002",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "L27_z",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 27.0,
+        "measured": 27.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "27",
+        "text_value": 27.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN003",
+        "ok": true,
+        "errors": []
+      }
+    ],
+    "gate1_ok": true,
+    "hole_notes": [
+      {
+        "id": "N_hole",
+        "view": "front",
+        "pattern": "\\A1;５．５キリ　ザグリ%%c９．５深さ１２",
+        "leader_points": [
+          [
+            187.4741,
+            136.0388
+          ],
+          [
+            200.0002,
+            151.9999
+          ],
+          [
+            210.0002,
+            151.9999
+          ]
+        ],
+        "text_insert": [
+          211.0002,
+          151.9999
+        ],
+        "ok": true,
+        "errors": [],
+        "anchor_check": {
+          "ok": true,
+          "dist_err_mm": 0.0002
+        },
+        "leader_handle": "1B5"
+      }
+    ],
+    "dimstyles": {
+      "W25_x": "GEN001",
+      "H25_y": "GEN002",
+      "L27_z": "GEN003"
+    },
+    "style_check": {
+      "ok": true,
+      "mismatches": [],
+      "effective": {
+        "W25_x": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "H25_y": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "L27_z": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        }
+      }
+    },
+    "arrow_blocks_created": [
+      "_OPEN30"
+    ],
+    "frame_check": {
+      "total": 174,
+      "frame_matched": 113,
+      "remaining": 61,
+      "remaining_ratio": 0.3505747126436782
+    },
+    "view_bbox": {
+      "front": [
+        171.6152,
+        120.1799,
+        196.6152,
+        145.1799
+      ],
+      "top": [
+        171.6152,
+        167.5,
+        196.6152,
+        194.5
+      ],
+      "right": [
+        216.5,
+        120.1799,
+        243.5,
+        145.1799
+      ],
+      "iso": [
+        211.6152,
+        160.1799,
+        248.3848,
+        201.8201
+      ]
+    },
+    "layout": {
+      "text_boxes": {
+        "W25_x": [
+          181.1152,
+          104.6799,
+          187.1152,
+          108.6799
+        ],
+        "H25_y": [
+          151.1152,
+          129.6799,
+          155.1152,
+          135.6799
+        ],
+        "L27_z": [
+          227.0,
+          99.6799,
+          233.0,
+          103.6799
+        ],
+        "N_hole": [
+          211.0002,
+          151.9999,
+          310.0002,
+          157.1999
+        ],
+        "N_general": [
+          295.0,
+          65.9,
+          370.6,
+          75.0
+        ]
+      },
+      "collisions": []
+    },
+    "resolved_kinds": {
+      "W25_x": "linear",
+      "H25_y": "linear",
+      "L27_z": "linear"
+    },
+    "defaults_applied": {
+      "diameter_style": {
+        "circular_view": "native",
+        "profile_view": "linear"
+      },
+      "hole_note": {
+        "notation": "kiri",
+        "width": "zenkaku"
+      }
+    },
+    "warnings": []
+  },
+  "gate2": {
+    "gate": "gate2_completeness_v1",
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-001_クッション.dxf",
+    "plan": "調査\\phase5_ai_operator\\plan_AUTO-001_クッション.json",
+    "dropped_dimensions": [],
+    "ok": true,
+    "unspecified": [],
+    "floating_dimensions": [],
+    "redundant_dimensions": [],
+    "duplicate_value_dimensions": [
+      {
+        "value": 25.0,
+        "ids": [
+          "W25_x",
+          "H25_y"
+        ]
+      }
+    ],
+    "circles": [
+      {
+        "diameter": 5.5,
+        "count": 1,
+        "views": [
+          "front"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 9.5,
+        "count": 1,
+        "views": [
+          "front"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      }
+    ],
+    "axes": {
+      "X": {
+        "axis": "X",
+        "node_count": 7,
+        "nodes": [
+          -12.5,
+          -4.75,
+          -2.75,
+          0.0,
+          2.75,
+          4.75,
+          12.5
+        ],
+        "mode": "symmetric",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": -12.5,
+            "by": "W25_x(対称・径/幅25)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 12.5,
+            "by": "W25_x(対称・径/幅25)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 4.75,
+            "by": "円φ9.5(front)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -4.75,
+            "by": "円φ9.5(front)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 2.75,
+            "by": "円φ5.5(front)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -2.75,
+            "by": "円φ5.5(front)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": 0.0
+      },
+      "Y": {
+        "axis": "Y",
+        "node_count": 7,
+        "nodes": [
+          -12.5,
+          -4.75,
+          -2.75,
+          0.0,
+          2.75,
+          4.75,
+          12.5
+        ],
+        "mode": "symmetric",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": -12.5,
+            "by": "H25_y(対称・径/幅25)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 12.5,
+            "by": "H25_y(対称・径/幅25)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 4.75,
+            "by": "円φ9.5(front)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -4.75,
+            "by": "円φ9.5(front)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 2.75,
+            "by": "円φ5.5(front)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -2.75,
+            "by": "円φ5.5(front)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": 0.0
+      },
+      "Z": {
+        "axis": "Z",
+        "node_count": 3,
+        "nodes": [
+          0.0,
+          15.0,
+          27.0
+        ],
+        "mode": "chain",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": 27.0,
+            "by": "L27_z(27)",
+            "new_link": true
+          },
+          {
+            "from": 27.0,
+            "to": 15.0,
+            "by": "注記深さ12",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": null
+      }
+    },
+    "dimensions_read": [
+      {
+        "id": "W25_x",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 25.0,
+        "view": "front"
+      },
+      {
+        "id": "H25_y",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 25.0,
+        "view": "front"
+      },
+      {
+        "id": "L27_z",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 27.0,
+        "view": "right"
+      }
+    ],
+    "hole_notes": [
+      {
+        "raw": "\\A1;５．５キリ　ザグリ%%c９．５深さ１２",
+        "normalized": "5.5キリ ザグリ%%c9.5深さ12",
+        "diameters": [
+          5.5,
+          9.5
+        ],
+        "taps": [],
+        "depths": [
+          12.0
+        ],
+        "pcds": []
+      }
+    ],
+    "note_diameters": [
+      5.5,
+      9.5
+    ],
+    "note_taps": [],
+    "note_depths": [
+      12.0
+    ],
+    "covered_diameters": [
+      5.5,
+      9.5
+    ],
+    "chamfers": [],
+    "out_of_scope": [
+      {
+        "class": "view_not_axis_aligned",
+        "view": "iso",
+        "reason": "軸平行でない投影(等角投影等)。v1は寸法棚卸しの対象外"
+      },
+      {
+        "class": "not_implemented",
+        "reason": "表面性状記号・幾何公差・溶接記号・ねじのピッチ/等級はv1の判定対象外(生成側も未実装)"
+      },
+      {
+        "class": "same_value_features",
+        "reason": "v1の台帳は特徴を**値と座標**で持つため、同じ値の別フィーチャー(左右のφ25等)を区別しない。片方の寸法を消しても検出できない(該当: [25.0])"
+      }
+    ]
+  },
+  "independent_verify": {
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\生成図面\\AUTO-001_クッション.dxf",
+    "plan": "調査\\phase5_ai_operator\\plan_AUTO-001_クッション.json",
+    "file_attrs_ok": true,
+    "frame": {
+      "total": 180,
+      "frame_matched": 113,
+      "remaining": 67,
+      "remaining_ratio": 0.37222222222222223
+    },
+    "gate1": [
+      {
+        "id": "W25_x",
+        "style": "GEN001",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 25.0,
+        "measured": 25.0,
+        "diff_mm": 0.0,
+        "text": "25",
+        "text_value": 25.0,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "H25_y",
+        "style": "GEN002",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 25.0,
+        "measured": 25.0,
+        "diff_mm": 0.0,
+        "text": "25",
+        "text_value": 25.0,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "L27_z",
+        "style": "GEN003",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 27.0,
+        "measured": 27.0,
+        "diff_mm": 0.0,
+        "text": "27",
+        "text_value": 27.0,
+        "text_diff_mm": 0.0,
+        "ok": true
+      }
+    ],
+    "gate1_ok": true,
+    "gate1_max_diff_mm": 0.0,
+    "style_ok": true,
+    "style_mismatches": [],
+    "notes": [
+      "\\A1;５．５キリ　ザグリ%%c９．５深さ１２"
+    ],
+    "note_ok": true,
+    "ok": true
+  }
+}

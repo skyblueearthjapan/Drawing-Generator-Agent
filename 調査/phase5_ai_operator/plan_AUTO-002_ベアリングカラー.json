@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "_note": "AIオペレータ層v1・人間図面を一切見ずに3D(STEP)計測だけから立てた作図計画。3D計測=調査/phase5_ai_operator/meas_3-05.json。向き選定=同ディレクトリ cand_3-05.png のC2(*正面+270 = 主軸を紙面水平)をAIオペレータが目視選択。測定点は全てSW実測の3Dモデル座標(space=model)の実在特徴点。",
+
+  "part": {
+    "model": "3-05(荏原トライ調整用/教師STEP/3.昇降軸/3-05.STEP)",
+    "図番": "AUTO-002",
+    "品名": "ベアリングカラー",
+    "shape_class": "旋盤物(view_orient.classify=lathe)",
+    "材質": "Ｓ４５Ｃ(推定・要確認)",
+    "個数": 1,
+    "形状要約": "主軸=モデルY。全長4.75のつば付きカラー。y=0〜2がφ40のつば、y=2〜4.75がφ38の胴、内径φ30が全長貫通。面取り・フィレット無し。体積2274.5mm3。"
+  },
+
+  "source": {
+    "base_dxf": "生成図面/AUTO-002_ベアリングカラー.dxf",
+    "meta_json": "調査/phase5_ai_operator/meta_3-05.json",
+    "scale": 1.0
+  },
+
+  "defaults": {
+    "first_offset_mm": 16.0,
+    "stack_step_mm": 8.0,
+    "snap_tol_mm": 0.01,
+    "gate_tol_mm": 0.01,
+    "diameter_style": {"circular_view": "native", "profile_view": "linear"},
+    "hole_note": {"notation": "kiri", "width": "zenkaku"}
+  },
+
+  "dimensions": [
+    {
+      "id": "T2_flange",
+      "comment": "つば厚2(y=0→2)。基準はつばの座面y=0(=軸受に当たる機能面/旋盤の突き当て基準)。正面図の下側1段目。測定点はφ40シルエット線の実在端点",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [20.0, 0.0, 0.0],
+        "p2": [20.0, 2.0, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 1},
+      "value_expected": 2.0,
+      "tolerance": null
+    },
+    {
+      "id": "L4_75_total",
+      "comment": "全長4.75(y=0→4.75)。同じ基準面y=0からの累進。正面図の下側2段目。つば厚2との差2.75が胴長になるが重複寸法は入れない(JIS)",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [20.0, 0.0, 0.0],
+        "p2": [19.0, 4.75, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 2},
+      "value_expected": 4.75,
+      "tolerance": null
+    },
+    {
+      "id": "D30_bore",
+      "comment": "内径φ30(貫通)。輪郭ビュー(正面図)なので線形+dimpost='%%c<>'。左側1段目(小さい寸法を内側に)。測定点は内径の隠れ線シルエットの実在端点。円形ビュー(右側面図)の実在円φ30と独立照合する",
+      "kind": "diameter",
+      "context": "profile_view",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-15.0, 0.0, 0.0],
+        "p2": [15.0, 0.0, 0.0],
+        "direction": "vertical"
+      },
+      "placement": {"side": "left", "level": 1},
+      "value_expected": 30.0,
+      "tolerance": null,
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, 0.0],
+        "diameter": 30.0
+      }
+    },
+    {
+      "id": "D38_body",
+      "comment": "胴外径φ38。左側2段目。測定点は胴端面y=4.75の実在端点",
+      "kind": "diameter",
+      "context": "profile_view",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-19.0, 4.75, 0.0],
+        "p2": [19.0, 4.75, 0.0],
+        "direction": "vertical"
+      },
+      "placement": {"side": "left", "level": 2},
+      "value_expected": 38.0,
+      "tolerance": null,
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, 0.0],
+        "diameter": 38.0
+      }
+    },
+    {
+      "id": "D40_flange",
+      "comment": "つば外径φ40。左側3段目(最外)。測定点はつば座面y=0の実在端点",
+      "kind": "diameter",
+      "context": "profile_view",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-20.0, 0.0, 0.0],
+        "p2": [20.0, 0.0, 0.0],
+        "direction": "vertical"
+      },
+      "placement": {"side": "left", "level": 3},
+      "value_expected": 40.0,
+      "tolerance": null,
+      "cross_check": {
+        "type": "circle_in_view",
+        "view": "right",
+        "space": "model",
+        "center": [0.0, 0.0, 0.0],
+        "diameter": 40.0
+      }
+    }
+  ],
+
+  "hole_notes": [],
+
+  "notes": [
+    {
+      "id": "N_general",
+      "comment": "部品固有の情報を必要としない共通注記のみ。塗装指定・はめあい公差は3Dから推定できないため質問票へ回した",
+      "text": "注記．\\P　指示無き角部はＣ０．２、隅部はＲ２以下とする。",
+      "insert": [295.0, 75.0],
+      "attachment": "top-left",
+      "height": 3.5
+    }
+  ]
+}

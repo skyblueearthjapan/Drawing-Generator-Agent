@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0",
+  "_note": "AIオペレータ層v1・人間図面を一切見ずに3D(STEP)計測だけから立てた作図計画。3D計測=調査/phase5_ai_operator/meas_1-18.json。向き選定=同ディレクトリ cand_1-18.png のC1(*正面+0)をAIオペレータが目視選択。測定点は全てSW実測の3Dモデル座標(space=model)の実在特徴点。",
+
+  "part": {
+    "model": "1-18(荏原トライ調整用/教師STEP/1.走行軸/1-18.STEP)",
+    "図番": "AUTO-001",
+    "品名": "クッション",
+    "shape_class": "角物(穴軸物・view_orient.classify=holed_block)",
+    "材質": "ＭＣナイロン(推定・要確認)",
+    "個数": 1,
+    "形状要約": "25□×27の角材。Z軸中心に段付き通し穴: z=27側からφ9.5を深さ12(ザグリ)、残り15はφ5.5通し。面取り・フィレット無し。体積15668.0mm3。"
+  },
+
+  "source": {
+    "base_dxf": "生成図面/AUTO-001_クッション.dxf",
+    "meta_json": "調査/phase5_ai_operator/meta_1-18.json",
+    "scale": 1.0
+  },
+
+  "defaults": {
+    "first_offset_mm": 16.0,
+    "stack_step_mm": 8.0,
+    "snap_tol_mm": 0.01,
+    "gate_tol_mm": 0.01,
+    "diameter_style": {"circular_view": "native", "profile_view": "linear"},
+    "hole_note": {"notation": "kiri", "width": "zenkaku"}
+  },
+
+  "dimensions": [
+    {
+      "id": "W25_x",
+      "comment": "外形幅25(モデルX)。素材=25□の角材そのままの寸法。正面図の下側1段目。基準は角材の外形(加工基準=素材面)",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-12.5, -12.5, 0.0],
+        "p2": [12.5, -12.5, 0.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 1},
+      "value_expected": 25.0,
+      "tolerance": null
+    },
+    {
+      "id": "H25_y",
+      "comment": "外形高さ25(モデルY)。正面図の左側1段目。X/Y両方入れて『25□』であることを明示する(角材の向きを取り違えない)",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [-12.5, -12.5, 0.0],
+        "p2": [-12.5, 12.5, 0.0],
+        "direction": "vertical"
+      },
+      "placement": {"side": "left", "level": 1},
+      "value_expected": 25.0,
+      "tolerance": null
+    },
+    {
+      "id": "L27_z",
+      "comment": "全長27(モデルZ=突切り方向)。右側面図の下側1段目。ザグリ深さ12は穴注記が持つので、φ5.5部の15は27-12で導出でき重複寸法を入れない(JIS: 寸法は重複させない)",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [12.5, -12.5, 0.0],
+        "p2": [12.5, -12.5, 27.0],
+        "direction": "horizontal"
+      },
+      "placement": {"side": "below", "level": 1},
+      "value_expected": 27.0,
+      "tolerance": null
+    }
+  ],
+
+  "hole_notes": [
+    {
+      "id": "N_hole",
+      "comment": "段付き穴。φ5.5通し+φ9.5ザグリ深さ12(z=27面から)。正面図は+Z面(ザグリ側)を見ているので、この面が加工の基準面。引出線始点はφ9.5円の45度点(実在円上・anchor_checkで検証)",
+      "view": "front",
+      "spec": {"drill": 5.5, "counterbore": {"dia": 9.5, "depth": 12}},
+      "leader": {
+        "space": "model",
+        "points": [
+          [3.3588989, 3.3588989, 27.0],
+          [15.885, 19.32, 27.0],
+          [25.885, 19.32, 27.0]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [26.885, 19.32, 27.0],
+      "attachment": "bottom-left",
+      "anchor_check": {
+        "type": "on_circle",
+        "view": "front",
+        "space": "model",
+        "center": [0.0, 0.0, 27.0],
+        "diameter": 9.5
+      }
+    }
+  ],
+
+  "notes": [
+    {
+      "id": "N_general",
+      "comment": "自社コーパスの共通注記のうち、部品固有の情報を必要としない行だけを入れた。塗装指定は3Dから推定できないため質問票へ回した(勝手に仮定して納品しない)",
+      "text": "注記．\\P　指示無き角部はＣ０．２、隅部はＲ２以下とする。",
+      "insert": [295.0, 75.0],
+      "attachment": "top-left",
+      "height": 3.5
+    }
+  ]
+}
