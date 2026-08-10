@@ -104,6 +104,18 @@
         "gate1_max_diff_mm": 0.0,
         "style_ok": true,
         "note_ok": true
+      },
+      "centerline": {
+        "enabled": true,
+        "added": 4,
+        "counts": {
+          "view_axis": 4
+        },
+        "gate3_circle_centerline_ok": true,
+        "n_features": 1,
+        "n_missing": 0,
+        "zone_hits": [],
+        "skipped_marks": []
       }
     },
     "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\regress_out\\AUTO-001_クッション.dxf",
@@ -112,6 +124,7 @@
     "gate2_ok": true,
     "verify_ok": true,
     "layout_ok": true,
+    "centerline_ok": true,
     "overall_ok": true,
     "status": "検証通過"
   },
@@ -906,11 +919,15 @@
           12.0
         ],
         "pcds": [],
+        "pipe_threads": [],
+        "clusters": [],
         "count": null,
         "equal_spacing_declared": false
       }
     ],
     "pcd_groups": [],
+    "cluster_groups": [],
+    "inclined_features": [],
     "polygons": [
       {
         "n": 4,
@@ -948,6 +965,8 @@
         "covered_by": "二面幅25"
       }
     ],
+    "oblique_width_dimensions": [],
+    "thread_features": [],
     "note_diameters": [
       5.5,
       9.5
@@ -1055,5 +1074,112 @@
     ],
     "note_ok": true,
     "ok": true
+  },
+  "centerline": {
+    "enabled": true,
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\regress_out\\AUTO-001_クッション.dxf",
+    "added": 4,
+    "counts": {
+      "view_axis": 4
+    },
+    "linetype_added": false,
+    "style": {
+      "linetype": "DASHDOT",
+      "color": 3,
+      "hole_ext_mm": 5.0,
+      "axis_ext_mm": 5.0
+    },
+    "features": [
+      {
+        "view": "front",
+        "center": [
+          184.115,
+          132.68
+        ],
+        "d_draw": 9.5,
+        "d_model": 9.5,
+        "n_circles": 2
+      }
+    ],
+    "lines": [
+      {
+        "view": "front",
+        "cls": "view_axis",
+        "dir": "v",
+        "p1": [
+          184.1152,
+          115.1799
+        ],
+        "p2": [
+          184.1152,
+          150.1799
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          166.6152,
+          132.6799
+        ],
+        "p2": [
+          201.6152,
+          132.6799
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "view_axis",
+        "dir": "v",
+        "p1": [
+          184.1152,
+          162.5
+        ],
+        "p2": [
+          184.1152,
+          199.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          211.5,
+          132.6799
+        ],
+        "p2": [
+          248.5,
+          132.6799
+        ]
+      }
+    ],
+    "circles": [],
+    "notes": []
+  },
+  "centerline_check": {
+    "ok": true,
+    "n_features": 1,
+    "n_missing": 0,
+    "coverage": 1.0,
+    "n_centerline_entities": 4,
+    "n_designed": 4,
+    "n_not_realized": 0,
+    "missing": [],
+    "not_realized": [],
+    "zone_hits": [],
+    "checked": [
+      {
+        "view": "front",
+        "center": [
+          184.115,
+          132.68
+        ],
+        "d_model": 9.5,
+        "h": 12.75,
+        "v": 12.75
+      }
+    ]
   }
 }

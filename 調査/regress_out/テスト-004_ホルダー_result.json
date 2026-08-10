@@ -108,6 +108,20 @@
         "gate1_max_diff_mm": 0.0,
         "style_ok": true,
         "note_ok": true
+      },
+      "centerline": {
+        "enabled": true,
+        "added": 8,
+        "counts": {
+          "view_axis": 4,
+          "hole_cross": 2,
+          "profile_mark": 2
+        },
+        "gate3_circle_centerline_ok": true,
+        "n_features": 3,
+        "n_missing": 0,
+        "zone_hits": [],
+        "skipped_marks": []
       }
     },
     "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\regress_out\\テスト-004_ホルダー.dxf",
@@ -116,6 +130,7 @@
     "gate2_ok": true,
     "verify_ok": true,
     "layout_ok": true,
+    "centerline_ok": true,
     "overall_ok": true,
     "status": "検証通過"
   },
@@ -1326,6 +1341,8 @@
         "pcds": [
           60.0
         ],
+        "pipe_threads": [],
+        "clusters": [],
         "count": 2,
         "equal_spacing_declared": false
       }
@@ -1360,7 +1377,11 @@
         "reason": "φ11 の穴が 2 個(採用の最小 3 個未満)。2個以下は寸法で指定させる(安全側)"
       }
     ],
+    "cluster_groups": [],
+    "inclined_features": [],
     "polygons": [],
+    "oblique_width_dimensions": [],
+    "thread_features": [],
     "note_diameters": [
       8.0,
       11.0
@@ -1551,5 +1572,206 @@
     ],
     "note_ok": true,
     "ok": true
+  },
+  "centerline": {
+    "enabled": true,
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\regress_out\\テスト-004_ホルダー.dxf",
+    "added": 8,
+    "counts": {
+      "view_axis": 4,
+      "hole_cross": 2,
+      "profile_mark": 2
+    },
+    "linetype_added": false,
+    "style": {
+      "linetype": "DASHDOT",
+      "color": 3,
+      "hole_ext_mm": 5.0,
+      "axis_ext_mm": 5.0
+    },
+    "features": [
+      {
+        "view": "right",
+        "center": [
+          237.5,
+          99.408
+        ],
+        "d_draw": 75.0,
+        "d_model": 75.0,
+        "n_circles": 3
+      },
+      {
+        "view": "right",
+        "center": [
+          267.5,
+          99.408
+        ],
+        "d_draw": 11.0,
+        "d_model": 11.0,
+        "n_circles": 2
+      },
+      {
+        "view": "right",
+        "center": [
+          207.5,
+          99.408
+        ],
+        "d_draw": 11.0,
+        "d_model": 11.0,
+        "n_circles": 2
+      }
+    ],
+    "lines": [
+      {
+        "view": "front",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          136.8414,
+          99.408
+        ],
+        "p2": [
+          186.8414,
+          99.408
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          136.8414,
+          206.0
+        ],
+        "p2": [
+          186.8414,
+          206.0
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "view_axis",
+        "dir": "v",
+        "p1": [
+          237.5,
+          56.908
+        ],
+        "p2": [
+          237.5,
+          141.908
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          195.0,
+          99.408
+        ],
+        "p2": [
+          280.0,
+          99.408
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          267.5,
+          88.908
+        ],
+        "p2": [
+          267.5,
+          109.908
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          207.5,
+          88.908
+        ],
+        "p2": [
+          207.5,
+          109.908
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "profile_mark",
+        "dir": "h",
+        "p1": [
+          169.8414,
+          236.0
+        ],
+        "p2": [
+          186.8414,
+          236.0
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "profile_mark",
+        "dir": "h",
+        "p1": [
+          169.8414,
+          176.0
+        ],
+        "p2": [
+          186.8414,
+          176.0
+        ]
+      }
+    ],
+    "circles": [],
+    "notes": []
+  },
+  "centerline_check": {
+    "ok": true,
+    "n_features": 3,
+    "n_missing": 0,
+    "coverage": 1.0,
+    "n_centerline_entities": 8,
+    "n_designed": 8,
+    "n_not_realized": 0,
+    "missing": [],
+    "not_realized": [],
+    "zone_hits": [],
+    "checked": [
+      {
+        "view": "right",
+        "center": [
+          237.5,
+          99.408
+        ],
+        "d_model": 75.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "right",
+        "center": [
+          267.5,
+          99.408
+        ],
+        "d_model": 11.0,
+        "h": 7.0,
+        "v": 5.0
+      },
+      {
+        "view": "right",
+        "center": [
+          207.5,
+          99.408
+        ],
+        "d_model": 11.0,
+        "h": 7.0,
+        "v": 5.0
+      }
+    ]
   }
 }

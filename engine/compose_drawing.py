@@ -617,6 +617,8 @@ _LINETYPE_STYLE = {
     "HIDDEN": dict(color="#c81e1e", lw=0.7, ls=(0, (5, 3))),
     "PHANTOM": dict(color="#1e6fc8", lw=0.7, ls=(0, (8, 3, 2, 3))),
     "CENTER": dict(color="#1e9e5a", lw=0.6, ls=(0, (10, 3, 2, 3))),
+    # 中心線(engine/centerline_gen.py が生成。人間図面と同じ DASHDOT・色3)
+    "DASHDOT": dict(color="#e8534f", lw=0.7, ls=(0, (9, 3, 1, 3))),
 }
 _DEFAULT_LINE_STYLE = dict(color="#e6e6e6", lw=0.7, ls="-")
 _ANNOT_STYLE = dict(color="#9a6ac8", lw=0.6, ls="-")

@@ -144,6 +144,27 @@
 | `gate_tol_mm` | 0.01 | ゲート①(実測 vs 期待値)の許容差 |
 | `diameter_style` | `{"circular_view":"native","profile_view":"linear"}` | `kind:"diameter"` の実装方式(§2.1a) |
 | `hole_note` | `{"notation":"phi","width":"zenkaku","separator":" "}` | 穴注記の既定書式(§3) |
+| `centerline` | `{"enabled":true}` | 中心線の自動生成(§1.5) |
+
+### 1.5 `defaults.centerline`(中心線エンジン)
+
+`engine/centerline_gen.py` が**既定ON**で中心線(一点鎖線)を自動生成する。
+計画側から書くのは抑制とパラメータ微調整だけで、**どこに引くかは実ジオメトリから決まる**
+(計画の自己申告を使わない = ゲート①②と同じ思想)。
+
+| キー | 既定 | 内容 |
+|---|---|---|
+| `enabled` | `true` | `false` で中心線生成とゲート③中心線チェックを丸ごと抑制する |
+| `hole_ext_mm` | 5.0 | 穴クロスが円の外へ出る量。人間図面(用紙倍率1・83枚)の中央値5.00・最頻5.0 |
+| `axis_ext_mm` | 5.0 | ビュー貫通軸が輪郭の外へ出る量。同 中央値4.56(p25 3.33 / p75 7.67) |
+| `mark_ext_mm` | 5.0 | 輪郭ビューの穴軸マークが穴の壁の外へ出る量 |
+| `min_diameter_mm` | 1.0 | これ未満の円には中心線を付けない |
+| `pcd` | `true` | PCD参照円を描くか |
+| `pcd_min_count` | 3 | PCD参照円を描く最小の穴数 |
+| `profile_marks` | `true` | 輪郭ビューの穴軸マーク(e)を描くか |
+
+線種・色は人間図面144枚の実測(**DASHDOT 100% / 色3(緑) 98.6%**)で固定。
+根拠と統計は `調査/centerline_style_analysis.md`。
 
 > **`diameter_style` / `hole_note` は「ユーザー確認中だった流儀」を分離したパラメータ**である。
 > 既定値の実体は `engine/dim_engine.py` の `DIAMETER_STYLE_DEFAULT` / `HOLE_NOTE_DEFAULT`。

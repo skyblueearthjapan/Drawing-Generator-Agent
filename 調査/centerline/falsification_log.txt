@@ -1,0 +1,60 @@
+﻿{
+  "cases": 5,
+  "baseline_ok": 5,
+  "mutations_total": 42,
+  "mutations_detected": 42,
+  "not_applicable": 3,
+  "undetected": []
+}
+ BLIND2-25154-3-02      base_ok=True feats=9 中心線23本 {'view_axis': 3, 'hole_cross': 12, 'profile_mark': 6, 'pcd_circle': 2}
+    C1_delete_all        検出=○ (未被覆9件/設計未実現23件/図枠侵入0件)
+    C2_drop_h            検出=○ (未被覆3件/設計未実現1件/図枠侵入0件)
+    C3_drop_v            検出=○ (未被覆3件/設計未実現1件/図枠侵入0件)
+    C4_shrink            検出=○ (未被覆9件/設計未実現21件/図枠侵入0件)
+    C5_lines_gone        検出=○ (未被覆9件/設計未実現21件/図枠侵入0件)
+    C6_frame_intrusion   検出=○ (未被覆0件/設計未実現0件/図枠侵入1件)
+    C7_continuous        検出=○ (未被覆9件/設計未実現23件/図枠侵入0件)
+    C8_drop_mark         検出=○ (未被覆0件/設計未実現1件/図枠侵入0件)
+    C9_drop_pcd          検出=○ (未被覆0件/設計未実現1件/図枠侵入0件)
+ BLIND2-25154-5-05      base_ok=True feats=9 中心線16本 {'view_axis': 3, 'hole_cross': 8, 'profile_mark': 4, 'pcd_circle': 1}
+    C1_delete_all        検出=○ (未被覆9件/設計未実現16件/図枠侵入0件)
+    C2_drop_h            検出=○ (未被覆3件/設計未実現1件/図枠侵入0件)
+    C3_drop_v            検出=○ (未被覆3件/設計未実現1件/図枠侵入0件)
+    C4_shrink            検出=○ (未被覆9件/設計未実現15件/図枠侵入0件)
+    C5_lines_gone        検出=○ (未被覆9件/設計未実現15件/図枠侵入0件)
+    C6_frame_intrusion   検出=○ (未被覆0件/設計未実現0件/図枠侵入1件)
+    C7_continuous        検出=○ (未被覆9件/設計未実現16件/図枠侵入0件)
+    C8_drop_mark         検出=○ (未被覆0件/設計未実現1件/図枠侵入0件)
+    C9_drop_pcd          検出=○ (未被覆0件/設計未実現1件/図枠侵入0件)
+ BLIND2-25154-4-05      base_ok=True feats=17 中心線36本 {'view_axis': 2, 'hole_cross': 16, 'profile_mark': 18}
+    C1_delete_all        検出=○ (未被覆17件/設計未実現36件/図枠侵入0件)
+    C2_drop_h            検出=○ (未被覆1件/設計未実現1件/図枠侵入0件)
+    C3_drop_v            検出=○ (未被覆1件/設計未実現1件/図枠侵入0件)
+    C4_shrink            検出=○ (未被覆17件/設計未実現36件/図枠侵入0件)
+    C5_lines_gone        検出=○ (未被覆17件/設計未実現36件/図枠侵入0件)
+    C6_frame_intrusion   検出=○ (未被覆0件/設計未実現0件/図枠侵入1件)
+    C7_continuous        検出=○ (未被覆17件/設計未実現36件/図枠侵入0件)
+    C8_drop_mark         検出=○ (未被覆0件/設計未実現1件/図枠侵入0件)
+    C9_drop_pcd          検出=- (未被覆0件/設計未実現0件/図枠侵入0件)
+ BLIND2-25154-1-27      base_ok=True feats=8 中心線11本 {'view_axis': 3, 'hole_cross': 6, 'profile_mark': 2}
+    C1_delete_all        検出=○ (未被覆8件/設計未実現11件/図枠侵入0件)
+    C2_drop_h            検出=○ (未被覆2件/設計未実現1件/図枠侵入0件)
+    C3_drop_v            検出=○ (未被覆2件/設計未実現1件/図枠侵入0件)
+    C4_shrink            検出=○ (未被覆8件/設計未実現11件/図枠侵入0件)
+    C5_lines_gone        検出=○ (未被覆8件/設計未実現11件/図枠侵入0件)
+    C6_frame_intrusion   検出=○ (未被覆0件/設計未実現0件/図枠侵入1件)
+    C7_continuous        検出=○ (未被覆8件/設計未実現11件/図枠侵入0件)
+    C8_drop_mark         検出=○ (未被覆0件/設計未実現1件/図枠侵入0件)
+    C9_drop_pcd          検出=- (未被覆0件/設計未実現0件/図枠侵入0件)
+ BLIND2-25154-2-16      base_ok=True feats=2 中心線5本 {'hole_cross': 3, 'profile_mark': 2}
+    C1_delete_all        検出=○ (未被覆2件/設計未実現5件/図枠侵入0件)
+    C2_drop_h            検出=○ (未被覆2件/設計未実現1件/図枠侵入0件)
+    C3_drop_v            検出=○ (未被覆1件/設計未実現1件/図枠侵入0件)
+    C4_shrink            検出=○ (未被覆2件/設計未実現5件/図枠侵入0件)
+    C5_lines_gone        検出=○ (未被覆2件/設計未実現5件/図枠侵入0件)
+    C6_frame_intrusion   検出=○ (未被覆0件/設計未実現0件/図枠侵入1件)
+    C7_continuous        検出=○ (未被覆2件/設計未実現5件/図枠侵入0件)
+    C8_drop_mark         検出=○ (未被覆0件/設計未実現1件/図枠侵入0件)
+    C9_drop_pcd          検出=- (未被覆0件/設計未実現0件/図枠侵入0件)
+
+出力: C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\centerline_falsification.json

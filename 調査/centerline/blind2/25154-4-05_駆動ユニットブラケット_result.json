@@ -1,0 +1,4432 @@
+{
+  "summary": {
+    "model": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-4-05\\4-05.STEP",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-4-05\\plan.json",
+    "request": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-4-05\\依頼.json",
+    "zuban": "25154-4-05",
+    "part_name": "駆動ユニットブラケット",
+    "skip_sw": true,
+    "steps": {
+      "sw_projection": {
+        "skipped": true,
+        "views_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-4-05\\views.dxf",
+        "meta_json": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-4-05\\meta.json"
+      },
+      "density": {
+        "material": "ＳＳ４００",
+        "resolved_kgm3": 7850.0,
+        "note": "材質記号 'SS400' -> 密度7850.0kg/m^3"
+      },
+      "compose": {
+        "scale": 0.25,
+        "views": [
+          "front",
+          "top",
+          "right"
+        ],
+        "layout": {
+          "views": [
+            "front",
+            "top",
+            "right"
+          ],
+          "gap_x_mm": 15.0,
+          "gap_y_mm": 15.0,
+          "group_wh_mm": [
+            101.50000000000013,
+            134.50000000000028
+          ],
+          "avail_wh_mm": [
+            410.0,
+            262.0
+          ],
+          "reserves": {
+            "front": {
+              "above": 0.0,
+              "below": 37.5,
+              "left": 53.5,
+              "right": 0.0
+            },
+            "top": {
+              "above": 45.5,
+              "below": 0.0,
+              "left": 45.5,
+              "right": 0.0
+            },
+            "right": {
+              "above": 21.5,
+              "below": 37.5,
+              "left": 0.0,
+              "right": 37.5
+            }
+          }
+        },
+        "frame_check": {
+          "total": 282,
+          "frame_matched": 112,
+          "remaining": 170,
+          "remaining_ratio": 0.6028368794326241
+        },
+        "zone_overlaps": [],
+        "view_pair_overlaps": [],
+        "weight": {
+          "volume_mm3": 830532.7928849788,
+          "density_kgm3_used": 7850.0,
+          "mass_kg": 6.519682424147084,
+          "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+        },
+        "warnings": [
+          "使用しないビューのエンティティを除外: {'iso': 224}"
+        ]
+      },
+      "dim_engine": {
+        "gate1_ok": true,
+        "warnings": [
+          "レイアウト衝突(要目視確認) 2件: [['D127_bore', 'view:top'], ['R15_window', 'view:front']]"
+        ],
+        "style_check_ok": true,
+        "layout_collisions": [
+          [
+            "D127_bore",
+            "view:top"
+          ],
+          [
+            "R15_window",
+            "view:front"
+          ]
+        ],
+        "frame_collisions": [],
+        "resolved_kinds": {
+          "X103_window": "linear",
+          "X143_holes": "linear",
+          "X173_base": "linear",
+          "X20_tap": "linear",
+          "X149_motor": "linear",
+          "X154_wall_in": "linear",
+          "X163_wall_out": "linear",
+          "Y15_hole1": "linear",
+          "Y50_window": "linear",
+          "Y95_hole2": "linear",
+          "Y175_hole3": "linear",
+          "Y220_window": "linear",
+          "Y249_wall": "linear",
+          "Y13_plate": "linear",
+          "Y305_total": "linear",
+          "Z16_base": "linear",
+          "Z173_depth": "linear",
+          "Z114_wall": "linear",
+          "Z3_step": "linear",
+          "Z5_tap": "linear",
+          "Z22_5_motor": "linear",
+          "Z80_bore": "linear",
+          "Z115_motor": "linear",
+          "D127_bore": "diameter_native",
+          "R15_window": "radius"
+        }
+      },
+      "layout_verify": {
+        "ok": true,
+        "frame_collision_count": 0,
+        "reasons": []
+      },
+      "gate2": {
+        "ok": true,
+        "unspecified_count": 0,
+        "redundant_count": 0
+      },
+      "independent_verify": {
+        "ok": true,
+        "file_attrs_ok": true,
+        "gate1_ok": true,
+        "gate1_max_diff_mm": 0.0,
+        "style_ok": true,
+        "note_ok": true
+      },
+      "centerline": {
+        "enabled": true,
+        "added": 36,
+        "counts": {
+          "view_axis": 2,
+          "hole_cross": 16,
+          "profile_mark": 18
+        },
+        "gate3_circle_centerline_ok": true,
+        "n_features": 17,
+        "n_missing": 0,
+        "zone_hits": [],
+        "skipped_marks": []
+      }
+    },
+    "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-4-05_駆動ユニットブラケット.dxf",
+    "final_png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-4-05_駆動ユニットブラケット.png",
+    "gate1_ok": true,
+    "gate2_ok": true,
+    "verify_ok": true,
+    "layout_ok": true,
+    "centerline_ok": true,
+    "overall_ok": true,
+    "status": "検証通過"
+  },
+  "compose": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-4-05_駆動ユニットブラケット.dxf",
+    "scale": 0.25,
+    "views": [
+      "front",
+      "top",
+      "right"
+    ],
+    "layout": {
+      "views": [
+        "front",
+        "top",
+        "right"
+      ],
+      "gap_x_mm": 15.0,
+      "gap_y_mm": 15.0,
+      "group_wh_mm": [
+        101.50000000000013,
+        134.50000000000028
+      ],
+      "avail_wh_mm": [
+        410.0,
+        262.0
+      ],
+      "reserves": {
+        "front": {
+          "above": 0.0,
+          "below": 37.5,
+          "left": 53.5,
+          "right": 0.0
+        },
+        "top": {
+          "above": 45.5,
+          "below": 0.0,
+          "left": 45.5,
+          "right": 0.0
+        },
+        "right": {
+          "above": 21.5,
+          "below": 37.5,
+          "left": 0.0,
+          "right": 37.5
+        }
+      }
+    },
+    "frame_entity_count_loaded": 112,
+    "frame_check": {
+      "total": 282,
+      "frame_matched": 112,
+      "remaining": 170,
+      "remaining_ratio": 0.6028368794326241
+    },
+    "view_entity_counts": {
+      "front": 73,
+      "top": 54,
+      "right": 33
+    },
+    "dropped_view_entity_counts": {
+      "iso": 224
+    },
+    "unclassified_entity_count": 0,
+    "view_out_bbox_mm": {
+      "front": [
+        159.24999999999994,
+        93.74999999999986,
+        202.49999999999994,
+        169.99999999999986
+      ],
+      "top": [
+        159.24999999999994,
+        184.99999999999986,
+        202.49999999999994,
+        228.25000000000014
+      ],
+      "right": [
+        217.49999999999994,
+        93.74999999999986,
+        260.75000000000006,
+        169.99999999999986
+      ]
+    },
+    "zone_overlaps": [],
+    "view_pair_overlaps": [],
+    "field_anchor_check": {
+      "品名_値": {
+        "expected": [
+          224.477,
+          22.51
+        ],
+        "actual": [
+          224.477,
+          22.51
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "装置名_値": {
+        "expected": [
+          224.477,
+          14.877
+        ],
+        "actual": [
+          224.477,
+          14.877
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "図番_値": {
+        "expected": [
+          273.605,
+          20.498
+        ],
+        "actual": [
+          273.605,
+          20.498
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "製図者_氏名": {
+        "expected": [
+          191.878,
+          22.586
+        ],
+        "actual": [
+          191.878,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_3": {
+        "expected": [
+          207.705,
+          22.586
+        ],
+        "actual": [
+          207.705,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_2": {
+        "expected": [
+          207.705,
+          14.722
+        ],
+        "actual": [
+          207.705,
+          14.722
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "尺度_値": {
+        "expected": [
+          176.415,
+          22.446
+        ],
+        "actual": [
+          176.415,
+          22.446
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "連番マーク_値": {
+        "expected": [
+          19.324,
+          275.03
+        ],
+        "actual": [
+          19.324,
+          275.03
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "材質個数ノート_自製品": {
+        "expected": [
+          33.595,
+          280.001
+        ],
+        "actual": [
+          33.595,
+          280.001
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "重量_値": {
+        "expected": [
+          224.593,
+          6.704
+        ],
+        "actual": [
+          224.593,
+          6.704
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      }
+    },
+    "linetypes_added": [
+      "HIDDEN",
+      "PHANTOM",
+      "CENTER"
+    ],
+    "linetypes_missing": [],
+    "weight": {
+      "volume_mm3": 830532.7928849788,
+      "density_kgm3_used": 7850.0,
+      "mass_kg": 6.519682424147084,
+      "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+    },
+    "field_values": {
+      "品名": "駆動ユニットブラケット",
+      "図番": "２５１５４－４－０５",
+      "装置名": "前後軸",
+      "尺度": "１：４",
+      "製図者": "ＡＩ",
+      "製図日付": "２６．０８．１０",
+      "連番": "０５",
+      "重量": "６．５２"
+    },
+    "warnings": [
+      "使用しないビューのエンティティを除外: {'iso': 224}"
+    ]
+  },
+  "dim": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-4-05_駆動ユニットブラケット.dxf",
+    "base_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-4-05_駆動ユニットブラケット.dxf",
+    "gate1": [
+      {
+        "id": "X103_window",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 103.0,
+        "measured": 103.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "103",
+        "text_value": 103.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN001",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "X143_holes",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 143.0,
+        "measured": 143.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "143",
+        "text_value": 143.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN002",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "X173_base",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 173.0,
+        "measured": 173.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "173",
+        "text_value": 173.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN003",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "X20_tap",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "top",
+        "expected": 20.0,
+        "measured": 20.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "20",
+        "text_value": 20.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN004",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "X149_motor",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "top",
+        "expected": 149.0,
+        "measured": 149.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "149",
+        "text_value": 149.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN005",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "X154_wall_in",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "top",
+        "expected": 154.0,
+        "measured": 154.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "154",
+        "text_value": 154.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN006",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "X163_wall_out",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "top",
+        "expected": 163.0,
+        "measured": 163.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "163",
+        "text_value": 163.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN007",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y15_hole1",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 15.0,
+        "measured": 15.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "15",
+        "text_value": 15.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN008",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y50_window",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 50.0,
+        "measured": 50.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "50",
+        "text_value": 50.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN009",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y95_hole2",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 95.0,
+        "measured": 95.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "95",
+        "text_value": 95.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN010",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y175_hole3",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 175.0,
+        "measured": 175.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "175",
+        "text_value": 175.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN011",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y220_window",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 220.0,
+        "measured": 220.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "220",
+        "text_value": 220.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN012",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y249_wall",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 249.0,
+        "measured": 249.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "249",
+        "text_value": 249.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN013",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y13_plate",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 13.0,
+        "measured": 13.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "13",
+        "text_value": 13.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN014",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y305_total",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 305.0,
+        "measured": 305.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "305",
+        "text_value": 305.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN015",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z16_base",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 16.0,
+        "measured": 16.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "16",
+        "text_value": 16.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN016",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z173_depth",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 173.0,
+        "measured": 173.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "173",
+        "text_value": 173.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN017",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z114_wall",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 114.0,
+        "measured": 114.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "114",
+        "text_value": 114.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN018",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z3_step",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 3.0,
+        "measured": 3.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "3",
+        "text_value": 3.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN019",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z5_tap",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "top",
+        "expected": 5.0,
+        "measured": 5.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "5",
+        "text_value": 5.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN020",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z22_5_motor",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "top",
+        "expected": 22.5,
+        "measured": 22.5,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "22.5",
+        "text_value": 22.5,
+        "text_diff_mm": 0.0,
+        "style": "GEN021",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z80_bore",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "top",
+        "expected": 80.0,
+        "measured": 80.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "80",
+        "text_value": 80.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN022",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z115_motor",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "top",
+        "expected": 115.0,
+        "measured": 115.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "115",
+        "text_value": 115.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN023",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "D127_bore",
+        "kind": "diameter_native",
+        "plan_kind": "diameter",
+        "view": "top",
+        "expected": 127.0,
+        "measured": 127.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "%%c127",
+        "text_value": 127.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN024",
+        "ok": true,
+        "errors": [],
+        "circle_check": {
+          "ok": true,
+          "center": [
+            180.875,
+            204.25
+          ],
+          "diameter": 127.0
+        }
+      },
+      {
+        "id": "R15_window",
+        "kind": "radius",
+        "plan_kind": "radius",
+        "view": "front",
+        "expected": 15.0,
+        "measured": 15.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "R15",
+        "text_value": 15.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN025",
+        "ok": true,
+        "errors": []
+      }
+    ],
+    "gate1_ok": true,
+    "hole_notes": [
+      {
+        "id": "N_hole11",
+        "view": "front",
+        "pattern": "\\A1;４－%%c１１",
+        "leader_points": [
+          [
+            200.125,
+            137.5
+          ],
+          [
+            280.0,
+            60.0
+          ],
+          [
+            300.0,
+            60.0
+          ]
+        ],
+        "text_insert": [
+          302.0,
+          60.0
+        ],
+        "ok": true,
+        "errors": [],
+        "leader_handle": "37F"
+      },
+      {
+        "id": "N_hole10_base",
+        "view": "front",
+        "pattern": "\\A1;２－%%c１０",
+        "leader_points": [
+          [
+            200.125,
+            117.5
+          ],
+          [
+            280.0,
+            45.0
+          ],
+          [
+            300.0,
+            45.0
+          ]
+        ],
+        "text_insert": [
+          302.0,
+          45.0
+        ],
+        "ok": true,
+        "errors": [],
+        "leader_handle": "381"
+      },
+      {
+        "id": "N_hole6_base",
+        "view": "front",
+        "pattern": "\\A1;４－%%c６",
+        "leader_points": [
+          [
+            194.5,
+            152.5
+          ],
+          [
+            280.0,
+            175.0
+          ],
+          [
+            300.0,
+            175.0
+          ]
+        ],
+        "text_insert": [
+          302.0,
+          175.0
+        ],
+        "ok": true,
+        "errors": [],
+        "leader_handle": "383"
+      },
+      {
+        "id": "N_hole10_motor",
+        "view": "top",
+        "pattern": "\\A1;４－%%c１０",
+        "leader_points": [
+          [
+            200.75,
+            218.625
+          ],
+          [
+            280.0,
+            200.0
+          ],
+          [
+            300.0,
+            200.0
+          ]
+        ],
+        "text_insert": [
+          302.0,
+          200.0
+        ],
+        "ok": true,
+        "errors": [],
+        "leader_handle": "385"
+      },
+      {
+        "id": "N_hole6_motor",
+        "view": "top",
+        "pattern": "\\A1;２－%%c６深さ１２",
+        "leader_points": [
+          [
+            184.125,
+            225.5
+          ],
+          [
+            280.0,
+            250.0
+          ],
+          [
+            300.0,
+            250.0
+          ]
+        ],
+        "text_insert": [
+          302.0,
+          250.0
+        ],
+        "ok": true,
+        "errors": [],
+        "leader_handle": "387"
+      }
+    ],
+    "dimstyles": {
+      "X103_window": "GEN001",
+      "X143_holes": "GEN002",
+      "X173_base": "GEN003",
+      "X20_tap": "GEN004",
+      "X149_motor": "GEN005",
+      "X154_wall_in": "GEN006",
+      "X163_wall_out": "GEN007",
+      "Y15_hole1": "GEN008",
+      "Y50_window": "GEN009",
+      "Y95_hole2": "GEN010",
+      "Y175_hole3": "GEN011",
+      "Y220_window": "GEN012",
+      "Y249_wall": "GEN013",
+      "Y13_plate": "GEN014",
+      "Y305_total": "GEN015",
+      "Z16_base": "GEN016",
+      "Z173_depth": "GEN017",
+      "Z114_wall": "GEN018",
+      "Z3_step": "GEN019",
+      "Z5_tap": "GEN020",
+      "Z22_5_motor": "GEN021",
+      "Z80_bore": "GEN022",
+      "Z115_motor": "GEN023",
+      "D127_bore": "GEN024",
+      "R15_window": "GEN025"
+    },
+    "style_check": {
+      "ok": true,
+      "mismatches": [],
+      "effective": {
+        "X103_window": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "X143_holes": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "X173_base": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "X20_tap": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "X149_motor": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "X154_wall_in": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "X163_wall_out": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y15_hole1": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y50_window": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y95_hole2": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y175_hole3": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y220_window": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y249_wall": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y13_plate": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y305_total": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z16_base": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z173_depth": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z114_wall": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z3_step": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z5_tap": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z22_5_motor": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z80_bore": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z115_motor": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "D127_bore": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "%%c<>",
+          "dimtol": 0
+        },
+        "R15_window": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 4.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "R<>",
+          "dimtol": 0
+        }
+      }
+    },
+    "arrow_blocks_created": [
+      "_OPEN30"
+    ],
+    "frame_check": {
+      "total": 282,
+      "frame_matched": 112,
+      "remaining": 170,
+      "remaining_ratio": 0.6028368794326241
+    },
+    "view_bbox": {
+      "front": [
+        159.25,
+        93.75,
+        202.5,
+        170.0
+      ],
+      "top": [
+        159.25,
+        185.0,
+        202.5,
+        228.25
+      ],
+      "right": [
+        217.5,
+        93.75,
+        260.75,
+        170.0
+      ]
+    },
+    "layout": {
+      "text_boxes": {
+        "X103_window": [
+          176.375,
+          78.25,
+          185.375,
+          82.25
+        ],
+        "X143_holes": [
+          176.375,
+          70.25,
+          185.375,
+          74.25
+        ],
+        "X173_base": [
+          176.375,
+          62.25,
+          185.375,
+          66.25
+        ],
+        "X20_tap": [
+          177.875,
+          246.75,
+          183.875,
+          250.75
+        ],
+        "X149_motor": [
+          176.375,
+          252.75,
+          185.375,
+          256.75
+        ],
+        "X154_wall_in": [
+          176.375,
+          260.75,
+          185.375,
+          264.75
+        ],
+        "X163_wall_out": [
+          176.375,
+          268.75,
+          185.375,
+          272.75
+        ],
+        "Y15_hole1": [
+          136.75,
+          92.625,
+          140.75,
+          98.625
+        ],
+        "Y50_window": [
+          130.75,
+          97.0,
+          134.75,
+          103.0
+        ],
+        "Y95_hole2": [
+          122.75,
+          102.625,
+          126.75,
+          108.625
+        ],
+        "Y175_hole3": [
+          114.75,
+          111.125,
+          118.75,
+          120.125
+        ],
+        "Y220_window": [
+          106.75,
+          116.75,
+          110.75,
+          125.75
+        ],
+        "Y249_wall": [
+          272.25,
+          120.375,
+          276.25,
+          129.375
+        ],
+        "Y13_plate": [
+          278.25,
+          165.375,
+          282.25,
+          171.375
+        ],
+        "Y305_total": [
+          288.25,
+          127.375,
+          292.25,
+          136.375
+        ],
+        "Z16_base": [
+          255.75,
+          71.25,
+          261.75,
+          75.25
+        ],
+        "Z173_depth": [
+          234.625,
+          65.25,
+          243.625,
+          69.25
+        ],
+        "Z114_wall": [
+          238.0,
+          57.25,
+          247.0,
+          61.25
+        ],
+        "Z3_step": [
+          254.875,
+          179.5,
+          257.875,
+          183.5
+        ],
+        "Z5_tap": [
+          145.75,
+          223.375,
+          149.75,
+          226.375
+        ],
+        "Z22_5_motor": [
+          128.75,
+          215.4375,
+          132.75,
+          227.4375
+        ],
+        "Z80_bore": [
+          122.75,
+          211.25,
+          126.75,
+          217.25
+        ],
+        "Z115_motor": [
+          119.75,
+          199.75,
+          123.75,
+          208.75
+        ],
+        "D127_bore": [
+          151.9824,
+          182.893,
+          163.9824,
+          186.893
+        ],
+        "R15_window": [
+          157.1737,
+          97.7093,
+          166.1737,
+          101.7093
+        ],
+        "N_hole11": [
+          302.0,
+          60.0,
+          329.0,
+          65.2
+        ],
+        "N_hole10_base": [
+          302.0,
+          45.0,
+          329.0,
+          50.2
+        ],
+        "N_hole6_base": [
+          302.0,
+          175.0,
+          323.0,
+          180.2
+        ],
+        "N_hole10_motor": [
+          302.0,
+          200.0,
+          329.0,
+          205.2
+        ],
+        "N_hole6_motor": [
+          302.0,
+          250.0,
+          347.0,
+          255.2
+        ]
+      },
+      "collisions": [
+        [
+          "D127_bore",
+          "view:top"
+        ],
+        [
+          "R15_window",
+          "view:front"
+        ]
+      ],
+      "geom_boxes": {
+        "X103_window": [
+          168.0,
+          75.75,
+          193.75,
+          102.5
+        ],
+        "X143_holes": [
+          163.0,
+          67.75,
+          198.75,
+          97.5
+        ],
+        "X173_base": [
+          159.25,
+          59.75,
+          202.5,
+          93.75
+        ],
+        "X20_tap": [
+          175.375,
+          225.5,
+          186.375,
+          251.3053
+        ],
+        "X149_motor": [
+          162.25,
+          218.625,
+          199.5,
+          257.3053
+        ],
+        "X154_wall_in": [
+          161.625,
+          223.5,
+          200.125,
+          265.3053
+        ],
+        "X163_wall_out": [
+          160.5,
+          223.5,
+          201.25,
+          273.3053
+        ],
+        "Y15_hole1": [
+          136.1947,
+          90.75,
+          163.0,
+          100.5
+        ],
+        "Y50_window": [
+          130.1947,
+          93.75,
+          171.75,
+          106.25
+        ],
+        "Y95_hole2": [
+          122.1947,
+          93.75,
+          163.0,
+          117.5
+        ],
+        "Y175_hole3": [
+          114.1947,
+          93.75,
+          163.0,
+          137.5
+        ],
+        "Y220_window": [
+          106.1947,
+          93.75,
+          171.75,
+          148.75
+        ],
+        "Y249_wall": [
+          228.25,
+          93.75,
+          278.75,
+          156.0
+        ],
+        "Y13_plate": [
+          217.5,
+          163.75,
+          286.75,
+          173.0
+        ],
+        "Y305_total": [
+          260.75,
+          93.75,
+          294.75,
+          170.0
+        ],
+        "Z16_base": [
+          255.6422,
+          70.6947,
+          261.8578,
+          93.75
+        ],
+        "Z173_depth": [
+          214.5,
+          64.6947,
+          263.75,
+          170.0
+        ],
+        "Z114_wall": [
+          225.25,
+          56.6947,
+          259.75,
+          145.0
+        ],
+        "Z3_step": [
+          253.75,
+          145.0,
+          259.0,
+          188.0
+        ],
+        "Z5_tap": [
+          141.25,
+          222.5,
+          178.375,
+          227.25
+        ],
+        "Z22_5_motor": [
+          128.1947,
+          215.625,
+          162.25,
+          227.25
+        ],
+        "Z80_bore": [
+          122.1947,
+          204.25,
+          180.875,
+          224.25
+        ],
+        "Z115_motor": [
+          117.25,
+          186.875,
+          162.25,
+          221.625
+        ],
+        "D127_bore": [
+          151.3426,
+          175.7006,
+          192.1003,
+          215.4753
+        ],
+        "R15_window": [
+          156.2426,
+          94.2781,
+          171.75,
+          106.25
+        ],
+        "N_hole11": [
+          200.125,
+          60.0,
+          329.0,
+          137.5
+        ],
+        "N_hole10_base": [
+          200.125,
+          45.0,
+          329.0,
+          117.5
+        ],
+        "N_hole6_base": [
+          194.5,
+          152.5,
+          323.0,
+          180.2
+        ],
+        "N_hole10_motor": [
+          200.75,
+          200.0,
+          329.0,
+          218.625
+        ],
+        "N_hole6_motor": [
+          184.125,
+          225.5,
+          347.0,
+          255.2
+        ]
+      },
+      "frame_collisions": [],
+      "frame_ok": true
+    },
+    "resolved_kinds": {
+      "X103_window": "linear",
+      "X143_holes": "linear",
+      "X173_base": "linear",
+      "X20_tap": "linear",
+      "X149_motor": "linear",
+      "X154_wall_in": "linear",
+      "X163_wall_out": "linear",
+      "Y15_hole1": "linear",
+      "Y50_window": "linear",
+      "Y95_hole2": "linear",
+      "Y175_hole3": "linear",
+      "Y220_window": "linear",
+      "Y249_wall": "linear",
+      "Y13_plate": "linear",
+      "Y305_total": "linear",
+      "Z16_base": "linear",
+      "Z173_depth": "linear",
+      "Z114_wall": "linear",
+      "Z3_step": "linear",
+      "Z5_tap": "linear",
+      "Z22_5_motor": "linear",
+      "Z80_bore": "linear",
+      "Z115_motor": "linear",
+      "D127_bore": "diameter_native",
+      "R15_window": "radius"
+    },
+    "scale": 0.25,
+    "dimlfac": 4.0,
+    "views": [
+      "front",
+      "top",
+      "right"
+    ],
+    "view_reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 37.5,
+        "left": 53.5,
+        "right": 0.0
+      },
+      "top": {
+        "above": 45.5,
+        "below": 0.0,
+        "left": 45.5,
+        "right": 0.0
+      },
+      "right": {
+        "above": 21.5,
+        "below": 37.5,
+        "left": 0.0,
+        "right": 37.5
+      }
+    },
+    "defaults_applied": {
+      "diameter_style": {
+        "circular_view": "native",
+        "profile_view": "linear"
+      },
+      "hole_note": {
+        "notation": "phi",
+        "width": "zenkaku",
+        "separator": " "
+      }
+    },
+    "warnings": [
+      "レイアウト衝突(要目視確認) 2件: [['D127_bore', 'view:top'], ['R15_window', 'view:front']]"
+    ]
+  },
+  "gate2": {
+    "gate": "gate2_completeness_v1",
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-4-05_駆動ユニットブラケット.dxf",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-4-05\\plan.json",
+    "dropped_dimensions": [],
+    "ok": true,
+    "unspecified": [],
+    "floating_dimensions": [],
+    "redundant_dimensions": [],
+    "duplicate_value_dimensions": [
+      {
+        "value": 173.0,
+        "ids": [
+          "X173_base",
+          "Z173_depth"
+        ]
+      }
+    ],
+    "circles": [
+      {
+        "diameter": 6.0,
+        "count": 6,
+        "views": [
+          "front",
+          "top"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 10.0,
+        "count": 6,
+        "views": [
+          "front",
+          "top"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 11.0,
+        "count": 4,
+        "views": [
+          "front"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 30.0,
+        "count": 4,
+        "views": [
+          "front"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 127.0,
+        "count": 1,
+        "views": [
+          "top"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      }
+    ],
+    "axes": {
+      "X": {
+        "axis": "X",
+        "node_count": 37,
+        "nodes": [
+          -86.5,
+          -81.5,
+          -79.5,
+          -77.0,
+          -76.5,
+          -74.5,
+          -71.5,
+          -69.5,
+          -66.5,
+          -66.0,
+          -63.5,
+          -54.5,
+          -51.5,
+          -48.5,
+          -36.5,
+          -13.0,
+          -10.0,
+          -7.0,
+          0.0,
+          7.0,
+          10.0,
+          13.0,
+          36.5,
+          48.5,
+          51.5,
+          54.5,
+          63.5,
+          66.0,
+          66.5,
+          69.5,
+          71.5,
+          74.5,
+          76.5,
+          77.0,
+          79.5,
+          81.5,
+          86.5
+        ],
+        "mode": "symmetric",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": -51.5,
+            "by": "X103_window(対称・径/幅103)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 51.5,
+            "by": "X103_window(対称・径/幅103)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -71.5,
+            "by": "X143_holes(対称・径/幅143)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 71.5,
+            "by": "X143_holes(対称・径/幅143)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -86.5,
+            "by": "X173_base(対称・径/幅173)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 86.5,
+            "by": "X173_base(対称・径/幅173)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -10.0,
+            "by": "X20_tap(対称・径/幅20)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 10.0,
+            "by": "X20_tap(対称・径/幅20)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -74.5,
+            "by": "X149_motor(対称・径/幅149)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 74.5,
+            "by": "X149_motor(対称・径/幅149)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -77.0,
+            "by": "X154_wall_in(対称・径/幅154)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 77.0,
+            "by": "X154_wall_in(対称・径/幅154)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -81.5,
+            "by": "X163_wall_out(対称・径/幅163)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 81.5,
+            "by": "X163_wall_out(対称・径/幅163)",
+            "new_link": true
+          },
+          {
+            "from": -36.5,
+            "to": -51.5,
+            "by": "円φ30(front)",
+            "new_link": true
+          },
+          {
+            "from": 36.5,
+            "to": 51.5,
+            "by": "円φ30(front)",
+            "new_link": true
+          },
+          {
+            "from": 51.5,
+            "to": 54.5,
+            "by": "円φ6(front)",
+            "new_link": true
+          },
+          {
+            "from": 51.5,
+            "to": 48.5,
+            "by": "円φ6(front)",
+            "new_link": true
+          },
+          {
+            "from": -51.5,
+            "to": -48.5,
+            "by": "円φ6(front)",
+            "new_link": true
+          },
+          {
+            "from": -51.5,
+            "to": -54.5,
+            "by": "円φ6(front)",
+            "new_link": true
+          },
+          {
+            "from": -71.5,
+            "to": -66.5,
+            "by": "円φ10(front)",
+            "new_link": true
+          },
+          {
+            "from": -71.5,
+            "to": -76.5,
+            "by": "円φ10(front)",
+            "new_link": true
+          },
+          {
+            "from": -71.5,
+            "to": -66.0,
+            "by": "円φ11(front)",
+            "new_link": true
+          },
+          {
+            "from": 71.5,
+            "to": 66.0,
+            "by": "円φ11(front)",
+            "new_link": true
+          },
+          {
+            "from": 71.5,
+            "to": 76.5,
+            "by": "円φ10(front)",
+            "new_link": true
+          },
+          {
+            "from": 71.5,
+            "to": 66.5,
+            "by": "円φ10(front)",
+            "new_link": true
+          },
+          {
+            "from": -10.0,
+            "to": -7.0,
+            "by": "円φ6(top)",
+            "new_link": true
+          },
+          {
+            "from": -10.0,
+            "to": -13.0,
+            "by": "円φ6(top)",
+            "new_link": true
+          },
+          {
+            "from": -74.5,
+            "to": -69.5,
+            "by": "円φ10(top)",
+            "new_link": true
+          },
+          {
+            "from": -74.5,
+            "to": -79.5,
+            "by": "円φ10(top)",
+            "new_link": true
+          },
+          {
+            "from": 74.5,
+            "to": 79.5,
+            "by": "円φ10(top)",
+            "new_link": true
+          },
+          {
+            "from": 74.5,
+            "to": 69.5,
+            "by": "円φ10(top)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 63.5,
+            "by": "円φ127(top)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -63.5,
+            "by": "円φ127(top)",
+            "new_link": true
+          },
+          {
+            "from": 10.0,
+            "to": 13.0,
+            "by": "円φ6(top)",
+            "new_link": true
+          },
+          {
+            "from": 10.0,
+            "to": 7.0,
+            "by": "円φ6(top)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": 0.0
+      },
+      "Y": {
+        "axis": "Y",
+        "node_count": 23,
+        "nodes": [
+          0.0,
+          9.5,
+          15.0,
+          20.5,
+          32.0,
+          35.0,
+          38.0,
+          50.0,
+          90.0,
+          95.0,
+          100.0,
+          169.5,
+          175.0,
+          180.5,
+          205.0,
+          220.0,
+          232.0,
+          235.0,
+          238.0,
+          249.0,
+          292.0,
+          293.0,
+          305.0
+        ],
+        "mode": "chain",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": 15.0,
+            "by": "Y15_hole1(15)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 50.0,
+            "by": "Y50_window(50)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 95.0,
+            "by": "Y95_hole2(95)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 175.0,
+            "by": "Y175_hole3(175)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 220.0,
+            "by": "Y220_window(220)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 249.0,
+            "by": "Y249_wall(249)",
+            "new_link": true
+          },
+          {
+            "from": 292.0,
+            "to": 305.0,
+            "by": "Y13_plate(13)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 305.0,
+            "by": "Y305_total(305)",
+            "new_link": true
+          },
+          {
+            "from": 220.0,
+            "to": 235.0,
+            "by": "円φ30(front)",
+            "new_link": true
+          },
+          {
+            "from": 220.0,
+            "to": 205.0,
+            "by": "円φ30(front)",
+            "new_link": true
+          },
+          {
+            "from": 235.0,
+            "to": 238.0,
+            "by": "円φ6(front)",
+            "new_link": true
+          },
+          {
+            "from": 235.0,
+            "to": 232.0,
+            "by": "円φ6(front)",
+            "new_link": true
+          },
+          {
+            "from": 50.0,
+            "to": 35.0,
+            "by": "円φ30(front)",
+            "new_link": true
+          },
+          {
+            "from": 95.0,
+            "to": 100.0,
+            "by": "円φ10(front)",
+            "new_link": true
+          },
+          {
+            "from": 95.0,
+            "to": 90.0,
+            "by": "円φ10(front)",
+            "new_link": true
+          },
+          {
+            "from": 15.0,
+            "to": 20.5,
+            "by": "円φ11(front)",
+            "new_link": true
+          },
+          {
+            "from": 15.0,
+            "to": 9.5,
+            "by": "円φ11(front)",
+            "new_link": true
+          },
+          {
+            "from": 175.0,
+            "to": 180.5,
+            "by": "円φ11(front)",
+            "new_link": true
+          },
+          {
+            "from": 175.0,
+            "to": 169.5,
+            "by": "円φ11(front)",
+            "new_link": true
+          },
+          {
+            "from": 35.0,
+            "to": 38.0,
+            "by": "円φ6(front)",
+            "new_link": true
+          },
+          {
+            "from": 35.0,
+            "to": 32.0,
+            "by": "円φ6(front)",
+            "new_link": true
+          },
+          {
+            "from": 305.0,
+            "to": 293.0,
+            "by": "注記深さ12",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": null
+      },
+      "Z": {
+        "axis": "Z",
+        "node_count": 17,
+        "nodes": [
+          -16.0,
+          -8.0,
+          -5.0,
+          -2.0,
+          0.0,
+          3.0,
+          16.5,
+          17.5,
+          22.5,
+          27.5,
+          80.0,
+          114.0,
+          132.5,
+          137.5,
+          142.5,
+          143.5,
+          157.0
+        ],
+        "mode": "chain",
+        "edges": [
+          {
+            "from": -16.0,
+            "to": 0.0,
+            "by": "Z16_base(16)",
+            "new_link": true
+          },
+          {
+            "from": -16.0,
+            "to": 157.0,
+            "by": "Z173_depth(173)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 114.0,
+            "by": "Z114_wall(114)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 3.0,
+            "by": "Z3_step(3)",
+            "new_link": true
+          },
+          {
+            "from": -5.0,
+            "to": 0.0,
+            "by": "Z5_tap(5)",
+            "new_link": true
+          },
+          {
+            "from": 22.5,
+            "to": 0.0,
+            "by": "Z22_5_motor(22.5)",
+            "new_link": true
+          },
+          {
+            "from": 80.0,
+            "to": 0.0,
+            "by": "Z80_bore(80)",
+            "new_link": true
+          },
+          {
+            "from": 22.5,
+            "to": 137.5,
+            "by": "Z115_motor(115)",
+            "new_link": true
+          },
+          {
+            "from": -5.0,
+            "to": -2.0,
+            "by": "円φ6(top)",
+            "new_link": true
+          },
+          {
+            "from": -5.0,
+            "to": -8.0,
+            "by": "円φ6(top)",
+            "new_link": true
+          },
+          {
+            "from": 22.5,
+            "to": 27.5,
+            "by": "円φ10(top)",
+            "new_link": true
+          },
+          {
+            "from": 22.5,
+            "to": 17.5,
+            "by": "円φ10(top)",
+            "new_link": true
+          },
+          {
+            "from": 137.5,
+            "to": 142.5,
+            "by": "円φ10(top)",
+            "new_link": true
+          },
+          {
+            "from": 137.5,
+            "to": 132.5,
+            "by": "円φ10(top)",
+            "new_link": true
+          },
+          {
+            "from": 80.0,
+            "to": 143.5,
+            "by": "円φ127(top)",
+            "new_link": true
+          },
+          {
+            "from": 80.0,
+            "to": 16.5,
+            "by": "円φ127(top)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": null
+      }
+    },
+    "dimensions_read": [
+      {
+        "id": "X103_window",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 103.0,
+        "view": "front"
+      },
+      {
+        "id": "X143_holes",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 143.0,
+        "view": "front"
+      },
+      {
+        "id": "X173_base",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 173.0,
+        "view": "front"
+      },
+      {
+        "id": "X20_tap",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 20.0,
+        "view": "top"
+      },
+      {
+        "id": "X149_motor",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 149.0,
+        "view": "top"
+      },
+      {
+        "id": "X154_wall_in",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 154.0,
+        "view": "top"
+      },
+      {
+        "id": "X163_wall_out",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 163.0,
+        "view": "top"
+      },
+      {
+        "id": "Y15_hole1",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 15.0,
+        "view": "front"
+      },
+      {
+        "id": "Y50_window",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 50.0,
+        "view": "front"
+      },
+      {
+        "id": "Y95_hole2",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 95.0,
+        "view": "front"
+      },
+      {
+        "id": "Y175_hole3",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 175.0,
+        "view": "front"
+      },
+      {
+        "id": "Y220_window",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 220.0,
+        "view": "front"
+      },
+      {
+        "id": "Y249_wall",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 249.0,
+        "view": "right"
+      },
+      {
+        "id": "Y13_plate",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 13.0,
+        "view": "right"
+      },
+      {
+        "id": "Y305_total",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 305.0,
+        "view": "right"
+      },
+      {
+        "id": "Z16_base",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 16.0,
+        "view": "right"
+      },
+      {
+        "id": "Z173_depth",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 173.0,
+        "view": "right"
+      },
+      {
+        "id": "Z114_wall",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 114.0,
+        "view": "right"
+      },
+      {
+        "id": "Z3_step",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 3.0,
+        "view": "right"
+      },
+      {
+        "id": "Z5_tap",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 5.0,
+        "view": "top"
+      },
+      {
+        "id": "Z22_5_motor",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 22.5,
+        "view": "top"
+      },
+      {
+        "id": "Z80_bore",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 80.0,
+        "view": "top"
+      },
+      {
+        "id": "Z115_motor",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 115.0,
+        "view": "top"
+      },
+      {
+        "id": "D127_bore",
+        "role": "diameter",
+        "axis": null,
+        "value": 127.0,
+        "view": "top"
+      },
+      {
+        "id": "R15_window",
+        "role": "diameter",
+        "axis": null,
+        "value": 30.0,
+        "view": "front"
+      }
+    ],
+    "hole_notes": [
+      {
+        "raw": "\\A1;４－%%c１１",
+        "normalized": "4-%%c11",
+        "diameters": [
+          11.0
+        ],
+        "taps": [],
+        "depths": [],
+        "pcds": [],
+        "pipe_threads": [],
+        "clusters": [],
+        "count": 4,
+        "equal_spacing_declared": false
+      },
+      {
+        "raw": "\\A1;２－%%c１０",
+        "normalized": "2-%%c10",
+        "diameters": [
+          10.0
+        ],
+        "taps": [],
+        "depths": [],
+        "pcds": [],
+        "pipe_threads": [],
+        "clusters": [],
+        "count": 2,
+        "equal_spacing_declared": false
+      },
+      {
+        "raw": "\\A1;４－%%c６",
+        "normalized": "4-%%c6",
+        "diameters": [
+          6.0
+        ],
+        "taps": [],
+        "depths": [],
+        "pcds": [],
+        "pipe_threads": [],
+        "clusters": [],
+        "count": 4,
+        "equal_spacing_declared": false
+      },
+      {
+        "raw": "\\A1;４－%%c１０",
+        "normalized": "4-%%c10",
+        "diameters": [
+          10.0
+        ],
+        "taps": [],
+        "depths": [],
+        "pcds": [],
+        "pipe_threads": [],
+        "clusters": [],
+        "count": 4,
+        "equal_spacing_declared": false
+      },
+      {
+        "raw": "\\A1;２－%%c６深さ１２",
+        "normalized": "2-%%c6深さ12",
+        "diameters": [
+          6.0
+        ],
+        "taps": [],
+        "depths": [
+          12.0
+        ],
+        "pcds": [],
+        "pipe_threads": [],
+        "clusters": [],
+        "count": 2,
+        "equal_spacing_declared": false
+      }
+    ],
+    "pcd_groups": [],
+    "cluster_groups": [],
+    "inclined_features": [],
+    "polygons": [
+      {
+        "n": 4,
+        "center": [
+          0.0,
+          70.5
+        ],
+        "circum_r": 122.329473,
+        "across_flats": 173.0,
+        "across_corners": 244.658946,
+        "vertices": [
+          [
+            -86.5,
+            -16.0
+          ],
+          [
+            -86.5,
+            157.0
+          ],
+          [
+            86.5,
+            157.0
+          ],
+          [
+            86.5,
+            -16.0
+          ]
+        ],
+        "view": "top",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "ok": true,
+        "covered_by": "二面幅173"
+      }
+    ],
+    "oblique_width_dimensions": [],
+    "thread_features": [],
+    "note_diameters": [
+      6.0,
+      10.0,
+      11.0
+    ],
+    "note_taps": [],
+    "note_depths": [
+      12.0
+    ],
+    "covered_diameters": [
+      6.0,
+      10.0,
+      11.0,
+      30.0,
+      127.0
+    ],
+    "chamfers": [],
+    "out_of_scope": [
+      {
+        "class": "not_implemented",
+        "reason": "表面性状記号・幾何公差・溶接記号・ねじのピッチ/等級はv1の判定対象外(生成側も未実装)"
+      },
+      {
+        "class": "same_value_features",
+        "reason": "v1の台帳は特徴を**値と座標**で持つため、同じ値の別フィーチャー(左右のφ25等)を区別しない。片方の寸法を消しても検出できない(該当: [173.0])"
+      }
+    ]
+  },
+  "independent_verify": {
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-4-05_駆動ユニットブラケット.dxf",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-4-05\\plan.json",
+    "file_attrs_ok": true,
+    "frame": {
+      "total": 317,
+      "frame_matched": 112,
+      "remaining": 205,
+      "remaining_ratio": 0.6466876971608833
+    },
+    "scale": 0.25,
+    "gate1": [
+      {
+        "id": "X103_window",
+        "style": "GEN001",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 103.0,
+        "measured": 103.0,
+        "diff_mm": 0.0,
+        "text": "103",
+        "text_value": 103.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "X143_holes",
+        "style": "GEN002",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 143.0,
+        "measured": 143.0,
+        "diff_mm": 0.0,
+        "text": "143",
+        "text_value": 143.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "X173_base",
+        "style": "GEN003",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 173.0,
+        "measured": 173.0,
+        "diff_mm": 0.0,
+        "text": "173",
+        "text_value": 173.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "X20_tap",
+        "style": "GEN004",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 20.0,
+        "measured": 20.0,
+        "diff_mm": 0.0,
+        "text": "20",
+        "text_value": 20.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "X149_motor",
+        "style": "GEN005",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 149.0,
+        "measured": 149.0,
+        "diff_mm": 0.0,
+        "text": "149",
+        "text_value": 149.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "X154_wall_in",
+        "style": "GEN006",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 154.0,
+        "measured": 154.0,
+        "diff_mm": 0.0,
+        "text": "154",
+        "text_value": 154.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "X163_wall_out",
+        "style": "GEN007",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 163.0,
+        "measured": 163.0,
+        "diff_mm": 0.0,
+        "text": "163",
+        "text_value": 163.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y15_hole1",
+        "style": "GEN008",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 15.0,
+        "measured": 15.0,
+        "diff_mm": 0.0,
+        "text": "15",
+        "text_value": 15.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y50_window",
+        "style": "GEN009",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 50.0,
+        "measured": 50.0,
+        "diff_mm": 0.0,
+        "text": "50",
+        "text_value": 50.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y95_hole2",
+        "style": "GEN010",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 95.0,
+        "measured": 95.0,
+        "diff_mm": 0.0,
+        "text": "95",
+        "text_value": 95.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y175_hole3",
+        "style": "GEN011",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 175.0,
+        "measured": 175.0,
+        "diff_mm": 0.0,
+        "text": "175",
+        "text_value": 175.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y220_window",
+        "style": "GEN012",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 220.0,
+        "measured": 220.0,
+        "diff_mm": 0.0,
+        "text": "220",
+        "text_value": 220.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y249_wall",
+        "style": "GEN013",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 249.0,
+        "measured": 249.0,
+        "diff_mm": 0.0,
+        "text": "249",
+        "text_value": 249.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y13_plate",
+        "style": "GEN014",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 13.0,
+        "measured": 13.0,
+        "diff_mm": 0.0,
+        "text": "13",
+        "text_value": 13.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y305_total",
+        "style": "GEN015",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 305.0,
+        "measured": 305.0,
+        "diff_mm": 0.0,
+        "text": "305",
+        "text_value": 305.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z16_base",
+        "style": "GEN016",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 16.0,
+        "measured": 16.0,
+        "diff_mm": 0.0,
+        "text": "16",
+        "text_value": 16.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z173_depth",
+        "style": "GEN017",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 173.0,
+        "measured": 173.0,
+        "diff_mm": 0.0,
+        "text": "173",
+        "text_value": 173.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z114_wall",
+        "style": "GEN018",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 114.0,
+        "measured": 114.0,
+        "diff_mm": 0.0,
+        "text": "114",
+        "text_value": 114.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z3_step",
+        "style": "GEN019",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 3.0,
+        "measured": 3.0,
+        "diff_mm": 0.0,
+        "text": "3",
+        "text_value": 3.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z5_tap",
+        "style": "GEN020",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 5.0,
+        "measured": 5.0,
+        "diff_mm": 0.0,
+        "text": "5",
+        "text_value": 5.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z22_5_motor",
+        "style": "GEN021",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 22.5,
+        "measured": 22.5,
+        "diff_mm": 0.0,
+        "text": "22.5",
+        "text_value": 22.5,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z80_bore",
+        "style": "GEN022",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 80.0,
+        "measured": 80.0,
+        "diff_mm": 0.0,
+        "text": "80",
+        "text_value": 80.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z115_motor",
+        "style": "GEN023",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 115.0,
+        "measured": 115.0,
+        "diff_mm": 0.0,
+        "text": "115",
+        "text_value": 115.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "D127_bore",
+        "style": "GEN024",
+        "kind": "diameter_native",
+        "dimtype": 35,
+        "dimtype_base": 3,
+        "kind_impl_ok": true,
+        "expected": 127.0,
+        "measured": 127.0,
+        "diff_mm": 0.0,
+        "text": "%%c127",
+        "text_value": 127.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "R15_window",
+        "style": "GEN025",
+        "kind": "radius",
+        "dimtype": 36,
+        "dimtype_base": 4,
+        "kind_impl_ok": true,
+        "expected": 15.0,
+        "measured": 15.0,
+        "diff_mm": 0.0,
+        "text": "R15",
+        "text_value": 15.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      }
+    ],
+    "gate1_ok": true,
+    "gate1_max_diff_mm": 0.0,
+    "style_ok": true,
+    "style_mismatches": [],
+    "frame_collisions": [],
+    "layout_ok": true,
+    "notes": [
+      "\\A1;４－%%c１１",
+      "\\A1;２－%%c１０",
+      "\\A1;４－%%c６",
+      "\\A1;４－%%c１０",
+      "\\A1;２－%%c６深さ１２"
+    ],
+    "note_ok": true,
+    "ok": true
+  },
+  "centerline": {
+    "enabled": true,
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-4-05_駆動ユニットブラケット.dxf",
+    "added": 36,
+    "counts": {
+      "view_axis": 2,
+      "hole_cross": 16,
+      "profile_mark": 18
+    },
+    "linetype_added": false,
+    "style": {
+      "linetype": "DASHDOT",
+      "color": 3,
+      "hole_ext_mm": 5.0,
+      "axis_ext_mm": 5.0
+    },
+    "features": [
+      {
+        "view": "front",
+        "center": [
+          163.0,
+          97.5
+        ],
+        "d_draw": 2.75,
+        "d_model": 11.0,
+        "n_circles": 1
+      },
+      {
+        "view": "front",
+        "center": [
+          163.0,
+          137.5
+        ],
+        "d_draw": 2.75,
+        "d_model": 11.0,
+        "n_circles": 1
+      },
+      {
+        "view": "front",
+        "center": [
+          198.75,
+          97.5
+        ],
+        "d_draw": 2.75,
+        "d_model": 11.0,
+        "n_circles": 1
+      },
+      {
+        "view": "front",
+        "center": [
+          198.75,
+          137.5
+        ],
+        "d_draw": 2.75,
+        "d_model": 11.0,
+        "n_circles": 1
+      },
+      {
+        "view": "front",
+        "center": [
+          163.0,
+          117.5
+        ],
+        "d_draw": 2.5,
+        "d_model": 10.0,
+        "n_circles": 1
+      },
+      {
+        "view": "front",
+        "center": [
+          198.75,
+          117.5
+        ],
+        "d_draw": 2.5,
+        "d_model": 10.0,
+        "n_circles": 1
+      },
+      {
+        "view": "front",
+        "center": [
+          193.75,
+          152.5
+        ],
+        "d_draw": 1.5,
+        "d_model": 6.0,
+        "n_circles": 1
+      },
+      {
+        "view": "front",
+        "center": [
+          168.0,
+          152.5
+        ],
+        "d_draw": 1.5,
+        "d_model": 6.0,
+        "n_circles": 1
+      },
+      {
+        "view": "front",
+        "center": [
+          168.0,
+          102.5
+        ],
+        "d_draw": 1.5,
+        "d_model": 6.0,
+        "n_circles": 1
+      },
+      {
+        "view": "front",
+        "center": [
+          193.75,
+          102.5
+        ],
+        "d_draw": 1.5,
+        "d_model": 6.0,
+        "n_circles": 1
+      },
+      {
+        "view": "top",
+        "center": [
+          180.875,
+          204.25
+        ],
+        "d_draw": 31.75,
+        "d_model": 127.0,
+        "n_circles": 1
+      },
+      {
+        "view": "top",
+        "center": [
+          162.25,
+          218.625
+        ],
+        "d_draw": 2.5,
+        "d_model": 10.0,
+        "n_circles": 1
+      },
+      {
+        "view": "top",
+        "center": [
+          199.5,
+          218.625
+        ],
+        "d_draw": 2.5,
+        "d_model": 10.0,
+        "n_circles": 1
+      },
+      {
+        "view": "top",
+        "center": [
+          199.5,
+          189.875
+        ],
+        "d_draw": 2.5,
+        "d_model": 10.0,
+        "n_circles": 1
+      },
+      {
+        "view": "top",
+        "center": [
+          162.25,
+          189.875
+        ],
+        "d_draw": 2.5,
+        "d_model": 10.0,
+        "n_circles": 1
+      },
+      {
+        "view": "top",
+        "center": [
+          178.375,
+          225.5
+        ],
+        "d_draw": 1.5,
+        "d_model": 6.0,
+        "n_circles": 1
+      },
+      {
+        "view": "top",
+        "center": [
+          183.375,
+          225.5
+        ],
+        "d_draw": 1.5,
+        "d_model": 6.0,
+        "n_circles": 1
+      }
+    ],
+    "lines": [
+      {
+        "view": "top",
+        "cls": "view_axis",
+        "dir": "v",
+        "p1": [
+          180.875,
+          180.0
+        ],
+        "p2": [
+          180.875,
+          233.25
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          154.25,
+          204.25
+        ],
+        "p2": [
+          207.5,
+          204.25
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          163.0,
+          91.125
+        ],
+        "p2": [
+          163.0,
+          143.875
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "hole_cross",
+        "dir": "h",
+        "p1": [
+          156.625,
+          97.5
+        ],
+        "p2": [
+          205.125,
+          97.5
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "hole_cross",
+        "dir": "h",
+        "p1": [
+          156.625,
+          137.5
+        ],
+        "p2": [
+          205.125,
+          137.5
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          198.75,
+          91.125
+        ],
+        "p2": [
+          198.75,
+          143.875
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "hole_cross",
+        "dir": "h",
+        "p1": [
+          156.75,
+          117.5
+        ],
+        "p2": [
+          205.0,
+          117.5
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          193.75,
+          96.75
+        ],
+        "p2": [
+          193.75,
+          158.25
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "hole_cross",
+        "dir": "h",
+        "p1": [
+          162.25,
+          152.5
+        ],
+        "p2": [
+          199.5,
+          152.5
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          168.0,
+          96.75
+        ],
+        "p2": [
+          168.0,
+          158.25
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "hole_cross",
+        "dir": "h",
+        "p1": [
+          162.25,
+          102.5
+        ],
+        "p2": [
+          199.5,
+          102.5
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          162.25,
+          183.625
+        ],
+        "p2": [
+          162.25,
+          224.875
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "hole_cross",
+        "dir": "h",
+        "p1": [
+          156.0,
+          218.625
+        ],
+        "p2": [
+          205.75,
+          218.625
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          199.5,
+          183.625
+        ],
+        "p2": [
+          199.5,
+          224.875
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "hole_cross",
+        "dir": "h",
+        "p1": [
+          156.0,
+          189.875
+        ],
+        "p2": [
+          205.75,
+          189.875
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          178.375,
+          219.75
+        ],
+        "p2": [
+          178.375,
+          231.25
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "hole_cross",
+        "dir": "h",
+        "p1": [
+          172.625,
+          225.5
+        ],
+        "p2": [
+          189.125,
+          225.5
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          183.375,
+          219.75
+        ],
+        "p2": [
+          183.375,
+          231.25
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          163.0,
+          180.0
+        ],
+        "p2": [
+          163.0,
+          233.25
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          198.75,
+          180.0
+        ],
+        "p2": [
+          198.75,
+          233.25
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          193.75,
+          218.5
+        ],
+        "p2": [
+          193.75,
+          233.25
+        ]
+      },
+      {
+        "view": "top",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          168.0,
+          218.5
+        ],
+        "p2": [
+          168.0,
+          233.25
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "profile_mark",
+        "dir": "h",
+        "p1": [
+          251.75,
+          97.5
+        ],
+        "p2": [
+          265.75,
+          97.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "profile_mark",
+        "dir": "h",
+        "p1": [
+          251.75,
+          137.5
+        ],
+        "p2": [
+          265.75,
+          137.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "profile_mark",
+        "dir": "h",
+        "p1": [
+          251.75,
+          117.5
+        ],
+        "p2": [
+          265.75,
+          117.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "profile_mark",
+        "dir": "h",
+        "p1": [
+          251.0,
+          152.5
+        ],
+        "p2": [
+          265.75,
+          152.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "profile_mark",
+        "dir": "h",
+        "p1": [
+          251.75,
+          102.5
+        ],
+        "p2": [
+          265.75,
+          102.5
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          180.875,
+          161.75
+        ],
+        "p2": [
+          180.875,
+          175.0
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          162.25,
+          161.75
+        ],
+        "p2": [
+          162.25,
+          175.0
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          199.5,
+          161.75
+        ],
+        "p2": [
+          199.5,
+          175.0
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          178.375,
+          162.0
+        ],
+        "p2": [
+          178.375,
+          175.0
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          183.375,
+          162.0
+        ],
+        "p2": [
+          183.375,
+          175.0
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          236.75,
+          161.75
+        ],
+        "p2": [
+          236.75,
+          175.0
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          251.125,
+          161.75
+        ],
+        "p2": [
+          251.125,
+          175.0
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          222.375,
+          161.75
+        ],
+        "p2": [
+          222.375,
+          175.0
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "profile_mark",
+        "dir": "v",
+        "p1": [
+          258.0,
+          162.0
+        ],
+        "p2": [
+          258.0,
+          175.0
+        ]
+      }
+    ],
+    "circles": [],
+    "notes": []
+  },
+  "centerline_check": {
+    "ok": true,
+    "n_features": 17,
+    "n_missing": 0,
+    "coverage": 1.0,
+    "n_centerline_entities": 36,
+    "n_designed": 36,
+    "n_not_realized": 0,
+    "missing": [],
+    "not_realized": [],
+    "zone_hits": [],
+    "checked": [
+      {
+        "view": "front",
+        "center": [
+          163.0,
+          97.5
+        ],
+        "d_model": 11.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "front",
+        "center": [
+          163.0,
+          137.5
+        ],
+        "d_model": 11.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "front",
+        "center": [
+          198.75,
+          97.5
+        ],
+        "d_model": 11.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "front",
+        "center": [
+          198.75,
+          137.5
+        ],
+        "d_model": 11.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "front",
+        "center": [
+          163.0,
+          117.5
+        ],
+        "d_model": 10.0,
+        "h": 5.0,
+        "v": 25.125
+      },
+      {
+        "view": "front",
+        "center": [
+          198.75,
+          117.5
+        ],
+        "d_model": 10.0,
+        "h": 5.0,
+        "v": 25.125
+      },
+      {
+        "view": "front",
+        "center": [
+          193.75,
+          152.5
+        ],
+        "d_model": 6.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "front",
+        "center": [
+          168.0,
+          152.5
+        ],
+        "d_model": 6.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "front",
+        "center": [
+          168.0,
+          102.5
+        ],
+        "d_model": 6.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "front",
+        "center": [
+          193.75,
+          102.5
+        ],
+        "d_model": 6.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "top",
+        "center": [
+          180.875,
+          204.25
+        ],
+        "d_model": 127.0,
+        "h": 10.75,
+        "v": 8.375
+      },
+      {
+        "view": "top",
+        "center": [
+          162.25,
+          218.625
+        ],
+        "d_model": 10.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "top",
+        "center": [
+          199.5,
+          218.625
+        ],
+        "d_model": 10.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "top",
+        "center": [
+          199.5,
+          189.875
+        ],
+        "d_model": 10.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "top",
+        "center": [
+          162.25,
+          189.875
+        ],
+        "d_model": 10.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "top",
+        "center": [
+          178.375,
+          225.5
+        ],
+        "d_model": 6.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "top",
+        "center": [
+          183.375,
+          225.5
+        ],
+        "d_model": 6.0,
+        "h": 5.0,
+        "v": 5.0
+      }
+    ]
+  }
+}

@@ -1,0 +1,328 @@
+[
+ {
+  "request": "BLIND2-25154-1-27",
+  "off": {
+   "rc": 0,
+   "overall_ok": true,
+   "gate1_ok": true,
+   "gate2_ok": true,
+   "verify_ok": true,
+   "layout_ok": true,
+   "centerline": {
+    "enabled": false,
+    "skipped_reason": "計画JSONで抑制(defaults.centerline.enabled=false)"
+   },
+   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-1-27_走行フレーム踏板.dxf",
+   "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-1-27_走行フレーム踏板.png",
+   "error": null
+  },
+  "on": {
+   "rc": 0,
+   "overall_ok": true,
+   "gate1_ok": true,
+   "gate2_ok": true,
+   "verify_ok": true,
+   "layout_ok": true,
+   "centerline": {
+    "enabled": true,
+    "added": 11,
+    "counts": {
+     "view_axis": 3,
+     "hole_cross": 6,
+     "profile_mark": 2
+    },
+    "gate3_circle_centerline_ok": true,
+    "n_features": 8,
+    "n_missing": 0,
+    "zone_hits": [],
+    "skipped_marks": [
+     {
+      "view": "top",
+      "cls": "profile_mark_skipped",
+      "reason": "穴の壁(隠れ線)が見つからない",
+      "pos": 116.8
+     },
+     {
+      "view": "top",
+      "cls": "profile_mark_skipped",
+      "reason": "穴の壁(隠れ線)が見つからない",
+      "pos": 303.2
+     },
+     {
+      "view": "top",
+      "cls": "profile_mark_skipped",
+      "reason": "穴の壁(隠れ線)が見つからない",
+      "pos": 303.2
+     },
+     {
+      "view": "top",
+      "cls": "profile_mark_skipped",
+      "reason": "穴の壁(隠れ線)が見つからない",
+      "pos": 116.8
+     }
+    ]
+   },
+   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-1-27_走行フレーム踏板.dxf",
+   "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-1-27_走行フレーム踏板.png",
+   "error": null
+  },
+  "diff": {
+   "old": "調査/centerline/blind2_off/25154-1-27_走行フレーム踏板.dxf",
+   "new": "調査/centerline/blind2/25154-1-27_走行フレーム踏板.dxf",
+   "non_centerline_entities": [
+    224,
+    224
+   ],
+   "centerline_entities": [
+    0,
+    11
+   ],
+   "removed_non_centerline": 0,
+   "added_non_centerline": 0,
+   "added_centerline": 11,
+   "removed_centerline": 0,
+   "ok": true
+  }
+ },
+ {
+  "request": "BLIND2-25154-2-16",
+  "off": {
+   "rc": 0,
+   "overall_ok": true,
+   "gate1_ok": true,
+   "gate2_ok": true,
+   "verify_ok": true,
+   "layout_ok": true,
+   "centerline": {
+    "enabled": false,
+    "skipped_reason": "計画JSONで抑制(defaults.centerline.enabled=false)"
+   },
+   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-2-16_指針.dxf",
+   "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-2-16_指針.png",
+   "error": null
+  },
+  "on": {
+   "rc": 0,
+   "overall_ok": true,
+   "gate1_ok": true,
+   "gate2_ok": true,
+   "verify_ok": true,
+   "layout_ok": true,
+   "centerline": {
+    "enabled": true,
+    "added": 5,
+    "counts": {
+     "hole_cross": 3,
+     "profile_mark": 2
+    },
+    "gate3_circle_centerline_ok": true,
+    "n_features": 2,
+    "n_missing": 0,
+    "zone_hits": [],
+    "skipped_marks": []
+   },
+   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-2-16_指針.dxf",
+   "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-2-16_指針.png",
+   "error": null
+  },
+  "diff": {
+   "old": "調査/centerline/blind2_off/25154-2-16_指針.dxf",
+   "new": "調査/centerline/blind2/25154-2-16_指針.dxf",
+   "non_centerline_entities": [
+    167,
+    167
+   ],
+   "centerline_entities": [
+    0,
+    5
+   ],
+   "removed_non_centerline": 0,
+   "added_non_centerline": 0,
+   "added_centerline": 5,
+   "removed_centerline": 0,
+   "ok": true
+  }
+ },
+ {
+  "request": "BLIND2-25154-3-02",
+  "off": {
+   "rc": 0,
+   "overall_ok": true,
+   "gate1_ok": true,
+   "gate2_ok": true,
+   "verify_ok": true,
+   "layout_ok": true,
+   "centerline": {
+    "enabled": false,
+    "skipped_reason": "計画JSONで抑制(defaults.centerline.enabled=false)"
+   },
+   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-3-02_モータブラケット.dxf",
+   "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-3-02_モータブラケット.png",
+   "error": null
+  },
+  "on": {
+   "rc": 0,
+   "overall_ok": true,
+   "gate1_ok": true,
+   "gate2_ok": true,
+   "verify_ok": true,
+   "layout_ok": true,
+   "centerline": {
+    "enabled": true,
+    "added": 23,
+    "counts": {
+     "view_axis": 3,
+     "hole_cross": 12,
+     "profile_mark": 6,
+     "pcd_circle": 2
+    },
+    "gate3_circle_centerline_ok": true,
+    "n_features": 9,
+    "n_missing": 0,
+    "zone_hits": [],
+    "skipped_marks": []
+   },
+   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-3-02_モータブラケット.dxf",
+   "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-3-02_モータブラケット.png",
+   "error": null
+  },
+  "diff": {
+   "old": "調査/centerline/blind2_off/25154-3-02_モータブラケット.dxf",
+   "new": "調査/centerline/blind2/25154-3-02_モータブラケット.dxf",
+   "non_centerline_entities": [
+    214,
+    214
+   ],
+   "centerline_entities": [
+    0,
+    23
+   ],
+   "removed_non_centerline": 0,
+   "added_non_centerline": 0,
+   "added_centerline": 23,
+   "removed_centerline": 0,
+   "ok": true
+  }
+ },
+ {
+  "request": "BLIND2-25154-4-05",
+  "off": {
+   "rc": 0,
+   "overall_ok": true,
+   "gate1_ok": true,
+   "gate2_ok": true,
+   "verify_ok": true,
+   "layout_ok": true,
+   "centerline": {
+    "enabled": false,
+    "skipped_reason": "計画JSONで抑制(defaults.centerline.enabled=false)"
+   },
+   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-4-05_駆動ユニットブラケット.dxf",
+   "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-4-05_駆動ユニットブラケット.png",
+   "error": null
+  },
+  "on": {
+   "rc": 0,
+   "overall_ok": true,
+   "gate1_ok": true,
+   "gate2_ok": true,
+   "verify_ok": true,
+   "layout_ok": true,
+   "centerline": {
+    "enabled": true,
+    "added": 36,
+    "counts": {
+     "view_axis": 2,
+     "hole_cross": 16,
+     "profile_mark": 18
+    },
+    "gate3_circle_centerline_ok": true,
+    "n_features": 17,
+    "n_missing": 0,
+    "zone_hits": [],
+    "skipped_marks": []
+   },
+   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-4-05_駆動ユニットブラケット.dxf",
+   "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-4-05_駆動ユニットブラケット.png",
+   "error": null
+  },
+  "diff": {
+   "old": "調査/centerline/blind2_off/25154-4-05_駆動ユニットブラケット.dxf",
+   "new": "調査/centerline/blind2/25154-4-05_駆動ユニットブラケット.dxf",
+   "non_centerline_entities": [
+    317,
+    317
+   ],
+   "centerline_entities": [
+    0,
+    36
+   ],
+   "removed_non_centerline": 0,
+   "added_non_centerline": 0,
+   "added_centerline": 36,
+   "removed_centerline": 0,
+   "ok": true
+  }
+ },
+ {
+  "request": "BLIND2-25154-5-05",
+  "off": {
+   "rc": 0,
+   "overall_ok": true,
+   "gate1_ok": true,
+   "gate2_ok": true,
+   "verify_ok": true,
+   "layout_ok": true,
+   "centerline": {
+    "enabled": false,
+    "skipped_reason": "計画JSONで抑制(defaults.centerline.enabled=false)"
+   },
+   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-5-05_減速機フランジ.dxf",
+   "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-5-05_減速機フランジ.png",
+   "error": null
+  },
+  "on": {
+   "rc": 0,
+   "overall_ok": true,
+   "gate1_ok": true,
+   "gate2_ok": true,
+   "verify_ok": true,
+   "layout_ok": true,
+   "centerline": {
+    "enabled": true,
+    "added": 16,
+    "counts": {
+     "view_axis": 3,
+     "hole_cross": 8,
+     "profile_mark": 4,
+     "pcd_circle": 1
+    },
+    "gate3_circle_centerline_ok": true,
+    "n_features": 9,
+    "n_missing": 0,
+    "zone_hits": [],
+    "skipped_marks": []
+   },
+   "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-5-05_減速機フランジ.dxf",
+   "png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2\\25154-5-05_減速機フランジ.png",
+   "error": null
+  },
+  "diff": {
+   "old": "調査/centerline/blind2_off/25154-5-05_減速機フランジ.dxf",
+   "new": "調査/centerline/blind2/25154-5-05_減速機フランジ.dxf",
+   "non_centerline_entities": [
+    262,
+    262
+   ],
+   "centerline_entities": [
+    0,
+    16
+   ],
+   "removed_non_centerline": 0,
+   "added_non_centerline": 0,
+   "added_centerline": 16,
+   "removed_centerline": 0,
+   "ok": true
+  }
+ }
+]

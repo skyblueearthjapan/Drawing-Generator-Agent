@@ -1,0 +1,53 @@
+[
+ {
+  "old": "生成図面/テスト-004_ホルダー.dxf",
+  "new": "調査/regress_out/テスト-004_ホルダー.dxf",
+  "non_centerline_entities": [
+   214,
+   214
+  ],
+  "centerline_entities": [
+   0,
+   8
+  ],
+  "removed_non_centerline": 0,
+  "added_non_centerline": 0,
+  "added_centerline": 8,
+  "removed_centerline": 0,
+  "ok": true
+ },
+ {
+  "old": "生成図面/AUTO-001_クッション.dxf",
+  "new": "調査/regress_out/AUTO-001_クッション.dxf",
+  "non_centerline_entities": [
+   179,
+   179
+  ],
+  "centerline_entities": [
+   0,
+   4
+  ],
+  "removed_non_centerline": 0,
+  "added_non_centerline": 0,
+  "added_centerline": 4,
+  "removed_centerline": 0,
+  "ok": true
+ },
+ {
+  "old": "生成図面/AUTO-002_ベアリングカラー.dxf",
+  "new": "調査/regress_out/AUTO-002_ベアリングカラー.dxf",
+  "non_centerline_entities": [
+   181,
+   181
+  ],
+  "centerline_entities": [
+   0,
+   4
+  ],
+  "removed_non_centerline": 0,
+  "added_non_centerline": 0,
+  "added_centerline": 4,
+  "removed_centerline": 0,
+  "ok": true
+ }
+]

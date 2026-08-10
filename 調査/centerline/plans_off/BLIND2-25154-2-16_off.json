@@ -1,0 +1,371 @@
+{
+ "schema_version": "1.0",
+ "_note": "盲検第2弾(2026-08-10)。人間図面は一切見ていない。3D実測(meas.json)と投影ジオメトリ、自社流儀の一般原則のみで作成。",
+ "part": {
+  "model": "2-16(教師STEP/2.ターン軸/2-16.STEP)",
+  "図番": "25154-2-16",
+  "品名": "指針",
+  "shape_class": "曲げ物",
+  "材質": "ＳＳ４００",
+  "個数": 1,
+  "形状要約": "板厚3.2のコの字ブラケット。幅25(X=±12.5)。ウェブ z39.8〜43 / y-3.2〜125.4。上フランジ y125.4〜128.6 / z-2〜39.8。下フランジ y-6.4〜-3.2 / z0〜39.8、z-45〜0は板厚6.4の段付き指針部でφ8通し穴2個。曲げ内R3.2×2。"
+ },
+ "source": {
+  "base_dxf": "data/依頼箱/BLIND2-25154-2-16/views.dxf",
+  "meta_json": "data/依頼箱/BLIND2-25154-2-16/meta.json",
+  "scale": 1.0
+ },
+ "layout": {
+  "views": [
+   "front",
+   "top"
+  ],
+  "dim_reserve": true
+ },
+ "defaults": {
+  "first_offset_mm": 16.0,
+  "stack_step_mm": 8.0,
+  "snap_tol_mm": 0.01,
+  "gate_tol_mm": 0.01,
+  "centerline": {
+   "enabled": false
+  }
+ },
+ "dimensions": [
+  {
+   "id": "Z88_total",
+   "kind": "linear",
+   "view": "front",
+   "measure": {
+    "space": "model",
+    "p1": [
+     0,
+     -3.2,
+     43
+    ],
+    "p2": [
+     0,
+     0,
+     -45
+    ],
+    "direction": "horizontal"
+   },
+   "placement": {
+    "side": "below",
+    "level": 1
+   },
+   "value_expected": 88.0,
+   "tolerance": null,
+   "comment": "全奥行。Z軸のdatum=ウェブ外面z=43(取付背面)"
+  },
+  {
+   "id": "Z43_step",
+   "kind": "linear",
+   "view": "front",
+   "measure": {
+    "space": "model",
+    "p1": [
+     0,
+     -3.2,
+     43
+    ],
+    "p2": [
+     0,
+     -3.2,
+     0
+    ],
+    "direction": "horizontal"
+   },
+   "placement": {
+    "side": "below",
+    "level": 2
+   },
+   "value_expected": 43.0,
+   "tolerance": null,
+   "comment": "datum(z=43)から段差面(z=0)まで"
+  },
+  {
+   "id": "Z45_topflange",
+   "kind": "linear",
+   "view": "front",
+   "measure": {
+    "space": "model",
+    "p1": [
+     0,
+     125.4,
+     43
+    ],
+    "p2": [
+     0,
+     125.4,
+     -2
+    ],
+    "direction": "horizontal"
+   },
+   "placement": {
+    "side": "below",
+    "level": 3
+   },
+   "value_expected": 45.0,
+   "tolerance": null,
+   "comment": "datum(z=43)から上フランジ先端(z=-2)まで"
+  },
+  {
+   "id": "Y135_total",
+   "kind": "linear",
+   "view": "front",
+   "measure": {
+    "space": "model",
+    "p1": [
+     0,
+     -6.4,
+     -45
+    ],
+    "p2": [
+     0,
+     128.6,
+     -2
+    ],
+    "direction": "vertical"
+   },
+   "placement": {
+    "side": "left",
+    "level": 1
+   },
+   "value_expected": 135.0,
+   "tolerance": null,
+   "comment": "全高。Y軸のdatum=下面y=-6.4"
+  },
+  {
+   "id": "Y6_4_tip",
+   "kind": "linear",
+   "view": "front",
+   "measure": {
+    "space": "model",
+    "p1": [
+     0,
+     -6.4,
+     -45
+    ],
+    "p2": [
+     0,
+     0,
+     -45
+    ],
+    "direction": "vertical"
+   },
+   "placement": {
+    "side": "left",
+    "level": 2
+   },
+   "value_expected": 6.4,
+   "tolerance": null,
+   "comment": "指針部の厚み(3.2の段付き重ね=6.4)。datumから積む"
+  },
+  {
+   "id": "Y3_2_topflange",
+   "kind": "linear",
+   "view": "front",
+   "measure": {
+    "space": "model",
+    "p1": [
+     0,
+     125.4,
+     -2
+    ],
+    "p2": [
+     0,
+     128.6,
+     -2
+    ],
+    "direction": "vertical"
+   },
+   "placement": {
+    "side": "right",
+    "level": 1
+   },
+   "value_expected": 3.2,
+   "tolerance": null,
+   "comment": "上フランジ板厚"
+  },
+  {
+   "id": "R3_2_bend",
+   "kind": "radius",
+   "view": "front",
+   "measure": {
+    "space": "model",
+    "p1": [
+     0,
+     -3.2,
+     39.8
+    ],
+    "radius": 3.2,
+    "leader_angle": 225
+   },
+   "value_expected": 3.2,
+   "tolerance": null,
+   "comment": "曲げ内R。φ6.4の円特徴をカバーし、円弧中心(y=-3.2,z=39.8)から四分点への辺で y{-6.4,-3.2,0} と z{39.8,43} を連結する"
+  },
+  {
+   "id": "X25_width",
+   "kind": "linear",
+   "view": "top",
+   "measure": {
+    "space": "model",
+    "p1": [
+     -12.5,
+     0,
+     -45
+    ],
+    "p2": [
+     12.5,
+     0,
+     -45
+    ],
+    "direction": "vertical"
+   },
+   "placement": {
+    "side": "left",
+    "level": 1
+   },
+   "value_expected": 25.0,
+   "tolerance": null,
+   "comment": "板幅。X軸は0対称で中点=対称中心のため両端が一括で決まる"
+  },
+  {
+   "id": "Z3_2_web",
+   "kind": "linear",
+   "view": "top",
+   "measure": {
+    "space": "model",
+    "p1": [
+     12.5,
+     128.6,
+     39.8
+    ],
+    "p2": [
+     12.5,
+     128.6,
+     43
+    ],
+    "direction": "horizontal"
+   },
+   "placement": {
+    "side": "above",
+    "level": 1
+   },
+   "value_expected": 3.2,
+   "tolerance": null,
+   "comment": "ウェブ板厚(材料板厚)。曲げR経由でも連結されるため冗長になるが、加工者に板厚を明示する目的で入れる"
+  },
+  {
+   "id": "Z20_pitch",
+   "kind": "linear",
+   "view": "top",
+   "measure": {
+    "space": "model",
+    "p1": [
+     0,
+     -6.4,
+     -10
+    ],
+    "p2": [
+     0,
+     -6.4,
+     -30
+    ],
+    "direction": "horizontal"
+   },
+   "placement": {
+    "side": "above",
+    "level": 2
+   },
+   "value_expected": 20.0,
+   "tolerance": null,
+   "comment": "φ8穴のピッチ(測定点は実在円の中心)"
+  },
+  {
+   "id": "Z15_end",
+   "kind": "linear",
+   "view": "top",
+   "measure": {
+    "space": "model",
+    "p1": [
+     0,
+     -6.4,
+     -30
+    ],
+    "p2": [
+     12.5,
+     -6.4,
+     -45
+    ],
+    "direction": "horizontal"
+   },
+   "placement": {
+    "side": "above",
+    "level": 3
+   },
+   "value_expected": 15.0,
+   "tolerance": null,
+   "comment": "先端(z=-45)から遠い側のφ8穴中心まで。datum→先端→穴 のチェーンを閉じる(作法1)"
+  }
+ ],
+ "hole_notes": [
+  {
+   "id": "N_hole8",
+   "view": "top",
+   "pattern": "\\A1;２－%%c８通し",
+   "leader": {
+    "space": "model",
+    "points": [
+     [
+      0,
+      -6.4,
+      -34
+     ],
+     [
+      -8,
+      -6.4,
+      -48
+     ],
+     [
+      -8,
+      -6.4,
+      -60
+     ]
+    ]
+   },
+   "text_space": "model",
+   "text_insert": [
+    -8,
+    -6.4,
+    -61
+   ],
+   "attachment": "bottom-left",
+   "anchor_check": {
+    "type": "on_circle",
+    "view": "top",
+    "center": [
+     239.0,
+     236.0
+    ],
+    "diameter": 8.0
+   },
+   "comment": "引出線始点はz=-30の穴の四分点(z=-34)。φ8通し穴2個。呼び径ちょうど(8.000)だがМ表記にはしない: 運用ルール『М判定は呼び径±0.1一致 かつ 3個以上が円周等配』に対し本件は2個・非等配で条件を満たさず、板厚6.4(=0.8×d)はタップ有効長として薄い。相手部品へ通しボルトで留める穴と解釈した。採らなかった解釈=Ｍ８タップ。"
+  }
+ ],
+ "notes": [
+  {
+   "id": "N_general",
+   "text": "注記．\\P　指示無き角部はＣ０．２、隅部はＲ２以下とする。",
+   "insert": [
+    290.0,
+    120.0
+   ],
+   "attachment": "top-left",
+   "height": 3.5,
+   "comment": "塗装色・公差・仕上げ記号は3Dからは決まらないため質問票へ回し、共通注記のみ記載"
+  }
+ ]
+}

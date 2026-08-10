@@ -1,0 +1,503 @@
+{
+ "summary": {
+  "cases": 5,
+  "baseline_ok": 5,
+  "mutations_total": 42,
+  "mutations_detected": 42,
+  "not_applicable": 3,
+  "undetected": []
+ },
+ "results": [
+  {
+   "case": "BLIND2-25154-3-02",
+   "added": 23,
+   "counts": {
+    "view_axis": 3,
+    "hole_cross": 12,
+    "profile_mark": 6,
+    "pcd_circle": 2
+   },
+   "C0_baseline": {
+    "ok": true,
+    "n_features": 9,
+    "n_missing": 0,
+    "n_centerline_entities": 23
+   },
+   "mutations": {
+    "C1_delete_all": {
+     "mutated_entities": 23,
+     "ok": false,
+     "n_missing": 9,
+     "n_not_realized": 23,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C2_drop_h": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 3,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C3_drop_v": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 3,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C4_shrink": {
+     "mutated_entities": 21,
+     "ok": false,
+     "n_missing": 9,
+     "n_not_realized": 21,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C5_lines_gone": {
+     "mutated_entities": 21,
+     "ok": false,
+     "n_missing": 9,
+     "n_not_realized": 21,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C6_frame_intrusion": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 0,
+     "n_zone_hits": 1,
+     "applicable": true,
+     "detected": true
+    },
+    "C7_continuous": {
+     "mutated_entities": 23,
+     "ok": false,
+     "n_missing": 9,
+     "n_not_realized": 23,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C8_drop_mark": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C9_drop_pcd": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    }
+   }
+  },
+  {
+   "case": "BLIND2-25154-5-05",
+   "added": 16,
+   "counts": {
+    "view_axis": 3,
+    "hole_cross": 8,
+    "profile_mark": 4,
+    "pcd_circle": 1
+   },
+   "C0_baseline": {
+    "ok": true,
+    "n_features": 9,
+    "n_missing": 0,
+    "n_centerline_entities": 16
+   },
+   "mutations": {
+    "C1_delete_all": {
+     "mutated_entities": 16,
+     "ok": false,
+     "n_missing": 9,
+     "n_not_realized": 16,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C2_drop_h": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 3,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C3_drop_v": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 3,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C4_shrink": {
+     "mutated_entities": 15,
+     "ok": false,
+     "n_missing": 9,
+     "n_not_realized": 15,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C5_lines_gone": {
+     "mutated_entities": 15,
+     "ok": false,
+     "n_missing": 9,
+     "n_not_realized": 15,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C6_frame_intrusion": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 0,
+     "n_zone_hits": 1,
+     "applicable": true,
+     "detected": true
+    },
+    "C7_continuous": {
+     "mutated_entities": 16,
+     "ok": false,
+     "n_missing": 9,
+     "n_not_realized": 16,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C8_drop_mark": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C9_drop_pcd": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    }
+   }
+  },
+  {
+   "case": "BLIND2-25154-4-05",
+   "added": 36,
+   "counts": {
+    "view_axis": 2,
+    "hole_cross": 16,
+    "profile_mark": 18
+   },
+   "C0_baseline": {
+    "ok": true,
+    "n_features": 17,
+    "n_missing": 0,
+    "n_centerline_entities": 36
+   },
+   "mutations": {
+    "C1_delete_all": {
+     "mutated_entities": 36,
+     "ok": false,
+     "n_missing": 17,
+     "n_not_realized": 36,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C2_drop_h": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 1,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C3_drop_v": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 1,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C4_shrink": {
+     "mutated_entities": 36,
+     "ok": false,
+     "n_missing": 17,
+     "n_not_realized": 36,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C5_lines_gone": {
+     "mutated_entities": 36,
+     "ok": false,
+     "n_missing": 17,
+     "n_not_realized": 36,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C6_frame_intrusion": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 0,
+     "n_zone_hits": 1,
+     "applicable": true,
+     "detected": true
+    },
+    "C7_continuous": {
+     "mutated_entities": 36,
+     "ok": false,
+     "n_missing": 17,
+     "n_not_realized": 36,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C8_drop_mark": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C9_drop_pcd": {
+     "mutated_entities": 0,
+     "ok": true,
+     "n_missing": 0,
+     "n_not_realized": 0,
+     "n_zone_hits": 0,
+     "applicable": false,
+     "detected": null
+    }
+   }
+  },
+  {
+   "case": "BLIND2-25154-1-27",
+   "added": 11,
+   "counts": {
+    "view_axis": 3,
+    "hole_cross": 6,
+    "profile_mark": 2
+   },
+   "C0_baseline": {
+    "ok": true,
+    "n_features": 8,
+    "n_missing": 0,
+    "n_centerline_entities": 11
+   },
+   "mutations": {
+    "C1_delete_all": {
+     "mutated_entities": 11,
+     "ok": false,
+     "n_missing": 8,
+     "n_not_realized": 11,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C2_drop_h": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 2,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C3_drop_v": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 2,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C4_shrink": {
+     "mutated_entities": 11,
+     "ok": false,
+     "n_missing": 8,
+     "n_not_realized": 11,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C5_lines_gone": {
+     "mutated_entities": 11,
+     "ok": false,
+     "n_missing": 8,
+     "n_not_realized": 11,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C6_frame_intrusion": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 0,
+     "n_zone_hits": 1,
+     "applicable": true,
+     "detected": true
+    },
+    "C7_continuous": {
+     "mutated_entities": 11,
+     "ok": false,
+     "n_missing": 8,
+     "n_not_realized": 11,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C8_drop_mark": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C9_drop_pcd": {
+     "mutated_entities": 0,
+     "ok": true,
+     "n_missing": 0,
+     "n_not_realized": 0,
+     "n_zone_hits": 0,
+     "applicable": false,
+     "detected": null
+    }
+   }
+  },
+  {
+   "case": "BLIND2-25154-2-16",
+   "added": 5,
+   "counts": {
+    "hole_cross": 3,
+    "profile_mark": 2
+   },
+   "C0_baseline": {
+    "ok": true,
+    "n_features": 2,
+    "n_missing": 0,
+    "n_centerline_entities": 5
+   },
+   "mutations": {
+    "C1_delete_all": {
+     "mutated_entities": 5,
+     "ok": false,
+     "n_missing": 2,
+     "n_not_realized": 5,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C2_drop_h": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 2,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C3_drop_v": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 1,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C4_shrink": {
+     "mutated_entities": 5,
+     "ok": false,
+     "n_missing": 2,
+     "n_not_realized": 5,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C5_lines_gone": {
+     "mutated_entities": 5,
+     "ok": false,
+     "n_missing": 2,
+     "n_not_realized": 5,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C6_frame_intrusion": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 0,
+     "n_zone_hits": 1,
+     "applicable": true,
+     "detected": true
+    },
+    "C7_continuous": {
+     "mutated_entities": 5,
+     "ok": false,
+     "n_missing": 2,
+     "n_not_realized": 5,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C8_drop_mark": {
+     "mutated_entities": 1,
+     "ok": false,
+     "n_missing": 0,
+     "n_not_realized": 1,
+     "n_zone_hits": 0,
+     "applicable": true,
+     "detected": true
+    },
+    "C9_drop_pcd": {
+     "mutated_entities": 0,
+     "ok": true,
+     "n_missing": 0,
+     "n_not_realized": 0,
+     "n_zone_hits": 0,
+     "applicable": false,
+     "detected": null
+    }
+   }
+  }
+ ]
+}

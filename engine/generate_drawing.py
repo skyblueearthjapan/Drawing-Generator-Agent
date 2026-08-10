@@ -11,6 +11,9 @@ u"""1コマンド部品図生成ランナー(フェーズ5骨格・恒久モジ�
   5. ゲート②     : engine/gate2_completeness.py (寸法完全性)
   6. 独立検証    : 調査/verify_generated.py のA(ゲート①独立再計算)/B(DIMSTYLE)/
                     C(図枠保持)/B2(注記書式)を汎用化して再実行(自己申告を信用しない)
+  6.5 中心線     : engine/centerline_gen.py (中心線生成 + ゲート③の機械化第一歩=
+                    「円形フィーチャーに中心線が付いているか」の決定論チェック)。
+                    既定ON。計画JSONの `defaults.centerline.enabled=false` で抑制できる
   7. PNG化 + 台帳追記(不合格は 生成図面/不合格/ へ隔離)
 
 安全規約(CLAUDE.md): SW COM操作は engine/draw_pipeline.py の関数をそのまま呼ぶだけで、
@@ -41,6 +44,7 @@ import ezdxf  # noqa: E402
 from engine import compose_drawing  # noqa: E402
 from engine import dim_engine  # noqa: E402
 from engine import gate2_completeness  # noqa: E402
+from engine import centerline_gen  # noqa: E402
 from engine.frame_extract import subtract_frame  # noqa: E402
 import draw_pipeline as dp  # noqa: E402
 
@@ -526,7 +530,42 @@ def main(argv):
         summary["steps"]["independent_verify"] = {"ok": False,
                                                    "skipped_reason": u"ゲート①不合格のため未実施"}
 
-    overall_ok = gate1_ok and gate2_ok and verify_ok and layout_ok
+    # ---- 6.5) 中心線生成 + ゲート③の機械化第一歩 ----
+    # ❗中心線は**注記であって幾何ではない**。ゲート①②・独立検証を終えた後に足すことで
+    #   「回帰差分が中心線の追加のみ」であることを機械的に保証する
+    #   (再検査経路(workshop retry / run_blind_regate)でも
+    #    dim_engine.classify_view_geometry が線種で中心線を除外するので判定は変わらない)。
+    cl_opts = dict((plan_doc.get("defaults") or {}).get("centerline") or {})
+    cl_enabled = bool(cl_opts.pop("enabled", True))
+    centerline_report = None
+    centerline_check = None
+    centerline_ok = True
+    if cl_enabled and gate1_ok and os.path.exists(out_dxf):
+        try:
+            centerline_report = centerline_gen.add_centerlines(
+                out_dxf, args.plan, options=dict(cl_opts))
+            centerline_check = centerline_gen.check_centerlines(
+                out_dxf, args.plan, options=dict(cl_opts))
+            centerline_ok = centerline_check["ok"]
+            summary["steps"]["centerline"] = {
+                "enabled": True, "added": centerline_report["added"],
+                "counts": centerline_report["counts"],
+                "gate3_circle_centerline_ok": centerline_ok,
+                "n_features": centerline_check["n_features"],
+                "n_missing": centerline_check["n_missing"],
+                "zone_hits": centerline_check["zone_hits"],
+                "skipped_marks": centerline_report["notes"]}
+        except Exception:
+            centerline_ok = False
+            summary["steps"]["centerline"] = {"enabled": True, "ok": False,
+                                              "error": traceback.format_exc()}
+    else:
+        summary["steps"]["centerline"] = {
+            "enabled": cl_enabled,
+            "skipped_reason": (u"計画JSONで抑制(defaults.centerline.enabled=false)"
+                               if not cl_enabled else u"ゲート①不合格のため未実施")}
+
+    overall_ok = gate1_ok and gate2_ok and verify_ok and layout_ok and centerline_ok
 
     # ---- 7) PNG化(現存する最終dxfに対して実施。失敗しても処理は継続) ----
     png_path = None
@@ -560,6 +599,7 @@ def main(argv):
     summary["gate2_ok"] = gate2_ok
     summary["verify_ok"] = verify_ok
     summary["layout_ok"] = layout_ok
+    summary["centerline_ok"] = centerline_ok
     summary["overall_ok"] = overall_ok
     summary["status"] = u"検証通過" if overall_ok else u"不合格"
     if dim_error:
@@ -568,7 +608,9 @@ def main(argv):
     result_json = os.path.join(out_dir, out_stem + u"_result.json")
     with io.open(result_json, "w", encoding="utf-8") as f:
         f.write(json.dumps({"summary": summary, "compose": comp, "dim": dim_report,
-                            "gate2": gate2_report, "independent_verify": verify_report},
+                            "gate2": gate2_report, "independent_verify": verify_report,
+                            "centerline": centerline_report,
+                            "centerline_check": centerline_check},
                            ensure_ascii=False, indent=2, default=str))
     summary["result_json"] = result_json
 
@@ -579,6 +621,11 @@ def main(argv):
                   else (u"不合格(未指定%d件)" % len(gate2_report["unspecified"])
                         if gate2_report else u"未実施"))
     gate3_text = ((u"PNG生成済み(要目視)" if final_png else u"PNG未生成")
+                  + (u" / 中心線%d本・円形フィーチャー被覆%d/%d"
+                     % (centerline_report["added"],
+                        centerline_check["n_features"] - centerline_check["n_missing"],
+                        centerline_check["n_features"])
+                     if centerline_check else u" / 中心線未実施")
                   + (u" / ❗図枠衝突%d件" % len(frame_collisions) if frame_collisions else ""))
     gate4_text = u"未実施(バッチ生成のためスキップ)"
     def _relslash(p):

@@ -223,14 +223,31 @@ def _is_centermark(e):
             and str(e.dxf.name).upper().startswith("SW_CENTERMARKSYMBOL"))
 
 
+#: 中心線の線種。**中心線は注記であって幾何ではない**ので、ビュー幾何の分類から除外する。
+#: これを除外しないと engine/centerline_gen.py が足した中心線が
+#:   - ゲート①の snap/circle_check の候補点になる
+#:   - ゲート②の位置ノード・円フィーチャー(PCD参照円=径寸法が要る円)になる
+#: という二重の実害が出る(中心線を足した図面を retry/regate で再検査する経路が実在する)。
+CENTERLINE_LINETYPES = frozenset((
+    "DASHDOT", "DASHDOT2", "DASHDOTX2", "CENTER", "CENTER2", "CENTERX2"))
+
+
+def is_centerline(e):
+    u"""エンティティが中心線(一点鎖線)か。線種のみで判定する(レイヤ名は当てにならない)。"""
+    return str(e.dxf.get("linetype", "BYLAYER")).upper() in CENTERLINE_LINETYPES
+
+
 def classify_view_geometry(entities, regions, margin=CLASSIFY_MARGIN_MM):
     u"""部品コンテンツ(図枠を差し引いた残り)の幾何エンティティをビュー別に分類する。
-    中心マークINSERTは輪郭・特徴点の対象外(CLAUDE.md知見: bbox計算時は除外)。
+    中心マークINSERT・中心線(DASHDOT/CENTER系)は輪郭・特徴点の対象外
+    (CLAUDE.md知見: 中心マークはbbox計算時は除外。中心線は注記であって幾何ではない)。
     **図枠を先に subtract_frame() で差し引いておくこと**(図枠外枠の中心がisoビュー領域に
     入ってしまい、ビュー輪郭が図枠全体に化ける実害を確認済み)。"""
     per_view = {k: [] for k in regions}
     for e in entities:
         t = e.dxftype()
+        if is_centerline(e):
+            continue
         if t in ("MTEXT", "TEXT", "DIMENSION", "LEADER", "POINT"):
             continue
         if _is_centermark(e):

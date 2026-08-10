@@ -101,6 +101,19 @@
         "gate1_max_diff_mm": 0.0,
         "style_ok": true,
         "note_ok": true
+      },
+      "centerline": {
+        "enabled": true,
+        "added": 4,
+        "counts": {
+          "view_axis": 3,
+          "profile_mark": 1
+        },
+        "gate3_circle_centerline_ok": true,
+        "n_features": 1,
+        "n_missing": 0,
+        "zone_hits": [],
+        "skipped_marks": []
       }
     },
     "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\regress_out\\AUTO-002_ベアリングカラー.dxf",
@@ -109,6 +122,7 @@
     "gate2_ok": true,
     "verify_ok": true,
     "layout_ok": true,
+    "centerline_ok": true,
     "overall_ok": true,
     "status": "検証通過"
   },
@@ -985,7 +999,11 @@
     ],
     "hole_notes": [],
     "pcd_groups": [],
+    "cluster_groups": [],
+    "inclined_features": [],
     "polygons": [],
+    "oblique_width_dimensions": [],
+    "thread_features": [],
     "note_diameters": [],
     "note_taps": [],
     "note_depths": [],
@@ -1119,5 +1137,113 @@
     "notes": [],
     "note_ok": true,
     "ok": true
+  },
+  "centerline": {
+    "enabled": true,
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\regress_out\\AUTO-002_ベアリングカラー.dxf",
+    "added": 4,
+    "counts": {
+      "view_axis": 3,
+      "profile_mark": 1
+    },
+    "linetype_added": false,
+    "style": {
+      "linetype": "DASHDOT",
+      "color": 3,
+      "hole_ext_mm": 5.0,
+      "axis_ext_mm": 5.0
+    },
+    "features": [
+      {
+        "view": "right",
+        "center": [
+          219.875,
+          133.5
+        ],
+        "d_draw": 40.0,
+        "d_model": 40.0,
+        "n_circles": 3
+      }
+    ],
+    "lines": [
+      {
+        "view": "top",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          166.8407,
+          188.5
+        ],
+        "p2": [
+          181.5907,
+          188.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "view_axis",
+        "dir": "v",
+        "p1": [
+          219.875,
+          108.5
+        ],
+        "p2": [
+          219.875,
+          158.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          194.875,
+          133.5
+        ],
+        "p2": [
+          244.875,
+          133.5
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "profile_mark",
+        "dir": "h",
+        "p1": [
+          166.8407,
+          133.5
+        ],
+        "p2": [
+          178.8407,
+          133.5
+        ]
+      }
+    ],
+    "circles": [],
+    "notes": []
+  },
+  "centerline_check": {
+    "ok": true,
+    "n_features": 1,
+    "n_missing": 0,
+    "coverage": 1.0,
+    "n_centerline_entities": 4,
+    "n_designed": 4,
+    "n_not_realized": 0,
+    "missing": [],
+    "not_realized": [],
+    "zone_hits": [],
+    "checked": [
+      {
+        "view": "right",
+        "center": [
+          219.875,
+          133.5
+        ],
+        "d_model": 40.0,
+        "h": 5.0,
+        "v": 5.0
+      }
+    ]
   }
 }

@@ -1,0 +1,2208 @@
+{
+  "summary": {
+    "model": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-1-27\\1-27.STEP",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\plans_off\\BLIND2-25154-1-27_off.json",
+    "request": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-1-27\\依頼.json",
+    "zuban": "25154-1-27",
+    "part_name": "走行フレーム踏板",
+    "skip_sw": true,
+    "steps": {
+      "sw_projection": {
+        "skipped": true,
+        "views_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-1-27\\views.dxf",
+        "meta_json": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\data\\依頼箱\\BLIND2-25154-1-27\\meta.json"
+      },
+      "density": {
+        "material": "ＳＳ４００",
+        "resolved_kgm3": 7850.0,
+        "note": "材質記号 'SS400' -> 密度7850.0kg/m^3"
+      },
+      "compose": {
+        "scale": 0.2,
+        "views": [
+          "front",
+          "top"
+        ],
+        "layout": {
+          "views": [
+            "front",
+            "top"
+          ],
+          "gap_x_mm": 0.0,
+          "gap_y_mm": 15.0,
+          "group_wh_mm": [
+            194.40000000000043,
+            81.24000000000005
+          ],
+          "avail_wh_mm": [
+            410.0,
+            262.0
+          ],
+          "reserves": {
+            "front": {
+              "above": 0.0,
+              "below": 37.5,
+              "left": 29.5,
+              "right": 21.5
+            },
+            "top": {
+              "above": 0.0,
+              "below": 0.0,
+              "left": 21.5,
+              "right": 21.5
+            }
+          }
+        },
+        "frame_check": {
+          "total": 210,
+          "frame_matched": 112,
+          "remaining": 98,
+          "remaining_ratio": 0.4666666666666667
+        },
+        "zone_overlaps": [],
+        "view_pair_overlaps": [],
+        "weight": {
+          "volume_mm3": 990411.3934508254,
+          "density_kgm3_used": 7850.0,
+          "mass_kg": 7.774729438588979,
+          "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+        },
+        "warnings": [
+          "使用しないビューのエンティティを除外: {'right': 21, 'iso': 136}"
+        ]
+      },
+      "dim_engine": {
+        "gate1_ok": true,
+        "warnings": [],
+        "style_check_ok": true,
+        "layout_collisions": [],
+        "frame_collisions": [],
+        "resolved_kinds": {
+          "X500_hex": "linear",
+          "X932_csk": "linear",
+          "X972_total": "linear",
+          "Z298_csk": "linear",
+          "Z318_total": "linear",
+          "Z19_hex_flats": "linear",
+          "R5_corner": "radius",
+          "Y3_2_plate": "linear",
+          "Y10_hex": "linear"
+        }
+      },
+      "layout_verify": {
+        "ok": true,
+        "frame_collision_count": 0,
+        "reasons": []
+      },
+      "gate2": {
+        "ok": true,
+        "unspecified_count": 0,
+        "redundant_count": 0
+      },
+      "independent_verify": {
+        "ok": true,
+        "file_attrs_ok": true,
+        "gate1_ok": true,
+        "gate1_max_diff_mm": 0.0,
+        "style_ok": true,
+        "note_ok": true
+      },
+      "centerline": {
+        "enabled": false,
+        "skipped_reason": "計画JSONで抑制(defaults.centerline.enabled=false)"
+      }
+    },
+    "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-1-27_走行フレーム踏板.dxf",
+    "final_png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-1-27_走行フレーム踏板.png",
+    "gate1_ok": true,
+    "gate2_ok": true,
+    "verify_ok": true,
+    "layout_ok": true,
+    "centerline_ok": true,
+    "overall_ok": true,
+    "status": "検証通過"
+  },
+  "compose": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-1-27_走行フレーム踏板.dxf",
+    "scale": 0.2,
+    "views": [
+      "front",
+      "top"
+    ],
+    "layout": {
+      "views": [
+        "front",
+        "top"
+      ],
+      "gap_x_mm": 0.0,
+      "gap_y_mm": 15.0,
+      "group_wh_mm": [
+        194.40000000000043,
+        81.24000000000005
+      ],
+      "avail_wh_mm": [
+        410.0,
+        262.0
+      ],
+      "reserves": {
+        "front": {
+          "above": 0.0,
+          "below": 37.5,
+          "left": 29.5,
+          "right": 21.5
+        },
+        "top": {
+          "above": 0.0,
+          "below": 0.0,
+          "left": 21.5,
+          "right": 21.5
+        }
+      }
+    },
+    "frame_entity_count_loaded": 112,
+    "frame_check": {
+      "total": 210,
+      "frame_matched": 112,
+      "remaining": 98,
+      "remaining_ratio": 0.4666666666666667
+    },
+    "view_entity_counts": {
+      "front": 52,
+      "top": 36
+    },
+    "dropped_view_entity_counts": {
+      "right": 21,
+      "iso": 136
+    },
+    "unclassified_entity_count": 0,
+    "view_out_bbox_mm": {
+      "front": [
+        112.8,
+        120.37999999999997,
+        307.2,
+        183.98
+      ],
+      "top": [
+        112.79999999999978,
+        198.98,
+        307.2000000000002,
+        201.62000000000003
+      ]
+    },
+    "zone_overlaps": [],
+    "view_pair_overlaps": [],
+    "field_anchor_check": {
+      "品名_値": {
+        "expected": [
+          224.477,
+          22.51
+        ],
+        "actual": [
+          224.477,
+          22.51
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "装置名_値": {
+        "expected": [
+          224.477,
+          14.877
+        ],
+        "actual": [
+          224.477,
+          14.877
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "図番_値": {
+        "expected": [
+          273.605,
+          20.498
+        ],
+        "actual": [
+          273.605,
+          20.498
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "製図者_氏名": {
+        "expected": [
+          191.878,
+          22.586
+        ],
+        "actual": [
+          191.878,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_3": {
+        "expected": [
+          207.705,
+          22.586
+        ],
+        "actual": [
+          207.705,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_2": {
+        "expected": [
+          207.705,
+          14.722
+        ],
+        "actual": [
+          207.705,
+          14.722
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "尺度_値": {
+        "expected": [
+          176.415,
+          22.446
+        ],
+        "actual": [
+          176.415,
+          22.446
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "連番マーク_値": {
+        "expected": [
+          19.324,
+          275.03
+        ],
+        "actual": [
+          19.324,
+          275.03
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "材質個数ノート_自製品": {
+        "expected": [
+          33.595,
+          280.001
+        ],
+        "actual": [
+          33.595,
+          280.001
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "重量_値": {
+        "expected": [
+          224.593,
+          6.704
+        ],
+        "actual": [
+          224.593,
+          6.704
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      }
+    },
+    "linetypes_added": [
+      "HIDDEN",
+      "PHANTOM",
+      "CENTER"
+    ],
+    "linetypes_missing": [],
+    "weight": {
+      "volume_mm3": 990411.3934508254,
+      "density_kgm3_used": 7850.0,
+      "mass_kg": 7.774729438588979,
+      "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+    },
+    "field_values": {
+      "品名": "走行フレーム踏板",
+      "図番": "２５１５４－１－２７",
+      "装置名": "走行軸",
+      "尺度": "１：５",
+      "製図者": "ＡＩ",
+      "製図日付": "２６．０８．１０",
+      "連番": "２７",
+      "重量": "７．７７"
+    },
+    "warnings": [
+      "使用しないビューのエンティティを除外: {'right': 21, 'iso': 136}"
+    ]
+  },
+  "dim": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-1-27_走行フレーム踏板.dxf",
+    "base_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-1-27_走行フレーム踏板.dxf",
+    "gate1": [
+      {
+        "id": "X500_hex",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 500.0,
+        "measured": 500.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "500",
+        "text_value": 500.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN001",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "X932_csk",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 932.0,
+        "measured": 932.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "932",
+        "text_value": 932.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN002",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "X972_total",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 972.0,
+        "measured": 972.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "972",
+        "text_value": 972.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN003",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z298_csk",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 298.0,
+        "measured": 298.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "298",
+        "text_value": 298.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN004",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z318_total",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 318.0,
+        "measured": 318.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "318",
+        "text_value": 318.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN005",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z19_hex_flats",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 19.0,
+        "measured": 19.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "19",
+        "text_value": 19.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN006",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "R5_corner",
+        "kind": "radius",
+        "plan_kind": "radius",
+        "view": "front",
+        "expected": 5.0,
+        "measured": 5.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "R5",
+        "text_value": 5.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN007",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y3_2_plate",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "top",
+        "expected": 3.2,
+        "measured": 3.2,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "3.2",
+        "text_value": 3.2,
+        "text_diff_mm": 0.0,
+        "style": "GEN008",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y10_hex",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "top",
+        "expected": 10.0,
+        "measured": 10.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "10",
+        "text_value": 10.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN009",
+        "ok": true,
+        "errors": []
+      }
+    ],
+    "gate1_ok": true,
+    "hole_notes": [
+      {
+        "id": "N_csk",
+        "view": "front",
+        "pattern": "\\A1;６－%%c７．０４\\P９０%%d皿もみ%%c１３．４４",
+        "leader_points": [
+          [
+            303.2,
+            183.324
+          ],
+          [
+            320.0,
+            230.0
+          ],
+          [
+            335.0,
+            230.0
+          ]
+        ],
+        "text_insert": [
+          337.0,
+          230.0
+        ],
+        "ok": true,
+        "errors": [],
+        "leader_handle": "239"
+      },
+      {
+        "id": "N_hex",
+        "view": "front",
+        "pattern": "\\A1;２－%%c１４\\P裏面六角座　二面幅１９\\P%%c１２通し",
+        "leader_points": [
+          [
+            260.0,
+            150.78
+          ],
+          [
+            320.0,
+            210.0
+          ],
+          [
+            340.0,
+            210.0
+          ]
+        ],
+        "text_insert": [
+          342.0,
+          210.0
+        ],
+        "ok": true,
+        "errors": [],
+        "leader_handle": "23B"
+      }
+    ],
+    "dimstyles": {
+      "X500_hex": "GEN001",
+      "X932_csk": "GEN002",
+      "X972_total": "GEN003",
+      "Z298_csk": "GEN004",
+      "Z318_total": "GEN005",
+      "Z19_hex_flats": "GEN006",
+      "R5_corner": "GEN007",
+      "Y3_2_plate": "GEN008",
+      "Y10_hex": "GEN009"
+    },
+    "style_check": {
+      "ok": true,
+      "mismatches": [],
+      "effective": {
+        "X500_hex": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 5.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "X932_csk": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 5.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "X972_total": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 5.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z298_csk": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 5.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z318_total": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 5.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z19_hex_flats": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 5.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "R5_corner": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 5.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "R<>",
+          "dimtol": 0
+        },
+        "Y3_2_plate": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 5.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y10_hex": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 5.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        }
+      }
+    },
+    "arrow_blocks_created": [
+      "_OPEN30"
+    ],
+    "frame_check": {
+      "total": 210,
+      "frame_matched": 112,
+      "remaining": 98,
+      "remaining_ratio": 0.4666666666666667
+    },
+    "view_bbox": {
+      "front": [
+        112.8,
+        120.38,
+        307.2,
+        183.98
+      ],
+      "top": [
+        112.8,
+        198.98,
+        307.2,
+        201.62
+      ]
+    },
+    "layout": {
+      "text_boxes": {
+        "X500_hex": [
+          205.5,
+          104.88,
+          214.5,
+          108.88
+        ],
+        "X932_csk": [
+          205.5,
+          96.88,
+          214.5,
+          100.88
+        ],
+        "X972_total": [
+          205.5,
+          88.88,
+          214.5,
+          92.88
+        ],
+        "Z298_csk": [
+          97.3,
+          147.68,
+          101.3,
+          156.68
+        ],
+        "Z318_total": [
+          89.3,
+          147.68,
+          93.3,
+          156.68
+        ],
+        "Z19_hex_flats": [
+          325.7,
+          149.18,
+          329.7,
+          155.18
+        ],
+        "R5_corner": [
+          103.7289,
+          115.8445,
+          109.7289,
+          119.8445
+        ],
+        "Y3_2_plate": [
+          99.3,
+          194.8,
+          103.3,
+          203.8
+        ],
+        "Y10_hex": [
+          316.7,
+          197.62,
+          320.7,
+          203.62
+        ],
+        "N_csk": [
+          337.0,
+          230.0,
+          409.0,
+          240.4
+        ],
+        "N_hex": [
+          342.0,
+          210.0,
+          408.0,
+          225.6
+        ],
+        "N_general": [
+          130.0,
+          240.9,
+          205.6,
+          250.0
+        ]
+      },
+      "collisions": [],
+      "geom_boxes": {
+        "X500_hex": [
+          160.0,
+          102.38,
+          260.0,
+          152.18
+        ],
+        "X932_csk": [
+          116.8,
+          94.38,
+          303.2,
+          181.98
+        ],
+        "X972_total": [
+          112.8,
+          86.38,
+          307.2,
+          182.98
+        ],
+        "Z298_csk": [
+          94.8,
+          119.38,
+          210.0,
+          184.98
+        ],
+        "Z318_total": [
+          86.8,
+          117.38,
+          113.8,
+          186.98
+        ],
+        "Z19_hex_flats": [
+          258.903,
+          149.0722,
+          330.2553,
+          155.2878
+        ],
+        "R5_corner": [
+          102.3966,
+          113.5121,
+          113.8,
+          122.1768
+        ],
+        "Y3_2_plate": [
+          94.8,
+          195.416,
+          307.2,
+          203.184
+        ],
+        "Y10_hex": [
+          257.8061,
+          196.62,
+          325.2,
+          204.62
+        ],
+        "N_csk": [
+          303.2,
+          183.324,
+          409.0,
+          240.4
+        ],
+        "N_hex": [
+          260.0,
+          150.78,
+          408.0,
+          225.6
+        ]
+      },
+      "frame_collisions": [],
+      "frame_ok": true
+    },
+    "resolved_kinds": {
+      "X500_hex": "linear",
+      "X932_csk": "linear",
+      "X972_total": "linear",
+      "Z298_csk": "linear",
+      "Z318_total": "linear",
+      "Z19_hex_flats": "linear",
+      "R5_corner": "radius",
+      "Y3_2_plate": "linear",
+      "Y10_hex": "linear"
+    },
+    "scale": 0.2,
+    "dimlfac": 5.0,
+    "views": [
+      "front",
+      "top"
+    ],
+    "view_reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 37.5,
+        "left": 29.5,
+        "right": 21.5
+      },
+      "top": {
+        "above": 0.0,
+        "below": 0.0,
+        "left": 21.5,
+        "right": 21.5
+      }
+    },
+    "defaults_applied": {
+      "diameter_style": {
+        "circular_view": "native",
+        "profile_view": "linear"
+      },
+      "hole_note": {
+        "notation": "phi",
+        "width": "zenkaku",
+        "separator": " "
+      }
+    },
+    "warnings": []
+  },
+  "gate2": {
+    "gate": "gate2_completeness_v1",
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-1-27_走行フレーム踏板.dxf",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\plans_off\\BLIND2-25154-1-27_off.json",
+    "dropped_dimensions": [],
+    "ok": true,
+    "unspecified": [],
+    "floating_dimensions": [],
+    "redundant_dimensions": [],
+    "duplicate_value_dimensions": [
+      {
+        "value": 10.0,
+        "ids": [
+          "R5_corner",
+          "Y10_hex"
+        ]
+      }
+    ],
+    "circles": [
+      {
+        "diameter": 7.04,
+        "count": 6,
+        "views": [
+          "front"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 10.0,
+        "count": 4,
+        "views": [
+          "front"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 12.0,
+        "count": 2,
+        "views": [
+          "front"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 13.44,
+        "count": 6,
+        "views": [
+          "front"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 14.0,
+        "count": 2,
+        "views": [
+          "front"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      }
+    ],
+    "axes": {
+      "X": {
+        "axis": "X",
+        "node_count": 37,
+        "nodes": [
+          -486.0,
+          -481.0,
+          -472.72,
+          -469.52,
+          -466.0,
+          -462.48,
+          -459.28,
+          -260.9697,
+          -257.0,
+          -256.0,
+          -255.4848,
+          -250.0,
+          -244.5152,
+          -244.0,
+          -243.0,
+          -239.0303,
+          -6.72,
+          -3.52,
+          0.0,
+          3.52,
+          6.72,
+          239.0303,
+          243.0,
+          244.0,
+          244.5152,
+          250.0,
+          255.4848,
+          256.0,
+          257.0,
+          260.9697,
+          459.28,
+          462.48,
+          466.0,
+          469.52,
+          472.72,
+          481.0,
+          486.0
+        ],
+        "mode": "symmetric",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": -250.0,
+            "by": "X500_hex(対称・径/幅500)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 250.0,
+            "by": "X500_hex(対称・径/幅500)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -466.0,
+            "by": "X932_csk(対称・径/幅932)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 466.0,
+            "by": "X932_csk(対称・径/幅932)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -486.0,
+            "by": "X972_total(対称・径/幅972)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 486.0,
+            "by": "X972_total(対称・径/幅972)",
+            "new_link": true
+          },
+          {
+            "from": -481.0,
+            "to": -486.0,
+            "by": "円φ10(front)",
+            "new_link": true
+          },
+          {
+            "from": 481.0,
+            "to": 486.0,
+            "by": "円φ10(front)",
+            "new_link": true
+          },
+          {
+            "from": -466.0,
+            "to": -459.28,
+            "by": "円φ13.44(front)",
+            "new_link": true
+          },
+          {
+            "from": -466.0,
+            "to": -472.72,
+            "by": "円φ13.44(front)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 6.72,
+            "by": "円φ13.44(front)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -6.72,
+            "by": "円φ13.44(front)",
+            "new_link": true
+          },
+          {
+            "from": 466.0,
+            "to": 472.72,
+            "by": "円φ13.44(front)",
+            "new_link": true
+          },
+          {
+            "from": 466.0,
+            "to": 459.28,
+            "by": "円φ13.44(front)",
+            "new_link": true
+          },
+          {
+            "from": -250.0,
+            "to": -243.0,
+            "by": "円φ14(front)",
+            "new_link": true
+          },
+          {
+            "from": -250.0,
+            "to": -257.0,
+            "by": "円φ14(front)",
+            "new_link": true
+          },
+          {
+            "from": 250.0,
+            "to": 257.0,
+            "by": "円φ14(front)",
+            "new_link": true
+          },
+          {
+            "from": 250.0,
+            "to": 243.0,
+            "by": "円φ14(front)",
+            "new_link": true
+          },
+          {
+            "from": -466.0,
+            "to": -462.48,
+            "by": "円φ7.04(front)",
+            "new_link": true
+          },
+          {
+            "from": -466.0,
+            "to": -469.52,
+            "by": "円φ7.04(front)",
+            "new_link": true
+          },
+          {
+            "from": 466.0,
+            "to": 469.52,
+            "by": "円φ7.04(front)",
+            "new_link": true
+          },
+          {
+            "from": 466.0,
+            "to": 462.48,
+            "by": "円φ7.04(front)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 3.52,
+            "by": "円φ7.04(front)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -3.52,
+            "by": "円φ7.04(front)",
+            "new_link": true
+          },
+          {
+            "from": 250.0,
+            "to": 256.0,
+            "by": "円φ12(front)",
+            "new_link": true
+          },
+          {
+            "from": 250.0,
+            "to": 244.0,
+            "by": "円φ12(front)",
+            "new_link": true
+          },
+          {
+            "from": -250.0,
+            "to": -244.0,
+            "by": "円φ12(front)",
+            "new_link": true
+          },
+          {
+            "from": -250.0,
+            "to": -256.0,
+            "by": "円φ12(front)",
+            "new_link": true
+          },
+          {
+            "from": -250.0,
+            "to": -255.4848,
+            "by": "正6角形(二面幅19・front)",
+            "new_link": true
+          },
+          {
+            "from": -250.0,
+            "to": -260.9697,
+            "by": "正6角形(二面幅19・front)",
+            "new_link": true
+          },
+          {
+            "from": -250.0,
+            "to": -244.5152,
+            "by": "正6角形(二面幅19・front)",
+            "new_link": true
+          },
+          {
+            "from": -250.0,
+            "to": -239.0303,
+            "by": "正6角形(二面幅19・front)",
+            "new_link": true
+          },
+          {
+            "from": 250.0,
+            "to": 255.4848,
+            "by": "正6角形(二面幅19・front)",
+            "new_link": true
+          },
+          {
+            "from": 250.0,
+            "to": 244.5152,
+            "by": "正6角形(二面幅19・front)",
+            "new_link": true
+          },
+          {
+            "from": 250.0,
+            "to": 260.9697,
+            "by": "正6角形(二面幅19・front)",
+            "new_link": true
+          },
+          {
+            "from": 250.0,
+            "to": 239.0303,
+            "by": "正6角形(二面幅19・front)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": 0.0
+      },
+      "Y": {
+        "axis": "Y",
+        "node_count": 3,
+        "nodes": [
+          -10.0,
+          0.0,
+          3.2
+        ],
+        "mode": "chain",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": 3.2,
+            "by": "Y3_2_plate(3.2)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -10.0,
+            "by": "Y10_hex(10)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": null
+      },
+      "Z": {
+        "axis": "Z",
+        "node_count": 9,
+        "nodes": [
+          -159.0,
+          -154.0,
+          -149.0,
+          -9.5,
+          0.0,
+          9.5,
+          149.0,
+          154.0,
+          159.0
+        ],
+        "mode": "symmetric",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": -149.0,
+            "by": "Z298_csk(対称・径/幅298)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 149.0,
+            "by": "Z298_csk(対称・径/幅298)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -159.0,
+            "by": "Z318_total(対称・径/幅318)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 159.0,
+            "by": "Z318_total(対称・径/幅318)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -9.5,
+            "by": "Z19_hex_flats(対称・径/幅19)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 9.5,
+            "by": "Z19_hex_flats(対称・径/幅19)",
+            "new_link": true
+          },
+          {
+            "from": 154.0,
+            "to": 159.0,
+            "by": "円φ10(front)",
+            "new_link": true
+          },
+          {
+            "from": -154.0,
+            "to": -149.0,
+            "by": "円φ10(front)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": 0.0
+      }
+    },
+    "dimensions_read": [
+      {
+        "id": "X500_hex",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 500.0,
+        "view": "front"
+      },
+      {
+        "id": "X932_csk",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 932.0,
+        "view": "front"
+      },
+      {
+        "id": "X972_total",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 972.0,
+        "view": "front"
+      },
+      {
+        "id": "Z298_csk",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 298.0,
+        "view": "front"
+      },
+      {
+        "id": "Z318_total",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 318.0,
+        "view": "front"
+      },
+      {
+        "id": "Z19_hex_flats",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 19.0,
+        "view": "front"
+      },
+      {
+        "id": "R5_corner",
+        "role": "diameter",
+        "axis": null,
+        "value": 10.0,
+        "view": "front"
+      },
+      {
+        "id": "Y3_2_plate",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 3.2,
+        "view": "top"
+      },
+      {
+        "id": "Y10_hex",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 10.0,
+        "view": "top"
+      }
+    ],
+    "hole_notes": [
+      {
+        "raw": "\\A1;６－%%c７．０４\\P９０%%d皿もみ%%c１３．４４",
+        "normalized": "6-%%c7.04 90%%d皿もみ%%c13.44",
+        "diameters": [
+          7.04,
+          13.44
+        ],
+        "taps": [],
+        "depths": [],
+        "pcds": [],
+        "pipe_threads": [],
+        "clusters": [],
+        "count": 6,
+        "equal_spacing_declared": false
+      },
+      {
+        "raw": "\\A1;２－%%c１４\\P裏面六角座　二面幅１９\\P%%c１２通し",
+        "normalized": "2-%%c14 裏面六角座 二面幅19 %%c12通し",
+        "diameters": [
+          12.0,
+          14.0
+        ],
+        "taps": [],
+        "depths": [],
+        "pcds": [],
+        "pipe_threads": [],
+        "clusters": [],
+        "count": 2,
+        "equal_spacing_declared": false
+      }
+    ],
+    "pcd_groups": [],
+    "cluster_groups": [],
+    "inclined_features": [],
+    "polygons": [
+      {
+        "n": 6,
+        "center": [
+          -250.0,
+          0.0
+        ],
+        "circum_r": 10.969828,
+        "across_flats": 19.000299,
+        "across_corners": 21.939655,
+        "vertices": [
+          [
+            -260.97,
+            0.0
+          ],
+          [
+            -255.485,
+            -9.5
+          ],
+          [
+            -244.515,
+            -9.5
+          ],
+          [
+            -239.03,
+            0.0
+          ],
+          [
+            -244.515,
+            9.5
+          ],
+          [
+            -255.485,
+            9.5
+          ]
+        ],
+        "view": "front",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "ok": true,
+        "covered_by": "二面幅19"
+      },
+      {
+        "n": 6,
+        "center": [
+          250.0,
+          0.0
+        ],
+        "circum_r": 10.969828,
+        "across_flats": 19.000299,
+        "across_corners": 21.939655,
+        "vertices": [
+          [
+            239.03,
+            0.0
+          ],
+          [
+            244.515,
+            -9.5
+          ],
+          [
+            255.485,
+            -9.5
+          ],
+          [
+            260.97,
+            0.0
+          ],
+          [
+            255.485,
+            9.5
+          ],
+          [
+            244.515,
+            9.5
+          ]
+        ],
+        "view": "front",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "ok": true,
+        "covered_by": "二面幅19"
+      }
+    ],
+    "oblique_width_dimensions": [],
+    "thread_features": [],
+    "note_diameters": [
+      7.04,
+      12.0,
+      13.44,
+      14.0
+    ],
+    "note_taps": [],
+    "note_depths": [],
+    "covered_diameters": [
+      7.04,
+      10.0,
+      12.0,
+      13.44,
+      14.0
+    ],
+    "chamfers": [
+      {
+        "view": "front",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "d": [
+          5.4848,
+          -9.5
+        ],
+        "kind": "taper",
+        "leg": 5.4848,
+        "pairs": {
+          "X": [
+            239.0303448854025,
+            244.51517244270195
+          ],
+          "Z": [
+            3.026912054338199e-11,
+            -9.4999999999703
+          ]
+        }
+      },
+      {
+        "view": "front",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "d": [
+          5.4848,
+          9.5
+        ],
+        "kind": "taper",
+        "leg": 5.4848,
+        "pairs": {
+          "X": [
+            -244.5151724426562,
+            -239.03034488535675
+          ],
+          "Z": [
+            -9.4999999999703,
+            3.026912054338199e-11
+          ]
+        }
+      },
+      {
+        "view": "front",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "d": [
+          5.4848,
+          -9.5
+        ],
+        "kind": "taper",
+        "leg": 5.4848,
+        "pairs": {
+          "X": [
+            -260.9696551145549,
+            -255.48482755725541
+          ],
+          "Z": [
+            3.026912054338199e-11,
+            -9.4999999999703
+          ]
+        }
+      },
+      {
+        "view": "front",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "d": [
+          5.4848,
+          9.5
+        ],
+        "kind": "taper",
+        "leg": 5.4848,
+        "pairs": {
+          "X": [
+            255.48482755730117,
+            260.96965511460064
+          ],
+          "Z": [
+            -9.4999999999703,
+            3.026912054338199e-11
+          ]
+        }
+      },
+      {
+        "view": "front",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "d": [
+          -5.4848,
+          9.5
+        ],
+        "kind": "taper",
+        "leg": 5.4848,
+        "pairs": {
+          "X": [
+            -239.03034488535675,
+            -244.5151724426562
+          ],
+          "Z": [
+            3.026912054338199e-11,
+            9.500000000030695
+          ]
+        }
+      },
+      {
+        "view": "front",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "d": [
+          -5.4848,
+          -9.5
+        ],
+        "kind": "taper",
+        "leg": 5.4848,
+        "pairs": {
+          "X": [
+            -255.48482755725541,
+            -260.9696551145549
+          ],
+          "Z": [
+            9.500000000030695,
+            3.026912054338199e-11
+          ]
+        }
+      },
+      {
+        "view": "front",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "d": [
+          -5.4848,
+          9.5
+        ],
+        "kind": "taper",
+        "leg": 5.4848,
+        "pairs": {
+          "X": [
+            260.96965511460064,
+            255.48482755730117
+          ],
+          "Z": [
+            3.026912054338199e-11,
+            9.500000000030695
+          ]
+        }
+      },
+      {
+        "view": "front",
+        "axes": [
+          "X",
+          "Z"
+        ],
+        "d": [
+          -5.4848,
+          -9.5
+        ],
+        "kind": "taper",
+        "leg": 5.4848,
+        "pairs": {
+          "X": [
+            244.51517244270195,
+            239.0303448854025
+          ],
+          "Z": [
+            9.500000000030695,
+            3.026912054338199e-11
+          ]
+        }
+      },
+      {
+        "view": "top",
+        "axes": [
+          "X",
+          "Y"
+        ],
+        "d": [
+          -3.2,
+          -3.2
+        ],
+        "kind": "chamfer45",
+        "leg": 3.2,
+        "pairs": {
+          "X": [
+            472.72000000004954,
+            469.52000000004944
+          ],
+          "Y": [
+            3.2000000000019613,
+            1.7053025658243374e-12
+          ]
+        }
+      },
+      {
+        "view": "top",
+        "axes": [
+          "X",
+          "Y"
+        ],
+        "d": [
+          -3.2,
+          3.2
+        ],
+        "kind": "chamfer45",
+        "leg": 3.2,
+        "pairs": {
+          "X": [
+            462.4800000000489,
+            459.2800000000488
+          ],
+          "Y": [
+            1.7053025658243374e-12,
+            3.2000000000019613
+          ]
+        }
+      },
+      {
+        "view": "top",
+        "axes": [
+          "X",
+          "Y"
+        ],
+        "d": [
+          -3.2,
+          -3.2
+        ],
+        "kind": "chamfer45",
+        "leg": 3.2,
+        "pairs": {
+          "X": [
+            6.72000000002309,
+            3.5200000000229763
+          ],
+          "Y": [
+            3.2000000000019613,
+            1.7053025658243374e-12
+          ]
+        }
+      },
+      {
+        "view": "top",
+        "axes": [
+          "X",
+          "Y"
+        ],
+        "d": [
+          -3.2,
+          3.2
+        ],
+        "kind": "chamfer45",
+        "leg": 3.2,
+        "pairs": {
+          "X": [
+            -3.5199999999775016,
+            -6.719999999977615
+          ],
+          "Y": [
+            1.7053025658243374e-12,
+            3.2000000000019613
+          ]
+        }
+      },
+      {
+        "view": "top",
+        "axes": [
+          "X",
+          "Y"
+        ],
+        "d": [
+          -3.2,
+          -3.2
+        ],
+        "kind": "chamfer45",
+        "leg": 3.2,
+        "pairs": {
+          "X": [
+            -459.2800000000033,
+            -462.4800000000036
+          ],
+          "Y": [
+            3.2000000000019613,
+            1.7053025658243374e-12
+          ]
+        }
+      },
+      {
+        "view": "top",
+        "axes": [
+          "X",
+          "Y"
+        ],
+        "d": [
+          -3.2,
+          3.2
+        ],
+        "kind": "chamfer45",
+        "leg": 3.2,
+        "pairs": {
+          "X": [
+            -469.52000000000396,
+            -472.7200000000042
+          ],
+          "Y": [
+            1.7053025658243374e-12,
+            3.2000000000019613
+          ]
+        }
+      }
+    ],
+    "out_of_scope": [
+      {
+        "class": "not_implemented",
+        "reason": "表面性状記号・幾何公差・溶接記号・ねじのピッチ/等級はv1の判定対象外(生成側も未実装)"
+      },
+      {
+        "class": "same_value_features",
+        "reason": "v1の台帳は特徴を**値と座標**で持つため、同じ値の別フィーチャー(左右のφ25等)を区別しない。片方の寸法を消しても検出できない(該当: [10.0])"
+      }
+    ]
+  },
+  "independent_verify": {
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\blind2_off\\25154-1-27_走行フレーム踏板.dxf",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\plans_off\\BLIND2-25154-1-27_off.json",
+    "file_attrs_ok": true,
+    "frame": {
+      "total": 224,
+      "frame_matched": 112,
+      "remaining": 112,
+      "remaining_ratio": 0.5
+    },
+    "scale": 0.2,
+    "gate1": [
+      {
+        "id": "X500_hex",
+        "style": "GEN001",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 500.0,
+        "measured": 500.0,
+        "diff_mm": 0.0,
+        "text": "500",
+        "text_value": 500.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "X932_csk",
+        "style": "GEN002",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 932.0,
+        "measured": 932.0,
+        "diff_mm": 0.0,
+        "text": "932",
+        "text_value": 932.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "X972_total",
+        "style": "GEN003",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 972.0,
+        "measured": 972.0,
+        "diff_mm": 0.0,
+        "text": "972",
+        "text_value": 972.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z298_csk",
+        "style": "GEN004",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 298.0,
+        "measured": 298.0,
+        "diff_mm": 0.0,
+        "text": "298",
+        "text_value": 298.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z318_total",
+        "style": "GEN005",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 318.0,
+        "measured": 318.0,
+        "diff_mm": 0.0,
+        "text": "318",
+        "text_value": 318.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z19_hex_flats",
+        "style": "GEN006",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 19.0,
+        "measured": 19.0,
+        "diff_mm": 0.0,
+        "text": "19",
+        "text_value": 19.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "R5_corner",
+        "style": "GEN007",
+        "kind": "radius",
+        "dimtype": 36,
+        "dimtype_base": 4,
+        "kind_impl_ok": true,
+        "expected": 5.0,
+        "measured": 5.0,
+        "diff_mm": 0.0,
+        "text": "R5",
+        "text_value": 5.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y3_2_plate",
+        "style": "GEN008",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 3.2,
+        "measured": 3.2,
+        "diff_mm": 0.0,
+        "text": "3.2",
+        "text_value": 3.2,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y10_hex",
+        "style": "GEN009",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 10.0,
+        "measured": 10.0,
+        "diff_mm": 0.0,
+        "text": "10",
+        "text_value": 10.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      }
+    ],
+    "gate1_ok": true,
+    "gate1_max_diff_mm": 0.0,
+    "style_ok": true,
+    "style_mismatches": [],
+    "frame_collisions": [],
+    "layout_ok": true,
+    "notes": [
+      "\\A1;６－%%c７．０４\\P９０%%d皿もみ%%c１３．４４",
+      "\\A1;２－%%c１４\\P裏面六角座　二面幅１９\\P%%c１２通し"
+    ],
+    "note_ok": true,
+    "ok": true
+  },
+  "centerline": null,
+  "centerline_check": null
+}

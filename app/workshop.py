@@ -346,6 +346,19 @@ def step_generate(rd, request, zuban, model_path, request_json_path):
     return result
 
 
+def _centerline_line(summary):
+    u"""解釈レポート用: 中心線チェック(ゲート③機械化第一歩)の1行サマリ。"""
+    cl = (summary.get("steps") or {}).get("centerline") or {}
+    if cl.get("enabled") is False:
+        return u"抑制(計画JSONの defaults.centerline.enabled=false)"
+    if "n_features" not in cl:
+        return u"未実施(%s)" % cl.get("skipped_reason", u"理由不明")
+    return (u"%s(中心線%d本を生成・円形フィーチャー%d件中%d件を被覆)"
+            % (u"合格" if cl.get("gate3_circle_centerline_ok") else u"不合格",
+               cl.get("added", 0), cl["n_features"],
+               cl["n_features"] - cl.get("n_missing", 0)))
+
+
 def write_interpretation_report(path, request_id, request, summary):
     lines = [
         u"# 解釈レポート %s %s" % (summary.get("zuban", ""), summary.get("part_name", "")),
@@ -361,9 +374,11 @@ def write_interpretation_report(path, request_id, request, summary):
         u"- ゲート①(寸法値照合・実測との突合せ): %s" % (u"合格" if summary.get("gate1_ok") else u"不合格"),
         u"- ゲート②(寸法完全性): %s" % (u"合格" if summary.get("gate2_ok") else u"不合格"),
         u"- 独立検証(DIMSTYLE・図枠・注記書式): %s" % (u"合格" if summary.get("verify_ok") else u"不合格"),
+        u"- ゲート③の機械化第一歩(円形フィーチャーの中心線被覆): %s" % _centerline_line(summary),
         u"",
         u"## 既知の制限(このループでは未実施)",
-        u"- ゲート③(目視照合)は自動化されていない。PNGを人間が確認すること。",
+        u"- ゲート③(目視照合)は中心線の被覆チェックだけが機械化されている。"
+        u"ビューの正しさ・注記の重なりはPNGを人間が確認すること。",
         u"- ゲート④(人間図面との比較)は開発期間限定の照合手段のため本ループ対象外。",
         u"- 本レポートは自動生成の雛形。仮定・矛盾点はAIオペレータが計画作成時(plan.json)に",
         u"  検討した内容に限られる。最終確認は人間が行うこと。",
@@ -402,6 +417,9 @@ def write_reject_reason(rd, result):
         "gate2_ok": summary.get("gate2_ok"),
         "verify_ok": summary.get("verify_ok"),
         "layout_ok": summary.get("layout_ok"),
+        # ゲート③の機械化第一歩(円形フィーチャーの中心線被覆)
+        "centerline_ok": summary.get("centerline_ok"),
+        "centerline": (summary.get("steps") or {}).get("centerline"),
         "dim_error": summary.get("dim_error"),
         "gate2_unspecified": gate2.get("unspecified"),
         "gate2_redundant_dimensions": gate2.get("redundant_dimensions"),
@@ -471,6 +489,11 @@ def summarize_reject_reason(rd):
         parts.append(u"図枠衝突%d件[%s]" % (len(collisions), u"、".join(segs)))
     elif reasons.get("layout_ok") is False:
         parts.append(u"レイアウト検証不合格(詳細不明)")
+
+    if reasons.get("centerline_ok") is False:
+        cl = reasons.get("centerline") or {}
+        parts.append(u"中心線不合格(円形フィーチャー未被覆%s件・図枠侵入%d件)"
+                     % (cl.get("n_missing", u"?"), len(cl.get("zone_hits") or [])))
 
     if not parts:
         parts.append(u"不合格(理由詳細なし)")
@@ -556,6 +579,15 @@ def book_ledger(request_id, request, zuban, result):
         gate2_text = u"未実施"
 
     gate3_text = u"PNG生成済み(要目視)" if summary.get("final_png") else u"PNG未生成"
+    # ゲート③の機械化第一歩(engine/centerline_gen.py): 円形フィーチャーの中心線被覆
+    cl = (summary.get("steps") or {}).get("centerline") or {}
+    if cl.get("enabled") and "n_features" in cl:
+        gate3_text += (u" / 中心線%d本・円形フィーチャー被覆%d/%d%s"
+                       % (cl.get("added", 0),
+                          cl["n_features"] - cl.get("n_missing", 0), cl["n_features"],
+                          u"" if cl.get("gate3_circle_centerline_ok") else u"❗不合格"))
+    elif cl.get("enabled") is False:
+        gate3_text += u" / 中心線=計画で抑制"
     gate4_text = u"未実施(バッチ生成のためスキップ)"
 
     def _relslash(p):
