@@ -60,6 +60,18 @@ GENERATE_SCRIPT = os.path.join(u"engine", u"generate_drawing.py")
 MODEL_EXTS = (".step", ".stp", ".sldprt")
 REQUIRED_REQUEST_FIELDS = (u"図番", u"材質", u"個数")
 
+# サブプロセスのタイムアウト[秒]。環境変数 OMC_WS_TIMEOUT_SCALE で一括倍率をかけられる。
+# ❗2026-08-10(盲検第2弾): 実機で measure_3d.py が1部品 285〜437秒かかり、旧値180秒では
+#   10部品中9部品が TimeoutExpired で「計測中」に張り付いた。SW形状APIの1呼び出しが
+#   100〜300ms(素のCOMは0.0ms)という機械側の遅さが原因で、スクリプト側の欠陥ではない。
+#   タイムアウトは「異常検知」であって「性能仕様」ではないので、実機の実測に合わせて広げる。
+_TIMEOUT_SCALE = float(os.environ.get("OMC_WS_TIMEOUT_SCALE", "1") or 1)
+TIMEOUT_MEASURE = int(1800 * _TIMEOUT_SCALE)
+TIMEOUT_PROJECT_CAND = int(1800 * _TIMEOUT_SCALE)
+TIMEOUT_RENDER_CAND = int(300 * _TIMEOUT_SCALE)
+TIMEOUT_PROJECT_CHOSEN = int(900 * _TIMEOUT_SCALE)
+TIMEOUT_GENERATE = int(900 * _TIMEOUT_SCALE)
+
 STATES_TERMINAL = (u"合格", u"不合格", u"質問あり")
 
 QUESTION_FILENAME = u"質問票.md"       # 計画待ち中にAIオペレータが置く(向き/計画で判断できない時)
@@ -214,7 +226,7 @@ def _survey_from_faces(faces, body_count):
 
 def step_measure_classify(rd, model_path):
     meas_path = os.path.join(rd, "meas.json")
-    proc = run_script(MEASURE_SCRIPT, [model_path, meas_path], timeout=180)
+    proc = run_script(MEASURE_SCRIPT, [model_path, meas_path], timeout=TIMEOUT_MEASURE)
     if not os.path.exists(meas_path):
         raise RuntimeError(u"計測スクリプトが meas.json を出力しなかった(rc=%s): %s"
                            % (proc.returncode, (proc.stderr or proc.stdout)[-2000:]))
@@ -239,7 +251,8 @@ def step_candidates(rd, model_path, shape_class, title, main_axis=None):
     _write_json(cand_input, cand_list)
 
     cand_dir = os.path.join(rd, u"候補")
-    proc = run_script(PROJECT_CAND_SCRIPT, [model_path, cand_dir, cand_input], timeout=300)
+    proc = run_script(PROJECT_CAND_SCRIPT, [model_path, cand_dir, cand_input],
+                      timeout=TIMEOUT_PROJECT_CAND)
     meta_path = os.path.join(cand_dir, "candidates_meta.json")
     if not os.path.exists(meta_path):
         raise RuntimeError(u"候補投影が candidates_meta.json を出力しなかった(rc=%s): %s"
@@ -250,7 +263,8 @@ def step_candidates(rd, model_path, shape_class, title, main_axis=None):
         raise RuntimeError(u"候補投影が全滅した: %s" % str(meta.get("error", "?"))[:2000])
 
     png_path = os.path.join(rd, u"候補.png")
-    proc2 = run_script(RENDER_CAND_SCRIPT, [cand_dir, png_path, title], timeout=120)
+    proc2 = run_script(RENDER_CAND_SCRIPT, [cand_dir, png_path, title],
+                       timeout=TIMEOUT_RENDER_CAND)
     if not os.path.exists(png_path):
         raise RuntimeError(u"候補PNGが生成されなかった(rc=%s): %s"
                            % (proc2.returncode, (proc2.stderr or proc2.stdout)[-2000:]))
@@ -273,7 +287,8 @@ def materialize_chosen_views(rd, model_path):
         raise ValueError(u"choice.json に sw_view が無い")
 
     proc = run_script(PROJECT_CHOSEN_SCRIPT,
-                      [model_path, views_dxf, meta_json, sw_view, int(rot)], timeout=180)
+                      [model_path, views_dxf, meta_json, sw_view, int(rot)],
+                      timeout=TIMEOUT_PROJECT_CHOSEN)
     if not os.path.exists(meta_json):
         raise RuntimeError(u"project_chosen が meta.json を出力しなかった(rc=%s): %s"
                            % (proc.returncode, (proc.stderr or proc.stdout)[-2000:]))
@@ -318,7 +333,7 @@ def step_generate(rd, request, zuban, model_path, request_json_path):
                        "--zuban", zuban, "--skip-sw",
                        "--views-dxf", views_dxf, "--meta-json", meta_json,
                        "--no-ledger"],  # 台帳記帳はworkshop側(book_ledger)に一本化し二重記帳を防ぐ
-                      timeout=240)
+                      timeout=TIMEOUT_GENERATE)
     result_json = os.path.join(out_dir, out_stem + u"_result.json")
     if not os.path.exists(result_json):
         raise RuntimeError(u"generate_drawing.py が result.json を出力しなかった(rc=%s): %s"
