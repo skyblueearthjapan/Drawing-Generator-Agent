@@ -1,0 +1,1118 @@
+{
+  "key": "1-04",
+  "chosen_front": {
+    "sw_view": "*平面",
+    "rotation_deg": 270
+  },
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "1",
+          "role": "front",
+          "sw_view": "front",
+          "transform": "恒等",
+          "det": 1,
+          "iou": 1.0,
+          "cov_sw": 1.0,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 1.0,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 1.0,
+        "cov_sw": 1.0
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [],
+      "fails": [],
+      "warns": [],
+      "verdict": "合格"
+    },
+    "orientation": {
+      "human_front_idx": "1",
+      "matched_sw_view": "front",
+      "matched_transform": "恒等",
+      "ties": [
+        "恒等",
+        "回転180",
+        "鏡像(左右反転)",
+        "鏡像(上下反転)"
+      ],
+      "n_ties": 4,
+      "planned_sw_view": "*平面",
+      "planned_rotation_deg": 270,
+      "correct": true,
+      "ambiguous": true,
+      "verdict": "正解"
+    },
+    "verdict": "合格"
+  },
+  "human_dims": {
+    "dims": [
+      {
+        "dimtype": 128,
+        "base": 0,
+        "dimstyle": "GMM001",
+        "dimpost": "%%c<>",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 17.0,
+        "rendered": "\\A1;%%c17",
+        "defpoint": [
+          669.9239,
+          373.2253
+        ],
+        "defpoint2": [
+          714.5386,
+          390.2253
+        ],
+        "defpoint3": [
+          714.5386,
+          373.2253
+        ],
+        "angle": 270.0
+      },
+      {
+        "dimtype": 128,
+        "base": 0,
+        "dimstyle": "GMM002",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 5.000000000000002,
+        "rendered": "\\A1;5",
+        "defpoint": [
+          714.5386,
+          425.5164
+        ],
+        "defpoint2": [
+          719.5386,
+          390.2253
+        ],
+        "defpoint3": [
+          714.5386,
+          406.7253
+        ],
+        "angle": 180.0
+      },
+      {
+        "dimtype": 128,
+        "base": 0,
+        "dimstyle": "GMM003",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 19.0,
+        "rendered": "\\A1;19",
+        "defpoint": [
+          733.5386,
+          439.0173
+        ],
+        "defpoint2": [
+          714.5386,
+          406.7253
+        ],
+        "defpoint3": [
+          733.5386,
+          406.7253
+        ],
+        "angle": null
+      },
+      {
+        "dimtype": 128,
+        "base": 0,
+        "dimstyle": "GMM003",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 90.0,
+        "rendered": "\\A1;90",
+        "defpoint": [
+          643.5386,
+          237.9996
+        ],
+        "defpoint2": [
+          733.5386,
+          256.7253
+        ],
+        "defpoint3": [
+          643.5386,
+          274.8078
+        ],
+        "angle": 180.0
+      },
+      {
+        "dimtype": 132,
+        "base": 4,
+        "dimstyle": "GMM005",
+        "dimpost": "4-R<>",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 5.0000000000015925,
+        "rendered": "\\A1;4-R5",
+        "defpoint": [
+          44.3562,
+          401.7253
+        ],
+        "defpoint2": null,
+        "defpoint3": null,
+        "angle": null
+      },
+      {
+        "dimtype": 0,
+        "base": 0,
+        "dimstyle": "GMM006",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 50.000000000010004,
+        "rendered": "\\A1;50",
+        "defpoint": [
+          97.8368,
+          356.7253
+        ],
+        "defpoint2": [
+          107.3562,
+          306.7253
+        ],
+        "defpoint3": [
+          107.3562,
+          356.7253
+        ],
+        "angle": 90.0
+      },
+      {
+        "dimtype": 128,
+        "base": 0,
+        "dimstyle": "GMM003",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 150.0,
+        "rendered": "\\A1;150",
+        "defpoint": [
+          599.7113,
+          406.7253
+        ],
+        "defpoint2": [
+          543.3562,
+          256.7253
+        ],
+        "defpoint3": [
+          543.3562,
+          406.7253
+        ],
+        "angle": 90.0
+      },
+      {
+        "dimtype": 128,
+        "base": 0,
+        "dimstyle": "GMM003",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 25.0,
+        "rendered": "\\A1;25",
+        "defpoint": [
+          575.8469,
+          381.7253
+        ],
+        "defpoint2": [
+          543.3562,
+          406.7253
+        ],
+        "defpoint3": [
+          539.7211,
+          381.7253
+        ],
+        "angle": 270.0
+      },
+      {
+        "dimtype": 128,
+        "base": 0,
+        "dimstyle": "GMM003",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 100.0,
+        "rendered": "\\A1;100",
+        "defpoint": [
+          575.8469,
+          281.7253
+        ],
+        "defpoint2": [
+          539.7211,
+          381.7253
+        ],
+        "defpoint3": [
+          539.7211,
+          281.7253
+        ],
+        "angle": 270.0
+      },
+      {
+        "dimtype": 128,
+        "base": 0,
+        "dimstyle": "GMM003",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 25.0,
+        "rendered": "\\A1;25",
+        "defpoint": [
+          575.8469,
+          256.7253
+        ],
+        "defpoint2": [
+          539.7211,
+          281.7253
+        ],
+        "defpoint3": [
+          543.3562,
+          256.7253
+        ],
+        "angle": 270.0
+      },
+      {
+        "dimtype": 128,
+        "base": 0,
+        "dimstyle": "GMM003",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 503.99999999999903,
+        "rendered": "\\A1;504",
+        "defpoint": [
+          543.3562,
+          441.6396
+        ],
+        "defpoint2": [
+          39.3562,
+          406.7253
+        ],
+        "defpoint3": [
+          543.3562,
+          406.7253
+        ],
+        "angle": null
+      },
+      {
+        "dimtype": 0,
+        "base": 0,
+        "dimstyle": "GMM006",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 24.999999999999993,
+        "rendered": "\\A1;25",
+        "defpoint": [
+          64.3562,
+          424.4392
+        ],
+        "defpoint2": [
+          39.3562,
+          406.7253
+        ],
+        "defpoint3": [
+          64.3562,
+          350.858
+        ],
+        "angle": null
+      },
+      {
+        "dimtype": 0,
+        "base": 0,
+        "dimstyle": "GMM006",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 383.99999999999903,
+        "rendered": "\\A1;384",
+        "defpoint": [
+          448.3562,
+          424.4392
+        ],
+        "defpoint2": [
+          64.3562,
+          350.858
+        ],
+        "defpoint3": [
+          448.3562,
+          350.858
+        ],
+        "angle": null
+      },
+      {
+        "dimtype": 0,
+        "base": 0,
+        "dimstyle": "GMM006",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 70.0,
+        "rendered": "\\A1;70",
+        "defpoint": [
+          518.3562,
+          424.4392
+        ],
+        "defpoint2": [
+          448.3562,
+          350.858
+        ],
+        "defpoint3": [
+          518.3562,
+          400.7419
+        ],
+        "angle": null
+      },
+      {
+        "dimtype": 0,
+        "base": 0,
+        "dimstyle": "GMM006",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 25.0,
+        "rendered": "\\A1;25",
+        "defpoint": [
+          543.3562,
+          424.4392
+        ],
+        "defpoint2": [
+          518.3562,
+          400.7419
+        ],
+        "defpoint3": [
+          543.3562,
+          406.7253
+        ],
+        "angle": null
+      },
+      {
+        "dimtype": 0,
+        "base": 0,
+        "dimstyle": "GMM006",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 84.0,
+        "rendered": "\\A1;84",
+        "defpoint": [
+          341.3562,
+          241.1792
+        ],
+        "defpoint2": [
+          257.3562,
+          258.7253
+        ],
+        "defpoint3": [
+          341.3562,
+          258.7253
+        ],
+        "angle": null
+      },
+      {
+        "dimtype": 0,
+        "base": 0,
+        "dimstyle": "GMM006",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 202.0,
+        "rendered": "\\A1;202",
+        "defpoint": [
+          543.3562,
+          241.1792
+        ],
+        "defpoint2": [
+          341.3562,
+          258.7253
+        ],
+        "defpoint3": [
+          543.3562,
+          256.7253
+        ],
+        "angle": null
+      },
+      {
+        "dimtype": 0,
+        "base": 0,
+        "dimstyle": "GMM006",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 162.0,
+        "rendered": "\\A1;162",
+        "defpoint": [
+          381.3562,
+          225.1277
+        ],
+        "defpoint2": [
+          543.3562,
+          256.7253
+        ],
+        "defpoint3": [
+          381.3562,
+          293.7253
+        ],
+        "angle": 180.0
+      },
+      {
+        "dimtype": 0,
+        "base": 0,
+        "dimstyle": "GMM006",
+        "dimpost": "",
+        "dimtol": 0,
+        "dimtp": 0.0,
+        "dimtm": 0.0,
+        "text_attr": "",
+        "measured": 261.0,
+        "rendered": "\\A1;261",
+        "defpoint": [
+          120.3562,
+          225.1277
+        ],
+        "defpoint2": [
+          381.3562,
+          293.7253
+        ],
+        "defpoint3": [
+          120.3562,
+          293.7253
+        ],
+        "angle": 180.0
+      }
+    ],
+    "hole_notes": [
+      {
+        "type": "MTEXT",
+        "text": "\\A1;２－%%c２０通し",
+        "insert": [
+          108.2579,
+          206.8901
+        ]
+      }
+    ],
+    "all_texts": [
+      {
+        "type": "MTEXT",
+        "text": "\\T1.500000;部品名（型式）",
+        "insert": [
+          707.9414,
+          40.8277
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;メーカー",
+        "insert": [
+          767.7368,
+          40.8277
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;備考",
+        "insert": [
+          812.949,
+          40.8277
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;品番",
+        "insert": [
+          650.8379,
+          38.1224
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;ラインワ－クス",
+        "insert": [
+          719.996,
+          22.2629
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "{\\T1.000000;株式}\\P{\\T1.000000;会社}",
+        "insert": [
+          704.8957,
+          23.1052
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;個数",
+        "insert": [
+          782.6627,
+          38.1224
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;REV",
+        "insert": [
+          637.2349,
+          26.1838
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;REV",
+        "insert": [
+          637.2349,
+          49.9153
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "図番",
+        "insert": [
+          539.2986,
+          27.9127
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "製作番号",
+        "insert": [
+          539.2986,
+          54.4256
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;ｋｇ",
+        "insert": [
+          533.1808,
+          11.4825
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "品名",
+        "insert": [
+          439.4712,
+          53.8175
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "重量",
+        "insert": [
+          440.1856,
+          22.6077
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "装置名",
+        "insert": [
+          440.2751,
+          39.4261
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "尺度",
+        "insert": [
+          335.7618,
+          53.8678
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;Ａ３",
+        "insert": [
+          351.8305,
+          28.1654
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "図枠",
+        "insert": [
+          335.7618,
+          38.5153
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;第三角法",
+        "insert": [
+          340.0215,
+          9.6821
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊＊",
+        "insert": [
+          382.7568,
+          12.9079
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊＊",
+        "insert": [
+          382.7568,
+          28.5395
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "審査",
+        "insert": [
+          367.0466,
+          22.8324
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "更新",
+        "insert": [
+          367.1604,
+          38.3063
+        ]
+      },
+      {
+        "type": "TEXT",
+        "text": "製図",
+        "insert": [
+          366.9329,
+          54.0643
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊＊．＊＊．＊＊",
+        "insert": [
+          414.4108,
+          28.4448
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊＊．＊＊．＊＊",
+        "insert": [
+          414.4108,
+          12.7185
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;ＲＥＶ",
+        "insert": [
+          16.8983,
+          11.8144
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;製図",
+        "insert": [
+          33.4552,
+          11.8144
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;変更内容",
+        "insert": [
+          85.6314,
+          11.9294
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊",
+        "insert": [
+          75.8268,
+          46.9167
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊＊",
+        "insert": [
+          33.3267,
+          47.2441
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊＊．＊＊．＊＊",
+        "insert": [
+          57.0367,
+          47.2441
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊",
+        "insert": [
+          766.758,
+          47.9121
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;日暮",
+        "insert": [
+          382.7568,
+          44.1711
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊",
+        "insert": [
+          812.9367,
+          47.9121
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;**-1",
+        "insert": [
+          -30.5991,
+          555.6057
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊",
+        "insert": [
+          766.758,
+          57.9121
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊",
+        "insert": [
+          766.758,
+          67.9121
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊",
+        "insert": [
+          812.9367,
+          67.9121
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;注記：塗装色は、工番指定色　とする。",
+        "insert": [
+          718.6854,
+          80.71
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;Ｓ４５Ｃ",
+        "insert": [
+          812.9367,
+          57.9121
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;１：２",
+        "insert": [
+          351.8305,
+          43.8917
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;ケーブルベア側ジャッキプレート",
+        "insert": [
+          447.9546,
+          44.0198
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "{\\T1.000000;材質　ＳＳ４００＋Ｓ４５Ｃ　ＰＬ１９}\\P{\\T1.000000;個数　５}",
+        "insert": [
+          66.1901,
+          559.0029
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;０４",
+        "insert": [
+          37.6473,
+          549.06
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;５",
+        "insert": [
+          788.5576,
+          57.9121
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;５",
+        "insert": [
+          788.5576,
+          47.9121
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;２５１５４－１－０４",
+        "insert": [
+          546.2093,
+          39.9954
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;０４－１",
+        "insert": [
+          656.6507,
+          47.7523
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;０４－２",
+        "insert": [
+          656.6507,
+          57.7523
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;０４－３",
+        "insert": [
+          656.6507,
+          67.7523
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\W0.791016;\\T1.000000;押ＨＭ１６×９０\\W0.395508;\\T1.000000; \\W0.791016;\\T1.000000;ＨＮ",
+        "insert": [
+          667.3635,
+          47.7304
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊＊",
+        "insert": [
+          33.3267,
+          35.4494
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊＊．＊＊．＊＊",
+        "insert": [
+          57.0367,
+          35.4494
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊",
+        "insert": [
+          75.8268,
+          35.122
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊＊",
+        "insert": [
+          33.3267,
+          23.6546
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊＊．＊＊．＊＊",
+        "insert": [
+          57.0367,
+          23.6546
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;＊",
+        "insert": [
+          75.8268,
+          23.3272
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\A1;Ｍ１６ネジ棒　Ｓ４５Ｃ",
+        "insert": [
+          576.4316,
+          192.7077
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\A1;ネジ棒　ロックタイトにて固定",
+        "insert": [
+          742.8783,
+          292.9445
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\A1;Ｍ１６　通し",
+        "insert": [
+          750.3219,
+          264.1625
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;２６．０５．１８",
+        "insert": [
+          414.4108,
+          44.1711
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;ネジ棒Ｍ１６×９０Ｌ　ＨＮ×２",
+        "insert": [
+          667.3635,
+          57.7304
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;ＬＩＮＥＭＡＮ２００",
+        "insert": [
+          447.9546,
+          28.7541
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;オールアンカー　Ｃ１６１２",
+        "insert": [
+          667.3635,
+          67.7304
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;１０",
+        "insert": [
+          788.5576,
+          67.9121
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;04-1",
+        "insert": [
+          645.4136,
+          425.5255
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;04-2",
+        "insert": [
+          546.3464,
+          189.0681
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\A1;４－Ｍ６通し",
+        "insert": [
+          389.526,
+          384.5772
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\A1;２－%%c２０通し",
+        "insert": [
+          108.2579,
+          206.8901
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\A1;アースターミナル取付穴\\P２－Ｍ６通し\\P５個の内１個に加工",
+        "insert": [
+          385.7052,
+          188.3243
+        ]
+      },
+      {
+        "type": "MTEXT",
+        "text": "\\T1.000000;04-3",
+        "insert": [
+          154.9173,
+          198.4827
+        ]
+      }
+    ]
+  }
+}
