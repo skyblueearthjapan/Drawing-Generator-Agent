@@ -48,12 +48,22 @@ def _style_key(doc, style_name):
         return (style_name,)
 
 
-def entity_signature(e, doc):
+#: ❗レイヤ名はファイルごとに流儀が違う(実測 2026-08-10)。
+#  frame_template.dxf の図枠線は layer='254' だが、25154-1-18_クッション.dxf は同じ座標の線を
+#  layer='表題欄' で持つ。座標は 67/67 完全一致なのに署名にレイヤ名を入れていたせいで
+#  subtract_frame の一致が 113→4 に落ちていた。STYLE名(GMM0xx)と同じ「名前で比較してはいけない」
+#  クラスの罠なので、既定でレイヤ名を無視する。
+IGNORE_LAYER_DEFAULT = True
+
+
+def entity_signature(e, doc, ignore_layer=None):
     """位置・幾何・内容を含む比較用シグネチャ。tuple。対象外タイプはNoneを返す。"""
     t = e.dxftype()
     if t not in FRAME_CANDIDATE_TYPES:
         return None
-    layer = e.dxf.layer
+    if ignore_layer is None:
+        ignore_layer = IGNORE_LAYER_DEFAULT
+    layer = "*" if ignore_layer else e.dxf.layer
     try:
         color = e.dxf.color
     except Exception:
@@ -90,19 +100,20 @@ def entity_signature(e, doc):
     return None
 
 
-def load_frame_signatures(template_path="図枠/frame_template.dxf"):
+def load_frame_signatures(template_path="図枠/frame_template.dxf", ignore_layer=None):
     """frame_template.dxf を読み込み、そのmodelspace全エンティティのシグネチャ集合を返す。"""
     doc = ezdxf.readfile(template_path)
     msp = doc.modelspace()
     sigs = set()
     for e in msp:
-        s = entity_signature(e, doc)
+        s = entity_signature(e, doc, ignore_layer=ignore_layer)
         if s is not None:
             sigs.add(s)
     return doc, sigs
 
 
-def subtract_frame(doc, frame_signatures=None, template_path="図枠/frame_template.dxf"):
+def subtract_frame(doc, frame_signatures=None, template_path="図枠/frame_template.dxf",
+                   ignore_layer=None):
     """
     doc(ezdxf.Drawing)のmodelspaceから図枠エンティティを差し引く。
 
@@ -118,7 +129,7 @@ def subtract_frame(doc, frame_signatures=None, template_path="図枠/frame_templ
         summary: dict(total, frame_matched, remaining, remaining_ratio)
     """
     if frame_signatures is None:
-        _, frame_signatures = load_frame_signatures(template_path)
+        _, frame_signatures = load_frame_signatures(template_path, ignore_layer=ignore_layer)
 
     msp = doc.modelspace()
     total = 0
@@ -126,7 +137,7 @@ def subtract_frame(doc, frame_signatures=None, template_path="図枠/frame_templ
     remaining = []
     for e in msp:
         total += 1
-        s = entity_signature(e, doc)
+        s = entity_signature(e, doc, ignore_layer=ignore_layer)
         if s is not None and s in frame_signatures:
             matched += 1
             continue

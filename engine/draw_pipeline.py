@@ -85,12 +85,23 @@ def connect():
 class OpenedDoc(object):
     u"""自分が開いた/作ったドキュメント。close() はタイトル照合済みのものだけ閉じる。"""
 
-    def __init__(self, sw, doc, title, mine, path=None):
+    def __init__(self, sw, doc, title, mine, path=None, imported=False):
         self.sw = sw
         self.doc = doc          # gen_py で包んだ IModelDoc2
         self.title = title
         self.mine = mine
         self.path = path
+        #: STEP等からインポートした未保存ドキュメントか
+        self.imported = imported
+
+    @property
+    def model_name(self):
+        u"""`CreateDrawViewFromModelView3` に渡す ModelName。
+
+        ❗インポート部品は `GetPathName()` が空なので**元のSTEPパスは使えない**(実測: None が返る)。
+          未保存ドキュメントは **GetTitle()('1-18.SLDPRT')** を渡すと通る。
+        """
+        return self.title if self.imported else self.path
 
     def close(self):
         if not self.mine:
@@ -99,9 +110,33 @@ class OpenedDoc(object):
         if cur != self.title:
             # 途中で名前が変わった(SaveAs 等)。現タイトルで閉じる前に必ず記録
             self.title = cur
-        self.sw.CloseDoc(self.title)
+        if self.imported:
+            # ❗未保存のインポート部品は CloseDoc(title) では閉じない(黙って居座る・実測)。
+            #   QuitDoc = 保存せずに閉じる。教師STEPを一切汚さないためにもこちらが正しい。
+            self.sw.QuitDoc(self.title)
+        else:
+            self.sw.CloseDoc(self.title)
         self.mine = False
         return True
+
+
+def list_open_docs(sw):
+    u"""開いている全ドキュメントの [(title, type)]。type: 1=部品 2=アセンブリ 3=図面。
+
+    ❗`GetFirstDocument`+`GetNext` の連鎖は当機では1件目で切れる(2件開いていても1件しか返らない
+      のを実測)。安全確認(pre/post スナップショット)は必ず `GetDocuments()` で取る。
+    """
+    out = []
+    try:
+        arr = sw.GetDocuments()
+    except Exception:
+        arr = None
+    for d in list(arr or []):
+        try:
+            out.append((prop(d, "GetTitle"), prop(d, "GetType")))
+        except Exception:
+            pass
+    return out
 
 
 def open_part_readonly(sw, mod, path):
@@ -139,6 +174,49 @@ def open_part_readonly(sw, mod, path):
         # 掴んだのが別物 → 絶対に閉じない(ユーザーのドキュメントの可能性)
         raise RuntimeError(u"タイトル不一致: 期待 %r / 実際 %r" % (base, title))
     return OpenedDoc(sw, doc, title, True, path), vh
+
+
+#: STEP/IGES 等、SolidWorks が「インポート」で読む中間フォーマット
+IMPORT_EXTS = (".step", ".stp", ".iges", ".igs", ".x_t", ".x_b", ".sat")
+
+
+def open_step_readonly(sw, mod, path):
+    u"""STEP を新規部品としてインポートして開く(元ファイルは一切変更しない)。
+
+    ❗**`OpenDoc6` では STEP を開けない**(実測 2026-08-10 / SW2023):
+        swDocPART(1)          → doc=None, error=2097152 (swFileRequiresRepairError)
+        swDocIMPORTED_PART(6) → doc=None, error=1024    (swInvalidFileTypeError)
+      **`ISldWorks.LoadFile4(path, "r", IImportStepData, err)` が唯一通る**。
+      戻り値は (IModelDoc2, error) のタプルで error=0。
+
+    生成されるのは **未保存の部品ドキュメント**(GetTitle='<stem>.SLDPRT' / GetPathName='')。
+    単位は mm で入る(GetBodyBox の m→mm 換算がそのまま実寸になることを実測で確認済み)。
+    """
+    path = os.path.abspath(path)
+    if not os.path.exists(path):
+        raise IOError(u"STEP が無い: %s" % path)
+
+    isd = sw.GetImportFileData(path)     # STEP なら IImportStepData が返る(None でも続行可)
+    ret = sw.LoadFile4(path, "r", isd, 0)
+    doc, err = (ret if isinstance(ret, tuple) else (ret, None))
+    if doc is None:
+        raise RuntimeError(u"LoadFile4 が None: %s (error=%r)。ActiveDoc で拾ってはいけない"
+                           % (path, err))
+    doc = mod.IModelDoc2(doc._oleobj_)
+    title = prop(doc, "GetTitle")
+    stem = os.path.splitext(os.path.basename(path))[0]
+    if os.path.splitext(title)[0] != stem:
+        # 掴んだのが別物 → 絶対に閉じない(ユーザーのドキュメントの可能性)
+        raise RuntimeError(u"タイトル不一致: 期待 '%s.*' / 実際 %r" % (stem, title))
+    return OpenedDoc(sw, doc, title, True, path, imported=True), {"import_error": err}
+
+
+def open_model_readonly(sw, mod, path):
+    u"""拡張子で SLDPRT / STEP を振り分けて読み取り専用で開く。"""
+    ext = os.path.splitext(path)[1].lower()
+    if ext in IMPORT_EXTS:
+        return open_step_readonly(sw, mod, path)
+    return open_part_readonly(sw, mod, path)
 
 
 def part_metrics(mod, opened):

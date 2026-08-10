@@ -109,17 +109,11 @@ def run_sw_projection(model_path, out_views_dxf, out_meta_json):
         sw, mod = dp.connect()
         meta["sw_progid"] = dp.sw_compat.detected_progid()
 
-        pre_titles = []
-        d = sw.GetFirstDocument()
-        while d is not None:
-            try:
-                pre_titles.append(dp.prop(d, "GetTitle"))
-            except Exception:
-                pass
-            d = d.GetNext()
-        meta["pre_open_titles"] = pre_titles
+        # ❗GetFirstDocument+GetNext は1件目で切れる(実測)。スナップショットは GetDocuments 経由
+        pre_docs = dp.list_open_docs(sw)
+        meta["pre_open_titles"] = [t for t, _ in pre_docs]
 
-        part, vh = dp.open_part_readonly(sw, mod, model_path)
+        part, vh = dp.open_model_readonly(sw, mod, model_path)
         meta["version_history"] = vh
         m = dp.part_metrics(mod, part)
         meta["metrics"] = m
@@ -127,7 +121,8 @@ def run_sw_projection(model_path, out_views_dxf, out_meta_json):
         dwgdoc, dwg, sheet = dp.new_drawing(sw, mod)
         meta["sheet"] = dp.sheet_info(mod, sheet)
 
-        views = dp.insert_standard_views(mod, dwg, part.path, m["size_mm"])
+        # ❗インポート部品は GetPathName が空 → ModelName は title を使う(part.model_name)
+        views = dp.insert_standard_views(mod, dwg, part.model_name, m["size_mm"])
         meta["views"] = views
         meta["views_on_sheet"] = dp.list_views(mod, dwg)
 
@@ -149,15 +144,11 @@ def run_sw_projection(model_path, out_views_dxf, out_meta_json):
             except Exception as e:
                 meta.setdefault("close_errors", []).append("%s: %s" % (label, e))
         if sw is not None:
-            post = []
-            d = sw.GetFirstDocument()
-            while d is not None:
-                try:
-                    post.append(dp.prop(d, "GetTitle"))
-                except Exception:
-                    pass
-                d = d.GetNext()
-            meta["post_open_titles"] = post
+            meta["post_open_titles"] = [t for t, _ in dp.list_open_docs(sw)]
+            leaked = [t for t in meta["post_open_titles"]
+                      if t not in meta.get("pre_open_titles", [])]
+            if leaked:
+                meta["leaked_docs"] = leaked
 
     out_dir = os.path.dirname(out_meta_json)
     if out_dir and not os.path.isdir(out_dir):
