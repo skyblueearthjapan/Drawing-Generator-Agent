@@ -1,0 +1,535 @@
+[
+  {
+    "case": "S0_baseline",
+    "note": "隣接2寸法を chain_group='X' で連記",
+    "reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 29.5,
+        "left": 21.5,
+        "right": 16.5
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
+    },
+    "offsets": {
+      "L40_total": 24.0,
+      "L35_counterbore_depth": 16.0,
+      "L5_bore_land": 16.0,
+      "D33_counterbore": 16.0,
+      "D26_bore": 11.0,
+      "D75_outer": 16.0,
+      "P60_hole_pitch": 16.0
+    },
+    "passed": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "X",
+        "ids": [
+          "L35_counterbore_depth",
+          "L5_bore_land"
+        ],
+        "offset_coord": 45.907986,
+        "segments": [
+          {
+            "id": "L35_counterbore_depth",
+            "s0": 141.84136,
+            "s1": 176.84136,
+            "line_coord": 45.907986
+          },
+          {
+            "id": "L5_bore_land",
+            "s0": 176.84136,
+            "s1": 181.84136,
+            "line_coord": 45.907986
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "gate1_ok": true,
+    "error": null,
+    "view_bbox": {
+      "front": [
+        141.8414,
+        61.908,
+        181.8414,
+        136.908
+      ],
+      "top": [
+        141.8414,
+        168.5,
+        181.8414,
+        243.5
+      ],
+      "right": [
+        200.0,
+        61.908,
+        275.0,
+        136.908
+      ],
+      "iso": [
+        196.8414,
+        163.6061,
+        278.1586,
+        248.3939
+      ]
+    },
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style_falsification\\case_S0_baseline.dxf",
+    "styles": {
+      "L40_total": "GEN001",
+      "L35_counterbore_depth": "GEN002",
+      "L5_bore_land": "GEN003",
+      "D33_counterbore": "GEN004",
+      "D26_bore": "GEN005",
+      "D75_outer": "GEN006",
+      "P60_hole_pitch": "GEN007"
+    },
+    "expected_pass": true,
+    "verdict": "OK"
+  },
+  {
+    "case": "S1_level_normalized",
+    "note": "level 1 と 3 を混在させても同一寸法線へ揃うか",
+    "reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 37.5,
+        "left": 21.5,
+        "right": 16.5
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
+    },
+    "offsets": {
+      "L40_total": 24.0,
+      "L35_counterbore_depth": 32.0,
+      "L5_bore_land": 32.0,
+      "D33_counterbore": 16.0,
+      "D26_bore": 11.0,
+      "D75_outer": 16.0,
+      "P60_hole_pitch": 16.0
+    },
+    "passed": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "X",
+        "ids": [
+          "L35_counterbore_depth",
+          "L5_bore_land"
+        ],
+        "offset_coord": 29.907986,
+        "segments": [
+          {
+            "id": "L35_counterbore_depth",
+            "s0": 141.84136,
+            "s1": 176.84136,
+            "line_coord": 29.907986
+          },
+          {
+            "id": "L5_bore_land",
+            "s0": 176.84136,
+            "s1": 181.84136,
+            "line_coord": 29.907986
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "gate1_ok": true,
+    "error": null,
+    "view_bbox": {
+      "front": [
+        141.8414,
+        61.908,
+        181.8414,
+        136.908
+      ],
+      "top": [
+        141.8414,
+        168.5,
+        181.8414,
+        243.5
+      ],
+      "right": [
+        200.0,
+        61.908,
+        275.0,
+        136.908
+      ],
+      "iso": [
+        196.8414,
+        163.6061,
+        278.1586,
+        248.3939
+      ]
+    },
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style_falsification\\case_S1_level_normalized.dxf",
+    "styles": {
+      "L40_total": "GEN001",
+      "L35_counterbore_depth": "GEN002",
+      "L5_bore_land": "GEN003",
+      "D33_counterbore": "GEN004",
+      "D26_bore": "GEN005",
+      "D75_outer": "GEN006",
+      "P60_hole_pitch": "GEN007"
+    },
+    "expected_pass": true,
+    "verdict": "OK",
+    "line_coords": [
+      29.907986,
+      29.907986
+    ],
+    "aligned_exactly": true
+  },
+  {
+    "case": "S2_engine_regression",
+    "note": "chain_group を無視する旧実装を注入(同一グループがずれる)",
+    "reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 37.5,
+        "left": 21.5,
+        "right": 16.5
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
+    },
+    "offsets": {
+      "L40_total": 24.0,
+      "L35_counterbore_depth": 16.0,
+      "L5_bore_land": 32.0,
+      "D33_counterbore": 16.0,
+      "D26_bore": 11.0,
+      "D75_outer": 16.0,
+      "P60_hole_pitch": 16.0
+    },
+    "passed": false,
+    "chains": null,
+    "chains_ok": false,
+    "gate1_ok": false,
+    "error": "ゲート①不合格 1件(DXFは保存していない):\n[\n  {\n    \"id\": \"L5_bore_land\",\n    \"kind\": \"linear\",\n    \"plan_kind\": \"linear\",\n    \"view\": \"front\",\n    \"expected\": 5.0,\n    \"measured\": 5.0,\n    \"diff_mm\": 0.0,\n    \"snap_max_mm\": 0.0,\n    \"text\": \"5\",\n    \"text_value\": 5.0,\n    \"text_diff_mm\": 0.0,\n    \"style\": \"GEN003\",\n    \"ok\": false,\n    \"errors\": [\n      \"L5_bore_land: 寸法線が同一直線上に無い(先頭とのずれ 16.0000mm > 0.0100mm)= 直列連記が崩れている\"\n    ]\n  }\n]",
+    "expected_pass": false,
+    "verdict": "OK"
+  },
+  {
+    "case": "S3_side_mixed",
+    "note": "同一グループで side を below/above に割る",
+    "reserves": {
+      "front": {
+        "above": 21.5,
+        "below": 29.5,
+        "left": 21.5,
+        "right": 16.5
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
+    },
+    "offsets": {
+      "L40_total": 24.0,
+      "L35_counterbore_depth": 16.0,
+      "L5_bore_land": 16.0,
+      "D33_counterbore": 16.0,
+      "D26_bore": 11.0,
+      "D75_outer": 16.0,
+      "P60_hole_pitch": 16.0
+    },
+    "passed": false,
+    "chains": null,
+    "chains_ok": false,
+    "gate1_ok": false,
+    "error": "ゲート①不合格 2件(DXFは保存していない):\n[\n  {\n    \"id\": \"L35_counterbore_depth\",\n    \"kind\": \"linear\",\n    \"plan_kind\": \"linear\",\n    \"view\": \"front\",\n    \"expected\": 35.0,\n    \"measured\": 35.0,\n    \"diff_mm\": 0.0,\n    \"snap_max_mm\": 0.0,\n    \"text\": \"35\",\n    \"text_value\": 35.0,\n    \"text_diff_mm\": 0.0,\n    \"style\": \"GEN002\",\n    \"ok\": false,\n    \"errors\": [\n      \"直列連記グループ 'X' の placement.side が混在している: ['above', 'below']\"\n    ]\n  },\n  {\n    \"id\": \"L5_bore_land\",\n    \"kind\": \"linear\",\n    \"plan_kind\": \"linear\",\n    \"view\": \"front\",\n    \"expected\": 5.0,\n    \"measured\": 5.0,\n    \"diff_mm\": 0.0,\n    \"snap_max_mm\": 0.0,\n    \"text\": \"5\",\n    \"text_value\": 5.0,\n    \"text_diff_mm\": 0.0,\n    \"style\": \"GEN003\",\n    \"ok\": false,\n    \"errors\": [\n      \"直列連記グループ 'X' の placement.side が混在している: ['above', 'below']\",\n      \"L5_bore_land: 寸法線が同一直線上に無い(先頭とのずれ 107.0000mm > 0.0100mm)= 直列連記が崩れている\"\n    ]\n  }\n]",
+    "expected_pass": false,
+    "verdict": "OK"
+  },
+  {
+    "case": "S4_overlap",
+    "note": "全長(-40..0)と部分(-40..-5)を同一寸法線へ",
+    "reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 21.5,
+        "right": 16.5
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
+    },
+    "offsets": {
+      "L40_total": 16.0,
+      "L35_counterbore_depth": 16.0,
+      "L5_bore_land": 16.0,
+      "D33_counterbore": 16.0,
+      "D26_bore": 11.0,
+      "D75_outer": 16.0,
+      "P60_hole_pitch": 16.0
+    },
+    "passed": false,
+    "chains": null,
+    "chains_ok": false,
+    "gate1_ok": false,
+    "error": "ゲート①不合格 2件(DXFは保存していない):\n[\n  {\n    \"id\": \"L40_total\",\n    \"kind\": \"linear\",\n    \"plan_kind\": \"linear\",\n    \"view\": \"front\",\n    \"expected\": 40.0,\n    \"measured\": 40.0,\n    \"diff_mm\": 0.0,\n    \"snap_max_mm\": 0.0,\n    \"text\": \"40\",\n    \"text_value\": 40.0,\n    \"text_diff_mm\": 0.0,\n    \"style\": \"GEN001\",\n    \"ok\": false,\n    \"errors\": [\n      \"L40_total と L35_counterbore_depth の測定区間が 40.0000mm 重なっている(同一寸法線上で重なる連記は不正)\"\n    ]\n  },\n  {\n    \"id\": \"L35_counterbore_depth\",\n    \"kind\": \"linear\",\n    \"plan_kind\": \"linear\",\n    \"view\": \"front\",\n    \"expected\": 35.0,\n    \"measured\": 35.0,\n    \"diff_mm\": 0.0,\n    \"snap_max_mm\": 0.0,\n    \"text\": \"35\",\n    \"text_value\": 35.0,\n    \"text_diff_mm\": 0.0,\n    \"style\": \"GEN002\",\n    \"ok\": false,\n    \"errors\": [\n      \"L40_total と L35_counterbore_depth の測定区間が 40.0000mm 重なっている(同一寸法線上で重なる連記は不正)\"\n    ]\n  }\n]",
+    "expected_pass": false,
+    "verdict": "OK"
+  },
+  {
+    "case": "S5_gap",
+    "note": "端点を共有しない2区間(間に33mmの隙間)を同一グループへ",
+    "reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 29.5,
+        "left": 21.5,
+        "right": 0.0
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
+    },
+    "offsets": {
+      "L40_total": 24.0,
+      "L35_counterbore_depth": 16.0,
+      "L5_bore_land": 16.0,
+      "D75_outer": 16.0,
+      "P60_hole_pitch": 16.0,
+      "V_lower": 16.0,
+      "V_upper": 16.0
+    },
+    "passed": false,
+    "chains": null,
+    "chains_ok": false,
+    "gate1_ok": false,
+    "error": "ゲート①不合格 2件(DXFは保存していない):\n[\n  {\n    \"id\": \"V_lower\",\n    \"kind\": \"linear\",\n    \"plan_kind\": \"linear\",\n    \"view\": \"front\",\n    \"expected\": 21.0,\n    \"measured\": 21.0,\n    \"diff_mm\": 0.0,\n    \"snap_max_mm\": 0.0,\n    \"text\": \"21\",\n    \"text_value\": 21.0,\n    \"text_diff_mm\": 0.0,\n    \"style\": \"GEN006\",\n    \"ok\": false,\n    \"errors\": [\n      \"V_lower と V_upper が端点を共有していない(隙間 33.0000mm)= 直列(chain)ではなく飛び地の並記になっている\"\n    ]\n  },\n  {\n    \"id\": \"V_upper\",\n    \"kind\": \"linear\",\n    \"plan_kind\": \"linear\",\n    \"view\": \"front\",\n    \"expected\": 21.0,\n    \"measured\": 21.0,\n    \"diff_mm\": 0.0,\n    \"snap_max_mm\": 0.0,\n    \"text\": \"21\",\n    \"text_value\": 21.0,\n    \"text_diff_mm\": 0.0,\n    \"style\": \"GEN007\",\n    \"ok\": false,\n    \"errors\": [\n      \"V_lower と V_upper が端点を共有していない(隙間 33.0000mm)= 直列(chain)ではなく飛び地の並記になっている\"\n    ]\n  }\n]",
+    "expected_pass": false,
+    "verdict": "OK"
+  },
+  {
+    "case": "S6_direction_mixed",
+    "note": "水平寸法と垂直寸法を同一グループへ",
+    "reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 29.5,
+        "left": 21.5,
+        "right": 16.5
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
+    },
+    "offsets": {
+      "L40_total": 24.0,
+      "L35_counterbore_depth": 16.0,
+      "L5_bore_land": 16.0,
+      "D33_counterbore": 16.0,
+      "D26_bore": 11.0,
+      "D75_outer": 16.0,
+      "P60_hole_pitch": 16.0
+    },
+    "passed": false,
+    "chains": null,
+    "chains_ok": false,
+    "gate1_ok": false,
+    "error": "ゲート①不合格 2件(DXFは保存していない):\n[\n  {\n    \"id\": \"L35_counterbore_depth\",\n    \"kind\": \"linear\",\n    \"plan_kind\": \"linear\",\n    \"view\": \"front\",\n    \"expected\": 35.0,\n    \"measured\": 35.0,\n    \"diff_mm\": 0.0,\n    \"snap_max_mm\": 0.0,\n    \"text\": \"35\",\n    \"text_value\": 35.0,\n    \"text_diff_mm\": 0.0,\n    \"style\": \"GEN002\",\n    \"ok\": false,\n    \"errors\": [\n      \"直列連記グループ 'X' の placement.side が混在している: ['below', 'left']\",\n      \"D33_counterbore と L35_counterbore_depth が端点を共有していない(隙間 25.9334mm)= 直列(chain)ではなく飛び地の並記になっている\"\n    ]\n  },\n  {\n    \"id\": \"D33_counterbore\",\n    \"kind\": \"diameter_linear\",\n    \"plan_kind\": \"diameter\",\n    \"view\": \"front\",\n    \"expected\": 33.0,\n    \"measured\": 33.0,\n    \"diff_mm\": 0.0,\n    \"snap_max_mm\": 0.0,\n    \"text\": \"%%c33\",\n    \"text_value\": 33.0,\n    \"text_diff_mm\": 0.0,\n    \"style\": \"GEN004\",\n    \"ok\": false,\n    \"errors\": [\n      \"D33_counterbore: 測定方向が 90.0000度 で、グループ先頭の 0.0000度 と違う(直列連記は同一方向の寸法だけ)\",\n      \"直列連記グループ 'X' の placement.side が混在している: ['below', 'left']\",\n      \"D33_counterbore: 寸法線が同一直線上に無い(先頭とのずれ 171.7493mm > 0.0100mm)= 直列連記が崩れている\",\n      \"D33_counterbore と L35_counterbore_depth が端点を共有していない(隙間 25.9334mm)= 直列(chain)ではなく飛び地の並記になっている\"\n    ],\n    \"cross_check\": {\n      \"ok\": true,\n      \"view\": \"right\",\n      \"found_diameter\": 33.0,\n      \"diff_vs_measured_mm\": 0.0\n    }\n  }\n]",
+    "direction_error_reported": true,
+    "expected_pass": false,
+    "verdict": "OK"
+  },
+  {
+    "case": "S7_single_member",
+    "note": "メンバー1本だけのグループ",
+    "reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 29.5,
+        "left": 21.5,
+        "right": 16.5
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
+    },
+    "offsets": {
+      "L40_total": 24.0,
+      "L35_counterbore_depth": 16.0,
+      "L5_bore_land": 16.0,
+      "D33_counterbore": 16.0,
+      "D26_bore": 11.0,
+      "D75_outer": 16.0,
+      "P60_hole_pitch": 16.0
+    },
+    "passed": false,
+    "chains": null,
+    "chains_ok": false,
+    "gate1_ok": false,
+    "error": "ゲート①不合格 1件(DXFは保存していない):\n[\n  {\n    \"id\": \"L35_counterbore_depth\",\n    \"kind\": \"linear\",\n    \"plan_kind\": \"linear\",\n    \"view\": \"front\",\n    \"expected\": 35.0,\n    \"measured\": 35.0,\n    \"diff_mm\": 0.0,\n    \"snap_max_mm\": 0.0,\n    \"text\": \"35\",\n    \"text_value\": 35.0,\n    \"text_diff_mm\": 0.0,\n    \"style\": \"GEN002\",\n    \"ok\": false,\n    \"errors\": [\n      \"直列連記グループ 'Z'(front)のメンバーが1本しかない(2本以上必要)\"\n    ]\n  }\n]",
+    "expected_pass": false,
+    "verdict": "OK"
+  },
+  {
+    "case": "S9_side_dispatch",
+    "note": "4方向(above/below/left/right)の配置検算",
+    "reserves": {
+      "front": {
+        "above": 21.5,
+        "below": 29.5,
+        "left": 21.5,
+        "right": 21.5
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 0.0
+      }
+    },
+    "offsets": {
+      "L40_total": 16.0,
+      "L35_counterbore_depth": 16.0,
+      "L5_bore_land": 24.0,
+      "D33_counterbore": 16.0,
+      "D26_bore": 16.0,
+      "D75_outer": 16.0,
+      "P60_hole_pitch": 16.0
+    },
+    "passed": true,
+    "chains": [],
+    "chains_ok": true,
+    "gate1_ok": true,
+    "error": null,
+    "view_bbox": {
+      "front": [
+        140.1707,
+        61.908,
+        180.1707,
+        136.908
+      ],
+      "top": [
+        140.1707,
+        168.5,
+        180.1707,
+        243.5
+      ],
+      "right": [
+        201.6707,
+        61.908,
+        276.6707,
+        136.908
+      ],
+      "iso": [
+        198.512,
+        163.6061,
+        279.8293,
+        248.3939
+      ]
+    },
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style_falsification\\case_S9_side_dispatch.dxf",
+    "styles": {
+      "L40_total": "GEN001",
+      "L35_counterbore_depth": "GEN002",
+      "L5_bore_land": "GEN003",
+      "D33_counterbore": "GEN004",
+      "D26_bore": "GEN005",
+      "D75_outer": "GEN006",
+      "P60_hole_pitch": "GEN007"
+    },
+    "side_checks": [
+      {
+        "id": "D26_bore",
+        "side": "left",
+        "offset_mm": 16.0,
+        "expected_coord": 124.1707,
+        "actual_coord": 124.1707,
+        "ok": true
+      },
+      {
+        "id": "D33_counterbore",
+        "side": "right",
+        "offset_mm": 16.0,
+        "expected_coord": 196.1707,
+        "actual_coord": 196.1707,
+        "ok": true
+      },
+      {
+        "id": "L35_counterbore_depth",
+        "side": "below",
+        "offset_mm": 16.0,
+        "expected_coord": 45.908,
+        "actual_coord": 45.908,
+        "ok": true
+      },
+      {
+        "id": "L40_total",
+        "side": "above",
+        "offset_mm": 16.0,
+        "expected_coord": 152.908,
+        "actual_coord": 152.908,
+        "ok": true
+      },
+      {
+        "id": "L5_bore_land",
+        "side": "below",
+        "offset_mm": 24.0,
+        "expected_coord": 37.908,
+        "actual_coord": 37.908,
+        "ok": true
+      }
+    ],
+    "side_dispatch_ok": true,
+    "expected_pass": true,
+    "verdict": "OK"
+  },
+  {
+    "case": "S8_style_dimension",
+    "note": "purpose='style' は警告からのみ外れる",
+    "style_ids": [
+      "A20_phase",
+      "A90_pitch"
+    ],
+    "unspecified_with_style": 0,
+    "unspecified_without_style": 0,
+    "floating_with_style": [],
+    "floating_without_style": [
+      "A20_phase",
+      "A90_pitch"
+    ],
+    "verdict": "OK"
+  }
+]

@@ -632,15 +632,22 @@ def measure_from_defpoints(dim):
 
 
 def measure_angle_deg(dim):
-    u"""ANGULAR DIMENSION(dimtype=2)の**実測角度[度]**を defpoint から独立に再計算する。
+    u"""ANGULAR DIMENSION(dimtype=2)の **実際に描かれる寸法円弧の角度[度]** を
+    defpoint から独立に再計算する。
 
     ❗角度は長さではないので `measure_model_value` の尺度換算(1/scale)を通してはいけない。
-    `add_angular_dim_2l(base, line1=(v,p1), line2=(v,p2))` の defpoint 割り当ては実測で
-    **defpoint2=v / defpoint3=p1 / defpoint4=v / defpoint=p2 / defpoint5=base**。
-    したがって
-        line1 の向き = defpoint3 - defpoint2 、 line2 の向き = defpoint - defpoint4
-    で、**line1 から line2 へ反時計回り(CCW)に測った角**が ezdxf の測定値と一致する
-    (`add_angular_dim_2l` の測定値と突き合わせて確認済み)。
+
+    ❗❗**2026-08-11 修正(重大)**: 旧実装は「defpoint3-defpoint2 から defpoint-defpoint4 へ
+    CCW」で測っていたが、**ezdxf が描く円弧はその逆回り**である。
+    `ezdxf.render.dim_curved.AngularDimension` は
+      start_angle = angle(defpoint - defpoint4) / end_angle = angle(defpoint3 - defpoint2)
+    としてその間を **CCW** に描く(実験 `調査/run_style_falsification.py` の probe と
+    ezdxf 1.4.4 のソースで確認)。旧実装は常に **360-描画角** を返していたため、
+    「20度と書いてあるのに 340度の優角(reflex)が描かれている」図面がゲート①を通り抜けた
+    (25154-3-09 の A30R/A30L が実害。30度の表示に対し実際は約310度の円弧)。
+    本関数は **描かれた円弧そのもの** を返すように改めた。
+    `apply_plan` 側も `add_angular_dim_2l` へ渡す line1/line2 を入れ替えたので、
+    **計画JSONの意味(p1 から p2 へ CCW に測る)は従来どおりで、値も従来と同じ**になる。
 
     Returns: 角度[度] 0〜360 / 角度寸法でなければ None
     """
@@ -648,13 +655,71 @@ def measure_angle_deg(dim):
     if (d.dimtype & 7) != 2:
         return None
     try:
-        v1, p1 = d.defpoint2, d.defpoint3
-        v2, p2 = d.defpoint4, d.defpoint
+        v1, q1 = d.defpoint2, d.defpoint3      # ezdxf の end_angle 側
+        v2, q2 = d.defpoint4, d.defpoint       # ezdxf の start_angle 側
     except AttributeError:
         return None
-    a1 = math.atan2(p1.y - v1.y, p1.x - v1.x)
-    a2 = math.atan2(p2.y - v2.y, p2.x - v2.x)
-    return math.degrees((a2 - a1) % (2.0 * math.pi))
+    a_end = math.atan2(q1.y - v1.y, q1.x - v1.x)
+    a_start = math.atan2(q2.y - v2.y, q2.x - v2.x)
+    return math.degrees((a_end - a_start) % (2.0 * math.pi))
+
+
+def measure_angle_arc(doc, dim):
+    u"""角度寸法の **描画実体(アノニマスブロック内のARC)** から円弧の実寸を読む。
+
+    ❗defpoint からの再計算(`measure_angle_deg`)だけでは
+    「ezdxf がどちら回りに描いたか」を取り違えた欠陥を検出できなかった
+    (3-09 の実害。上の関数の注記参照)。**描かれた線そのもの**を測って突き合わせる。
+
+    Returns: {"span_deg", "mid_deg", "radius", "center"} / 見つからなければ None
+    """
+    geom = dim.dxf.get("geometry", None)
+    if not geom or geom not in doc.blocks:
+        return None
+    best = None
+    for e in doc.blocks.get(geom):
+        if e.dxftype() != "ARC":
+            continue
+        span = (e.dxf.end_angle - e.dxf.start_angle) % 360.0
+        if best is None or span > best[0]:
+            best = (span, e)
+    if best is None:
+        return None
+    span, e = best
+    return {"span_deg": span,
+            "mid_deg": (e.dxf.start_angle + span / 2.0) % 360.0,
+            "radius": e.dxf.radius,
+            "center": (e.dxf.center.x, e.dxf.center.y)}
+
+
+def check_angle_arc(doc, dim, measured_deg):
+    u"""描かれた寸法円弧が **測った角のセクタの中** にあるかを検査する(ゲート①の一部)。
+
+    寸法円弧は矢印の逃げぶん測定角より少し長く描かれるので長さでは判定できない。
+    代わりに **円弧の中点が、始辺から測定角までの範囲に入っているか** を見る。
+    優角(reflex)側に描かれた瞬間、中点はセクタの外へ出るので確実に落ちる。
+    """
+    arc = measure_angle_arc(doc, dim)
+    if arc is None or measured_deg is None:
+        return {"ok": arc is not None, "reason": u"円弧を読めない" if arc is None else None}
+    d = dim.dxf
+    start_ray = math.degrees(math.atan2(d.defpoint.y - d.defpoint4.y,
+                                        d.defpoint.x - d.defpoint4.x))
+    off = (arc["mid_deg"] - start_ray) % 360.0
+    mid_ok = -1e-6 <= off <= measured_deg + 1e-6
+    # 円弧の長さそのものも見る。矢印の逃げぶんだけ伸縮するので、その分だけ許容する
+    # (ezdxf: start_offset=矢印長/半径, end_offset=2*dimasz/半径 → 合計 4*dimasz/半径 が上界)
+    try:
+        dimasz = float(doc.dimstyles.get(str(d.dimstyle)).dxf.get("dimasz", 2.5))
+    except Exception:
+        dimasz = 2.5
+    allow = (math.degrees(4.0 * dimasz / arc["radius"]) if arc["radius"] > 1e-9 else 360.0)
+    span_ok = abs(arc["span_deg"] - measured_deg) <= allow + 1e-6
+    return {"ok": bool(mid_ok and span_ok), "mid_ok": bool(mid_ok), "span_ok": bool(span_ok),
+            "arc_span_deg": round(arc["span_deg"], 6),
+            "arc_mid_offset_deg": round(off, 6), "measured_deg": round(measured_deg, 6),
+            "arc_span_allow_deg": round(allow, 6),
+            "arc_radius": round(arc["radius"], 6)}
 
 
 # 角度寸法の許容差[度]。円周等分/群配置の検算(PCD_ANGLE_TOL_DEG)と同じ厳しさに揃える。
@@ -727,6 +792,114 @@ def oblique_base_point(side, p1, p2, angle, offset):
     mx = (p1[0] + p2[0]) / 2.0
     my = (p1[1] + p2[1]) / 2.0
     return (mx + nx * offset, my + ny * offset)
+
+
+def _proj(p, ux, uy):
+    return p[0] * ux + p[1] * uy
+
+
+def check_chain_alignment(plan, dims_by_id, scale=1.0, tol_mm=0.01):
+    u"""**直列連記(`placement.chain_group`)が本当に1本の寸法線に並んでいるか**を、
+    保存済み/生成済みの DIMENSION エンティティ**だけ**から独立に検証する。
+
+    人間コーパスが多用する「端点が接する寸法を同一寸法線へ連記する」配置
+    (`調査/drawing_style_analysis.md`§6。生成図面は0%だった)をエンジン機能にした以上、
+    **壊れたときに検出できなければ意味が無い**。判定はすべて実DXFの defpoint から行い、
+    計画の自己申告(placement)はグループの**メンバーシップにしか**使わない。
+
+    dims_by_id: 計画の寸法ID -> ezdxf の DIMENSION エンティティ
+    Returns: [{"view","group","ids","offset_coord","segments","ok","errors",
+               "member_errors":{id:[msg]}}]
+
+    検査項目(1つでも破れたらそのグループは不合格):
+      (1) メンバーが2本以上ある
+      (2) 全メンバーが線形寸法(dimtype base 0)で、測定方向(angle)が一致する
+      (3) 寸法線の**法線方向の位置が全メンバーで一致**する(=同一直線上にある)
+      (4) 測定区間が互いに重ならない(連記した寸法どうしが重なって描かれない)
+      (5) 隣り合う区間が端点を共有する(=直列。飛び地は「同じ線に置いただけ」で直列ではない)
+    """
+    groups = {}
+    for item in plan.get("dimensions", []):
+        k = compose_drawing.chain_key(item)
+        if k is None:
+            continue
+        groups.setdefault(k, []).append(item)
+
+    out = []
+    for (view, gname), items in sorted(groups.items()):
+        rep = {"view": view, "group": gname, "ids": [i["id"] for i in items],
+               "offset_coord": None, "segments": [], "errors": [], "member_errors": {}}
+
+        def err(msg, ids=None):
+            rep["errors"].append(msg)
+            for i in (ids if ids is not None else rep["ids"]):
+                rep["member_errors"].setdefault(i, []).append(msg)
+
+        if len(items) < 2:
+            err(u"直列連記グループ '%s'(%s)のメンバーが%d本しかない(2本以上必要)"
+                % (gname, view, len(items)))
+            rep["ok"] = False
+            out.append(rep)
+            continue
+
+        recs, missing = [], []
+        for it in items:
+            ent = dims_by_id.get(it["id"])
+            if ent is None:
+                missing.append(it["id"])
+                continue
+            d = ent.dxf
+            if (d.dimtype & 7) != 0:
+                err(u"%s: 直列連記は線形寸法(rotated)だけが対象(dimtype base=%d)"
+                    % (it["id"], d.dimtype & 7), [it["id"]])
+                continue
+            a = float(d.get("angle", 0.0))
+            ux, uy = math.cos(math.radians(a)), math.sin(math.radians(a))
+            nx, ny = -uy, ux
+            recs.append({
+                "id": it["id"], "angle": a % 180.0,
+                "line_coord": _proj((d.defpoint.x, d.defpoint.y), nx, ny) / float(scale),
+                "s0": min(_proj((d.defpoint2.x, d.defpoint2.y), ux, uy),
+                          _proj((d.defpoint3.x, d.defpoint3.y), ux, uy)) / float(scale),
+                "s1": max(_proj((d.defpoint2.x, d.defpoint2.y), ux, uy),
+                          _proj((d.defpoint3.x, d.defpoint3.y), ux, uy)) / float(scale),
+                "side": (it.get("placement") or {}).get("side"),
+            })
+        if missing:
+            err(u"直列連記グループ '%s' のメンバー %s が図面に存在しない" % (gname, missing), missing)
+
+        if len(recs) >= 2:
+            a0 = recs[0]["angle"]
+            for r in recs[1:]:
+                if abs(r["angle"] - a0) > 1e-6:
+                    err(u"%s: 測定方向が %.4f度 で、グループ先頭の %.4f度 と違う"
+                        u"(直列連記は同一方向の寸法だけ)" % (r["id"], r["angle"], a0), [r["id"]])
+            sides = {r["side"] for r in recs}
+            if len(sides) > 1:
+                err(u"直列連記グループ '%s' の placement.side が混在している: %s"
+                    % (gname, sorted(str(s) for s in sides)))
+            c0 = recs[0]["line_coord"]
+            rep["offset_coord"] = round(c0, 6)
+            for r in recs[1:]:
+                dev = abs(r["line_coord"] - c0)
+                if dev > tol_mm:
+                    err(u"%s: 寸法線が同一直線上に無い(先頭とのずれ %.4fmm > %.4fmm)"
+                        u"= 直列連記が崩れている" % (r["id"], dev, tol_mm), [r["id"]])
+            ordered = sorted(recs, key=lambda r: r["s0"])
+            rep["segments"] = [{"id": r["id"], "s0": round(r["s0"], 6), "s1": round(r["s1"], 6),
+                                "line_coord": round(r["line_coord"], 6)} for r in ordered]
+            for a_, b_ in zip(ordered, ordered[1:]):
+                gap = b_["s0"] - a_["s1"]
+                if gap < -tol_mm:
+                    err(u"%s と %s の測定区間が %.4fmm 重なっている(同一寸法線上で重なる連記は不正)"
+                        % (a_["id"], b_["id"], -gap), [a_["id"], b_["id"]])
+                elif gap > tol_mm:
+                    err(u"%s と %s が端点を共有していない(隙間 %.4fmm)"
+                        u"= 直列(chain)ではなく飛び地の並記になっている"
+                        % (a_["id"], b_["id"], gap), [a_["id"], b_["id"]])
+        rep["ok"] = not rep["errors"]
+        out.append(rep)
+    return out
 
 
 def base_point(region, side, p1, p2, offset):
@@ -924,8 +1097,8 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
     spec = load_dimstyle_spec(dimstyle_spec_path)
 
     defaults = plan.get("defaults", {})
-    first_offset = float(defaults.get("first_offset_mm", 16.0))
-    stack_step = float(defaults.get("stack_step_mm", spec["dimstyle_base"]["dimdli"]["value"]))
+    # ❗寸法線オフセット(first_offset_mm / stack_step_mm / offset_mm / chain_group)の解釈は
+    #   compose_drawing.resolve_dim_offsets に一本化した(レイアウトと実配置の一致を構造的に担保)
     snap_tol = float(defaults.get("snap_tol_mm", 0.01))
     gate_tol = float(defaults.get("gate_tol_mm", 0.01))
     # 角度寸法(kind='angle')の許容差[度]。長さのmm許容差とは別物なので専用キーで持つ
@@ -1008,6 +1181,10 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         return name
 
     resolved_kinds = {}
+    # ❗寸法線オフセットの決定は compose と**同じ1実装**から取る(直列連記の正規化を含む)。
+    #   ここで独自計算するとレイアウト(予約帯)と実配置がずれる
+    dim_offsets = compose_drawing.resolve_dim_offsets(plan)
+    dims_by_id = {}
     for item in plan.get("dimensions", []):
         did = item["id"]
         # kind='diameter' は文脈(context)と defaults.diameter_style から実装方式を解決する。
@@ -1026,9 +1203,7 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         space = meas.get("space", "view")
         placement = item.get("placement", {})
         side = placement.get("side", "below")
-        level = int(placement.get("level", 1))
-        offset = placement.get("offset_mm")
-        offset = first_offset + (level - 1) * stack_step if offset is None else float(offset)
+        offset = dim_offsets[did]
 
         # 専用DIMSTYLE(1寸法=1スタイル)
         dv = dict(dimvars_base)
@@ -1124,9 +1299,14 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             p2 = to_draw(view, space, meas["p2"])
             if not text_override:
                 raise ValueError("%s: kind='angle' は text_override 必須(§8ルール3)" % did)
+            # ❗line1/line2 は**入れ替えて**渡す。ezdxf は
+            #   start_angle = line2 の向き / end_angle = line1 の向き としてCCWに円弧を描く
+            #   (dim_curved.AngularDimension)。計画JSONの意味「p1 から p2 へCCW」を
+            #   描画と一致させるには line1=(v,p2) / line2=(v,p1) が正しい。
+            #   旧実装(line1=(v,p1))は**常に優角(360-θ)の円弧**を描いていた(3-09の実害)。
             dim = msp.add_angular_dim_2l(
                 base=to_draw(view, space, meas["base"]),
-                line1=(v, p1), line2=(v, p2),
+                line1=(v, p2), line2=(v, p1),
                 dimstyle=style_name, dxfattribs=attribs)
             dim.dimension.dxf.text = text_override
             dim.render()
@@ -1173,6 +1353,12 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         }
         if is_angle:
             row["unit"] = "deg"        # diff_mm/text_diff_mm は**度**で読むこと
+            # ❗描かれた円弧そのものを検査する(優角側に描かれる欠陥の再発防止)
+            row["arc_check"] = check_angle_arc(doc, ent, measured)
+            if not row["arc_check"]["ok"]:
+                row["errors"].append(
+                    u"角度寸法の円弧が測定セクタの外に描かれている(優角側): %s"
+                    % json.dumps(row["arc_check"], ensure_ascii=False))
         if row["snap_max_mm"] is not None and row["snap_max_mm"] > snap_tol:
             row["errors"].append(
                 u"測定点が実ジオメトリ特徴点に一致しない(最大%.4fmm > %.4fmm)"
@@ -1225,6 +1411,7 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
 
         row["ok"] = not row["errors"]
         gate_rows.append(row)
+        dims_by_id[did] = ent
         dimstyle_records[did] = style_name
         tb = _text_box(doc, ent, spec["text_style"]["width_factor"])
         if tb:
@@ -1235,6 +1422,22 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             geom_boxes[did] = [round(v, 4) for v in (
                 min(p[0] for p in pbs), min(p[1] for p in pbs),
                 max(p[2] for p in pbs), max(p[3] for p in pbs))]
+
+    # --- 4.5) 直列連記(chain_group)の整列検証 -------------------------------
+    # ❗連記が崩れた(同一グループの寸法線がずれた・重なった・飛び地になった)図面は
+    #   「正しいが読みにくい」どころか**誤読される**。ゲート①の一部として不合格にする。
+    chain_reports = check_chain_alignment(plan, dims_by_id, scale=scale, tol_mm=gate_tol)
+    _row_by_id = {r["id"]: r for r in gate_rows}
+    for crep in chain_reports:
+        for mid, msgs in crep["member_errors"].items():
+            r = _row_by_id.get(mid)
+            if r is None:
+                continue
+            r["errors"].extend(msgs)
+            r["ok"] = False
+        if crep["errors"] and not crep["member_errors"]:
+            warnings.append(u"❗直列連記 '%s'(%s): %s"
+                            % (crep["group"], crep["view"], "; ".join(crep["errors"])))
 
     # --- 5) 穴注記(LEADER + MTEXT) --------------------------------------
     note_rows = []
@@ -1364,6 +1567,9 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         "base_dxf": base_dxf,
         "gate1": gate_rows,
         "gate1_ok": gate_ok,
+        "chains": chain_reports,
+        "chains_ok": all(c["ok"] for c in chain_reports),
+        "dim_offsets": {k: round(v, 4) for k, v in dim_offsets.items()},
         "hole_notes": note_rows,
         "dimstyles": dimstyle_records,
         "style_check": style_check,

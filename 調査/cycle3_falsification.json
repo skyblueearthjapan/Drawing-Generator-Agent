@@ -1,6 +1,6 @@
 {
- "passed": 14,
- "total": 14,
+ "passed": 15,
+ "total": 15,
  "cases": {
   "G1_cluster_base": {
    "gate2_ok": true,
@@ -227,7 +227,71 @@
     "137.5": 137.5,
     "285.0": 285.0
    },
-   "expect": "合成した既知角(30/137.5/285度)を defpoint から測り直して一致する",
+   "arc": {
+    "30.0": {
+     "ok": true,
+     "mid_ok": true,
+     "span_ok": true,
+     "arc_span_deg": 28.311907,
+     "arc_mid_offset_deg": 15.0,
+     "measured_deg": 30.0,
+     "arc_span_allow_deg": 3.376186,
+     "arc_radius": 16.970563
+    },
+    "137.5": {
+     "ok": true,
+     "mid_ok": true,
+     "span_ok": true,
+     "arc_span_deg": 135.811907,
+     "arc_mid_offset_deg": 68.75,
+     "measured_deg": 137.5,
+     "arc_span_allow_deg": 3.376186,
+     "arc_radius": 16.970563
+    },
+    "285.0": {
+     "ok": true,
+     "mid_ok": true,
+     "span_ok": true,
+     "arc_span_deg": 283.311907,
+     "arc_mid_offset_deg": 142.5,
+     "measured_deg": 285.0,
+     "arc_span_allow_deg": 3.376186,
+     "arc_radius": 16.970563
+    }
+   },
+   "expect": "合成した既知角(30/137.5/285度)を defpoint から測り直して一致し、**描かれた円弧もその角のセクタ内**にある",
+   "pass": true
+  },
+  "H8_reflex_arc_regression": {
+   "probe": {
+    "30.0": {
+     "measured": 330.0,
+     "arc": {
+      "ok": false,
+      "mid_ok": false,
+      "span_ok": false,
+      "arc_span_deg": 328.311907,
+      "arc_mid_offset_deg": 165.0,
+      "measured_deg": 30.0,
+      "arc_span_allow_deg": 3.376186,
+      "arc_radius": 16.970563
+     }
+    },
+    "137.5": {
+     "measured": 222.5,
+     "arc": {
+      "ok": false,
+      "mid_ok": true,
+      "span_ok": false,
+      "arc_span_deg": 220.811907,
+      "arc_mid_offset_deg": 111.25,
+      "measured_deg": 137.5,
+      "arc_span_allow_deg": 3.376186,
+      "arc_radius": 16.970563
+     }
+    }
+   },
+   "expect": "旧実装の引数順(=優角側に円弧が出る)を再現すると、(1)実測角が 360-θ になってゲート①の値照合が必ず落ち、(2)『θ度のつもり』で円弧を検査しても不合格になる",
    "pass": true
   }
  }

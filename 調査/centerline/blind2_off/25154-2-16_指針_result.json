@@ -46,7 +46,7 @@
               "right": 21.5
             },
             "top": {
-              "above": 37.5,
+              "above": 29.5,
               "below": 0.0,
               "left": 21.5,
               "right": 0.0
@@ -80,6 +80,7 @@
         "resolved_kinds": {
           "Z88_total": "linear",
           "Z43_step": "linear",
+          "Z45_tip": "linear",
           "Z45_topflange": "linear",
           "Y135_total": "linear",
           "Y6_4_tip": "linear",
@@ -89,7 +90,30 @@
           "Z3_2_web": "linear",
           "Z20_pitch": "linear",
           "Z15_end": "linear"
-        }
+        },
+        "chains_ok": true,
+        "chains": [
+          {
+            "group": "Zseg",
+            "view": "front",
+            "ids": [
+              "Z43_step",
+              "Z45_tip"
+            ],
+            "ok": true,
+            "errors": []
+          },
+          {
+            "group": "Zpitch",
+            "view": "top",
+            "ids": [
+              "Z20_pitch",
+              "Z15_end"
+            ],
+            "ok": true,
+            "errors": []
+          }
+        ]
       },
       "layout_verify": {
         "ok": true,
@@ -99,7 +123,7 @@
       "gate2": {
         "ok": true,
         "unspecified_count": 0,
-        "redundant_count": 0
+        "redundant_count": 1
       },
       "independent_verify": {
         "ok": true,
@@ -107,7 +131,9 @@
         "gate1_ok": true,
         "gate1_max_diff_mm": 0.0,
         "style_ok": true,
-        "note_ok": true
+        "note_ok": true,
+        "chains_ok": true,
+        "chain_errors": []
       },
       "centerline": {
         "enabled": false,
@@ -154,7 +180,7 @@
           "right": 21.5
         },
         "top": {
-          "above": 37.5,
+          "above": 29.5,
           "below": 0.0,
           "left": 21.5,
           "right": 0.0
@@ -363,7 +389,7 @@
       "装置名": "ターン軸",
       "尺度": "１：１",
       "製図者": "ＡＩ",
-      "製図日付": "２６．０８．１０",
+      "製図日付": "２６．０８．１１",
       "連番": "１６",
       "重量": "０．１９"
     },
@@ -408,7 +434,7 @@
         "errors": []
       },
       {
-        "id": "Z45_topflange",
+        "id": "Z45_tip",
         "kind": "linear",
         "plan_kind": "linear",
         "view": "front",
@@ -424,6 +450,22 @@
         "errors": []
       },
       {
+        "id": "Z45_topflange",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 45.0,
+        "measured": 45.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "45",
+        "text_value": 45.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN004",
+        "ok": true,
+        "errors": []
+      },
+      {
         "id": "Y135_total",
         "kind": "linear",
         "plan_kind": "linear",
@@ -435,7 +477,7 @@
         "text": "135",
         "text_value": 135.0,
         "text_diff_mm": 0.0,
-        "style": "GEN004",
+        "style": "GEN005",
         "ok": true,
         "errors": []
       },
@@ -451,7 +493,7 @@
         "text": "6.4",
         "text_value": 6.4,
         "text_diff_mm": 0.0,
-        "style": "GEN005",
+        "style": "GEN006",
         "ok": true,
         "errors": []
       },
@@ -467,7 +509,7 @@
         "text": "3.2",
         "text_value": 3.2,
         "text_diff_mm": 0.0,
-        "style": "GEN006",
+        "style": "GEN007",
         "ok": true,
         "errors": []
       },
@@ -483,7 +525,7 @@
         "text": "R3.2",
         "text_value": 3.2,
         "text_diff_mm": 0.0,
-        "style": "GEN007",
+        "style": "GEN008",
         "ok": true,
         "errors": []
       },
@@ -499,7 +541,7 @@
         "text": "25",
         "text_value": 25.0,
         "text_diff_mm": 0.0,
-        "style": "GEN008",
+        "style": "GEN009",
         "ok": true,
         "errors": []
       },
@@ -515,7 +557,7 @@
         "text": "3.2",
         "text_value": 3.2,
         "text_diff_mm": 0.0,
-        "style": "GEN009",
+        "style": "GEN010",
         "ok": true,
         "errors": []
       },
@@ -531,7 +573,7 @@
         "text": "20",
         "text_value": 20.0,
         "text_diff_mm": 0.0,
-        "style": "GEN010",
+        "style": "GEN011",
         "ok": true,
         "errors": []
       },
@@ -547,12 +589,81 @@
         "text": "15",
         "text_value": 15.0,
         "text_diff_mm": 0.0,
-        "style": "GEN011",
+        "style": "GEN012",
         "ok": true,
         "errors": []
       }
     ],
     "gate1_ok": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "Zseg",
+        "ids": [
+          "Z43_step",
+          "Z45_tip"
+        ],
+        "offset_coord": 57.5,
+        "segments": [
+          {
+            "id": "Z43_step",
+            "s0": 166.0,
+            "s1": 209.0,
+            "line_coord": 57.5
+          },
+          {
+            "id": "Z45_tip",
+            "s0": 209.0,
+            "s1": 254.0,
+            "line_coord": 57.5
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      },
+      {
+        "view": "top",
+        "group": "Zpitch",
+        "ids": [
+          "Z20_pitch",
+          "Z15_end"
+        ],
+        "offset_coord": 264.5,
+        "segments": [
+          {
+            "id": "Z20_pitch",
+            "s0": 219.0,
+            "s1": 239.0,
+            "line_coord": 264.5
+          },
+          {
+            "id": "Z15_end",
+            "s0": 239.0,
+            "s1": 254.0,
+            "line_coord": 264.5
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "dim_offsets": {
+      "Z88_total": 24.0,
+      "Z43_step": 16.0,
+      "Z45_tip": 16.0,
+      "Z45_topflange": 32.0,
+      "Y135_total": 16.0,
+      "Y6_4_tip": 24.0,
+      "Y3_2_topflange": 16.0,
+      "R3_2_bend": 16.0,
+      "X25_width": 16.0,
+      "Z3_2_web": 24.0,
+      "Z20_pitch": 16.0,
+      "Z15_end": 16.0
+    },
     "hole_notes": [
       {
         "id": "N_hole8",
@@ -582,21 +693,22 @@
           "ok": true,
           "dist_err_mm": 0.0
         },
-        "leader_handle": "220"
+        "leader_handle": "230"
       }
     ],
     "dimstyles": {
       "Z88_total": "GEN001",
       "Z43_step": "GEN002",
-      "Z45_topflange": "GEN003",
-      "Y135_total": "GEN004",
-      "Y6_4_tip": "GEN005",
-      "Y3_2_topflange": "GEN006",
-      "R3_2_bend": "GEN007",
-      "X25_width": "GEN008",
-      "Z3_2_web": "GEN009",
-      "Z20_pitch": "GEN010",
-      "Z15_end": "GEN011"
+      "Z45_tip": "GEN003",
+      "Z45_topflange": "GEN004",
+      "Y135_total": "GEN005",
+      "Y6_4_tip": "GEN006",
+      "Y3_2_topflange": "GEN007",
+      "R3_2_bend": "GEN008",
+      "X25_width": "GEN009",
+      "Z3_2_web": "GEN010",
+      "Z20_pitch": "GEN011",
+      "Z15_end": "GEN012"
     },
     "style_check": {
       "ok": true,
@@ -630,6 +742,33 @@
           "dimtol": 0
         },
         "Z43_step": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z45_tip": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -928,15 +1067,21 @@
       "text_boxes": {
         "Z88_total": [
           207.0,
-          58.0,
+          50.0,
           213.0,
-          62.0
+          54.0
         ],
         "Z43_step": [
           184.5,
-          50.0,
+          58.0,
           190.5,
-          54.0
+          62.0
+        ],
+        "Z45_tip": [
+          228.5,
+          58.0,
+          234.5,
+          62.0
         ],
         "Z45_topflange": [
           185.5,
@@ -976,21 +1121,21 @@
         ],
         "Z3_2_web": [
           163.1,
-          258.0,
+          266.0,
           172.1,
-          262.0
+          270.0
         ],
         "Z20_pitch": [
           226.0,
-          273.0,
+          265.0,
           232.0,
-          277.0
+          269.0
         ],
         "Z15_end": [
           243.5,
-          281.0,
+          265.0,
           249.5,
-          285.0
+          269.0
         ],
         "N_hole8": [
           270.0,
@@ -1009,15 +1154,21 @@
       "geom_boxes": {
         "Z88_total": [
           166.0,
-          55.5,
+          47.5,
           254.0,
           79.9
         ],
         "Z43_step": [
           166.0,
-          47.5,
+          55.5,
           209.0,
           76.7
+        ],
+        "Z45_tip": [
+          209.0,
+          55.5,
+          254.0,
+          79.9
         ],
         "Z45_topflange": [
           166.0,
@@ -1059,19 +1210,19 @@
           163.716,
           223.5,
           171.484,
-          266.5
+          274.5
         ],
         "Z20_pitch": [
           219.0,
           236.0,
           239.0,
-          277.5553
+          269.5553
         ],
         "Z15_end": [
           239.0,
           223.5,
           254.0,
-          285.5553
+          269.5553
         ],
         "N_hole8": [
           243.0,
@@ -1086,6 +1237,7 @@
     "resolved_kinds": {
       "Z88_total": "linear",
       "Z43_step": "linear",
+      "Z45_tip": "linear",
       "Z45_topflange": "linear",
       "Y135_total": "linear",
       "Y6_4_tip": "linear",
@@ -1110,7 +1262,7 @@
         "right": 21.5
       },
       "top": {
-        "above": 37.5,
+        "above": 29.5,
         "below": 0.0,
         "left": 21.5,
         "right": 0.0
@@ -1137,7 +1289,16 @@
     "ok": true,
     "unspecified": [],
     "floating_dimensions": [],
-    "redundant_dimensions": [],
+    "style_dimensions": [],
+    "redundant_dimensions": [
+      {
+        "axis": "Z",
+        "by": "Z45_tip(45)",
+        "from": 0.0,
+        "to": -45.0,
+        "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+      }
+    ],
     "duplicate_value_dimensions": [
       {
         "value": 3.2,
@@ -1151,6 +1312,13 @@
         "ids": [
           "Y6_4_tip",
           "R3_2_bend"
+        ]
+      },
+      {
+        "value": 45.0,
+        "ids": [
+          "Z45_tip",
+          "Z45_topflange"
         ]
       }
     ],
@@ -1274,6 +1442,12 @@
             "new_link": true
           },
           {
+            "from": 0.0,
+            "to": -45.0,
+            "by": "Z45_tip(45)",
+            "new_link": false
+          },
+          {
             "from": 43.0,
             "to": -2.0,
             "by": "Z45_topflange(45)",
@@ -1340,6 +1514,13 @@
         "role": "position_pair",
         "axis": "Z",
         "value": 43.0,
+        "view": "front"
+      },
+      {
+        "id": "Z45_tip",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 45.0,
         "view": "front"
       },
       {
@@ -1445,7 +1626,7 @@
       },
       {
         "class": "same_value_features",
-        "reason": "v1の台帳は特徴を**値と座標**で持つため、同じ値の別フィーチャー(左右のφ25等)を区別しない。片方の寸法を消しても検出できない(該当: [3.2, 6.4])"
+        "reason": "v1の台帳は特徴を**値と座標**で持つため、同じ値の別フィーチャー(左右のφ25等)を区別しない。片方の寸法を消しても検出できない(該当: [3.2, 6.4, 45.0])"
       }
     ]
   },
@@ -1454,10 +1635,10 @@
     "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\plans_off\\BLIND2-25154-2-16_off.json",
     "file_attrs_ok": true,
     "frame": {
-      "total": 167,
+      "total": 168,
       "frame_matched": 112,
-      "remaining": 55,
-      "remaining_ratio": 0.32934131736526945
+      "remaining": 56,
+      "remaining_ratio": 0.3333333333333333
     },
     "scale": 1.0,
     "gate1": [
@@ -1498,7 +1679,7 @@
         "ok": true
       },
       {
-        "id": "Z45_topflange",
+        "id": "Z45_tip",
         "style": "GEN003",
         "kind": "linear",
         "dimtype": 32,
@@ -1516,8 +1697,26 @@
         "ok": true
       },
       {
-        "id": "Y135_total",
+        "id": "Z45_topflange",
         "style": "GEN004",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 45.0,
+        "measured": 45.0,
+        "diff_mm": 0.0,
+        "text": "45",
+        "text_value": 45.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y135_total",
+        "style": "GEN005",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
@@ -1535,7 +1734,7 @@
       },
       {
         "id": "Y6_4_tip",
-        "style": "GEN005",
+        "style": "GEN006",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
@@ -1553,7 +1752,7 @@
       },
       {
         "id": "Y3_2_topflange",
-        "style": "GEN006",
+        "style": "GEN007",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
@@ -1571,7 +1770,7 @@
       },
       {
         "id": "R3_2_bend",
-        "style": "GEN007",
+        "style": "GEN008",
         "kind": "radius",
         "dimtype": 36,
         "dimtype_base": 4,
@@ -1589,7 +1788,7 @@
       },
       {
         "id": "X25_width",
-        "style": "GEN008",
+        "style": "GEN009",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
@@ -1607,7 +1806,7 @@
       },
       {
         "id": "Z3_2_web",
-        "style": "GEN009",
+        "style": "GEN010",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
@@ -1625,7 +1824,7 @@
       },
       {
         "id": "Z20_pitch",
-        "style": "GEN010",
+        "style": "GEN011",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
@@ -1643,7 +1842,7 @@
       },
       {
         "id": "Z15_end",
-        "style": "GEN011",
+        "style": "GEN012",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
@@ -1661,6 +1860,61 @@
       }
     ],
     "gate1_ok": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "Zseg",
+        "ids": [
+          "Z43_step",
+          "Z45_tip"
+        ],
+        "offset_coord": 57.5,
+        "segments": [
+          {
+            "id": "Z43_step",
+            "s0": 166.0,
+            "s1": 209.0,
+            "line_coord": 57.5
+          },
+          {
+            "id": "Z45_tip",
+            "s0": 209.0,
+            "s1": 254.0,
+            "line_coord": 57.5
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      },
+      {
+        "view": "top",
+        "group": "Zpitch",
+        "ids": [
+          "Z20_pitch",
+          "Z15_end"
+        ],
+        "offset_coord": 264.5,
+        "segments": [
+          {
+            "id": "Z20_pitch",
+            "s0": 219.0,
+            "s1": 239.0,
+            "line_coord": 264.5
+          },
+          {
+            "id": "Z15_end",
+            "s0": 239.0,
+            "s1": 254.0,
+            "line_coord": 264.5
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
     "gate1_max_diff_mm": 0.0,
     "style_ok": true,
     "style_mismatches": [],

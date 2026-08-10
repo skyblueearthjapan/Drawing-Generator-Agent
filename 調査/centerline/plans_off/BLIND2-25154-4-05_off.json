@@ -1,6 +1,6 @@
 {
  "schema_version": "1.0",
- "_note": "盲検第2弾(2026-08-10)。人間図面は一切見ていない。3D実測(meas.json)と投影ジオメトリ、自社流儀の一般原則のみで作成。",
+ "_note": "盲検第2弾(2026-08-10)の計画を『様式規則(作法6〜11)』で書き直した版(2026-08-11)。寸法値・測定点の集合は盲検時と等価(基準からの並列積み5本を、同じ位置ノードを通る直列連記5本へ置き換えた)。適用: 作法8(直列連記3組)・作法11(段数の圧縮)。径寸法はφ127のネイティブ1本だけなので作法6/7は非該当。密度は正面図9本・平面図9本と作法11の目安8本を超えるが、位置ノードが実際に多い(取付穴3種・窓・側壁・立ち上がり板)ため削減できない。代わりに**段数**を 正面図左5段→1段 / 平面図左4段→2段 / 右側面図下3段→2段 に圧縮した。",
  "part": {
   "model": "4-05(教師STEP/4.前後軸/4-05.STEP)",
   "図番": "25154-4-05",
@@ -235,21 +235,21 @@
    },
    "placement": {
     "side": "left",
-    "level": 1
+    "chain_group": "Ychain"
    },
    "value_expected": 15.0,
    "tolerance": null,
-   "comment": "Y軸のdatum=ベース板端面y=0。以降すべてdatumから積む(作法1)"
+   "comment": "Y軸のdatum=ベース板端面y=0。【様式】作法8: 以降を数珠つなぎにして1本の寸法線へ連記する(15｜35｜45｜80｜45)"
   },
   {
-   "id": "Y50_window",
+   "id": "Y35_window",
    "kind": "linear",
    "view": "front",
    "measure": {
     "space": "model",
     "p1": [
-     -86.5,
-     0,
+     -71.5,
+     15,
      -16
     ],
     "p2": [
@@ -261,21 +261,21 @@
    },
    "placement": {
     "side": "left",
-    "level": 2
+    "chain_group": "Ychain"
    },
-   "value_expected": 50.0,
+   "value_expected": 35.0,
    "tolerance": null,
-   "comment": "datumから窓の手前側R中心まで"
+   "comment": "φ11穴中心(y=15)から窓の手前側R中心(y=50)まで。旧 Y50_window(datumから50)と同じノードを繋ぐ"
   },
   {
-   "id": "Y95_hole2",
+   "id": "Y45_hole2",
    "kind": "linear",
    "view": "front",
    "measure": {
     "space": "model",
     "p1": [
-     -86.5,
-     0,
+     -36.5,
+     50,
      -16
     ],
     "p2": [
@@ -287,21 +287,21 @@
    },
    "placement": {
     "side": "left",
-    "level": 3
+    "chain_group": "Ychain"
    },
-   "value_expected": 95.0,
+   "value_expected": 45.0,
    "tolerance": null,
-   "comment": "datumからφ10穴中心まで"
+   "comment": "窓手前R中心(y=50)からφ10穴中心(y=95)まで。旧 Y95_hole2 と同じノード"
   },
   {
-   "id": "Y175_hole3",
+   "id": "Y80_hole3",
    "kind": "linear",
    "view": "front",
    "measure": {
     "space": "model",
     "p1": [
-     -86.5,
-     0,
+     -71.5,
+     95,
      -16
     ],
     "p2": [
@@ -313,21 +313,21 @@
    },
    "placement": {
     "side": "left",
-    "level": 4
+    "chain_group": "Ychain"
    },
-   "value_expected": 175.0,
+   "value_expected": 80.0,
    "tolerance": null,
-   "comment": "datumから2列目のφ11穴中心まで"
+   "comment": "φ10穴(y=95)から2列目のφ11穴(y=175)まで。旧 Y175_hole3 と同じノード"
   },
   {
-   "id": "Y220_window",
+   "id": "Y45_window2",
    "kind": "linear",
    "view": "front",
    "measure": {
     "space": "model",
     "p1": [
-     -86.5,
-     0,
+     -71.5,
+     175,
      -16
     ],
     "p2": [
@@ -339,11 +339,11 @@
    },
    "placement": {
     "side": "left",
-    "level": 5
+    "chain_group": "Ychain"
    },
-   "value_expected": 220.0,
+   "value_expected": 45.0,
    "tolerance": null,
-   "comment": "datumから窓の奥側R中心まで"
+   "comment": "φ11穴(y=175)から窓の奥側R中心(y=220)まで。旧 Y220_window と同じノード"
   },
   {
    "id": "Y249_wall",
@@ -443,11 +443,11 @@
    },
    "placement": {
     "side": "below",
-    "level": 1
+    "chain_group": "Zdepth"
    },
    "value_expected": 16.0,
    "tolerance": null,
-   "comment": "ベース板の厚み。Z軸のdatum=ベース板上面z=0"
+   "comment": "ベース板の厚み。Z軸のdatum=ベース板上面z=0。【様式】作法8: z=0 を共有する Z114_wall と同一寸法線へ直列連記(16｜114)"
   },
   {
    "id": "Z173_depth",
@@ -473,7 +473,7 @@
    },
    "value_expected": 173.0,
    "tolerance": null,
-   "comment": "全奥行"
+   "comment": "全奥行。全奥行は直列連記の1段外側"
   },
   {
    "id": "Z114_wall",
@@ -495,11 +495,11 @@
    },
    "placement": {
     "side": "below",
-    "level": 3
+    "chain_group": "Zdepth"
    },
    "value_expected": 114.0,
    "tolerance": null,
-   "comment": "側壁の段の位置(datum z=0から)"
+   "comment": "側壁の段の位置(datum z=0から)。Z16_base と直列連記"
   },
   {
    "id": "Z3_step",
@@ -547,11 +547,11 @@
    },
    "placement": {
     "side": "left",
-    "level": 1
+    "chain_group": "Zchain"
    },
    "value_expected": 5.0,
    "tolerance": null,
-   "comment": "datum(z=0)から端面φ6止まり穴の中心まで"
+   "comment": "datum(z=0)から端面φ6止まり穴の中心まで。【様式】作法8: z=0 を共有する Z22_5_motor と同一寸法線へ直列連記(5｜22.5｜115)"
   },
   {
    "id": "Z22_5_motor",
@@ -573,11 +573,11 @@
    },
    "placement": {
     "side": "left",
-    "level": 2
+    "chain_group": "Zchain"
    },
    "value_expected": 22.5,
    "tolerance": null,
-   "comment": "datumから立ち上がり板の手前側φ10穴中心まで"
+   "comment": "datumから立ち上がり板の手前側φ10穴中心まで。Z5_tap / Z115_motor と直列連記"
   },
   {
    "id": "Z80_bore",
@@ -599,11 +599,11 @@
    },
    "placement": {
     "side": "left",
-    "level": 3
+    "level": 2
    },
    "value_expected": 80.0,
    "tolerance": null,
-   "comment": "datumからφ127内径の中心まで"
+   "comment": "datumからφ127内径の中心まで。直列連記(5｜22.5｜115)と区間が重なるため1段外側の別の寸法線に置く"
   },
   {
    "id": "Z115_motor",
@@ -625,11 +625,11 @@
    },
    "placement": {
     "side": "left",
-    "level": 4
+    "chain_group": "Zchain"
    },
    "value_expected": 115.0,
    "tolerance": null,
-   "comment": "立ち上がり板のφ10穴の縦ピッチ"
+   "comment": "立ち上がり板のφ10穴の縦ピッチ。z=22.5 を共有するので直列連記の3本目に入れる"
   },
   {
    "id": "D127_bore",

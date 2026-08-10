@@ -1130,6 +1130,12 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
     # --- 2) 図面上の寸法・注記を読む(自己申告でなく実DXFから) --------------
     msp = doc.modelspace()
     plan_ids = [d["id"] for d in plan["dimensions"]]
+    # ❗**様式寸法**(`purpose:"style"`): 形状を決めるためではなく「読み手への配慮」のために
+    #   入れる寸法(等配穴群の位相を示す角度寸法など)。ゲート②の判定モデルは位相を
+    #   対象外にしている(`out_of_scope`)ので、そのままだと必ず「宙に浮いた寸法」警告になり、
+    #   **人間図面が実際にやっている作図を計画側が避ける動機**になってしまう。
+    #   完全性の判定には一切使わない(=甘くならない)まま、警告からだけ外す。
+    style_ids = {d["id"] for d in plan["dimensions"] if d.get("purpose") == "style"}
     dims = []
     for e in msp:
         if e.dxftype() != "DIMENSION":
@@ -1562,6 +1568,14 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
         axis_report[a] = rep
 
     used_angle_ids = {f["dim_id"] for f in inclined_features if f["dim_id"]}
+    for r in dims:
+        if r["id"] in style_ids:
+            out_of_scope.append({
+                "class": "style_dimension", "id": r["id"], "role": r["role"],
+                "value": r["value"],
+                "reason": u"様式寸法(purpose='style')。形状の一意性ではなく読みやすさ"
+                          u"(等配穴群の位相・面取り角の明示等)のための寸法なので、"
+                          u"完全性の根拠にも『宙に浮いた寸法』警告にもしない"})
     for f in inclined_features:
         if f["ok"]:
             continue
@@ -1572,17 +1586,20 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                              "reason": u"傾斜フィーチャーを位置の根拠に採用できない: %s"
                                        % f["reason"]})
     for r in dims:
-        if r["role"] == "angle" and r["id"] not in used_angle_ids:
+        if r["role"] == "angle" and r["id"] not in used_angle_ids \
+                and r["id"] not in style_ids:
             floating.append({"id": r["id"], "axis": None,
                              "reason": u"角度寸法だが、どの傾斜フィーチャーの方向指定にも"
                                        u"ならない(位置チェーンの辺にもならない)"})
     for r in dims:
-        if r["role"] == "oblique_width" and r["id"] not in used_oblique_ids:
+        if r["role"] == "oblique_width" and r["id"] not in used_oblique_ids \
+                and r["id"] not in style_ids:
             floating.append({"id": r["id"], "axis": None,
                              "reason": u"斜め線形寸法だが、どの正多角形の二面幅/対角とも"
                                        u"一致しない(位置チェーンの辺にもならない)"})
     for r in dims:
         if r["role"] == "position_pair" and r["id"] not in used_dim_ids \
+                and r["id"] not in style_ids \
                 and not any(f["id"] == r["id"] for f in floating):
             floating.append({"id": r["id"], "axis": r["axis"],
                              "reason": u"どのビュー・軸の特徴にも結び付かない"})
@@ -1618,6 +1635,7 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
         "ok": ok,
         "unspecified": unspecified,
         "floating_dimensions": floating,
+        "style_dimensions": sorted(style_ids),
         "redundant_dimensions": redundant,
         "duplicate_value_dimensions": dup,
         "circles": circle_report,

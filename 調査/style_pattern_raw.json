@@ -11704,46 +11704,34 @@
    "path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\..\\data/納品箱/BLIND2-25154-1-27/25154-1-27_走行フレーム踏板.dxf",
    "tag": "1-27",
    "frame_summary": {
-    "total": 224,
+    "total": 235,
     "frame_matched": 112,
-    "remaining": 112,
-    "remaining_ratio": 0.5
+    "remaining": 123,
+    "remaining_ratio": 0.5234042553191489
    },
-   "n_views": 6,
+   "n_views": 4,
    "view_bboxes": [
     [
-     112.80000000000454,
-     150.27999999999395,
+     107.8,
+     116.036,
      162.19393102292457,
-     201.61999999999966
+     206.61999999999966
     ],
     [
      257.8060689770846,
-     150.27999999999395,
-     307.2000000000046,
-     201.61999999999966
+     116.036,
+     312.2,
+     206.61999999999966
     ],
     [
      208.65600000000455,
      181.97999999999394,
      211.34400000000454,
-     199.61999999999966
+     206.62000000000003
     ],
     [
-     112.80000000000457,
-     120.37999999999394,
-     116.80000000000457,
-     122.37999999999394
-    ],
-    [
-     303.2000000000046,
-     120.37999999999394,
-     307.2000000000046,
-     122.37999999999394
-    ],
-    [
-     210.00000000000458,
-     122.37999999999394,
+     210.0,
+     115.37999999999997,
      210.00000000000458,
      122.37999999999394
     ]
@@ -11751,14 +11739,12 @@
    "n_dims": 9,
    "kind_side_counts": {
     "length|bottom": 3,
-    "length|left": 3,
-    "length|right": 2,
+    "length|left": 4,
+    "length|right": 1,
     "radius|left": 1
    },
    "view_dim_counts": [
-    3,
-    2,
-    0,
+    5,
     1,
     0,
     3
@@ -11774,66 +11760,30 @@
       "total": 0
      },
      "vertical": {
-      "chain_dims": 0,
-      "chain_groups": 0,
+      "chain_dims": 2,
+      "chain_groups": 1,
       "baseline_dims": 2,
       "baseline_groups": 1,
+      "isolated": 0,
+      "total": 4
+     }
+    },
+    {
+     "horizontal": {
+      "chain_dims": 0,
+      "chain_groups": 0,
+      "baseline_dims": 0,
+      "baseline_groups": 0,
+      "isolated": 0,
+      "total": 0
+     },
+     "vertical": {
+      "chain_dims": 0,
+      "chain_groups": 0,
+      "baseline_dims": 0,
+      "baseline_groups": 0,
       "isolated": 1,
-      "total": 3
-     }
-    },
-    {
-     "horizontal": {
-      "chain_dims": 0,
-      "chain_groups": 0,
-      "baseline_dims": 0,
-      "baseline_groups": 0,
-      "isolated": 0,
-      "total": 0
-     },
-     "vertical": {
-      "chain_dims": 0,
-      "chain_groups": 0,
-      "baseline_dims": 0,
-      "baseline_groups": 0,
-      "isolated": 2,
-      "total": 2
-     }
-    },
-    {
-     "horizontal": {
-      "chain_dims": 0,
-      "chain_groups": 0,
-      "baseline_dims": 0,
-      "baseline_groups": 0,
-      "isolated": 0,
-      "total": 0
-     },
-     "vertical": {
-      "chain_dims": 0,
-      "chain_groups": 0,
-      "baseline_dims": 0,
-      "baseline_groups": 0,
-      "isolated": 0,
-      "total": 0
-     }
-    },
-    {
-     "horizontal": {
-      "chain_dims": 0,
-      "chain_groups": 0,
-      "baseline_dims": 0,
-      "baseline_groups": 0,
-      "isolated": 0,
-      "total": 0
-     },
-     "vertical": {
-      "chain_dims": 0,
-      "chain_groups": 0,
-      "baseline_dims": 0,
-      "baseline_groups": 0,
-      "isolated": 0,
-      "total": 0
+      "total": 1
      }
     },
     {
@@ -11877,7 +11827,7 @@
     {
      "id": 0,
      "kind": "length",
-     "view": 5,
+     "view": 3,
      "anchor": [
       210.0,
       106.87999999999394
@@ -11888,7 +11838,7 @@
     {
      "id": 1,
      "kind": "length",
-     "view": 5,
+     "view": 3,
      "anchor": [
       210.0,
       98.87999999999394
@@ -11899,7 +11849,7 @@
     {
      "id": 2,
      "kind": "length",
-     "view": 5,
+     "view": 3,
      "anchor": [
       210.0,
       90.87999999999394
@@ -11943,7 +11893,7 @@
     {
      "id": 6,
      "kind": "radius",
-     "view": 3,
+     "view": 0,
      "anchor": [
       106.72893218813452,
       117.84446609406724
@@ -11965,12 +11915,12 @@
     {
      "id": 8,
      "kind": "length",
-     "view": 1,
+     "view": 0,
      "anchor": [
-      318.7000000000046,
+      92.30000000000454,
       200.62
      ],
-     "side": "right",
+     "side": "left",
      "direction": "vertical"
     }
    ]
@@ -11979,10 +11929,10 @@
    "path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\..\\data/納品箱/BLIND2-25154-2-16/25154-2-16_指針.dxf",
    "tag": "2-16",
    "frame_summary": {
-    "total": 167,
+    "total": 173,
     "frame_matched": 112,
-    "remaining": 55,
-    "remaining_ratio": 0.32934131736526945
+    "remaining": 61,
+    "remaining_ratio": 0.35260115606936415
    },
    "n_views": 2,
    "view_bboxes": [
@@ -11994,22 +11944,22 @@
     ],
     [
      166.00000000003996,
-     73.49999999997964,
+     68.49999999997964,
      254.00000000003996,
-     79.89999999997963
+     84.89999999997963
     ]
    ],
-   "n_dims": 11,
+   "n_dims": 12,
    "kind_side_counts": {
-    "length|bottom": 3,
+    "length|bottom": 4,
     "length|top": 4,
     "length|left": 2,
     "length|right": 1,
-    "radius|bottom": 1
+    "radius|left": 1
    },
    "view_dim_counts": [
     5,
-    6
+    7
    ],
    "chaining_per_view": [
     {
@@ -12032,12 +11982,12 @@
     },
     {
      "horizontal": {
-      "chain_dims": 0,
-      "chain_groups": 0,
-      "baseline_dims": 3,
+      "chain_dims": 2,
+      "chain_groups": 1,
+      "baseline_dims": 2,
       "baseline_groups": 1,
       "isolated": 0,
-      "total": 3
+      "total": 4
      },
      "vertical": {
       "chain_dims": 0,
@@ -12056,7 +12006,7 @@
      "view": 1,
      "anchor": [
       210.0,
-      59.99999999997962
+      51.99999999997962
      ],
      "side": "bottom",
      "direction": "horizontal"
@@ -12067,13 +12017,24 @@
      "view": 1,
      "anchor": [
       187.5,
-      51.99999999997962
+      59.99999999997962
      ],
      "side": "bottom",
      "direction": "horizontal"
     },
     {
      "id": 2,
+     "kind": "length",
+     "view": 1,
+     "anchor": [
+      231.5,
+      59.99999999997962
+     ],
+     "side": "bottom",
+     "direction": "horizontal"
+    },
+    {
+     "id": 3,
      "kind": "length",
      "view": 1,
      "anchor": [
@@ -12084,7 +12045,7 @@
      "direction": "horizontal"
     },
     {
-     "id": 3,
+     "id": 4,
      "kind": "length",
      "view": 1,
      "anchor": [
@@ -12095,7 +12056,7 @@
      "direction": "vertical"
     },
     {
-     "id": 4,
+     "id": 5,
      "kind": "length",
      "view": 1,
      "anchor": [
@@ -12106,7 +12067,7 @@
      "direction": "vertical"
     },
     {
-     "id": 5,
+     "id": 6,
      "kind": "length",
      "view": 0,
      "anchor": [
@@ -12117,18 +12078,18 @@
      "direction": "vertical"
     },
     {
-     "id": 6,
+     "id": 7,
      "kind": "radius",
      "view": 1,
      "anchor": [
       158.45197692596446,
       69.48751083189718
      ],
-     "side": "bottom",
+     "side": "left",
      "direction": null
     },
     {
-     "id": 7,
+     "id": 8,
      "kind": "length",
      "view": 0,
      "anchor": [
@@ -12139,23 +12100,12 @@
      "direction": "vertical"
     },
     {
-     "id": 8,
-     "kind": "length",
-     "view": 0,
-     "anchor": [
-      167.59999999999977,
-      259.9999999999999
-     ],
-     "side": "top",
-     "direction": "horizontal"
-    },
-    {
      "id": 9,
      "kind": "length",
      "view": 0,
      "anchor": [
-      229.00000000000023,
-      274.9999999999999
+      167.59999999999977,
+      267.9999999999999
      ],
      "side": "top",
      "direction": "horizontal"
@@ -12165,8 +12115,19 @@
      "kind": "length",
      "view": 0,
      "anchor": [
+      229.00000000000023,
+      266.9999999999999
+     ],
+     "side": "top",
+     "direction": "horizontal"
+    },
+    {
+     "id": 11,
+     "kind": "length",
+     "view": 0,
+     "anchor": [
       246.50000000000023,
-      282.9999999999999
+      266.9999999999999
      ],
      "side": "top",
      "direction": "oblique"
@@ -12177,38 +12138,40 @@
    "path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\..\\data/納品箱/BLIND2-25154-3-02/25154-3-02_モータブラケット.dxf",
    "tag": "3-02",
    "frame_summary": {
-    "total": 214,
+    "total": 239,
     "frame_matched": 112,
-    "remaining": 102,
-    "remaining_ratio": 0.4766355140186916
+    "remaining": 127,
+    "remaining_ratio": 0.5313807531380753
    },
    "n_views": 1,
    "view_bboxes": [
     [
-     135.125,
-     111.99999999997928,
-     277.125,
-     209.99999999997928
+     122.87499999999972,
+     107.0,
+     297.1250000000003,
+     215.0
     ]
    ],
-   "n_dims": 8,
+   "n_dims": 10,
    "kind_side_counts": {
     "diameter_linear|left": 4,
     "length|bottom": 3,
-    "length|top": 1
+    "length|top": 1,
+    "angular|right": 1,
+    "angular|top": 1
    },
    "view_dim_counts": [
-    8
+    10
    ],
    "chaining_per_view": [
     {
      "horizontal": {
-      "chain_dims": 0,
-      "chain_groups": 0,
+      "chain_dims": 2,
+      "chain_groups": 1,
       "baseline_dims": 2,
       "baseline_groups": 1,
       "isolated": 1,
-      "total": 3
+      "total": 5
      },
      "vertical": {
       "chain_dims": 0,
@@ -12226,7 +12189,7 @@
      "kind": "diameter_linear",
      "view": 0,
      "anchor": [
-      121.625,
+      114.375,
       161.0
      ],
      "side": "left",
@@ -12237,7 +12200,7 @@
      "kind": "diameter_linear",
      "view": 0,
      "anchor": [
-      113.625,
+      106.375,
       161.0
      ],
      "side": "left",
@@ -12248,7 +12211,7 @@
      "kind": "diameter_linear",
      "view": 0,
      "anchor": [
-      105.625,
+      183.125,
       161.0
      ],
      "side": "left",
@@ -12259,7 +12222,7 @@
      "kind": "diameter_linear",
      "view": 0,
      "anchor": [
-      97.625,
+      191.125,
       161.0
      ],
      "side": "left",
@@ -12270,8 +12233,8 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      137.6249999999999,
-      100.49999999997928
+      163.8749999999999,
+      91.49999999997928
      ],
      "side": "bottom",
      "direction": "horizontal"
@@ -12281,8 +12244,8 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      152.7499999999999,
-      90.49999999997928
+      145.4999999999999,
+      98.49999999997928
      ],
      "side": "bottom",
      "direction": "horizontal"
@@ -12292,8 +12255,8 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      153.4999999999999,
-      77.49999999997928
+      146.2499999999999,
+      85.49999999997928
      ],
      "side": "bottom",
      "direction": "oblique"
@@ -12303,8 +12266,30 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      171.1249999999999,
-      221.49999999997928
+      130.3749999999999,
+      230.49999999997928
+     ],
+     "side": "top",
+     "direction": "horizontal"
+    },
+    {
+     "id": 8,
+     "kind": "angular",
+     "view": 0,
+     "anchor": [
+      268.23690732130717,
+      156.57209326740573
+     ],
+     "side": "right",
+     "direction": "horizontal"
+    },
+    {
+     "id": 9,
+     "kind": "angular",
+     "view": 0,
+     "anchor": [
+      226.50798304703366,
+      177.61701695296637
      ],
      "side": "top",
      "direction": "horizontal"
@@ -12315,18 +12300,18 @@
    "path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\..\\data/納品箱/BLIND2-25154-4-05/25154-4-05_駆動ユニットブラケット.dxf",
    "tag": "4-05",
    "frame_summary": {
-    "total": 317,
+    "total": 353,
     "frame_matched": 112,
-    "remaining": 205,
-    "remaining_ratio": 0.6466876971608833
+    "remaining": 241,
+    "remaining_ratio": 0.6827195467422096
    },
    "n_views": 1,
    "view_bboxes": [
     [
-     159.24999999999315,
-     93.75000000001015,
-     260.75,
-     228.25000000000003
+     154.24999999999994,
+     91.125,
+     265.75,
+     233.25000000000014
     ]
    ],
    "n_dims": 25,
@@ -12336,7 +12321,7 @@
     "length|left": 9,
     "length|right": 4,
     "diameter_native|left": 1,
-    "radius|left": 1
+    "radius|bottom": 1
    },
    "view_dim_counts": [
     25
@@ -12344,20 +12329,20 @@
    "chaining_per_view": [
     {
      "horizontal": {
-      "chain_dims": 0,
-      "chain_groups": 0,
-      "baseline_dims": 10,
-      "baseline_groups": 4,
-      "isolated": 2,
+      "chain_dims": 2,
+      "chain_groups": 1,
+      "baseline_dims": 6,
+      "baseline_groups": 2,
+      "isolated": 4,
       "total": 12
      },
      "vertical": {
       "chain_dims": 0,
       "chain_groups": 0,
-      "baseline_dims": 4,
-      "baseline_groups": 1,
-      "isolated": 2,
-      "total": 6
+      "baseline_dims": 0,
+      "baseline_groups": 0,
+      "isolated": 4,
+      "total": 4
      }
     }
    ],
@@ -12455,8 +12440,8 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      132.74999999999315,
-      99.99999999999986
+      140.74999999999315,
+      101.87499999999986
      ],
      "side": "left",
      "direction": "oblique"
@@ -12466,19 +12451,19 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      124.74999999999315,
-      105.62499999999986
+      140.74999999999315,
+      111.87499999999986
      ],
      "side": "left",
-     "direction": "vertical"
+     "direction": "oblique"
     },
     {
      "id": 10,
      "kind": "length",
      "view": 0,
      "anchor": [
-      116.74999999999315,
-      115.62499999999986
+      140.74999999999315,
+      127.49999999999986
      ],
      "side": "left",
      "direction": "vertical"
@@ -12488,11 +12473,11 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      108.74999999999315,
-      121.24999999999986
+      140.74999999999315,
+      143.12499999999986
      ],
      "side": "left",
-     "direction": "vertical"
+     "direction": "oblique"
     },
     {
      "id": 12,
@@ -12555,7 +12540,7 @@
      "view": 0,
      "anchor": [
       242.5,
-      59.25000000001015
+      75.25000000001015
      ],
      "side": "bottom",
      "direction": "horizontal"
@@ -12587,7 +12572,7 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      130.74999999999315,
+      138.74999999999315,
       221.43749999999986
      ],
      "side": "left",
@@ -12598,7 +12583,7 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      124.74999999999315,
+      132.74999999999315,
       214.2499999999999
      ],
      "side": "left",
@@ -12609,7 +12594,7 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      121.74999999999315,
+      145.74999999999315,
       204.2499999999999
      ],
      "side": "left",
@@ -12634,7 +12619,7 @@
       161.67372836809164,
       99.7092622740243
      ],
-     "side": "left",
+     "side": "bottom",
      "direction": null
     }
    ]
@@ -12643,38 +12628,39 @@
    "path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\..\\data/納品箱/BLIND2-25154-5-05/25154-5-05_減速機フランジ.dxf",
    "tag": "5-05",
    "frame_summary": {
-    "total": 262,
+    "total": 279,
     "frame_matched": 112,
-    "remaining": 150,
-    "remaining_ratio": 0.5725190839694656
+    "remaining": 167,
+    "remaining_ratio": 0.5985663082437276
    },
    "n_views": 2,
    "view_bboxes": [
     [
-     135.99999999999736,
-     82.5000000000147,
-     283.9999999999974,
-     239.5
+     131.0,
+     77.49999999999994,
+     289.0,
+     244.50000000000006
     ],
     [
      209.99999999999736,
      179.5,
-     209.99999999999736,
+     210.0,
      179.5
     ]
    ],
-   "n_dims": 17,
+   "n_dims": 18,
    "kind_side_counts": {
     "length|bottom": 3,
-    "length|left": 6,
-    "length|right": 4,
+    "length|right": 6,
+    "length|left": 4,
     "diameter_native|left": 1,
     "diameter_native|top": 1,
     "diameter_native|right": 1,
+    "angular|right": 1,
     "radius|left": 1
    },
    "view_dim_counts": [
-    17,
+    18,
     0
    ],
    "chaining_per_view": [
@@ -12682,16 +12668,16 @@
      "horizontal": {
       "chain_dims": 0,
       "chain_groups": 0,
-      "baseline_dims": 0,
-      "baseline_groups": 0,
-      "isolated": 4,
-      "total": 4
+      "baseline_dims": 2,
+      "baseline_groups": 1,
+      "isolated": 3,
+      "total": 5
      },
      "vertical": {
-      "chain_dims": 0,
-      "chain_groups": 0,
-      "baseline_dims": 4,
-      "baseline_groups": 2,
+      "chain_dims": 2,
+      "chain_groups": 1,
+      "baseline_dims": 2,
+      "baseline_groups": 1,
       "isolated": 4,
       "total": 8
      }
@@ -12754,10 +12740,10 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      117.49999999999736,
+      297.4999999999974,
       85.99999999999994
      ],
-     "side": "left",
+     "side": "right",
      "direction": "vertical"
     },
     {
@@ -12765,7 +12751,7 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      109.49999999999736,
+      117.49999999999736,
       93.49999999999994
      ],
      "side": "left",
@@ -12853,10 +12839,10 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      93.49999999999736,
+      313.4999999999974,
       205.75000000000003
      ],
-     "side": "left",
+     "side": "right",
      "direction": "oblique"
     },
     {
@@ -12864,7 +12850,7 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      304.4999999999974,
+      328.4999999999974,
       229.50000000000003
      ],
      "side": "right",
@@ -12875,7 +12861,7 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      305.4999999999974,
+      297.4999999999974,
       193.5
      ],
      "side": "right",
@@ -12886,7 +12872,7 @@
      "kind": "length",
      "view": 0,
      "anchor": [
-      318.4999999999974,
+      302.4999999999974,
       210.5
      ],
      "side": "right",
@@ -12894,6 +12880,17 @@
     },
     {
      "id": 16,
+     "kind": "angular",
+     "view": 0,
+     "anchor": [
+      241.87389746972724,
+      166.29739938234954
+     ],
+     "side": "right",
+     "direction": "horizontal"
+    },
+    {
+     "id": 17,
      "kind": "radius",
      "view": 0,
      "anchor": [

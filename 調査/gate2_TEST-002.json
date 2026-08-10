@@ -6,6 +6,7 @@
   "ok": true,
   "unspecified": [],
   "floating_dimensions": [],
+  "style_dimensions": [],
   "redundant_dimensions": [
     {
       "axis": "X",

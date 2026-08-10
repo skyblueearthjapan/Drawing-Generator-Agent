@@ -1,0 +1,1114 @@
+{
+  "cases": [
+    {
+      "request": "BLIND2-25154-1-27",
+      "dxf": "data/納品箱/BLIND2-25154-1-27/25154-1-27_走行フレーム踏板.dxf",
+      "mixed_bands": [],
+      "n_dims": 9,
+      "per_view_counts": {
+        "front": 7,
+        "top": 2
+      },
+      "n_dimension_lines": 7,
+      "shared_lines": [
+        {
+          "key": "top/left@96.8",
+          "ids": [
+            "Y3_2_plate",
+            "Y10_hex"
+          ]
+        }
+      ],
+      "kind_side": {
+        "length": {
+          "above": 0,
+          "below": 3,
+          "left": 4,
+          "right": 1,
+          "_inside": 0
+        },
+        "radius": {
+          "above": 0,
+          "below": 0,
+          "left": 0,
+          "right": 0,
+          "_inside": 1
+        }
+      },
+      "side_mismatch": [],
+      "rows": [
+        {
+          "id": "X500_hex",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 104.38,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X932_csk",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 96.38,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X972_total",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 88.38,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z298_csk",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 96.8,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z318_total",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 88.8,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z19_hex_flats",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 323.2,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "R5_corner",
+          "kind": "radius",
+          "view": "front",
+          "dimtype_base": 4,
+          "side_measured": null,
+          "side_planned": null,
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Y3_2_plate",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 96.8,
+          "chain_group": "Yseg",
+          "purpose": null
+        },
+        {
+          "id": "Y10_hex",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 96.8,
+          "chain_group": "Yseg",
+          "purpose": null
+        }
+      ],
+      "scale": 0.2,
+      "tag": "1-27"
+    },
+    {
+      "request": "BLIND2-25154-2-16",
+      "dxf": "data/納品箱/BLIND2-25154-2-16/25154-2-16_指針.dxf",
+      "mixed_bands": [],
+      "n_dims": 12,
+      "per_view_counts": {
+        "front": 8,
+        "top": 4
+      },
+      "n_dimension_lines": 9,
+      "shared_lines": [
+        {
+          "key": "front/below@57.5",
+          "ids": [
+            "Z43_step",
+            "Z45_tip"
+          ]
+        },
+        {
+          "key": "top/above@264.5",
+          "ids": [
+            "Z20_pitch",
+            "Z15_end"
+          ]
+        }
+      ],
+      "kind_side": {
+        "length": {
+          "above": 3,
+          "below": 4,
+          "left": 3,
+          "right": 1,
+          "_inside": 0
+        },
+        "radius": {
+          "above": 0,
+          "below": 0,
+          "left": 0,
+          "right": 0,
+          "_inside": 1
+        }
+      },
+      "side_mismatch": [],
+      "rows": [
+        {
+          "id": "Z88_total",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 49.5,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z43_step",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 57.5,
+          "chain_group": "Zseg",
+          "purpose": null
+        },
+        {
+          "id": "Z45_tip",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 57.5,
+          "chain_group": "Zseg",
+          "purpose": null
+        },
+        {
+          "id": "Z45_topflange",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 41.5,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Y135_total",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 150.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Y6_4_tip",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 142.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Y3_2_topflange",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 270.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "R3_2_bend",
+          "kind": "radius",
+          "view": "front",
+          "dimtype_base": 4,
+          "side_measured": null,
+          "side_planned": null,
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X25_width",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 150.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z3_2_web",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "above",
+          "side_planned": "above",
+          "line_coord": 272.5,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z20_pitch",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "above",
+          "side_planned": "above",
+          "line_coord": 264.5,
+          "chain_group": "Zpitch",
+          "purpose": null
+        },
+        {
+          "id": "Z15_end",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "above",
+          "side_planned": "above",
+          "line_coord": 264.5,
+          "chain_group": "Zpitch",
+          "purpose": null
+        }
+      ],
+      "scale": 1.0,
+      "tag": "2-16"
+    },
+    {
+      "request": "BLIND2-25154-3-02",
+      "dxf": "data/納品箱/BLIND2-25154-3-02/25154-3-02_モータブラケット.dxf",
+      "mixed_bands": [],
+      "n_dims": 10,
+      "per_view_counts": {
+        "front": 8,
+        "right": 2
+      },
+      "n_dimension_lines": 7,
+      "shared_lines": [
+        {
+          "key": "front/below@96.0",
+          "ids": [
+            "Z3_spigot",
+            "Z70_5_body"
+          ]
+        }
+      ],
+      "kind_side": {
+        "diameter": {
+          "above": 0,
+          "below": 0,
+          "left": 2,
+          "right": 2,
+          "_inside": 0
+        },
+        "length": {
+          "above": 1,
+          "below": 3,
+          "left": 0,
+          "right": 0,
+          "_inside": 0
+        },
+        "angular": {
+          "above": 0,
+          "below": 0,
+          "left": 0,
+          "right": 0,
+          "_inside": 2
+        }
+      },
+      "side_mismatch": [],
+      "rows": [
+        {
+          "id": "D53_bore",
+          "kind": "diameter",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 111.875,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "D110_recess",
+          "kind": "diameter",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 103.875,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "D130_spigot",
+          "kind": "diameter",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 180.625,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "D196_body",
+          "kind": "diameter",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 188.625,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z3_spigot",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 96.0,
+          "chain_group": "Zseg",
+          "purpose": null
+        },
+        {
+          "id": "Z70_5_body",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 96.0,
+          "chain_group": "Zseg",
+          "purpose": null
+        },
+        {
+          "id": "Z73_5_total",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 88.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z10_recess_depth",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "above",
+          "side_planned": "above",
+          "line_coord": 226.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "A20_phase",
+          "kind": "angle",
+          "view": "right",
+          "dimtype_base": 2,
+          "side_measured": null,
+          "side_planned": "left",
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": "style"
+        },
+        {
+          "id": "A90_pitch",
+          "kind": "angle",
+          "view": "right",
+          "dimtype_base": 2,
+          "side_measured": null,
+          "side_planned": "left",
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": "style"
+        }
+      ],
+      "scale": 0.5,
+      "tag": "3-02"
+    },
+    {
+      "request": "BLIND2-25154-4-05",
+      "dxf": "data/納品箱/BLIND2-25154-4-05/25154-4-05_駆動ユニットブラケット.dxf",
+      "mixed_bands": [],
+      "n_dims": 25,
+      "per_view_counts": {
+        "front": 9,
+        "top": 9,
+        "right": 7
+      },
+      "n_dimension_lines": 16,
+      "shared_lines": [
+        {
+          "key": "front/left@143.25",
+          "ids": [
+            "Y15_hole1",
+            "Y35_window",
+            "Y45_hole2",
+            "Y80_hole3",
+            "Y45_window2"
+          ]
+        },
+        {
+          "key": "right/below@77.75",
+          "ids": [
+            "Z16_base",
+            "Z114_wall"
+          ]
+        },
+        {
+          "key": "top/left@143.25",
+          "ids": [
+            "Z5_tap",
+            "Z22_5_motor",
+            "Z115_motor"
+          ]
+        }
+      ],
+      "kind_side": {
+        "length": {
+          "above": 5,
+          "below": 6,
+          "left": 9,
+          "right": 3,
+          "_inside": 0
+        },
+        "diameter": {
+          "above": 0,
+          "below": 0,
+          "left": 0,
+          "right": 0,
+          "_inside": 1
+        },
+        "radius": {
+          "above": 0,
+          "below": 0,
+          "left": 0,
+          "right": 0,
+          "_inside": 1
+        }
+      },
+      "side_mismatch": [],
+      "rows": [
+        {
+          "id": "X103_window",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 77.75,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X143_holes",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 69.75,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X173_base",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 61.75,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X20_tap",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "above",
+          "side_planned": "above",
+          "line_coord": 244.25,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X149_motor",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "above",
+          "side_planned": "above",
+          "line_coord": 252.25,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X154_wall_in",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "above",
+          "side_planned": "above",
+          "line_coord": 260.25,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X163_wall_out",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "above",
+          "side_planned": "above",
+          "line_coord": 268.25,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Y15_hole1",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 143.25,
+          "chain_group": "Ychain",
+          "purpose": null
+        },
+        {
+          "id": "Y35_window",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 143.25,
+          "chain_group": "Ychain",
+          "purpose": null
+        },
+        {
+          "id": "Y45_hole2",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 143.25,
+          "chain_group": "Ychain",
+          "purpose": null
+        },
+        {
+          "id": "Y80_hole3",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 143.25,
+          "chain_group": "Ychain",
+          "purpose": null
+        },
+        {
+          "id": "Y45_window2",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 143.25,
+          "chain_group": "Ychain",
+          "purpose": null
+        },
+        {
+          "id": "Y249_wall",
+          "kind": "linear",
+          "view": "right",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 276.75,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Y13_plate",
+          "kind": "linear",
+          "view": "right",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 284.75,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Y305_total",
+          "kind": "linear",
+          "view": "right",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 292.75,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z16_base",
+          "kind": "linear",
+          "view": "right",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 77.75,
+          "chain_group": "Zdepth",
+          "purpose": null
+        },
+        {
+          "id": "Z173_depth",
+          "kind": "linear",
+          "view": "right",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 69.75,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z114_wall",
+          "kind": "linear",
+          "view": "right",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 77.75,
+          "chain_group": "Zdepth",
+          "purpose": null
+        },
+        {
+          "id": "Z3_step",
+          "kind": "linear",
+          "view": "right",
+          "dimtype_base": 0,
+          "side_measured": "above",
+          "side_planned": "above",
+          "line_coord": 186.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z5_tap",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 143.25,
+          "chain_group": "Zchain",
+          "purpose": null
+        },
+        {
+          "id": "Z22_5_motor",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 143.25,
+          "chain_group": "Zchain",
+          "purpose": null
+        },
+        {
+          "id": "Z80_bore",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 135.25,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z115_motor",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 143.25,
+          "chain_group": "Zchain",
+          "purpose": null
+        },
+        {
+          "id": "D127_bore",
+          "kind": "diameter",
+          "view": "top",
+          "dimtype_base": 3,
+          "side_measured": null,
+          "side_planned": null,
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "R15_window",
+          "kind": "radius",
+          "view": "front",
+          "dimtype_base": 4,
+          "side_measured": null,
+          "side_planned": null,
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": null
+        }
+      ],
+      "scale": 0.25,
+      "tag": "4-05"
+    },
+    {
+      "request": "BLIND2-25154-5-05",
+      "dxf": "data/納品箱/BLIND2-25154-5-05/25154-5-05_減速機フランジ.dxf",
+      "mixed_bands": [],
+      "n_dims": 18,
+      "per_view_counts": {
+        "front": 6,
+        "top": 12
+      },
+      "n_dimension_lines": 11,
+      "shared_lines": [
+        {
+          "key": "front/right@300.0",
+          "ids": [
+            "Y14_plate",
+            "Y12_lug"
+          ]
+        },
+        {
+          "key": "top/right@300.0",
+          "ids": [
+            "Z56_lug",
+            "Z12_lug"
+          ]
+        }
+      ],
+      "kind_side": {
+        "length": {
+          "above": 0,
+          "below": 3,
+          "left": 4,
+          "right": 6,
+          "_inside": 0
+        },
+        "diameter": {
+          "above": 0,
+          "below": 0,
+          "left": 0,
+          "right": 0,
+          "_inside": 3
+        },
+        "angular": {
+          "above": 0,
+          "below": 0,
+          "left": 0,
+          "right": 0,
+          "_inside": 1
+        },
+        "radius": {
+          "above": 0,
+          "below": 0,
+          "left": 0,
+          "right": 0,
+          "_inside": 1
+        }
+      },
+      "side_mismatch": [],
+      "rows": [
+        {
+          "id": "X196_lug_roots",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 66.5,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X235_plate",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 58.5,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "X296_lugs",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "below",
+          "side_planned": "below",
+          "line_coord": 50.5,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Y14_plate",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 300.0,
+          "chain_group": "Yseg",
+          "purpose": null
+        },
+        {
+          "id": "Y44_total",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 120.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Y12_lug",
+          "kind": "linear",
+          "view": "front",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 300.0,
+          "chain_group": "Yseg",
+          "purpose": null
+        },
+        {
+          "id": "D219_1_boss",
+          "kind": "diameter",
+          "view": "top",
+          "dimtype_base": 3,
+          "side_measured": null,
+          "side_planned": null,
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "D200_counterbore",
+          "kind": "diameter",
+          "view": "top",
+          "dimtype_base": 3,
+          "side_measured": null,
+          "side_planned": null,
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "D190_bore",
+          "kind": "diameter",
+          "view": "top",
+          "dimtype_base": 3,
+          "side_measured": null,
+          "side_planned": null,
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z240_plate",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 120.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z210_slot_out",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 112.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z190_slot_in",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "left",
+          "side_planned": "left",
+          "line_coord": 104.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z105_center",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 316.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z10_slot",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 324.0,
+          "chain_group": null,
+          "purpose": null
+        },
+        {
+          "id": "Z56_lug",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 300.0,
+          "chain_group": "Zseg",
+          "purpose": null
+        },
+        {
+          "id": "Z12_lug",
+          "kind": "linear",
+          "view": "top",
+          "dimtype_base": 0,
+          "side_measured": "right",
+          "side_planned": "right",
+          "line_coord": 300.0,
+          "chain_group": "Zseg",
+          "purpose": null
+        },
+        {
+          "id": "A45_phase",
+          "kind": "angle",
+          "view": "top",
+          "dimtype_base": 2,
+          "side_measured": null,
+          "side_planned": "right",
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": "style"
+        },
+        {
+          "id": "R15_corner",
+          "kind": "radius",
+          "view": "top",
+          "dimtype_base": 4,
+          "side_measured": null,
+          "side_planned": null,
+          "line_coord": null,
+          "chain_group": null,
+          "purpose": null
+        }
+      ],
+      "scale": 0.5,
+      "tag": "5-05"
+    }
+  ],
+  "aggregate": {
+    "length": {
+      "above": 9,
+      "below": 19,
+      "left": 20,
+      "right": 11,
+      "_inside": 0
+    },
+    "radius": {
+      "above": 0,
+      "below": 0,
+      "left": 0,
+      "right": 0,
+      "_inside": 4
+    },
+    "diameter": {
+      "above": 0,
+      "below": 0,
+      "left": 2,
+      "right": 2,
+      "_inside": 4
+    },
+    "angular": {
+      "above": 0,
+      "below": 0,
+      "left": 0,
+      "right": 0,
+      "_inside": 3
+    }
+  }
+}

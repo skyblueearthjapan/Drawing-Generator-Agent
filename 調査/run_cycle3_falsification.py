@@ -392,25 +392,64 @@ def main(argv):
           % (base_iv["gate1_ok"], iv["gate1_ok"], len(ng_rows),
              u"OK" if res["H6_angle_text_forgery"]["pass"] else u"NG"))
 
-    # ---------- H7: 角度の実測(measure_angle_deg)単体 ----------
+    # ---------- H7: 角度の実測(measure_angle_deg)+ **描かれた円弧** 単体 ----------
+    # ❗2026-08-11: 旧H7は `add_angular_dim_2l(line1=(v,p1), line2=(v,p2))` を直に呼んで
+    #   defpoint からの再計算だけを見ていたため、**ezdxf が優角(360-θ)側に円弧を描いている**
+    #   ことを見逃していた(25154-3-09 が30度の表示で約310度の円弧を持ったまま納品されていた)。
+    #   ここでは dim_engine と**同じ引数順**(line1=(v,p2), line2=(v,p1))で作り、
+    #   実測角と**描画実体のARC**の両方が既知角と一致することを要求する。
     doc = ezdxf.new("R2000", setup=True)
     msp = doc.modelspace()
-    probe = {}
+    probe, probe_arc = {}, {}
     for want in (30.0, 137.5, 285.0):
         v, r0 = (10.0, 5.0), 20.0
         p1 = (v[0] + r0, v[1])
         p2 = (v[0] + r0 * math.cos(math.radians(want)),
               v[1] + r0 * math.sin(math.radians(want)))
         d = msp.add_angular_dim_2l(base=(v[0] + 12.0, v[1] + 12.0),
-                                   line1=(v, p1), line2=(v, p2))
+                                   line1=(v, p2), line2=(v, p1))
         d.render()
         probe[want] = round(dim_engine.measure_angle_deg(d.dimension), 6)
+        chk = dim_engine.check_angle_arc(doc, d.dimension, probe[want])
+        probe_arc[want] = chk
     res["H7_measure_angle_deg"] = {
         "probe": {str(k): v for k, v in probe.items()},
-        "expect": u"合成した既知角(30/137.5/285度)を defpoint から測り直して一致する",
-        "pass": all(abs(probe[k] - k) <= 1e-6 for k in probe)}
-    print(u"H7 measure_angle_deg 単体: %s -> %s"
-          % (probe, u"OK" if res["H7_measure_angle_deg"]["pass"] else u"NG"))
+        "arc": {str(k): v for k, v in probe_arc.items()},
+        "expect": u"合成した既知角(30/137.5/285度)を defpoint から測り直して一致し、"
+                  u"**描かれた円弧もその角のセクタ内**にある",
+        "pass": (all(abs(probe[k] - k) <= 1e-6 for k in probe)
+                 and all(probe_arc[k]["ok"] for k in probe_arc))}
+    print(u"H7 measure_angle_deg + 描画円弧: %s / arc_ok=%s -> %s"
+          % (probe, {k: v["ok"] for k, v in probe_arc.items()},
+             u"OK" if res["H7_measure_angle_deg"]["pass"] else u"NG"))
+
+    # ---------- H8: 優角(reflex)側に円弧を描く実装退行を検出できるか ----------
+    # 旧実装と同じ引数順(line1=(v,p1), line2=(v,p2))で作ると、ezdxf は 360-θ の
+    # 優角側に円弧を描く。**この状態を check_angle_arc が落とすこと**が反証の本体。
+    doc2 = ezdxf.new("R2000", setup=True)
+    msp2 = doc2.modelspace()
+    reflex = {}
+    for want in (30.0, 137.5):
+        v, r0 = (10.0, 5.0), 20.0
+        p1 = (v[0] + r0, v[1])
+        p2 = (v[0] + r0 * math.cos(math.radians(want)),
+              v[1] + r0 * math.sin(math.radians(want)))
+        d = msp2.add_angular_dim_2l(base=(v[0] + 12.0, v[1] + 12.0),
+                                    line1=(v, p1), line2=(v, p2))   # ❗旧(誤)の引数順
+        d.render()
+        m = dim_engine.measure_angle_deg(d.dimension)
+        reflex[want] = {"measured": round(m, 6),
+                        "arc": dim_engine.check_angle_arc(doc2, d.dimension, want)}
+    res["H8_reflex_arc_regression"] = {
+        "probe": {str(k): v for k, v in reflex.items()},
+        "expect": u"旧実装の引数順(=優角側に円弧が出る)を再現すると、"
+                  u"(1)実測角が 360-θ になってゲート①の値照合が必ず落ち、"
+                  u"(2)『θ度のつもり』で円弧を検査しても不合格になる",
+        "pass": all(abs(reflex[k]["measured"] - (360.0 - k)) <= 1e-6
+                    and reflex[k]["arc"]["ok"] is False for k in reflex)}
+    print(u"H8 優角側に描く実装退行: %s -> %s"
+          % ({k: (v["measured"], v["arc"]["ok"]) for k, v in reflex.items()},
+             u"OK" if res["H8_reflex_arc_regression"]["pass"] else u"NG"))
 
     # ---------- 集計 ----------
     total = sum(1 for v in res.values() if "pass" in v)

@@ -255,7 +255,7 @@
       "装置名": "テスト装置",
       "尺度": "１：１",
       "製図者": "ＡＩ",
-      "製図日付": "２６．０８．１０",
+      "製図日付": "２６．０８．１１",
       "連番": "０２",
       "重量": "１．０９"
     },
@@ -399,6 +399,17 @@
       }
     ],
     "gate1_ok": true,
+    "chains": [],
+    "chains_ok": true,
+    "dim_offsets": {
+      "L40_total": 24.0,
+      "L35_counterbore_depth": 16.0,
+      "L5_bore_land": 16.0,
+      "D33_counterbore": 16.0,
+      "D26_bore": 11.0,
+      "D75_outer": 16.0,
+      "P60_hole_pitch": 16.0
+    },
     "hole_notes": [
       {
         "id": "N_bolt_holes",

@@ -1,6 +1,6 @@
 {
  "schema_version": "1.0",
- "_note": "盲検第2弾(2026-08-10)。人間図面は一切見ていない。3D実測(meas.json)と投影ジオメトリ、自社流儀の一般原則のみで作成。",
+ "_note": "盲検第2弾(2026-08-10)の計画を『様式規則(作法6〜11)』で書き直した版(2026-08-11)。寸法値・測定点は盲検時のまま。適用: 作法7(正面図の左右を長さの帯として分け直し)・作法8(直列連記2組)・作法9(ＰＣＤ２０６の8等配Ｍ８穴群の位相を角度寸法45度で明示)。径寸法3本は円形ビュー(平面図)のネイティブDIAMETER型で、引出し角を45/135/225度に散らして同じ象限に固めない(作法6後段)。",
  "part": {
   "model": "5-05(教師STEP/5.ひねり軸/5-05.STEP)",
   "図番": "25154-5-05",
@@ -129,12 +129,12 @@
     "direction": "vertical"
    },
    "placement": {
-    "side": "left",
-    "level": 1
+    "side": "right",
+    "chain_group": "Yseg"
    },
    "value_expected": 14.0,
    "tolerance": null,
-   "comment": "板厚。Y軸のdatum=取付面y=0"
+   "comment": "板厚。Y軸のdatum=取付面y=0。【様式】作法8: y=14 を共有する Y12_lug と同一寸法線へ直列連記(１４｜１２)。作法7に倣い長さ寸法は左に積まず、左は全高1本だけにする"
   },
   {
    "id": "Y44_total",
@@ -156,11 +156,11 @@
    },
    "placement": {
     "side": "left",
-    "level": 2
+    "level": 1
    },
    "value_expected": 44.0,
    "tolerance": null,
-   "comment": "全高(ボス頂まで)。datumから積む"
+   "comment": "全高(ボス頂まで)。datumから積む。【様式】左は全高1本だけ(旧計画は左に2段積んでいた)"
   },
   {
    "id": "Y12_lug",
@@ -182,11 +182,11 @@
    },
    "placement": {
     "side": "right",
-    "level": 1
+    "chain_group": "Yseg"
    },
    "value_expected": 12.0,
    "tolerance": null,
-   "comment": "耳の厚み。板上面y=14から積む"
+   "comment": "耳の厚み。板上面y=14から積む。Y14_plate と直列連記"
   },
   {
    "id": "D219_1_boss",
@@ -342,12 +342,12 @@
     "direction": "vertical"
    },
    "placement": {
-    "side": "left",
-    "level": 4
+    "side": "right",
+    "level": 2
    },
    "value_expected": 105.0,
    "tolerance": null,
-   "comment": "中心線から長穴外側R中心まで。Z軸は耳が-Z側だけにあり非対称なので、中心を基準にしたチェーンで位置を与える(作法1)"
+   "comment": "中心線から長穴外側R中心まで。Z軸は耳が-Z側だけにあり非対称なので、中心を基準にしたチェーンで位置を与える(作法1)。【様式】左に4段積んでいたのを右へ回して左右3段ずつに均す(作法6)"
   },
   {
    "id": "Z10_slot",
@@ -369,7 +369,7 @@
    },
    "placement": {
     "side": "right",
-    "level": 1
+    "level": 3
    },
    "value_expected": 10.0,
    "tolerance": null,
@@ -395,11 +395,11 @@
    },
    "placement": {
     "side": "right",
-    "level": 2
+    "chain_group": "Zseg"
    },
    "value_expected": 56.0,
    "tolerance": null,
-   "comment": "中心線から耳の手前面まで"
+   "comment": "中心線から耳の手前面まで。Z12_lug と直列連記"
   },
   {
    "id": "Z12_lug",
@@ -421,11 +421,47 @@
    },
    "placement": {
     "side": "right",
-    "level": 3
+    "chain_group": "Zseg"
    },
    "value_expected": 12.0,
    "tolerance": null,
-   "comment": "耳の幅"
+   "comment": "耳の幅。【様式】作法8: z=-56 を共有する Z56_lug と同一寸法線へ直列連記(１２｜５６)"
+  },
+  {
+   "id": "A45_phase",
+   "kind": "angle",
+   "purpose": "style",
+   "view": "top",
+   "measure": {
+    "space": "model",
+    "vertex": [
+     0,
+     0,
+     0
+    ],
+    "p1": [
+     72.831998,
+     0,
+     72.831998
+    ],
+    "p2": [
+     103.0,
+     0,
+     0
+    ],
+    "base": [
+     55.4329,
+     0,
+     22.961
+    ]
+   },
+   "placement": {
+    "side": "right",
+    "level": 1
+   },
+   "value_expected": 45.0,
+   "text_override": "\\A1;４５%%d",
+   "comment": "【様式】作法9: ＰＣＤ２０６の8等配Ｍ８穴群の割付角45度。PCD注記は等配であることしか保証せず位相(基準角)はゲート②の判定対象外なので、『穴がX中心線上(0度)から始まる』ことを角度寸法で読めるようにする。完全性の根拠にはしないので purpose='style'(様式寸法)。頂点=φ190/φ200内径の実在円中心、両辺の端点=実在するＭ８穴の中心。円弧はφ190内径の内側の空き(モデルr=60)に置く(ボス外周とM8穴の帯は詰まっているため)"
   },
   {
    "id": "R15_corner",

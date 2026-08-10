@@ -206,6 +206,57 @@ def resolve_views(views):
     return out
 
 
+def chain_key(item):
+    u"""直列連記(同一寸法線への連記)のグループキー。使わない寸法は None。
+
+    `placement.chain_group` に同じ名前を書いた寸法は**同一ビュー・同一辺の1本の寸法線**へ
+    連記される(人間コーパスが17〜23%の頻度で使う配置。`調査/drawing_style_analysis.md`§6)。
+    グループはビュー内で閉じる(同じ名前でもビューが違えば別グループ)。
+    """
+    pl = item.get("placement") or {}
+    g = pl.get("chain_group")
+    if g in (None, ""):
+        return None
+    return (item["view"], str(g))
+
+
+def resolve_dim_offsets(plan):
+    u"""`dimensions[].id` -> 寸法線オフセット(mm)を決める**唯一の実装**。
+
+    ❗`plan_view_reserves`(レイアウト側)と `dim_engine.apply_plan`(作図側)が
+    **同じ値**を使わないとビュー間隔と実際の寸法線位置がずれる(CLAUDE.md既知の罠)。
+    そのため両者ともこの関数だけを見る。
+
+    - 通常: `offset_mm` があればそれ、無ければ `first_offset_mm + (level-1)*stack_step_mm`
+    - **直列連記(`placement.chain_group`)**: 同一グループの全メンバーを
+      **グループ内の最大オフセット**へ揃える(=1本の寸法線に並ぶ)。
+      段(level)を書き分けても連記が壊れないようにするための正規化であり、
+      整列そのものは `dim_engine.check_chain_alignment` が実DXFから独立に検証する。
+    """
+    defaults = plan.get("defaults", {})
+    # ❗既定値は dim_engine.apply_plan と同じでなければならない
+    #   (stack_step の既定は dimstyle_spec.json の dimdli=8.0)
+    fo = float(defaults.get("first_offset_mm", 16.0))
+    ss = float(defaults.get("stack_step_mm", 8.0))
+    raw = {}
+    for item in plan.get("dimensions", []):
+        pl = item.get("placement") or {}
+        off = pl.get("offset_mm")
+        raw[item["id"]] = (fo + (int(pl.get("level", 1)) - 1) * ss
+                           if off is None else float(off))
+    group_off = {}
+    for item in plan.get("dimensions", []):
+        k = chain_key(item)
+        if k is None:
+            continue
+        group_off[k] = max(group_off.get(k, 0.0), raw[item["id"]])
+    out = {}
+    for item in plan.get("dimensions", []):
+        k = chain_key(item)
+        out[item["id"]] = group_off[k] if k is not None else raw[item["id"]]
+    return out
+
+
 def plan_view_reserves(plan, band_mm=DIM_BAND_MM):
     u"""作図計画JSONの `dimensions[].placement` から、ビュー×辺ごとの**寸法予約帯**(mm)を作る。
 
@@ -216,12 +267,9 @@ def plan_view_reserves(plan, band_mm=DIM_BAND_MM):
     ネイティブDIAMETER/RADIUS(placement.side を持たない)はビュー輪郭の内側に描かれるため
     予約帯を作らない。穴注記・自由注記は絶対座標指定のため v1 では見込まない。
     """
-    defaults = plan.get("defaults", {})
-    # ❗既定値は dim_engine.apply_plan のオフセット計算と同じでなければならない
-    #   (dim_engine 側の stack_step 既定は dimstyle_spec.json の dimdli=8.0)。
-    #   どちらかを変えるときは必ず両方を合わせること
-    fo = float(defaults.get("first_offset_mm", 16.0))
-    ss = float(defaults.get("stack_step_mm", 8.0))
+    # ❗オフセットの決定は `resolve_dim_offsets` に一本化してある(直列連記の正規化を含む)。
+    #   ここで独自に計算し直すと dim_engine の実配置とずれる
+    offsets = resolve_dim_offsets(plan)
     reserves = {}
     for item in plan.get("dimensions", []):
         pl = item.get("placement") or {}
@@ -241,8 +289,7 @@ def plan_view_reserves(plan, band_mm=DIM_BAND_MM):
             a_ = float(d_) % 180.0
             if min(abs(a_), abs(a_ - 90.0), abs(a_ - 180.0)) > 1e-6:
                 continue
-        off = pl.get("offset_mm")
-        off = fo + (int(pl.get("level", 1)) - 1) * ss if off is None else float(off)
+        off = offsets[item["id"]]
         d = reserves.setdefault(item["view"], {s: 0.0 for s in DIM_SIDES})
         d[side] = max(d[side], off + band_mm)
     return reserves

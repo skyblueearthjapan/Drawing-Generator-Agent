@@ -129,8 +129,8 @@
    "old": "調査/centerline/blind2_off/25154-2-16_指針.dxf",
    "new": "調査/centerline/blind2/25154-2-16_指針.dxf",
    "non_centerline_entities": [
-    167,
-    167
+    168,
+    168
    ],
    "centerline_entities": [
     0,
@@ -190,8 +190,8 @@
    "old": "調査/centerline/blind2_off/25154-3-02_モータブラケット.dxf",
    "new": "調査/centerline/blind2/25154-3-02_モータブラケット.dxf",
    "non_centerline_entities": [
-    214,
-    214
+    216,
+    216
    ],
    "centerline_entities": [
     0,
@@ -311,8 +311,8 @@
    "old": "調査/centerline/blind2_off/25154-5-05_減速機フランジ.dxf",
    "new": "調査/centerline/blind2/25154-5-05_減速機フランジ.dxf",
    "non_centerline_entities": [
-    262,
-    262
+    263,
+    263
    ],
    "centerline_entities": [
     0,

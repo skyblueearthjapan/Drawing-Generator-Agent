@@ -1,6 +1,6 @@
 {
  "schema_version": "1.0",
- "_note": "盲検第2弾(2026-08-10)。人間図面は一切見ていない。3D実測(meas.json)と投影ジオメトリ、自社流儀の一般原則のみで作成。",
+ "_note": "盲検第2弾(2026-08-10)の計画を『様式規則(作法6〜11)』で書き直した版(2026-08-11)。寸法値・測定点は盲検時のまま。本部品は径寸法・PCD穴群を持たない曲げ物なので作法6/7/9は非該当。適用したのは作法8(直列連記)2組: ①正面図のZ方向 43｜45(z=43→0→-45)を1本の寸法線へ ②平面図のZ方向 20｜15(z=-10→-30→-45)を1本の寸法線へ。旧計画は全て基準からの並列積みで直列連記0本だった。",
  "part": {
   "model": "2-16(教師STEP/2.ターン軸/2-16.STEP)",
   "図番": "25154-2-16",
@@ -52,11 +52,11 @@
    },
    "placement": {
     "side": "below",
-    "level": 1
+    "level": 2
    },
    "value_expected": 88.0,
    "tolerance": null,
-   "comment": "全奥行。Z軸のdatum=ウェブ外面z=43(取付背面)"
+   "comment": "全奥行。Z軸のdatum=ウェブ外面z=43(取付背面)。直列連記(43｜45)の1段外側に置く全長"
   },
   {
    "id": "Z43_step",
@@ -78,11 +78,37 @@
    },
    "placement": {
     "side": "below",
-    "level": 2
+    "chain_group": "Zseg"
    },
    "value_expected": 43.0,
    "tolerance": null,
-   "comment": "datum(z=43)から段差面(z=0)まで"
+   "comment": "datum(z=43)から段差面(z=0)まで。【様式】作法8: z=0 を共有する Z45_tip と同一寸法線へ直列連記"
+  },
+  {
+   "id": "Z45_tip",
+   "kind": "linear",
+   "view": "front",
+   "measure": {
+    "space": "model",
+    "p1": [
+     0,
+     -3.2,
+     0
+    ],
+    "p2": [
+     0,
+     0,
+     -45
+    ],
+    "direction": "horizontal"
+   },
+   "placement": {
+    "side": "below",
+    "chain_group": "Zseg"
+   },
+   "value_expected": 45.0,
+   "tolerance": null,
+   "comment": "段差面(z=0)から指針先端(z=-45)まで。Z43_step と直列連記(４３｜４５)。旧計画の Z88_total(43→-45)はこの2本の和として1段外側に残す"
   },
   {
    "id": "Z45_topflange",
@@ -108,7 +134,7 @@
    },
    "value_expected": 45.0,
    "tolerance": null,
-   "comment": "datum(z=43)から上フランジ先端(z=-2)まで"
+   "comment": "datum(z=43)から上フランジ先端(z=-2)まで。z=-2 に届く唯一の辺なので残す"
   },
   {
    "id": "Y135_total",
@@ -252,11 +278,11 @@
    },
    "placement": {
     "side": "above",
-    "level": 1
+    "level": 2
    },
    "value_expected": 3.2,
    "tolerance": null,
-   "comment": "ウェブ板厚(材料板厚)。曲げR経由でも連結されるため冗長になるが、加工者に板厚を明示する目的で入れる"
+   "comment": "ウェブ板厚(材料板厚)。曲げR経由でも連結されるため冗長になるが、加工者に板厚を明示する目的で入れる。直列連記(20｜15)の1段外側"
   },
   {
    "id": "Z20_pitch",
@@ -278,11 +304,11 @@
    },
    "placement": {
     "side": "above",
-    "level": 2
+    "chain_group": "Zpitch"
    },
    "value_expected": 20.0,
    "tolerance": null,
-   "comment": "φ8穴のピッチ(測定点は実在円の中心)"
+   "comment": "φ8穴のピッチ(測定点は実在円の中心)。【様式】作法8: z=-30 を共有する Z15_end と同一寸法線へ直列連記(２０｜１５)"
   },
   {
    "id": "Z15_end",
@@ -304,11 +330,11 @@
    },
    "placement": {
     "side": "above",
-    "level": 3
+    "chain_group": "Zpitch"
    },
    "value_expected": 15.0,
    "tolerance": null,
-   "comment": "先端(z=-45)から遠い側のφ8穴中心まで。datum→先端→穴 のチェーンを閉じる(作法1)"
+   "comment": "先端(z=-45)から遠い側のφ8穴中心まで。datum→先端→穴 のチェーンを閉じる(作法1)。Z20_pitch と直列連記"
   }
  ],
  "hole_notes": [

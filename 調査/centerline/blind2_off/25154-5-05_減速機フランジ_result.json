@@ -42,13 +42,13 @@
             "front": {
               "above": 0.0,
               "below": 37.5,
-              "left": 29.5,
+              "left": 21.5,
               "right": 21.5
             },
             "top": {
               "above": 0.0,
               "below": 0.0,
-              "left": 45.5,
+              "left": 37.5,
               "right": 37.5
             }
           }
@@ -74,7 +74,7 @@
       "dim_engine": {
         "gate1_ok": true,
         "warnings": [
-          "レイアウト衝突(要目視確認) 4件: [['D219_1_boss', 'view:top'], ['D200_counterbore', 'view:top'], ['D190_bore', 'view:top'], ['R15_corner', 'view:top']]"
+          "レイアウト衝突(要目視確認) 6件: [['D219_1_boss', 'view:top'], ['D200_counterbore', 'view:top'], ['D190_bore', 'view:top'], ['Z105_center', 'Z12_lug'], ['A45_phase', 'view:top'], ['R15_corner', 'view:top']]"
         ],
         "style_check_ok": true,
         "layout_collisions": [
@@ -88,6 +88,14 @@
           ],
           [
             "D190_bore",
+            "view:top"
+          ],
+          [
+            "Z105_center",
+            "Z12_lug"
+          ],
+          [
+            "A45_phase",
             "view:top"
           ],
           [
@@ -113,8 +121,32 @@
           "Z10_slot": "linear",
           "Z56_lug": "linear",
           "Z12_lug": "linear",
+          "A45_phase": "angle",
           "R15_corner": "radius"
-        }
+        },
+        "chains_ok": true,
+        "chains": [
+          {
+            "group": "Yseg",
+            "view": "front",
+            "ids": [
+              "Y14_plate",
+              "Y12_lug"
+            ],
+            "ok": true,
+            "errors": []
+          },
+          {
+            "group": "Zseg",
+            "view": "top",
+            "ids": [
+              "Z56_lug",
+              "Z12_lug"
+            ],
+            "ok": true,
+            "errors": []
+          }
+        ]
       },
       "layout_verify": {
         "ok": true,
@@ -132,7 +164,9 @@
         "gate1_ok": true,
         "gate1_max_diff_mm": 0.0,
         "style_ok": true,
-        "note_ok": true
+        "note_ok": true,
+        "chains_ok": true,
+        "chain_errors": []
       },
       "centerline": {
         "enabled": false,
@@ -175,13 +209,13 @@
         "front": {
           "above": 0.0,
           "below": 37.5,
-          "left": 29.5,
+          "left": 21.5,
           "right": 21.5
         },
         "top": {
           "above": 0.0,
           "below": 0.0,
-          "left": 45.5,
+          "left": 37.5,
           "right": 37.5
         }
       }
@@ -388,7 +422,7 @@
       "装置名": "ひねり軸",
       "尺度": "１：２",
       "製図者": "ＡＩ",
-      "製図日付": "２６．０８．１０",
+      "製図日付": "２６．０８．１１",
       "連番": "０５",
       "重量": "４．８２"
     },
@@ -681,6 +715,33 @@
         "errors": []
       },
       {
+        "id": "A45_phase",
+        "kind": "angle",
+        "plan_kind": "angle",
+        "view": "top",
+        "expected": 45.0,
+        "measured": 45.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "\\A1;４５%%d",
+        "text_value": 45.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN017",
+        "ok": true,
+        "errors": [],
+        "unit": "deg",
+        "arc_check": {
+          "ok": true,
+          "mid_ok": true,
+          "span_ok": true,
+          "arc_span_deg": 45.0,
+          "arc_mid_offset_deg": 22.5,
+          "measured_deg": 45.0,
+          "arc_span_allow_deg": 22.918267,
+          "arc_radius": 30.000058
+        }
+      },
+      {
         "id": "R15_corner",
         "kind": "radius",
         "plan_kind": "radius",
@@ -692,12 +753,87 @@
         "text": "R15",
         "text_value": 15.0,
         "text_diff_mm": 0.0,
-        "style": "GEN017",
+        "style": "GEN018",
         "ok": true,
         "errors": []
       }
     ],
     "gate1_ok": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "Yseg",
+        "ids": [
+          "Y14_plate",
+          "Y12_lug"
+        ],
+        "offset_coord": -600.0,
+        "segments": [
+          {
+            "id": "Y14_plate",
+            "s0": 165.0,
+            "s1": 179.0,
+            "line_coord": -600.0
+          },
+          {
+            "id": "Y12_lug",
+            "s0": 179.0,
+            "s1": 191.0,
+            "line_coord": -600.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      },
+      {
+        "view": "top",
+        "group": "Zseg",
+        "ids": [
+          "Z56_lug",
+          "Z12_lug"
+        ],
+        "offset_coord": -600.0,
+        "segments": [
+          {
+            "id": "Z56_lug",
+            "s0": 359.0,
+            "s1": 415.0,
+            "line_coord": -600.0
+          },
+          {
+            "id": "Z12_lug",
+            "s0": 415.0,
+            "s1": 427.0,
+            "line_coord": -600.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "dim_offsets": {
+      "X196_lug_roots": 16.0,
+      "X235_plate": 24.0,
+      "X296_lugs": 32.0,
+      "Y14_plate": 16.0,
+      "Y44_total": 16.0,
+      "Y12_lug": 16.0,
+      "D219_1_boss": 16.0,
+      "D200_counterbore": 16.0,
+      "D190_bore": 16.0,
+      "Z240_plate": 16.0,
+      "Z210_slot_out": 24.0,
+      "Z190_slot_in": 32.0,
+      "Z105_center": 24.0,
+      "Z10_slot": 32.0,
+      "Z56_lug": 16.0,
+      "Z12_lug": 16.0,
+      "A45_phase": 16.0,
+      "R15_corner": 16.0
+    },
     "hole_notes": [
       {
         "id": "N_slot",
@@ -723,7 +859,7 @@
         ],
         "ok": true,
         "errors": [],
-        "leader_handle": "2D1"
+        "leader_handle": "2E5"
       },
       {
         "id": "N_tap8",
@@ -749,7 +885,7 @@
         ],
         "ok": true,
         "errors": [],
-        "leader_handle": "2D3"
+        "leader_handle": "2E7"
       }
     ],
     "dimstyles": {
@@ -769,7 +905,8 @@
       "Z10_slot": "GEN014",
       "Z56_lug": "GEN015",
       "Z12_lug": "GEN016",
-      "R15_corner": "GEN017"
+      "A45_phase": "GEN017",
+      "R15_corner": "GEN018"
     },
     "style_check": {
       "ok": true,
@@ -1207,6 +1344,33 @@
           "dimpost": "",
           "dimtol": 0
         },
+        "A45_phase": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 2.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
         "R15_corner": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
@@ -1280,15 +1444,15 @@
           55.0
         ],
         "Y14_plate": [
-          115.5,
+          295.5,
           83.0,
-          119.5,
+          299.5,
           89.0
         ],
         "Y44_total": [
-          107.5,
+          115.5,
           90.5,
-          111.5,
+          119.5,
           96.5
         ],
         "Y12_lug": [
@@ -1334,28 +1498,34 @@
           184.0
         ],
         "Z105_center": [
-          91.5,
+          303.5,
           201.25,
-          95.5,
+          307.5,
           210.25
         ],
         "Z10_slot": [
-          302.5,
+          318.5,
           226.5,
-          306.5,
+          322.5,
           232.5
         ],
         "Z56_lug": [
-          303.5,
+          295.5,
           190.5,
-          307.5,
+          299.5,
           196.5
         ],
         "Z12_lug": [
-          316.5,
+          300.5,
           207.5,
-          320.5,
+          304.5,
           213.5
+        ],
+        "A45_phase": [
+          234.3739,
+          164.2974,
+          249.3739,
+          168.2974
         ],
         "R15_corner": [
           141.5221,
@@ -1396,6 +1566,14 @@
           "view:top"
         ],
         [
+          "Z105_center",
+          "Z12_lug"
+        ],
+        [
+          "A45_phase",
+          "view:top"
+        ],
+        [
           "R15_corner",
           "view:top"
         ]
@@ -1420,13 +1598,13 @@
           89.5
         ],
         "Y14_plate": [
-          114.9447,
-          82.5,
           151.25,
+          82.5,
+          302.0,
           89.5
         ],
         "Y44_total": [
-          106.9447,
+          114.9447,
           82.5,
           155.225,
           104.5
@@ -1474,28 +1652,34 @@
           230.0
         ],
         "Z105_center": [
-          90.9447,
+          160.0,
           179.5,
-          210.0,
+          310.0,
           232.0
         ],
         "Z10_slot": [
           260.0,
           226.3922,
-          307.0553,
+          323.0553,
           232.6078
         ],
         "Z56_lug": [
           210.0,
           179.5,
-          310.0,
+          302.0,
           207.5
         ],
         "Z12_lug": [
           284.0,
           207.3922,
-          321.0553,
+          305.0553,
           213.6078
+        ],
+        "A45_phase": [
+          210.0,
+          143.084,
+          261.5,
+          185.4601
         ],
         "R15_corner": [
           140.591,
@@ -1536,6 +1720,7 @@
       "Z10_slot": "linear",
       "Z56_lug": "linear",
       "Z12_lug": "linear",
+      "A45_phase": "angle",
       "R15_corner": "radius"
     },
     "scale": 0.5,
@@ -1548,13 +1733,13 @@
       "front": {
         "above": 0.0,
         "below": 37.5,
-        "left": 29.5,
+        "left": 21.5,
         "right": 21.5
       },
       "top": {
         "above": 0.0,
         "below": 0.0,
-        "left": 45.5,
+        "left": 37.5,
         "right": 37.5
       }
     },
@@ -1570,7 +1755,7 @@
       }
     },
     "warnings": [
-      "レイアウト衝突(要目視確認) 4件: [['D219_1_boss', 'view:top'], ['D200_counterbore', 'view:top'], ['D190_bore', 'view:top'], ['R15_corner', 'view:top']]"
+      "レイアウト衝突(要目視確認) 6件: [['D219_1_boss', 'view:top'], ['D200_counterbore', 'view:top'], ['D190_bore', 'view:top'], ['Z105_center', 'Z12_lug'], ['A45_phase', 'view:top'], ['R15_corner', 'view:top']]"
     ]
   },
   "gate2": {
@@ -1581,6 +1766,9 @@
     "ok": true,
     "unspecified": [],
     "floating_dimensions": [],
+    "style_dimensions": [
+      "A45_phase"
+    ],
     "redundant_dimensions": [],
     "duplicate_value_dimensions": [
       {
@@ -2176,6 +2364,13 @@
         "view": "top"
       },
       {
+        "id": "A45_phase",
+        "role": "angle",
+        "axis": null,
+        "value": 44.99999999999998,
+        "view": "top"
+      },
+      {
         "id": "R15_corner",
         "role": "diameter",
         "axis": null,
@@ -2360,6 +2555,12 @@
     ],
     "out_of_scope": [
       {
+        "class": "angle_dimension",
+        "id": "A45_phase",
+        "angle": 44.99999999999998,
+        "reason": "角度寸法。位置チェーンの辺には使わない(傾斜フィーチャーの方向指定としてのみ使う)"
+      },
+      {
         "class": "chamfer_derived_circle",
         "diameter": 192.0,
         "reason": "面取りC1由来(穴口元・φ190+2×1) / 面取り自体はv1の判定対象外"
@@ -2367,6 +2568,13 @@
       {
         "class": "pcd_phase",
         "reason": "円周配置穴群の**位相(基準角)**はv1の判定対象外。PCD+配置角+個数までを実ジオメトリで検算して位置カバレッジに採用している"
+      },
+      {
+        "class": "style_dimension",
+        "id": "A45_phase",
+        "role": "angle",
+        "value": 44.99999999999998,
+        "reason": "様式寸法(purpose='style')。形状の一意性ではなく読みやすさ(等配穴群の位相・面取り角の明示等)のための寸法なので、完全性の根拠にも『宙に浮いた寸法』警告にもしない"
       },
       {
         "class": "not_implemented",
@@ -2383,10 +2591,10 @@
     "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\plans_off\\BLIND2-25154-5-05_off.json",
     "file_attrs_ok": true,
     "frame": {
-      "total": 262,
+      "total": 263,
       "frame_matched": 112,
-      "remaining": 150,
-      "remaining_ratio": 0.5725190839694656
+      "remaining": 151,
+      "remaining_ratio": 0.5741444866920152
     },
     "scale": 0.5,
     "gate1": [
@@ -2679,8 +2887,37 @@
         "ok": true
       },
       {
-        "id": "R15_corner",
+        "id": "A45_phase",
         "style": "GEN017",
+        "kind": "angle",
+        "dimtype": 34,
+        "dimtype_base": 2,
+        "kind_impl_ok": true,
+        "expected": 45.0,
+        "measured": 45.0,
+        "diff_mm": 0.0,
+        "text": "\\A1;４５%%d",
+        "text_value": 45.0,
+        "text_role": "override",
+        "text_override": "\\A1;４５%%d",
+        "text_override_ok": true,
+        "text_diff_mm": 0.0,
+        "ok": true,
+        "unit": "deg",
+        "arc_check": {
+          "ok": true,
+          "mid_ok": true,
+          "span_ok": true,
+          "arc_span_deg": 45.0,
+          "arc_mid_offset_deg": 22.5,
+          "measured_deg": 45.0,
+          "arc_span_allow_deg": 22.918267,
+          "arc_radius": 30.000058
+        }
+      },
+      {
+        "id": "R15_corner",
+        "style": "GEN018",
         "kind": "radius",
         "dimtype": 36,
         "dimtype_base": 4,
@@ -2698,6 +2935,61 @@
       }
     ],
     "gate1_ok": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "Yseg",
+        "ids": [
+          "Y14_plate",
+          "Y12_lug"
+        ],
+        "offset_coord": -600.0,
+        "segments": [
+          {
+            "id": "Y14_plate",
+            "s0": 165.0,
+            "s1": 179.0,
+            "line_coord": -600.0
+          },
+          {
+            "id": "Y12_lug",
+            "s0": 179.0,
+            "s1": 191.0,
+            "line_coord": -600.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      },
+      {
+        "view": "top",
+        "group": "Zseg",
+        "ids": [
+          "Z56_lug",
+          "Z12_lug"
+        ],
+        "offset_coord": -600.0,
+        "segments": [
+          {
+            "id": "Z56_lug",
+            "s0": 359.0,
+            "s1": 415.0,
+            "line_coord": -600.0
+          },
+          {
+            "id": "Z12_lug",
+            "s0": 415.0,
+            "s1": 427.0,
+            "line_coord": -600.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
     "gate1_max_diff_mm": 0.0,
     "style_ok": true,
     "style_mismatches": [],

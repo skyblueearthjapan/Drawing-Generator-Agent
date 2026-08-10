@@ -265,8 +265,31 @@ def independent_verify(dxf_path, plan_path):
                      "text_diff_mm": None if tdiff is None else round(tdiff, 6), "ok": ok})
         if is_angle:
             rows[-1]["unit"] = "deg"   # diff_mm/text_diff_mm は**度**で読むこと
+            # ❗保存済みDXFの**描画実体**で寸法円弧の向きを独立に確かめる
+            #   (優角側に描かれていた欠陥=25154-3-09 の再発防止)
+            ac = dim_engine.check_angle_arc(doc, dim, m)
+            rows[-1]["arc_check"] = ac
+            if not ac["ok"]:
+                rows[-1]["ok"] = False
+                gate_ok = False
     result["scale"] = scale
     result["gate1"] = rows
+    result["gate1_ok"] = gate_ok
+
+    # ---- A2. 直列連記(chain_group)の整列を保存済みDXFから独立に検証 ----
+    # ❗dim_engine 側でも同じ検査をしているが、**保存後のDXFで並んでいること**が本体。
+    #   ここが落ちたら「連記したつもりで段が分かれている/重なっている」図面になっている。
+    dims_by_id = {}
+    for dim in dims:
+        m_idx = re.sub(r"\D", "", str(dim.dxf.dimstyle))
+        idx = int(m_idx) - 1 if m_idx else -1
+        if 0 <= idx < len(order):
+            dims_by_id[order[idx]] = dim
+    chains = dim_engine.check_chain_alignment(plan, dims_by_id, scale=scale)
+    result["chains"] = chains
+    chains_ok = all(c["ok"] for c in chains)
+    result["chains_ok"] = chains_ok
+    gate_ok = gate_ok and chains_ok
     result["gate1_ok"] = gate_ok
     # ❗角度[度]をmmの最大差に混ぜない(単位が違う値の max は意味を持たない)
     result["gate1_max_diff_mm"] = (max((r["diff_mm"] for r in rows
@@ -479,7 +502,11 @@ def main(argv):
             "style_check_ok": dim_report["style_check"]["ok"],
             "layout_collisions": dim_report["layout"]["collisions"],
             "frame_collisions": frame_collisions,
-            "resolved_kinds": dim_report["resolved_kinds"]}
+            "resolved_kinds": dim_report["resolved_kinds"],
+            "chains_ok": dim_report["chains_ok"],
+            "chains": [{"group": c["group"], "view": c["view"], "ids": c["ids"],
+                        "ok": c["ok"], "errors": c["errors"]}
+                       for c in dim_report["chains"]]}
     except dim_engine.DimensionGateError as e:
         dim_error = str(e)
         summary["steps"]["dim_engine"] = {"gate1_ok": False, "error": dim_error}
@@ -525,7 +552,9 @@ def main(argv):
             "ok": verify_ok, "file_attrs_ok": verify_report["file_attrs_ok"],
             "gate1_ok": verify_report["gate1_ok"],
             "gate1_max_diff_mm": verify_report["gate1_max_diff_mm"],
-            "style_ok": verify_report["style_ok"], "note_ok": verify_report["note_ok"]}
+            "style_ok": verify_report["style_ok"], "note_ok": verify_report["note_ok"],
+            "chains_ok": verify_report["chains_ok"],
+            "chain_errors": [e for c in verify_report["chains"] for e in c["errors"]]}
     else:
         summary["steps"]["independent_verify"] = {"ok": False,
                                                    "skipped_reason": u"ゲート①不合格のため未実施"}

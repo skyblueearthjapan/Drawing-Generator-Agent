@@ -1,0 +1,62 @@
+(除外: 非バケットA 7枚 = ['1-27', '1-03', '2-06', '3-02', '4-05', '5-05', '6-02'])
+===== human (n_files=15) =====
+-- 観点1: kind x side 分布 --
+  diameter: total=19  top=0(0%), bottom=1(5%), left=8(42%), right=10(53%)
+  radius: total=8  top=2(25%), bottom=1(12%), left=3(38%), right=2(25%)
+  length: total=145  top=31(21%), bottom=59(41%), left=18(12%), right=37(26%)
+  angular: total=2  top=0(0%), bottom=0(0%), left=1(50%), right=1(50%)
+-- 観点5: view毎の寸法数 --
+  n_views=36  min=1 median=4.0 mean=4.8 max=18  all=[1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 8, 10, 11, 14, 18]
+-- 観点6: 直列(chain) / 並列(baseline) / 孤立 --
+  horizontal: total=71  chain=16(23%,8groups)  baseline=12(17%,6groups)  isolated=43(61%)
+  vertical: total=70  chain=12(17%,6groups)  baseline=18(26%,9groups)  isolated=40(57%)
+
+===== generated (n_files=5) =====
+-- 観点1: kind x side 分布 --
+  diameter: total=8  top=1(12%), bottom=0(0%), left=6(75%), right=1(12%)
+  radius: total=4  top=0(0%), bottom=1(25%), left=3(75%), right=0(0%)
+  length: total=58  top=9(16%), bottom=18(31%), left=20(34%), right=11(19%)
+-- 観点5: view毎の寸法数 --
+  n_views=9  min=1 median=5 mean=7.8 max=25  all=[1, 2, 3, 3, 5, 6, 8, 17, 25]
+-- 観点6: 直列(chain) / 並列(baseline) / 孤立 --
+  horizontal: total=27  chain=0(0%,0groups)  baseline=15(56%,6groups)  isolated=12(44%)
+  vertical: total=27  chain=0(0%,0groups)  baseline=12(44%,5groups)  isolated=15(56%)
+
+===== generated 個別ファイル =====
+-- 1-27 (C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\..\data/納品箱/BLIND2-25154-1-27/25154-1-27_走行フレーム踏板.dxf) views=6 dims=9 --
+  radius: total=1  top=0(0%), bottom=0(0%), left=1(100%), right=0(0%)
+  length: total=8  top=0(0%), bottom=3(38%), left=3(38%), right=2(25%)
+-- 2-16 (C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\..\data/納品箱/BLIND2-25154-2-16/25154-2-16_指針.dxf) views=2 dims=11 --
+  radius: total=1  top=0(0%), bottom=1(100%), left=0(0%), right=0(0%)
+  length: total=10  top=4(40%), bottom=3(30%), left=2(20%), right=1(10%)
+-- 3-02 (C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\..\data/納品箱/BLIND2-25154-3-02/25154-3-02_モータブラケット.dxf) views=1 dims=8 --
+  diameter: total=4  top=0(0%), bottom=0(0%), left=4(100%), right=0(0%)
+  length: total=4  top=1(25%), bottom=3(75%), left=0(0%), right=0(0%)
+-- 4-05 (C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\..\data/納品箱/BLIND2-25154-4-05/25154-4-05_駆動ユニットブラケット.dxf) views=1 dims=25 --
+  diameter: total=1  top=0(0%), bottom=0(0%), left=1(100%), right=0(0%)
+  radius: total=1  top=0(0%), bottom=0(0%), left=1(100%), right=0(0%)
+  length: total=23  top=4(17%), bottom=6(26%), left=9(39%), right=4(17%)
+-- 5-05 (C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\..\data/納品箱/BLIND2-25154-5-05/25154-5-05_減速機フランジ.dxf) views=2 dims=17 --
+  diameter: total=3  top=1(33%), bottom=0(0%), left=1(33%), right=1(33%)
+  radius: total=1  top=0(0%), bottom=0(0%), left=1(100%), right=0(0%)
+  length: total=13  top=0(0%), bottom=3(23%), left=6(46%), right=4(31%)
+
+===== human 個別ファイル(BLIND2対応分のみ) =====
+-- 1-27 (C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\..\荏原トライ調整用/DXF/部品表用DXFデータ/1.走行軸/25154-1-27_走行フレーム踏板.dxf) views=112 dims=11 --
+  radius: total=1  top=0(0%), bottom=0(0%), left=1(100%), right=0(0%)
+  length: total=10  top=3(30%), bottom=4(40%), left=1(10%), right=2(20%)
+-- 2-16 (C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\..\荏原トライ調整用/DXF/部品表用DXFデータ/2.ターン軸/25154-2-16_指針.dxf) views=4 dims=9 --
+  length: total=9  top=5(56%), bottom=2(22%), left=0(0%), right=2(22%)
+-- 3-02 (C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\..\荏原トライ調整用/DXF/部品表用DXFデータ/3.昇降軸/25154-3-02_モータブラケット.dxf) views=12 dims=12 --
+  diameter: total=4  top=0(0%), bottom=1(25%), left=2(50%), right=1(25%)
+  length: total=5  top=1(20%), bottom=0(0%), left=0(0%), right=4(80%)
+  angular: total=3  top=2(67%), bottom=0(0%), left=1(33%), right=0(0%)
+-- 4-05 (C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\..\荏原トライ調整用/DXF/部品表用DXFデータ/4.前後軸/25154-4-05_駆動ユニットブラケット.dxf) views=23 dims=29 --
+  diameter: total=1  top=0(0%), bottom=0(0%), left=1(100%), right=0(0%)
+  radius: total=1  top=0(0%), bottom=0(0%), left=0(0%), right=1(100%)
+  length: total=27  top=6(22%), bottom=5(19%), left=7(26%), right=9(33%)
+-- 5-05 (C:\Users\imaizumi.LINEWORKS-NET\Documents\部品図作成agent\調査\..\荏原トライ調整用/DXF/部品表用DXFデータ/5.ひねり軸/25154-5-05_減速機フランジ.dxf) views=15 dims=39 --
+  diameter: total=4  top=1(25%), bottom=3(75%), left=0(0%), right=0(0%)
+  radius: total=4  top=2(50%), bottom=1(25%), left=0(0%), right=1(25%)
+  length: total=30  top=13(43%), bottom=5(17%), left=6(20%), right=6(20%)
+  angular: total=1  top=0(0%), bottom=0(0%), left=0(0%), right=1(100%)

@@ -49,7 +49,7 @@
               "above": 0.0,
               "below": 0.0,
               "left": 21.5,
-              "right": 21.5
+              "right": 0.0
             }
           }
         },
@@ -87,7 +87,20 @@
           "R5_corner": "radius",
           "Y3_2_plate": "linear",
           "Y10_hex": "linear"
-        }
+        },
+        "chains_ok": true,
+        "chains": [
+          {
+            "group": "Yseg",
+            "view": "top",
+            "ids": [
+              "Y3_2_plate",
+              "Y10_hex"
+            ],
+            "ok": true,
+            "errors": []
+          }
+        ]
       },
       "layout_verify": {
         "ok": true,
@@ -105,7 +118,9 @@
         "gate1_ok": true,
         "gate1_max_diff_mm": 0.0,
         "style_ok": true,
-        "note_ok": true
+        "note_ok": true,
+        "chains_ok": true,
+        "chain_errors": []
       },
       "centerline": {
         "enabled": false,
@@ -155,7 +170,7 @@
           "above": 0.0,
           "below": 0.0,
           "left": 21.5,
-          "right": 21.5
+          "right": 0.0
         }
       }
     },
@@ -361,7 +376,7 @@
       "装置名": "走行軸",
       "尺度": "１：５",
       "製図者": "ＡＩ",
-      "製図日付": "２６．０８．１０",
+      "製図日付": "２６．０８．１１",
       "連番": "２７",
       "重量": "７．７７"
     },
@@ -519,6 +534,46 @@
       }
     ],
     "gate1_ok": true,
+    "chains": [
+      {
+        "view": "top",
+        "group": "Yseg",
+        "ids": [
+          "Y3_2_plate",
+          "Y10_hex"
+        ],
+        "offset_coord": -484.0,
+        "segments": [
+          {
+            "id": "Y3_2_plate",
+            "s0": 994.9,
+            "s1": 998.1,
+            "line_coord": -484.0
+          },
+          {
+            "id": "Y10_hex",
+            "s0": 998.1,
+            "s1": 1008.1,
+            "line_coord": -484.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "dim_offsets": {
+      "X500_hex": 16.0,
+      "X932_csk": 24.0,
+      "X972_total": 32.0,
+      "Z298_csk": 16.0,
+      "Z318_total": 24.0,
+      "Z19_hex_flats": 16.0,
+      "R5_corner": 16.0,
+      "Y3_2_plate": 16.0,
+      "Y10_hex": 16.0
+    },
     "hole_notes": [
       {
         "id": "N_csk",
@@ -907,9 +962,9 @@
           203.8
         ],
         "Y10_hex": [
-          316.7,
+          90.3,
           197.62,
-          320.7,
+          94.3,
           203.62
         ],
         "N_csk": [
@@ -982,9 +1037,9 @@
           203.184
         ],
         "Y10_hex": [
-          257.8061,
+          89.7447,
           196.62,
-          325.2,
+          257.8061,
           204.62
         ],
         "N_csk": [
@@ -1031,7 +1086,7 @@
         "above": 0.0,
         "below": 0.0,
         "left": 21.5,
-        "right": 21.5
+        "right": 0.0
       }
     },
     "defaults_applied": {
@@ -1055,6 +1110,7 @@
     "ok": true,
     "unspecified": [],
     "floating_dimensions": [],
+    "style_dimensions": [],
     "redundant_dimensions": [],
     "duplicate_value_dimensions": [
       {
@@ -2191,6 +2247,35 @@
       }
     ],
     "gate1_ok": true,
+    "chains": [
+      {
+        "view": "top",
+        "group": "Yseg",
+        "ids": [
+          "Y3_2_plate",
+          "Y10_hex"
+        ],
+        "offset_coord": -484.0,
+        "segments": [
+          {
+            "id": "Y3_2_plate",
+            "s0": 994.9,
+            "s1": 998.1,
+            "line_coord": -484.0
+          },
+          {
+            "id": "Y10_hex",
+            "s0": 998.1,
+            "s1": 1008.1,
+            "line_coord": -484.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
     "gate1_max_diff_mm": 0.0,
     "style_ok": true,
     "style_mismatches": [],

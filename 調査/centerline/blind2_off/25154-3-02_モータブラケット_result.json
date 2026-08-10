@@ -28,10 +28,10 @@
             "front",
             "right"
           ],
-          "gap_x_mm": 15.0,
+          "gap_x_mm": 29.5,
           "gap_y_mm": 0.0,
           "group_wh_mm": [
-            149.75000000000057,
+            164.25000000000057,
             98.0
           ],
           "avail_wh_mm": [
@@ -41,9 +41,9 @@
           "reserves": {
             "front": {
               "above": 21.5,
-              "below": 37.5,
-              "left": 45.5,
-              "right": 0.0
+              "below": 29.5,
+              "left": 29.5,
+              "right": 29.5
             },
             "right": {}
           }
@@ -68,20 +68,46 @@
       },
       "dim_engine": {
         "gate1_ok": true,
-        "warnings": [],
+        "warnings": [
+          "レイアウト衝突(要目視確認) 2件: [['A20_phase', 'view:right'], ['A90_pitch', 'view:right']]"
+        ],
         "style_check_ok": true,
-        "layout_collisions": [],
+        "layout_collisions": [
+          [
+            "A20_phase",
+            "view:right"
+          ],
+          [
+            "A90_pitch",
+            "view:right"
+          ]
+        ],
         "frame_collisions": [],
         "resolved_kinds": {
           "D53_bore": "diameter_linear",
           "D110_recess": "diameter_linear",
           "D130_spigot": "diameter_linear",
           "D196_body": "diameter_linear",
-          "Z10_recess_depth": "linear",
+          "Z3_spigot": "linear",
           "Z70_5_body": "linear",
           "Z73_5_total": "linear",
-          "Z3_spigot": "linear"
-        }
+          "Z10_recess_depth": "linear",
+          "A20_phase": "angle",
+          "A90_pitch": "angle"
+        },
+        "chains_ok": true,
+        "chains": [
+          {
+            "group": "Zseg",
+            "view": "front",
+            "ids": [
+              "Z3_spigot",
+              "Z70_5_body"
+            ],
+            "ok": true,
+            "errors": []
+          }
+        ]
       },
       "layout_verify": {
         "ok": true,
@@ -99,7 +125,9 @@
         "gate1_ok": true,
         "gate1_max_diff_mm": 0.0,
         "style_ok": true,
-        "note_ok": true
+        "note_ok": true,
+        "chains_ok": true,
+        "chain_errors": []
       },
       "centerline": {
         "enabled": false,
@@ -128,10 +156,10 @@
         "front",
         "right"
       ],
-      "gap_x_mm": 15.0,
+      "gap_x_mm": 29.5,
       "gap_y_mm": 0.0,
       "group_wh_mm": [
-        149.75000000000057,
+        164.25000000000057,
         98.0
       ],
       "avail_wh_mm": [
@@ -141,9 +169,9 @@
       "reserves": {
         "front": {
           "above": 21.5,
-          "below": 37.5,
-          "left": 45.5,
-          "right": 0.0
+          "below": 29.5,
+          "left": 29.5,
+          "right": 29.5
         },
         "right": {}
       }
@@ -166,15 +194,15 @@
     "unclassified_entity_count": 0,
     "view_out_bbox_mm": {
       "front": [
-        135.12499999999972,
+        127.87499999999972,
         112.0,
-        171.87500000000006,
+        164.62500000000006,
         210.0
       ],
       "right": [
-        186.87500000000006,
+        194.12500000000006,
         112.0,
-        284.8750000000003,
+        292.1250000000003,
         210.0
       ]
     },
@@ -350,7 +378,7 @@
       "装置名": "昇降軸",
       "尺度": "１：２",
       "製図者": "ＡＩ",
-      "製図日付": "２６．０８．１０",
+      "製図日付": "２６．０８．１１",
       "連番": "０２",
       "重量": "１４．８５"
     },
@@ -427,16 +455,16 @@
         "errors": []
       },
       {
-        "id": "Z10_recess_depth",
+        "id": "Z3_spigot",
         "kind": "linear",
         "plan_kind": "linear",
         "view": "front",
-        "expected": 10.0,
-        "measured": 10.0,
+        "expected": 3.0,
+        "measured": 3.0,
         "diff_mm": 0.0,
         "snap_max_mm": 0.0,
-        "text": "10",
-        "text_value": 10.0,
+        "text": "3",
+        "text_value": 3.0,
         "text_diff_mm": 0.0,
         "style": "GEN005",
         "ok": true,
@@ -475,23 +503,118 @@
         "errors": []
       },
       {
-        "id": "Z3_spigot",
+        "id": "Z10_recess_depth",
         "kind": "linear",
         "plan_kind": "linear",
         "view": "front",
-        "expected": 3.0,
-        "measured": 3.0,
+        "expected": 10.0,
+        "measured": 10.0,
         "diff_mm": 0.0,
         "snap_max_mm": 0.0,
-        "text": "3",
-        "text_value": 3.0,
+        "text": "10",
+        "text_value": 10.0,
         "text_diff_mm": 0.0,
         "style": "GEN008",
         "ok": true,
         "errors": []
+      },
+      {
+        "id": "A20_phase",
+        "kind": "angle",
+        "plan_kind": "angle",
+        "view": "right",
+        "expected": 20.0,
+        "measured": 20.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "\\A1;２０%%d",
+        "text_value": 20.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN009",
+        "ok": true,
+        "errors": [],
+        "unit": "deg",
+        "arc_check": {
+          "ok": true,
+          "mid_ok": true,
+          "span_ok": true,
+          "arc_span_deg": 20.0,
+          "arc_mid_offset_deg": 10.0,
+          "measured_deg": 20.0,
+          "arc_span_allow_deg": 32.741538,
+          "arc_radius": 20.999299
+        }
+      },
+      {
+        "id": "A90_pitch",
+        "kind": "angle",
+        "plan_kind": "angle",
+        "view": "right",
+        "expected": 90.0,
+        "measured": 90.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "\\A1;９０%%d",
+        "text_value": 90.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN010",
+        "ok": true,
+        "errors": [],
+        "unit": "deg",
+        "arc_check": {
+          "ok": true,
+          "mid_ok": true,
+          "span_ok": true,
+          "arc_span_deg": 90.0,
+          "arc_mid_offset_deg": 45.0,
+          "measured_deg": 90.0,
+          "arc_span_allow_deg": 32.740429,
+          "arc_radius": 21.000011
+        }
       }
     ],
     "gate1_ok": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "Zseg",
+        "ids": [
+          "Z3_spigot",
+          "Z70_5_body"
+        ],
+        "offset_coord": 192.0,
+        "segments": [
+          {
+            "id": "Z70_5_body",
+            "s0": 255.75,
+            "s1": 326.25,
+            "line_coord": 192.0
+          },
+          {
+            "id": "Z3_spigot",
+            "s0": 326.25,
+            "s1": 329.25,
+            "line_coord": 192.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "dim_offsets": {
+      "D53_bore": 16.0,
+      "D110_recess": 24.0,
+      "D130_spigot": 16.0,
+      "D196_body": 24.0,
+      "Z3_spigot": 16.0,
+      "Z70_5_body": 16.0,
+      "Z73_5_total": 24.0,
+      "Z10_recess_depth": 16.0,
+      "A20_phase": 16.0,
+      "A90_pitch": 16.0
+    },
     "hole_notes": [
       {
         "id": "N_bolt12",
@@ -499,25 +622,25 @@
         "pattern": "\\A1;４－%%c１２　ザグリ%%c１８深さ１０\\PＰＣＤ１６５",
         "leader_points": [
           [
-            281.625,
+            288.875,
             161.0
           ],
           [
-            299.995,
+            307.245,
             180.0
           ],
           [
-            311.995,
+            319.245,
             180.0
           ]
         ],
         "text_insert": [
-          313.995,
+          321.245,
           180.0
         ],
         "ok": true,
         "errors": [],
-        "leader_handle": "224"
+        "leader_handle": "24C"
       },
       {
         "id": "N_tap8",
@@ -525,25 +648,25 @@
         "pattern": "\\A1;４－Ｍ８深さ１５\\PＰＣＤ１４５",
         "leader_points": [
           [
-            271.9389,
+            279.1889,
             148.6017
           ],
           [
-            299.995,
+            307.245,
             130.0
           ],
           [
-            314.995,
+            322.245,
             130.0
           ]
         ],
         "text_insert": [
-          316.995,
+          324.245,
           130.0
         ],
         "ok": true,
         "errors": [],
-        "leader_handle": "226"
+        "leader_handle": "24E"
       }
     ],
     "dimstyles": {
@@ -551,10 +674,12 @@
       "D110_recess": "GEN002",
       "D130_spigot": "GEN003",
       "D196_body": "GEN004",
-      "Z10_recess_depth": "GEN005",
+      "Z3_spigot": "GEN005",
       "Z70_5_body": "GEN006",
       "Z73_5_total": "GEN007",
-      "Z3_spigot": "GEN008"
+      "Z10_recess_depth": "GEN008",
+      "A20_phase": "GEN009",
+      "A90_pitch": "GEN010"
     },
     "style_check": {
       "ok": true,
@@ -668,7 +793,7 @@
           "dimpost": "%%c<>",
           "dimtol": 0
         },
-        "Z10_recess_depth": {
+        "Z3_spigot": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -749,7 +874,61 @@
           "dimpost": "",
           "dimtol": 0
         },
-        "Z3_spigot": {
+        "Z10_recess_depth": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 2.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "A20_phase": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 2.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "A90_pitch": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -789,78 +968,90 @@
     },
     "view_bbox": {
       "front": [
-        135.125,
+        127.875,
         112.0,
-        171.875,
+        164.625,
         210.0
       ],
       "right": [
-        186.875,
+        194.125,
         112.0,
-        284.875,
+        292.125,
         210.0
       ]
     },
     "layout": {
       "text_boxes": {
         "D53_bore": [
-          119.625,
+          112.375,
           156.5,
-          123.625,
+          116.375,
           165.5
         ],
         "D110_recess": [
-          111.625,
+          104.375,
           155.0,
-          115.625,
+          108.375,
           167.0
         ],
         "D130_spigot": [
-          103.625,
+          181.125,
           155.0,
-          107.625,
+          185.125,
           167.0
         ],
         "D196_body": [
-          95.625,
+          189.125,
           155.0,
-          99.625,
+          193.125,
           167.0
         ],
-        "Z10_recess_depth": [
-          134.625,
-          98.5,
-          140.625,
-          102.5
+        "Z3_spigot": [
+          162.375,
+          89.5,
+          165.375,
+          93.5
         ],
         "Z70_5_body": [
-          146.75,
-          88.5,
-          158.75,
-          92.5
+          139.5,
+          96.5,
+          151.5,
+          100.5
         ],
         "Z73_5_total": [
-          147.5,
-          75.5,
-          159.5,
-          79.5
+          140.25,
+          83.5,
+          152.25,
+          87.5
         ],
-        "Z3_spigot": [
-          169.625,
-          219.5,
-          172.625,
-          223.5
+        "Z10_recess_depth": [
+          127.375,
+          228.5,
+          133.375,
+          232.5
+        ],
+        "A20_phase": [
+          260.7369,
+          154.5721,
+          275.7369,
+          158.5721
+        ],
+        "A90_pitch": [
+          219.008,
+          175.617,
+          234.008,
+          179.617
         ],
         "N_bolt12": [
-          313.995,
+          321.245,
           180.0,
-          403.995,
+          411.245,
           190.4
         ],
         "N_tap8": [
-          316.995,
+          324.245,
           130.0,
-          364.995,
+          372.245,
           140.4
         ],
         "N_general": [
@@ -870,66 +1061,87 @@
           250.0
         ]
       },
-      "collisions": [],
+      "collisions": [
+        [
+          "A20_phase",
+          "view:right"
+        ],
+        [
+          "A90_pitch",
+          "view:right"
+        ]
+      ],
       "geom_boxes": {
         "D53_bore": [
-          117.125,
+          109.875,
           144.75,
-          171.875,
+          164.625,
           177.25
         ],
         "D110_recess": [
-          109.125,
+          101.875,
           130.5,
-          135.125,
+          127.875,
           191.5
         ],
         "D130_spigot": [
-          101.125,
+          164.625,
           125.5,
-          171.875,
+          185.6803,
           196.5
         ],
         "D196_body": [
-          93.125,
+          127.875,
           109.0,
-          135.125,
+          193.6803,
           213.0
         ],
-        "Z10_recess_depth": [
-          132.125,
-          94.0,
-          143.125,
-          188.5
+        "Z3_spigot": [
+          161.625,
+          88.9447,
+          166.125,
+          193.5
         ],
         "Z70_5_body": [
-          135.125,
-          86.0,
-          170.375,
+          127.875,
+          94.0,
+          163.125,
           210.0
         ],
         "Z73_5_total": [
-          132.125,
-          74.9447,
-          174.875,
+          124.875,
+          82.9447,
+          167.625,
           210.0
         ],
-        "Z3_spigot": [
-          168.875,
-          193.5,
-          173.375,
-          228.0
+        "Z10_recess_depth": [
+          124.875,
+          188.5,
+          135.875,
+          233.0553
+        ],
+        "A20_phase": [
+          243.125,
+          148.5472,
+          284.375,
+          166.9187
+        ],
+        "A90_pitch": [
+          201.875,
+          155.0813,
+          249.0437,
+          202.25
         ],
         "N_bolt12": [
-          281.625,
+          288.875,
           161.0,
-          403.995,
+          411.245,
           190.4
         ],
         "N_tap8": [
-          271.9389,
+          279.1889,
           130.0,
-          364.995,
+          372.245,
           148.6017
         ]
       },
@@ -941,10 +1153,12 @@
       "D110_recess": "diameter_linear",
       "D130_spigot": "diameter_linear",
       "D196_body": "diameter_linear",
-      "Z10_recess_depth": "linear",
+      "Z3_spigot": "linear",
       "Z70_5_body": "linear",
       "Z73_5_total": "linear",
-      "Z3_spigot": "linear"
+      "Z10_recess_depth": "linear",
+      "A20_phase": "angle",
+      "A90_pitch": "angle"
     },
     "scale": 0.5,
     "dimlfac": 2.0,
@@ -955,9 +1169,9 @@
     "view_reserves": {
       "front": {
         "above": 21.5,
-        "below": 37.5,
-        "left": 45.5,
-        "right": 0.0
+        "below": 29.5,
+        "left": 29.5,
+        "right": 29.5
       }
     },
     "defaults_applied": {
@@ -971,7 +1185,9 @@
         "separator": " "
       }
     },
-    "warnings": []
+    "warnings": [
+      "レイアウト衝突(要目視確認) 2件: [['A20_phase', 'view:right'], ['A90_pitch', 'view:right']]"
+    ]
   },
   "gate2": {
     "gate": "gate2_completeness_v1",
@@ -981,12 +1197,16 @@
     "ok": true,
     "unspecified": [],
     "floating_dimensions": [],
+    "style_dimensions": [
+      "A20_phase",
+      "A90_pitch"
+    ],
     "redundant_dimensions": [
       {
         "axis": "Z",
-        "by": "Z3_spigot(3)",
+        "by": "Z73_5_total(73.5)",
         "from": -73.5,
-        "to": -70.5,
+        "to": 0.0,
         "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
       }
     ],
@@ -1376,9 +1596,9 @@
         "mode": "chain",
         "edges": [
           {
-            "from": 0.0,
-            "to": -10.0,
-            "by": "Z10_recess_depth(10)",
+            "from": -73.5,
+            "to": -70.5,
+            "by": "Z3_spigot(3)",
             "new_link": true
           },
           {
@@ -1391,13 +1611,13 @@
             "from": -73.5,
             "to": 0.0,
             "by": "Z73_5_total(73.5)",
-            "new_link": true
+            "new_link": false
           },
           {
-            "from": -73.5,
-            "to": -70.5,
-            "by": "Z3_spigot(3)",
-            "new_link": false
+            "from": 0.0,
+            "to": -10.0,
+            "by": "Z10_recess_depth(10)",
+            "new_link": true
           },
           {
             "from": 0.0,
@@ -1441,10 +1661,10 @@
         "view": "front"
       },
       {
-        "id": "Z10_recess_depth",
+        "id": "Z3_spigot",
         "role": "position_pair",
         "axis": "Z",
-        "value": 10.0,
+        "value": 3.0,
         "view": "front"
       },
       {
@@ -1462,11 +1682,25 @@
         "view": "front"
       },
       {
-        "id": "Z3_spigot",
+        "id": "Z10_recess_depth",
         "role": "position_pair",
         "axis": "Z",
-        "value": 3.0,
+        "value": 10.0,
         "view": "front"
+      },
+      {
+        "id": "A20_phase",
+        "role": "angle",
+        "axis": null,
+        "value": 19.99999971143684,
+        "view": "right"
+      },
+      {
+        "id": "A90_pitch",
+        "role": "angle",
+        "axis": null,
+        "value": 90.0,
+        "view": "right"
       }
     ],
     "hole_notes": [
@@ -1673,8 +1907,34 @@
     "chamfers": [],
     "out_of_scope": [
       {
+        "class": "angle_dimension",
+        "id": "A20_phase",
+        "angle": 19.99999971143684,
+        "reason": "角度寸法。位置チェーンの辺には使わない(傾斜フィーチャーの方向指定としてのみ使う)"
+      },
+      {
+        "class": "angle_dimension",
+        "id": "A90_pitch",
+        "angle": 90.0,
+        "reason": "角度寸法。位置チェーンの辺には使わない(傾斜フィーチャーの方向指定としてのみ使う)"
+      },
+      {
         "class": "pcd_phase",
         "reason": "円周配置穴群の**位相(基準角)**はv1の判定対象外。PCD+配置角+個数までを実ジオメトリで検算して位置カバレッジに採用している"
+      },
+      {
+        "class": "style_dimension",
+        "id": "A20_phase",
+        "role": "angle",
+        "value": 19.99999971143684,
+        "reason": "様式寸法(purpose='style')。形状の一意性ではなく読みやすさ(等配穴群の位相・面取り角の明示等)のための寸法なので、完全性の根拠にも『宙に浮いた寸法』警告にもしない"
+      },
+      {
+        "class": "style_dimension",
+        "id": "A90_pitch",
+        "role": "angle",
+        "value": 90.0,
+        "reason": "様式寸法(purpose='style')。形状の一意性ではなく読みやすさ(等配穴群の位相・面取り角の明示等)のための寸法なので、完全性の根拠にも『宙に浮いた寸法』警告にもしない"
       },
       {
         "class": "not_implemented",
@@ -1687,10 +1947,10 @@
     "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\centerline\\plans_off\\BLIND2-25154-3-02_off.json",
     "file_attrs_ok": true,
     "frame": {
-      "total": 214,
+      "total": 216,
       "frame_matched": 112,
-      "remaining": 102,
-      "remaining_ratio": 0.4766355140186916
+      "remaining": 104,
+      "remaining_ratio": 0.48148148148148145
     },
     "scale": 0.5,
     "gate1": [
@@ -1767,17 +2027,17 @@
         "ok": true
       },
       {
-        "id": "Z10_recess_depth",
+        "id": "Z3_spigot",
         "style": "GEN005",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
         "kind_impl_ok": true,
-        "expected": 10.0,
-        "measured": 10.0,
+        "expected": 3.0,
+        "measured": 3.0,
         "diff_mm": 0.0,
-        "text": "10",
-        "text_value": 10.0,
+        "text": "3",
+        "text_value": 3.0,
         "text_role": "measured",
         "text_override": null,
         "text_override_ok": null,
@@ -1821,25 +2081,112 @@
         "ok": true
       },
       {
-        "id": "Z3_spigot",
+        "id": "Z10_recess_depth",
         "style": "GEN008",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
         "kind_impl_ok": true,
-        "expected": 3.0,
-        "measured": 3.0,
+        "expected": 10.0,
+        "measured": 10.0,
         "diff_mm": 0.0,
-        "text": "3",
-        "text_value": 3.0,
+        "text": "10",
+        "text_value": 10.0,
         "text_role": "measured",
         "text_override": null,
         "text_override_ok": null,
         "text_diff_mm": 0.0,
         "ok": true
+      },
+      {
+        "id": "A20_phase",
+        "style": "GEN009",
+        "kind": "angle",
+        "dimtype": 34,
+        "dimtype_base": 2,
+        "kind_impl_ok": true,
+        "expected": 20.0,
+        "measured": 20.0,
+        "diff_mm": 0.0,
+        "text": "\\A1;２０%%d",
+        "text_value": 20.0,
+        "text_role": "override",
+        "text_override": "\\A1;２０%%d",
+        "text_override_ok": true,
+        "text_diff_mm": 0.0,
+        "ok": true,
+        "unit": "deg",
+        "arc_check": {
+          "ok": true,
+          "mid_ok": true,
+          "span_ok": true,
+          "arc_span_deg": 20.0,
+          "arc_mid_offset_deg": 10.0,
+          "measured_deg": 20.0,
+          "arc_span_allow_deg": 32.741538,
+          "arc_radius": 20.999299
+        }
+      },
+      {
+        "id": "A90_pitch",
+        "style": "GEN010",
+        "kind": "angle",
+        "dimtype": 34,
+        "dimtype_base": 2,
+        "kind_impl_ok": true,
+        "expected": 90.0,
+        "measured": 90.0,
+        "diff_mm": 0.0,
+        "text": "\\A1;９０%%d",
+        "text_value": 90.0,
+        "text_role": "override",
+        "text_override": "\\A1;９０%%d",
+        "text_override_ok": true,
+        "text_diff_mm": 0.0,
+        "ok": true,
+        "unit": "deg",
+        "arc_check": {
+          "ok": true,
+          "mid_ok": true,
+          "span_ok": true,
+          "arc_span_deg": 90.0,
+          "arc_mid_offset_deg": 45.0,
+          "measured_deg": 90.0,
+          "arc_span_allow_deg": 32.740429,
+          "arc_radius": 21.000011
+        }
       }
     ],
     "gate1_ok": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "Zseg",
+        "ids": [
+          "Z3_spigot",
+          "Z70_5_body"
+        ],
+        "offset_coord": 192.0,
+        "segments": [
+          {
+            "id": "Z70_5_body",
+            "s0": 255.75,
+            "s1": 326.25,
+            "line_coord": 192.0
+          },
+          {
+            "id": "Z3_spigot",
+            "s0": 326.25,
+            "s1": 329.25,
+            "line_coord": 192.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
     "gate1_max_diff_mm": 0.0,
     "style_ok": true,
     "style_mismatches": [],

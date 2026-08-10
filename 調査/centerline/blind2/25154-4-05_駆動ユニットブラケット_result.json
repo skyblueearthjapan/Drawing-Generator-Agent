@@ -44,18 +44,18 @@
             "front": {
               "above": 0.0,
               "below": 37.5,
-              "left": 53.5,
+              "left": 21.5,
               "right": 0.0
             },
             "top": {
               "above": 45.5,
               "below": 0.0,
-              "left": 45.5,
+              "left": 29.5,
               "right": 0.0
             },
             "right": {
               "above": 21.5,
-              "below": 37.5,
+              "below": 29.5,
               "left": 0.0,
               "right": 37.5
             }
@@ -105,10 +105,10 @@
           "X154_wall_in": "linear",
           "X163_wall_out": "linear",
           "Y15_hole1": "linear",
-          "Y50_window": "linear",
-          "Y95_hole2": "linear",
-          "Y175_hole3": "linear",
-          "Y220_window": "linear",
+          "Y35_window": "linear",
+          "Y45_hole2": "linear",
+          "Y80_hole3": "linear",
+          "Y45_window2": "linear",
           "Y249_wall": "linear",
           "Y13_plate": "linear",
           "Y305_total": "linear",
@@ -122,7 +122,44 @@
           "Z115_motor": "linear",
           "D127_bore": "diameter_native",
           "R15_window": "radius"
-        }
+        },
+        "chains_ok": true,
+        "chains": [
+          {
+            "group": "Ychain",
+            "view": "front",
+            "ids": [
+              "Y15_hole1",
+              "Y35_window",
+              "Y45_hole2",
+              "Y80_hole3",
+              "Y45_window2"
+            ],
+            "ok": true,
+            "errors": []
+          },
+          {
+            "group": "Zdepth",
+            "view": "right",
+            "ids": [
+              "Z16_base",
+              "Z114_wall"
+            ],
+            "ok": true,
+            "errors": []
+          },
+          {
+            "group": "Zchain",
+            "view": "top",
+            "ids": [
+              "Z5_tap",
+              "Z22_5_motor",
+              "Z115_motor"
+            ],
+            "ok": true,
+            "errors": []
+          }
+        ]
       },
       "layout_verify": {
         "ok": true,
@@ -140,7 +177,9 @@
         "gate1_ok": true,
         "gate1_max_diff_mm": 0.0,
         "style_ok": true,
-        "note_ok": true
+        "note_ok": true,
+        "chains_ok": true,
+        "chain_errors": []
       },
       "centerline": {
         "enabled": true,
@@ -195,18 +234,18 @@
         "front": {
           "above": 0.0,
           "below": 37.5,
-          "left": 53.5,
+          "left": 21.5,
           "right": 0.0
         },
         "top": {
           "above": 45.5,
           "below": 0.0,
-          "left": 45.5,
+          "left": 29.5,
           "right": 0.0
         },
         "right": {
           "above": 21.5,
-          "below": 37.5,
+          "below": 29.5,
           "left": 0.0,
           "right": 37.5
         }
@@ -420,7 +459,7 @@
       "装置名": "前後軸",
       "尺度": "１：４",
       "製図者": "ＡＩ",
-      "製図日付": "２６．０８．１０",
+      "製図日付": "２６．０８．１１",
       "連番": "０５",
       "重量": "６．５２"
     },
@@ -561,64 +600,64 @@
         "errors": []
       },
       {
-        "id": "Y50_window",
+        "id": "Y35_window",
         "kind": "linear",
         "plan_kind": "linear",
         "view": "front",
-        "expected": 50.0,
-        "measured": 50.0,
+        "expected": 35.0,
+        "measured": 35.0,
         "diff_mm": 0.0,
         "snap_max_mm": 0.0,
-        "text": "50",
-        "text_value": 50.0,
+        "text": "35",
+        "text_value": 35.0,
         "text_diff_mm": 0.0,
         "style": "GEN009",
         "ok": true,
         "errors": []
       },
       {
-        "id": "Y95_hole2",
+        "id": "Y45_hole2",
         "kind": "linear",
         "plan_kind": "linear",
         "view": "front",
-        "expected": 95.0,
-        "measured": 95.0,
+        "expected": 45.0,
+        "measured": 45.0,
         "diff_mm": 0.0,
         "snap_max_mm": 0.0,
-        "text": "95",
-        "text_value": 95.0,
+        "text": "45",
+        "text_value": 45.0,
         "text_diff_mm": 0.0,
         "style": "GEN010",
         "ok": true,
         "errors": []
       },
       {
-        "id": "Y175_hole3",
+        "id": "Y80_hole3",
         "kind": "linear",
         "plan_kind": "linear",
         "view": "front",
-        "expected": 175.0,
-        "measured": 175.0,
+        "expected": 80.0,
+        "measured": 80.0,
         "diff_mm": 0.0,
         "snap_max_mm": 0.0,
-        "text": "175",
-        "text_value": 175.0,
+        "text": "80",
+        "text_value": 80.0,
         "text_diff_mm": 0.0,
         "style": "GEN011",
         "ok": true,
         "errors": []
       },
       {
-        "id": "Y220_window",
+        "id": "Y45_window2",
         "kind": "linear",
         "plan_kind": "linear",
         "view": "front",
-        "expected": 220.0,
-        "measured": 220.0,
+        "expected": 45.0,
+        "measured": 45.0,
         "diff_mm": 0.0,
         "snap_max_mm": 0.0,
-        "text": "220",
-        "text_value": 220.0,
+        "text": "45",
+        "text_value": 45.0,
         "text_diff_mm": 0.0,
         "style": "GEN012",
         "ok": true,
@@ -842,6 +881,142 @@
       }
     ],
     "gate1_ok": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "Ychain",
+        "ids": [
+          "Y15_hole1",
+          "Y35_window",
+          "Y45_hole2",
+          "Y80_hole3",
+          "Y45_window2"
+        ],
+        "offset_coord": -573.0,
+        "segments": [
+          {
+            "id": "Y15_hole1",
+            "s0": 375.0,
+            "s1": 390.0,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Y35_window",
+            "s0": 390.0,
+            "s1": 425.0,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Y45_hole2",
+            "s0": 425.0,
+            "s1": 470.0,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Y80_hole3",
+            "s0": 470.0,
+            "s1": 550.0,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Y45_window2",
+            "s0": 550.0,
+            "s1": 595.0,
+            "line_coord": -573.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      },
+      {
+        "view": "right",
+        "group": "Zdepth",
+        "ids": [
+          "Z16_base",
+          "Z114_wall"
+        ],
+        "offset_coord": 311.0,
+        "segments": [
+          {
+            "id": "Z114_wall",
+            "s0": 913.0,
+            "s1": 1027.0,
+            "line_coord": 311.0
+          },
+          {
+            "id": "Z16_base",
+            "s0": 1027.0,
+            "s1": 1043.0,
+            "line_coord": 311.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      },
+      {
+        "view": "top",
+        "group": "Zchain",
+        "ids": [
+          "Z5_tap",
+          "Z22_5_motor",
+          "Z115_motor"
+        ],
+        "offset_coord": -573.0,
+        "segments": [
+          {
+            "id": "Z115_motor",
+            "s0": 759.5,
+            "s1": 874.5,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Z22_5_motor",
+            "s0": 874.5,
+            "s1": 897.0,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Z5_tap",
+            "s0": 897.0,
+            "s1": 902.0,
+            "line_coord": -573.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "dim_offsets": {
+      "X103_window": 16.0,
+      "X143_holes": 24.0,
+      "X173_base": 32.0,
+      "X20_tap": 16.0,
+      "X149_motor": 24.0,
+      "X154_wall_in": 32.0,
+      "X163_wall_out": 40.0,
+      "Y15_hole1": 16.0,
+      "Y35_window": 16.0,
+      "Y45_hole2": 16.0,
+      "Y80_hole3": 16.0,
+      "Y45_window2": 16.0,
+      "Y249_wall": 16.0,
+      "Y13_plate": 24.0,
+      "Y305_total": 32.0,
+      "Z16_base": 16.0,
+      "Z173_depth": 24.0,
+      "Z114_wall": 16.0,
+      "Z3_step": 16.0,
+      "Z5_tap": 16.0,
+      "Z22_5_motor": 16.0,
+      "Z80_bore": 24.0,
+      "Z115_motor": 16.0,
+      "D127_bore": 16.0,
+      "R15_window": 16.0
+    },
     "hole_notes": [
       {
         "id": "N_hole11",
@@ -983,10 +1158,10 @@
       "X154_wall_in": "GEN006",
       "X163_wall_out": "GEN007",
       "Y15_hole1": "GEN008",
-      "Y50_window": "GEN009",
-      "Y95_hole2": "GEN010",
-      "Y175_hole3": "GEN011",
-      "Y220_window": "GEN012",
+      "Y35_window": "GEN009",
+      "Y45_hole2": "GEN010",
+      "Y80_hole3": "GEN011",
+      "Y45_window2": "GEN012",
       "Y249_wall": "GEN013",
       "Y13_plate": "GEN014",
       "Y305_total": "GEN015",
@@ -1221,7 +1396,7 @@
           "dimpost": "",
           "dimtol": 0
         },
-        "Y50_window": {
+        "Y35_window": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -1248,7 +1423,7 @@
           "dimpost": "",
           "dimtol": 0
         },
-        "Y95_hole2": {
+        "Y45_hole2": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -1275,7 +1450,7 @@
           "dimpost": "",
           "dimtol": 0
         },
-        "Y175_hole3": {
+        "Y80_hole3": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -1302,7 +1477,7 @@
           "dimpost": "",
           "dimtol": 0
         },
-        "Y220_window": {
+        "Y45_window2": {
           "dimtxt": 4.0,
           "dimasz": 3.0,
           "dimexo": 1.0,
@@ -1761,29 +1936,29 @@
           140.75,
           98.625
         ],
-        "Y50_window": [
-          130.75,
-          97.0,
-          134.75,
-          103.0
+        "Y35_window": [
+          138.75,
+          98.875,
+          142.75,
+          104.875
         ],
-        "Y95_hole2": [
-          122.75,
-          102.625,
-          126.75,
-          108.625
+        "Y45_hole2": [
+          138.75,
+          108.875,
+          142.75,
+          114.875
         ],
-        "Y175_hole3": [
-          114.75,
-          111.125,
-          118.75,
-          120.125
+        "Y80_hole3": [
+          138.75,
+          124.5,
+          142.75,
+          130.5
         ],
-        "Y220_window": [
-          106.75,
-          116.75,
-          110.75,
-          125.75
+        "Y45_window2": [
+          138.75,
+          140.125,
+          142.75,
+          146.125
         ],
         "Y249_wall": [
           272.25,
@@ -1817,9 +1992,9 @@
         ],
         "Z114_wall": [
           238.0,
-          57.25,
+          73.25,
           247.0,
-          61.25
+          77.25
         ],
         "Z3_step": [
           254.875,
@@ -1834,21 +2009,21 @@
           226.375
         ],
         "Z22_5_motor": [
-          128.75,
+          136.75,
           215.4375,
-          132.75,
+          140.75,
           227.4375
         ],
         "Z80_bore": [
-          122.75,
+          130.75,
           211.25,
-          126.75,
+          134.75,
           217.25
         ],
         "Z115_motor": [
-          119.75,
+          143.75,
           199.75,
-          123.75,
+          147.75,
           208.75
         ],
         "D127_bore": [
@@ -1953,27 +2128,27 @@
           163.0,
           100.5
         ],
-        "Y50_window": [
-          130.1947,
-          93.75,
+        "Y35_window": [
+          138.1947,
+          97.5,
           171.75,
           106.25
         ],
-        "Y95_hole2": [
-          122.1947,
-          93.75,
-          163.0,
+        "Y45_hole2": [
+          138.1947,
+          106.25,
+          171.75,
           117.5
         ],
-        "Y175_hole3": [
-          114.1947,
-          93.75,
+        "Y80_hole3": [
+          138.1947,
+          117.5,
           163.0,
           137.5
         ],
-        "Y220_window": [
-          106.1947,
-          93.75,
+        "Y45_window2": [
+          138.1947,
+          137.5,
           171.75,
           148.75
         ],
@@ -2009,7 +2184,7 @@
         ],
         "Z114_wall": [
           225.25,
-          56.6947,
+          72.6947,
           259.75,
           145.0
         ],
@@ -2026,19 +2201,19 @@
           227.25
         ],
         "Z22_5_motor": [
-          128.1947,
+          136.1947,
           215.625,
           162.25,
           227.25
         ],
         "Z80_bore": [
-          122.1947,
+          130.1947,
           204.25,
           180.875,
           224.25
         ],
         "Z115_motor": [
-          117.25,
+          141.25,
           186.875,
           162.25,
           221.625
@@ -2098,10 +2273,10 @@
       "X154_wall_in": "linear",
       "X163_wall_out": "linear",
       "Y15_hole1": "linear",
-      "Y50_window": "linear",
-      "Y95_hole2": "linear",
-      "Y175_hole3": "linear",
-      "Y220_window": "linear",
+      "Y35_window": "linear",
+      "Y45_hole2": "linear",
+      "Y80_hole3": "linear",
+      "Y45_window2": "linear",
       "Y249_wall": "linear",
       "Y13_plate": "linear",
       "Y305_total": "linear",
@@ -2127,18 +2302,18 @@
       "front": {
         "above": 0.0,
         "below": 37.5,
-        "left": 53.5,
+        "left": 21.5,
         "right": 0.0
       },
       "top": {
         "above": 45.5,
         "below": 0.0,
-        "left": 45.5,
+        "left": 29.5,
         "right": 0.0
       },
       "right": {
         "above": 21.5,
-        "below": 37.5,
+        "below": 29.5,
         "left": 0.0,
         "right": 37.5
       }
@@ -2166,8 +2341,23 @@
     "ok": true,
     "unspecified": [],
     "floating_dimensions": [],
+    "style_dimensions": [],
     "redundant_dimensions": [],
     "duplicate_value_dimensions": [
+      {
+        "value": 45.0,
+        "ids": [
+          "Y45_hole2",
+          "Y45_window2"
+        ]
+      },
+      {
+        "value": 80.0,
+        "ids": [
+          "Y80_hole3",
+          "Z80_bore"
+        ]
+      },
       {
         "value": 173.0,
         "ids": [
@@ -2528,27 +2718,27 @@
             "new_link": true
           },
           {
-            "from": 0.0,
+            "from": 15.0,
             "to": 50.0,
-            "by": "Y50_window(50)",
+            "by": "Y35_window(35)",
             "new_link": true
           },
           {
-            "from": 0.0,
+            "from": 50.0,
             "to": 95.0,
-            "by": "Y95_hole2(95)",
+            "by": "Y45_hole2(45)",
             "new_link": true
           },
           {
-            "from": 0.0,
+            "from": 95.0,
             "to": 175.0,
-            "by": "Y175_hole3(175)",
+            "by": "Y80_hole3(80)",
             "new_link": true
           },
           {
-            "from": 0.0,
+            "from": 175.0,
             "to": 220.0,
-            "by": "Y220_window(220)",
+            "by": "Y45_window2(45)",
             "new_link": true
           },
           {
@@ -2842,31 +3032,31 @@
         "view": "front"
       },
       {
-        "id": "Y50_window",
+        "id": "Y35_window",
         "role": "position_pair",
         "axis": "Y",
-        "value": 50.0,
+        "value": 35.0,
         "view": "front"
       },
       {
-        "id": "Y95_hole2",
+        "id": "Y45_hole2",
         "role": "position_pair",
         "axis": "Y",
-        "value": 95.0,
+        "value": 45.0,
         "view": "front"
       },
       {
-        "id": "Y175_hole3",
+        "id": "Y80_hole3",
         "role": "position_pair",
         "axis": "Y",
-        "value": 175.0,
+        "value": 80.0,
         "view": "front"
       },
       {
-        "id": "Y220_window",
+        "id": "Y45_window2",
         "role": "position_pair",
         "axis": "Y",
-        "value": 220.0,
+        "value": 45.0,
         "view": "front"
       },
       {
@@ -3101,7 +3291,7 @@
       },
       {
         "class": "same_value_features",
-        "reason": "v1の台帳は特徴を**値と座標**で持つため、同じ値の別フィーチャー(左右のφ25等)を区別しない。片方の寸法を消しても検出できない(該当: [173.0])"
+        "reason": "v1の台帳は特徴を**値と座標**で持つため、同じ値の別フィーチャー(左右のφ25等)を区別しない。片方の寸法を消しても検出できない(該当: [45.0, 80.0, 173.0])"
       }
     ]
   },
@@ -3262,17 +3452,17 @@
         "ok": true
       },
       {
-        "id": "Y50_window",
+        "id": "Y35_window",
         "style": "GEN009",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
         "kind_impl_ok": true,
-        "expected": 50.0,
-        "measured": 50.0,
+        "expected": 35.0,
+        "measured": 35.0,
         "diff_mm": 0.0,
-        "text": "50",
-        "text_value": 50.0,
+        "text": "35",
+        "text_value": 35.0,
         "text_role": "measured",
         "text_override": null,
         "text_override_ok": null,
@@ -3280,17 +3470,17 @@
         "ok": true
       },
       {
-        "id": "Y95_hole2",
+        "id": "Y45_hole2",
         "style": "GEN010",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
         "kind_impl_ok": true,
-        "expected": 95.0,
-        "measured": 95.0,
+        "expected": 45.0,
+        "measured": 45.0,
         "diff_mm": 0.0,
-        "text": "95",
-        "text_value": 95.0,
+        "text": "45",
+        "text_value": 45.0,
         "text_role": "measured",
         "text_override": null,
         "text_override_ok": null,
@@ -3298,17 +3488,17 @@
         "ok": true
       },
       {
-        "id": "Y175_hole3",
+        "id": "Y80_hole3",
         "style": "GEN011",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
         "kind_impl_ok": true,
-        "expected": 175.0,
-        "measured": 175.0,
+        "expected": 80.0,
+        "measured": 80.0,
         "diff_mm": 0.0,
-        "text": "175",
-        "text_value": 175.0,
+        "text": "80",
+        "text_value": 80.0,
         "text_role": "measured",
         "text_override": null,
         "text_override_ok": null,
@@ -3316,17 +3506,17 @@
         "ok": true
       },
       {
-        "id": "Y220_window",
+        "id": "Y45_window2",
         "style": "GEN012",
         "kind": "linear",
         "dimtype": 32,
         "dimtype_base": 0,
         "kind_impl_ok": true,
-        "expected": 220.0,
-        "measured": 220.0,
+        "expected": 45.0,
+        "measured": 45.0,
         "diff_mm": 0.0,
-        "text": "220",
-        "text_value": 220.0,
+        "text": "45",
+        "text_value": 45.0,
         "text_role": "measured",
         "text_override": null,
         "text_override_ok": null,
@@ -3569,6 +3759,115 @@
       }
     ],
     "gate1_ok": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "Ychain",
+        "ids": [
+          "Y15_hole1",
+          "Y35_window",
+          "Y45_hole2",
+          "Y80_hole3",
+          "Y45_window2"
+        ],
+        "offset_coord": -573.0,
+        "segments": [
+          {
+            "id": "Y15_hole1",
+            "s0": 375.0,
+            "s1": 390.0,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Y35_window",
+            "s0": 390.0,
+            "s1": 425.0,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Y45_hole2",
+            "s0": 425.0,
+            "s1": 470.0,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Y80_hole3",
+            "s0": 470.0,
+            "s1": 550.0,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Y45_window2",
+            "s0": 550.0,
+            "s1": 595.0,
+            "line_coord": -573.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      },
+      {
+        "view": "right",
+        "group": "Zdepth",
+        "ids": [
+          "Z16_base",
+          "Z114_wall"
+        ],
+        "offset_coord": 311.0,
+        "segments": [
+          {
+            "id": "Z114_wall",
+            "s0": 913.0,
+            "s1": 1027.0,
+            "line_coord": 311.0
+          },
+          {
+            "id": "Z16_base",
+            "s0": 1027.0,
+            "s1": 1043.0,
+            "line_coord": 311.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      },
+      {
+        "view": "top",
+        "group": "Zchain",
+        "ids": [
+          "Z5_tap",
+          "Z22_5_motor",
+          "Z115_motor"
+        ],
+        "offset_coord": -573.0,
+        "segments": [
+          {
+            "id": "Z115_motor",
+            "s0": 759.5,
+            "s1": 874.5,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Z22_5_motor",
+            "s0": 874.5,
+            "s1": 897.0,
+            "line_coord": -573.0
+          },
+          {
+            "id": "Z5_tap",
+            "s0": 897.0,
+            "s1": 902.0,
+            "line_coord": -573.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
     "gate1_max_diff_mm": 0.0,
     "style_ok": true,
     "style_mismatches": [],

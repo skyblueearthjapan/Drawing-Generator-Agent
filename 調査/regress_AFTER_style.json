@@ -1,0 +1,919 @@
+{
+  "AUTO-001": {
+    "collisions": [],
+    "compose_scale_text": "１：１",
+    "compose_view_bbox": {
+      "front": [
+        171.615224,
+        120.179934,
+        196.615224,
+        145.179934
+      ],
+      "iso": [
+        211.615224,
+        160.179934,
+        248.384776,
+        201.820066
+      ],
+      "right": [
+        216.5,
+        120.179934,
+        243.5,
+        145.179934
+      ],
+      "top": [
+        171.615224,
+        167.5,
+        196.615224,
+        194.5
+      ]
+    },
+    "compose_view_pair_overlaps": [],
+    "compose_zone_overlaps": [],
+    "frame_matched": 112,
+    "gate1": [
+      {
+        "diff_mm": 0.0,
+        "expected": 25.0,
+        "id": "W25_x",
+        "kind": "linear",
+        "measured": 25.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "25",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 25.0,
+        "id": "H25_y",
+        "kind": "linear",
+        "measured": 25.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "25",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 27.0,
+        "id": "L27_z",
+        "kind": "linear",
+        "measured": 27.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "27",
+        "view": "right"
+      }
+    ],
+    "gate1_ok": true,
+    "gate2": {
+      "ok": true,
+      "redundant": [],
+      "unspecified": []
+    },
+    "gate2_ok": true,
+    "independent_gate1_max_diff_mm": 0.0,
+    "independent_ok": true,
+    "overall_ok": true,
+    "rc": 0,
+    "verify_ok": true
+  },
+  "AUTO-002": {
+    "collisions": [],
+    "compose_scale_text": "１：１",
+    "compose_view_bbox": {
+      "front": [
+        171.840729,
+        113.5,
+        176.590729,
+        153.5
+      ],
+      "iso": [
+        191.590729,
+        170.232553,
+        248.159271,
+        206.767447
+      ],
+      "right": [
+        199.875,
+        113.5,
+        239.875,
+        153.5
+      ],
+      "top": [
+        171.840729,
+        168.5,
+        176.590729,
+        208.5
+      ]
+    },
+    "compose_view_pair_overlaps": [],
+    "compose_zone_overlaps": [],
+    "frame_matched": 112,
+    "gate1": [
+      {
+        "diff_mm": 0.0,
+        "expected": 2.0,
+        "id": "T2_flange",
+        "kind": "linear",
+        "measured": 2.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "2",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 4.75,
+        "id": "L4_75_total",
+        "kind": "linear",
+        "measured": 4.75,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "4.75",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 30.0,
+        "id": "D30_bore",
+        "kind": "diameter_linear",
+        "measured": 30.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c30",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 38.0,
+        "id": "D38_body",
+        "kind": "diameter_linear",
+        "measured": 38.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c38",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 40.0,
+        "id": "D40_flange",
+        "kind": "diameter_linear",
+        "measured": 40.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c40",
+        "view": "front"
+      }
+    ],
+    "gate1_ok": true,
+    "gate2": {
+      "ok": true,
+      "redundant": [],
+      "unspecified": []
+    },
+    "gate2_ok": true,
+    "independent_gate1_max_diff_mm": 0.0,
+    "independent_ok": true,
+    "overall_ok": true,
+    "rc": 0,
+    "verify_ok": true
+  },
+  "TEST-002": {
+    "collisions": [],
+    "compose_scale_text": "１：１",
+    "compose_view_bbox": {
+      "front": [
+        141.84136,
+        61.907986,
+        181.84136,
+        136.907986
+      ],
+      "iso": [
+        196.84136,
+        151.907986,
+        278.15864,
+        260.092014
+      ],
+      "right": [
+        200.0,
+        61.907986,
+        275.0,
+        136.907986
+      ],
+      "top": [
+        141.84136,
+        168.5,
+        181.84136,
+        243.5
+      ]
+    },
+    "compose_view_pair_overlaps": [],
+    "compose_zone_overlaps": [],
+    "frame_matched": 112,
+    "gate1": [
+      {
+        "diff_mm": 0.0,
+        "expected": 40.0,
+        "id": "L40_total",
+        "kind": "linear",
+        "measured": 40.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "40",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 35.0,
+        "id": "L35_counterbore_depth",
+        "kind": "linear",
+        "measured": 35.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "35",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 5.0,
+        "id": "L5_bore_land",
+        "kind": "linear",
+        "measured": 5.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "5",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 33.0,
+        "id": "D33_counterbore",
+        "kind": "diameter_linear",
+        "measured": 33.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c33",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 26.0,
+        "id": "D26_bore",
+        "kind": "diameter_linear",
+        "measured": 26.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c26",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 75.0,
+        "id": "D75_outer",
+        "kind": "diameter_native",
+        "measured": 75.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c75",
+        "view": "right"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 60.0,
+        "id": "P60_hole_pitch",
+        "kind": "linear",
+        "measured": 60.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "60",
+        "view": "right"
+      }
+    ],
+    "gate1_ok": true,
+    "hole_notes": [
+      {
+        "anchor_check": {
+          "dist_err_mm": 0.0,
+          "ok": true
+        },
+        "id": "N_bolt_holes",
+        "leader_points": [
+          [
+            271.3891,
+            103.2971
+          ],
+          [
+            288.0,
+            120.0
+          ],
+          [
+            298.0,
+            120.0
+          ]
+        ],
+        "ok": true,
+        "pattern": "\\A1;２－８キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０",
+        "text_insert": [
+          299.0,
+          120.0
+        ],
+        "view": "right"
+      }
+    ],
+    "rc": 0,
+    "style_check_ok": true,
+    "view_bbox": {
+      "front": [
+        141.8414,
+        61.908,
+        181.8414,
+        136.908
+      ],
+      "iso": [
+        196.8414,
+        163.6061,
+        278.1586,
+        248.3939
+      ],
+      "right": [
+        200.0,
+        61.908,
+        275.0,
+        136.908
+      ],
+      "top": [
+        141.8414,
+        168.5,
+        181.8414,
+        243.5
+      ]
+    }
+  },
+  "TEST-003": {
+    "collisions": [],
+    "compose_scale_text": "１：１",
+    "compose_view_bbox": {
+      "front": [
+        125.316234,
+        104.208869,
+        203.316234,
+        134.208869
+      ],
+      "iso": [
+        218.316234,
+        149.208869,
+        294.683766,
+        217.791131
+      ],
+      "right": [
+        241.5,
+        104.208869,
+        271.5,
+        134.208869
+      ],
+      "top": [
+        125.316234,
+        168.5,
+        203.316234,
+        198.5
+      ]
+    },
+    "compose_view_pair_overlaps": [],
+    "compose_zone_overlaps": [],
+    "frame_matched": 112,
+    "gate1": [
+      {
+        "diff_mm": 0.0,
+        "expected": 5.0,
+        "id": "L5_left_step",
+        "kind": "linear",
+        "measured": 5.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "5",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 10.0,
+        "id": "L10_flat",
+        "kind": "linear",
+        "measured": 10.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "10",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 28.0,
+        "id": "L28_to_step_end",
+        "kind": "linear",
+        "measured": 28.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "28",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 50.0,
+        "id": "L50_from_step_end",
+        "kind": "linear",
+        "measured": 50.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "50",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 78.0,
+        "id": "L78_total",
+        "kind": "linear",
+        "measured": 78.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "78",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 25.0,
+        "id": "D25_left",
+        "kind": "diameter_linear",
+        "measured": 25.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c25",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 30.0,
+        "id": "D30_step",
+        "kind": "diameter_linear",
+        "measured": 30.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "\\A1;%%c30{\\H0.625x;\\S 0^ -0.021;}",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 25.0,
+        "id": "D25_right",
+        "kind": "diameter_linear",
+        "measured": 25.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c25",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 19.0,
+        "id": "W19_flats",
+        "kind": "linear",
+        "measured": 19.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "19",
+        "view": "right"
+      }
+    ],
+    "gate1_ok": true,
+    "hole_notes": [
+      {
+        "anchor_check": {
+          "dist_err_mm": 0.0,
+          "ok": true
+        },
+        "id": "N_tap_M10",
+        "leader_points": [
+          [
+            259.5052,
+            122.2141
+          ],
+          [
+            278.0,
+            132.2089
+          ],
+          [
+            290.0,
+            132.2089
+          ]
+        ],
+        "ok": true,
+        "pattern": "\\A1;Ｍ１０深さ２０",
+        "text_insert": [
+          291.0,
+          132.2089
+        ],
+        "view": "right"
+      }
+    ],
+    "rc": 0,
+    "style_check_ok": true,
+    "view_bbox": {
+      "front": [
+        125.3162,
+        104.2089,
+        203.3162,
+        134.2089
+      ],
+      "iso": [
+        219.9391,
+        156.2137,
+        290.7947,
+        211.0703
+      ],
+      "right": [
+        241.5,
+        104.2089,
+        271.5,
+        134.2089
+      ],
+      "top": [
+        125.3162,
+        168.5,
+        203.3162,
+        198.5
+      ]
+    }
+  },
+  "gate2_falsification": {
+    "rc": 0,
+    "summary": {
+      "TEST-002": {
+        "base_ok": true,
+        "base_redundant": [
+          {
+            "axis": "X",
+            "by": "L5_bore_land(5)",
+            "from": -5.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)",
+            "to": 0.0
+          }
+        ],
+        "base_unspecified": [],
+        "detected": 4,
+        "multi_drop": [
+          {
+            "dropped": [
+              "L40_total",
+              "L35_counterbore_depth"
+            ],
+            "ok": false
+          },
+          {
+            "dropped": [
+              "L40_total",
+              "L5_bore_land"
+            ],
+            "ok": false
+          },
+          {
+            "dropped": [
+              "L35_counterbore_depth",
+              "L5_bore_land"
+            ],
+            "ok": false
+          }
+        ],
+        "total": 7
+      },
+      "TEST-003": {
+        "base_ok": true,
+        "base_redundant": [
+          {
+            "axis": "X",
+            "by": "L78_total(78)",
+            "from": -78.0,
+            "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)",
+            "to": 0.0
+          }
+        ],
+        "base_unspecified": [],
+        "detected": 4,
+        "multi_drop": [
+          {
+            "dropped": [
+              "L78_total",
+              "L28_to_step_end"
+            ],
+            "ok": false
+          },
+          {
+            "dropped": [
+              "L78_total",
+              "L50_from_step_end"
+            ],
+            "ok": false
+          },
+          {
+            "dropped": [
+              "L28_to_step_end",
+              "L50_from_step_end"
+            ],
+            "ok": false
+          },
+          {
+            "dropped": [
+              "D25_left",
+              "D25_right"
+            ],
+            "ok": false
+          }
+        ],
+        "total": 9
+      }
+    }
+  },
+  "verify_generated": {
+    "TEST-002": {
+      "frame_matched": 112,
+      "gate1": [
+        {
+          "diff_mm": 0.0,
+          "expected": 40.0,
+          "id": "L40_total",
+          "measured": 40.0,
+          "ok": true,
+          "text": "40"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 35.0,
+          "id": "L35_counterbore_depth",
+          "measured": 35.0,
+          "ok": true,
+          "text": "35"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 5.0,
+          "id": "L5_bore_land",
+          "measured": 5.0,
+          "ok": true,
+          "text": "5"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 33.0,
+          "id": "D33_counterbore",
+          "measured": 33.0,
+          "ok": true,
+          "text": "%%c33"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 26.0,
+          "id": "D26_bore",
+          "measured": 26.0,
+          "ok": true,
+          "text": "%%c26"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 75.0,
+          "id": "D75_outer",
+          "measured": 75.0,
+          "ok": true,
+          "text": "%%c75"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 60.0,
+          "id": "P60_hole_pitch",
+          "measured": 60.0,
+          "ok": true,
+          "text": "60"
+        }
+      ],
+      "gate1_ok": true,
+      "human_set_ok": true,
+      "note_ok": true,
+      "ok": true,
+      "style_ok": true
+    },
+    "TEST-003": {
+      "frame_matched": 112,
+      "gate1": [
+        {
+          "diff_mm": 0.0,
+          "expected": 5.0,
+          "id": "L5_left_step",
+          "measured": 5.0,
+          "ok": true,
+          "text": "5"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 10.0,
+          "id": "L10_flat",
+          "measured": 10.0,
+          "ok": true,
+          "text": "10"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 28.0,
+          "id": "L28_to_step_end",
+          "measured": 28.0,
+          "ok": true,
+          "text": "28"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 50.0,
+          "id": "L50_from_step_end",
+          "measured": 50.0,
+          "ok": true,
+          "text": "50"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 78.0,
+          "id": "L78_total",
+          "measured": 78.0,
+          "ok": true,
+          "text": "78"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 25.0,
+          "id": "D25_left",
+          "measured": 25.0,
+          "ok": true,
+          "text": "%%c25"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 30.0,
+          "id": "D30_step",
+          "measured": 30.0,
+          "ok": true,
+          "text": "\\A1;%%c30{\\H0.625x;\\S 0^ -0.021;}"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 25.0,
+          "id": "D25_right",
+          "measured": 25.0,
+          "ok": true,
+          "text": "%%c25"
+        },
+        {
+          "diff_mm": 0.0,
+          "expected": 19.0,
+          "id": "W19_flats",
+          "measured": 19.0,
+          "ok": true,
+          "text": "19"
+        }
+      ],
+      "gate1_ok": true,
+      "human_set_ok": true,
+      "note_ok": true,
+      "ok": true,
+      "style_ok": true
+    },
+    "rc": 0
+  },
+  "テスト-004": {
+    "collisions": [],
+    "compose_scale_text": "１：１",
+    "compose_view_bbox": {
+      "front": [
+        141.84136,
+        61.907986,
+        181.84136,
+        136.907986
+      ],
+      "iso": [
+        196.84136,
+        151.907986,
+        278.15864,
+        260.092014
+      ],
+      "right": [
+        200.0,
+        61.907986,
+        275.0,
+        136.907986
+      ],
+      "top": [
+        141.84136,
+        168.5,
+        181.84136,
+        243.5
+      ]
+    },
+    "compose_view_pair_overlaps": [],
+    "compose_zone_overlaps": [],
+    "frame_matched": 112,
+    "gate1": [
+      {
+        "diff_mm": 0.0,
+        "expected": 40.0,
+        "id": "L40_total",
+        "kind": "linear",
+        "measured": 40.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "40",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 35.0,
+        "id": "L35_counterbore_depth",
+        "kind": "linear",
+        "measured": 35.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "35",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 5.0,
+        "id": "L5_bore_land",
+        "kind": "linear",
+        "measured": 5.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "5",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 33.0,
+        "id": "D33_counterbore",
+        "kind": "diameter_linear",
+        "measured": 33.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c33",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 26.0,
+        "id": "D26_bore",
+        "kind": "diameter_linear",
+        "measured": 26.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c26",
+        "view": "front"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 75.0,
+        "id": "D75_outer",
+        "kind": "diameter_native",
+        "measured": 75.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "%%c75",
+        "view": "right"
+      },
+      {
+        "diff_mm": 0.0,
+        "expected": 60.0,
+        "id": "P60_hole_pitch",
+        "kind": "linear",
+        "measured": 60.0,
+        "ok": true,
+        "snap_max_mm": 0.0,
+        "text": "60",
+        "view": "right"
+      }
+    ],
+    "gate1_ok": true,
+    "gate2": {
+      "ok": true,
+      "redundant": [
+        {
+          "axis": "X",
+          "by": "L5_bore_land(5)",
+          "from": -5.0,
+          "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)",
+          "to": 0.0
+        }
+      ],
+      "unspecified": []
+    },
+    "gate2_ok": true,
+    "independent_gate1_max_diff_mm": 0.0,
+    "independent_ok": true,
+    "overall_ok": true,
+    "rc": 0,
+    "verify_ok": true
+  }
+}

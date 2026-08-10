@@ -1,6 +1,6 @@
 {
  "schema_version": "1.0",
- "_note": "盲検第2弾(2026-08-10)。人間図面は一切見ていない。3D実測(meas.json)と投影ジオメトリ、自社流儀の一般原則のみで作成。",
+ "_note": "盲検第2弾(2026-08-10)の計画を『様式規則(作法6〜11)』で書き直した版(2026-08-11)。寸法の集合・測定点・値は盲検時のまま(人間図面は見ていない)で、変えたのは**配置の様式だけ**: ①径寸法の左右振り分け(作法6) ②径の帯と長さの帯の分離(作法7) ③直列連記(作法8) ④PCD穴群の位相を角度寸法で明示(作法9)。",
  "part": {
   "model": "3-02(教師STEP/3.昇降軸/3-02.STEP)",
   "図番": "25154-3-02",
@@ -57,7 +57,7 @@
    },
    "value_expected": 53.0,
    "tolerance": null,
-   "comment": "中心内径。輪郭ビューなので線形+%%c(スキーマ2.1a)"
+   "comment": "中心内径。輪郭ビューなので線形+%%c(スキーマ2.1a)。【様式】作法6: 径4本を左右へ2本ずつ振り分ける。左=内側の穴系(φ53内径・φ110ザグリ)"
   },
   {
    "id": "D110_recess",
@@ -84,7 +84,7 @@
    },
    "value_expected": 110.0,
    "tolerance": null,
-   "comment": "頂面側のザグリ径(深さ10)"
+   "comment": "頂面側のザグリ径(深さ10)。左=内側の穴系のまとまり"
   },
   {
    "id": "D130_spigot",
@@ -106,12 +106,12 @@
     "direction": "vertical"
    },
    "placement": {
-    "side": "left",
-    "level": 3
+    "side": "right",
+    "level": 1
    },
    "value_expected": 130.0,
    "tolerance": null,
-   "comment": "底のインロー径"
+   "comment": "底のインロー径。【様式】作法6: 右=外形系(φ130インロー・φ196胴)。旧計画は4本とも左に積んでいた(左100%)"
   },
   {
    "id": "D196_body",
@@ -133,38 +133,38 @@
     "direction": "vertical"
    },
    "placement": {
-    "side": "left",
-    "level": 4
+    "side": "right",
+    "level": 2
    },
    "value_expected": 196.0,
    "tolerance": null,
-   "comment": "胴外径"
+   "comment": "胴外径。右の外側段"
   },
   {
-   "id": "Z10_recess_depth",
+   "id": "Z3_spigot",
    "kind": "linear",
    "view": "front",
    "measure": {
     "space": "model",
     "p1": [
      0,
-     55,
-     0
+     65,
+     -73.5
     ],
     "p2": [
      0,
-     55,
-     -10
+     65,
+     -70.5
     ],
     "direction": "horizontal"
    },
    "placement": {
     "side": "below",
-    "level": 1
+    "chain_group": "Zseg"
    },
-   "value_expected": 10.0,
+   "value_expected": 3.0,
    "tolerance": null,
-   "comment": "φ110ザグリ深さ。Z軸のdatum=頂面z=0(モータ取付基準面)"
+   "comment": "インローの出。【様式】作法8: 端点(z=-70.5)を共有する Z70_5_body と**同一寸法線に直列連記**する"
   },
   {
    "id": "Z70_5_body",
@@ -186,11 +186,11 @@
    },
    "placement": {
     "side": "below",
-    "level": 2
+    "chain_group": "Zseg"
    },
    "value_expected": 70.5,
    "tolerance": null,
-   "comment": "胴の長さ。datumから積む"
+   "comment": "胴の長さ。Z3_spigot と直列連記(3｜70.5 が1本の寸法線に並ぶ)"
   },
   {
    "id": "Z73_5_total",
@@ -212,27 +212,27 @@
    },
    "placement": {
     "side": "below",
-    "level": 3
+    "level": 2
    },
    "value_expected": 73.5,
    "tolerance": null,
-   "comment": "全長。datumから積む(冗長寸法1本は自社流儀で許容)"
+   "comment": "全長。直列連記の1段外側に置く(冗長寸法1本は自社流儀で許容)"
   },
   {
-   "id": "Z3_spigot",
+   "id": "Z10_recess_depth",
    "kind": "linear",
    "view": "front",
    "measure": {
     "space": "model",
     "p1": [
      0,
-     65,
-     -73.5
+     55,
+     0
     ],
     "p2": [
      0,
-     65,
-     -70.5
+     55,
+     -10
     ],
     "direction": "horizontal"
    },
@@ -240,9 +240,81 @@
     "side": "above",
     "level": 1
    },
-   "value_expected": 3.0,
+   "value_expected": 10.0,
    "tolerance": null,
-   "comment": "インローの出"
+   "comment": "φ110ザグリ深さ。Z軸のdatum=頂面z=0(モータ取付基準面)。【様式】作法11: 下側に3本積むのを避け、上側へ逃がす"
+  },
+  {
+   "id": "A20_phase",
+   "kind": "angle",
+   "purpose": "style",
+   "view": "right",
+   "measure": {
+    "space": "model",
+    "vertex": [
+     0,
+     0,
+     0
+    ],
+    "p1": [
+     -68.127715,
+     -24.79646,
+     0
+    ],
+    "p2": [
+     -82.5,
+     0,
+     0
+    ],
+    "base": [
+     -41.3607,
+     -7.2921,
+     0
+    ]
+   },
+   "placement": {
+    "side": "left",
+    "level": 1
+   },
+   "value_expected": 20.0,
+   "text_override": "\\A1;２０%%d",
+   "comment": "【様式】作法9: ＰＣＤ１６５のφ12穴群とＰＣＤ１４５のＭ８穴群の**位相差20度**。PCD注記は『等配であること』しか保証せず位相(基準角)はゲート②の判定対象外なので、人間流儀に倣い角度寸法で明示する。形状の一意性の根拠にはしないので purpose='style'(様式寸法)。頂点=部品中心の実在円中心、両辺の端点=実在する穴中心。 円弧はφ53とφ110の間の空き(モデルr=42)に置き、他の円・引出線と重ならないようにした。"
+  },
+  {
+   "id": "A90_pitch",
+   "kind": "angle",
+   "purpose": "style",
+   "view": "right",
+   "measure": {
+    "space": "model",
+    "vertex": [
+     0,
+     0,
+     0
+    ],
+    "p1": [
+     0,
+     82.5,
+     0
+    ],
+    "p2": [
+     82.5,
+     0,
+     0
+    ],
+    "base": [
+     29.6985,
+     29.6985,
+     0
+    ]
+   },
+   "placement": {
+    "side": "left",
+    "level": 1
+   },
+   "value_expected": 90.0,
+   "text_override": "\\A1;９０%%d",
+   "comment": "【様式】作法9: ＰＣＤ１６５の隣接穴の割付角90度。位相の基準(x軸上に穴が来る)を読み取れるようにする様式寸法。70度(=90-20)は20と90から読めるため入れない。 穴注記の引出線が集まる右下を避け、図面上の左上象限(12時→9時の穴)で表示する。円弧はA20と同じ空きの帯(モデルr=42)。"
   }
  ],
  "hole_notes": [
@@ -285,7 +357,7 @@
     0
    ],
    "attachment": "bottom-left",
-   "comment": "φ12通し+φ18ザグリ深さ10が4個。実測PCD=165.000・隣接角90度で円周等分(作法2の採用条件を満たす)。ザグリ付きなので通しボルト穴と判断しМ表記にはしない。"
+   "comment": "φ12通し+φ18ザグリ深さ10が4個。実測PCD=165.000・隣接角90度で円周等分(作法2の採用条件を満たす)。ザグリ付きなので通しボルト穴と判断しМ表記にはしない。位相は A90_pitch / A20_phase の角度寸法で補う(作法9)。"
   },
   {
    "id": "N_tap8",
