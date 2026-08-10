@@ -380,6 +380,7 @@
         60.0
       ],
       "pipe_threads": [],
+      "clusters": [],
       "count": 2,
       "equal_spacing_declared": false
     }
@@ -414,6 +415,8 @@
       "reason": "φ11 の穴が 2 個(採用の最小 3 個未満)。2個以下は寸法で指定させる(安全側)"
     }
   ],
+  "cluster_groups": [],
+  "inclined_features": [],
   "polygons": [],
   "oblique_width_dimensions": [],
   "thread_features": [],

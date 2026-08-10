@@ -247,6 +247,12 @@ _PIPE_NEEDS_FRACTION = ("R", "G")
 _NOTE_RE_COUNT = re.compile(r"^\s*(\d+)\s*[-−]")
 # 円周等分配置の明示語(自社流儀。無くてもPCD+実ジオメトリの等配検算で代替する)
 _NOTE_EQ_WORDS = (u"円周等分", u"等配", u"等分配置")
+# 円周上の**群(クラスタ)配置**の書式(E1・plan_schema.md §3.1 に明記)。
+#   `ＰＣＤ１４２　４個×３群　振分角１２－１８－１２`
+#   = PCD142 の円周上に「4個を1組」とした群が3つ、群内の隣接角が 12/18/12 度。
+#   群間の角(=残りの角)は 360/群数 − 振分角の和 で**一意に決まる**ので書かない。
+_NOTE_RE_CLUSTER = re.compile(u"(\\d+)\\s*個\\s*[×xX*]\\s*(\\d+)\\s*群")
+_NOTE_RE_PITCH = re.compile(u"振分角\\s*(\\d+(?:\\.\\d+)?(?:\\s*-\\s*\\d+(?:\\.\\d+)?)*)")
 
 
 def parse_hole_note(raw):
@@ -291,10 +297,19 @@ def parse_hole_note(raw):
                       "size": size, "pitch": p, "major": d, "pitch_dia": d2, "minor": d1,
                       "env": [lo, hi]})
     mc = _NOTE_RE_COUNT.match(s)
+    # 群(クラスタ)配置指定(E1)。**個数×群数と振分角の両方が揃ったときだけ**構造化する
+    # (片方だけでは配置が一意に決まらないので採用しない = 安全側)
+    clusters = []
+    mcl, mpi = _NOTE_RE_CLUSTER.search(s), _NOTE_RE_PITCH.search(s)
+    if mcl and mpi:
+        pitches = [float(x) for x in re.split(r"\s*-\s*", mpi.group(1)) if x]
+        clusters.append({"per_group": int(mcl.group(1)), "groups": int(mcl.group(2)),
+                         "pitches": pitches})
     return {"raw": raw, "normalized": s, "diameters": sorted(set(dias)),
             "taps": sorted(set(taps)), "depths": sorted(set(depths)),
             "pcds": sorted(set(pcds)),
             "pipe_threads": pipes,
+            "clusters": clusters,
             "count": int(mc.group(1)) if mc else None,
             "equal_spacing_declared": any(w in raw or w in s for w in _NOTE_EQ_WORDS)}
 
@@ -387,6 +402,134 @@ def find_pcd_groups(circles, notes):
                     g["reason"] = (u"ＰＣＤ%g・φ%g×%d個・円周等分を実ジオメトリで検算(実測φ%.4f)"
                                    % (pcd, dia, len(group), g["pcd_measured"]))
                     groups.append(g)
+    return groups
+
+
+# ---------------------------------------------------------------------------
+# 円周上の「群(クラスタ)配置」穴群(E1)
+# ---------------------------------------------------------------------------
+def _cyclic_match(diffs, pattern, tol):
+    u"""隣接角の並び `diffs` が、巡回シフトのどれかで `pattern` と一致するか。
+
+    円周上の並びには**始点が無い**(どの穴を1番目と呼ぶかは任意)ので、
+    巡回シフトを全部試す。反転(時計回り/反時計回り)は**許さない**:
+    許すと「鏡像の配置」まで同じ注記で通ってしまい検出力が落ちる。
+    """
+    n = len(pattern)
+    if len(diffs) != n:
+        return None
+    for k in range(n):
+        rot = pattern[k:] + pattern[:k]
+        if all(abs(diffs[i] - rot[i]) <= tol for i in range(n)):
+            return k
+    return None
+
+
+def find_cluster_groups(circles, notes):
+    u"""**円周等分でない**群配置穴群を、注記の角度列を実ジオメトリで検算して同定する(E1)。
+
+    盲検 25154-5-04 は φ9×12 が「4個1組 × 3群」で並び、実測の隣接角が
+    `[12,18,12,78]×3`(=円周等分でない)ため `find_pcd_groups` が正しく却下していた。
+    人間は「ＰＣＤ１４２　４個×３群　振分角１２－１８－１２」のように**PCD+群構成+振分角**で
+    書くので、その注記を位置カバレッジの根拠として採用できるようにする。
+
+    ❗採用条件(=反証が効く条件)は等配PCDと同じ思想で、**全部を実ジオメトリで検算**する:
+      1. 注記の総数(個数×群数)と同径の穴の実数が一致(注記先頭の個数とも一致)
+      2. 全穴中心が共通中心から等距離で、その直径が注記のＰＣＤと 0.01mm 以内で一致
+      3. 隣接角の並びが、注記から**一意に決まる**パターン
+         `[a1..a(n-1), gap] × m`(gap = 360/m − Σa)と巡回シフト込みで
+         0.05度以内で一致する
+    角度を1つでも偽装すれば 3 で落ちる(反証テスト参照)。
+    位相(基準角)は等配PCDと同じく判定対象外。
+
+    Returns: find_pcd_groups と同じ形の dict のリスト(`kind="cluster"` つき)
+    """
+    groups = []
+    for n in notes:
+        for cl in n.get("clusters") or ():
+            per, m = cl["per_group"], cl["groups"]
+            pitches = list(cl["pitches"])
+            for pcd in n["pcds"]:
+                for dia in n["diameters"]:
+                    byview = {}
+                    for c in circles:
+                        if abs(c["diameter"] - dia) <= VALUE_TOL:
+                            byview.setdefault(c["view"], []).append(c)
+                    for view in sorted(byview):
+                        group = byview[view]
+                        ax, ay = group[0]["axes"]
+                        g = {"kind": "cluster", "note": n["raw"], "view": view,
+                             "axes": [ax, ay], "diameter": dia, "pcd": pcd,
+                             "per_group": per, "groups": m, "pitches": pitches,
+                             "count_in_note": n["count"], "count_found": len(group),
+                             "ok": False, "reason": None}
+                        total = per * m
+                        if m < 1 or per < 1 or len(pitches) != per - 1:
+                            g["reason"] = (u"注記の群構成が不整合(%d個×%d群 なら振分角は%d個必要・"
+                                           u"実際%d個)" % (per, m, max(per - 1, 0), len(pitches)))
+                            groups.append(g)
+                            continue
+                        if total < PCD_MIN_COUNT:
+                            g["reason"] = (u"総数 %d 個(採用の最小 %d 個未満)"
+                                           % (total, PCD_MIN_COUNT))
+                            groups.append(g)
+                            continue
+                        if len(group) != total:
+                            g["reason"] = (u"注記の総数 %d個(%d個×%d群)と実ジオメトリのφ%g穴 "
+                                           u"%d 個が一致しない"
+                                           % (total, per, m, dia, len(group)))
+                            groups.append(g)
+                            continue
+                        if n["count"] is not None and n["count"] != total:
+                            g["reason"] = u"注記先頭の個数 %d と 個数×群数 %d が一致しない" % (
+                                n["count"], total)
+                            groups.append(g)
+                            continue
+                        cx = sum(c["center"][ax] for c in group) / len(group)
+                        cy = sum(c["center"][ay] for c in group) / len(group)
+                        rs = [math.hypot(c["center"][ax] - cx, c["center"][ay] - cy)
+                              for c in group]
+                        g["center"] = {ax: round(cx, 6) + 0.0, ay: round(cy, 6) + 0.0}
+                        g["pcd_measured"] = round(2.0 * (sum(rs) / len(rs)), 4)
+                        if max(abs(2.0 * r - pcd) for r in rs) > VALUE_TOL:
+                            g["reason"] = (u"注記のＰＣＤ%g と実ジオメトリの穴中心円 φ%.4f が"
+                                           u"一致しない(許容%.2fmm)"
+                                           % (pcd, g["pcd_measured"], VALUE_TOL))
+                            groups.append(g)
+                            continue
+                        period = 360.0 / m
+                        gap = period - sum(pitches)
+                        g["gap_deg"] = round(gap, 6)
+                        if gap <= PCD_ANGLE_TOL_DEG:
+                            g["reason"] = (u"振分角の合計 %g度 が 360/%d=%g度 以上で群が成立しない"
+                                           % (sum(pitches), m, period))
+                            groups.append(g)
+                            continue
+                        angs = sorted(math.degrees(math.atan2(c["center"][ay] - cy,
+                                                              c["center"][ax] - cx)) % 360.0
+                                      for c in group)
+                        diffs = [(angs[(i + 1) % len(angs)] - angs[i]) % 360.0
+                                 for i in range(len(angs))]
+                        pattern = (pitches + [gap]) * m
+                        k = _cyclic_match(diffs, pattern, PCD_ANGLE_TOL_DEG)
+                        g["angles_measured_deg"] = [round(d, 4) for d in diffs]
+                        g["pattern_deg"] = [round(p, 4) for p in pattern]
+                        if k is None:
+                            g["reason"] = (u"φ%g の穴 %d 個の実測隣接角 %s が注記の並び %s と"
+                                           u"一致しない(許容%.2f度)"
+                                           % (dia, len(group), g["angles_measured_deg"],
+                                              g["pattern_deg"], PCD_ANGLE_TOL_DEG))
+                            groups.append(g)
+                            continue
+                        g["ok"] = True
+                        g["angles_deg"] = [round(a, 4) for a in angs]
+                        g["hole_centers"] = [c["center"] for c in group]
+                        g["reason"] = (u"ＰＣＤ%g・φ%g×%d個(%d個×%d群・振分角%s・群間角%.4g度)"
+                                       u"を実ジオメトリで検算(実測φ%.4f)"
+                                       % (pcd, dia, total, per, m,
+                                          u"-".join(u"%g" % p for p in pitches), gap,
+                                          g["pcd_measured"]))
+                        groups.append(g)
     return groups
 
 
@@ -659,6 +802,230 @@ def find_thread_features(circles, nodes, pipe_threads):
 
 
 # ---------------------------------------------------------------------------
+# 傾斜フィーチャー(傾斜穴・傾斜稜線)の同定(E2)
+# ---------------------------------------------------------------------------
+# 角度の一致許容差[度]。群配置の検算(PCD_ANGLE_TOL_DEG)と同じ厳しさに揃える。
+INCLINED_ANGLE_TOL_DEG = 0.05
+
+
+def _seg_points(o):
+    u"""斜線1本の2端点を、そのビューの2軸のモデル座標で返す。"""
+    ax, ay = o["axes"]
+    return ((o["pairs"][ax][0], o["pairs"][ay][0]),
+            (o["pairs"][ax][1], o["pairs"][ay][1]))
+
+
+def _unit(dx, dy):
+    n = math.hypot(dx, dy)
+    return (dx / n, dy / n) if n > 1e-12 else None
+
+
+def _parallel(u1, u2, tol_deg=INCLINED_ANGLE_TOL_DEG):
+    u"""2つの単位ベクトルが(向きの正負を問わず)平行か。"""
+    return abs(u1[0] * u2[1] - u1[1] * u2[0]) <= math.sin(math.radians(tol_deg))
+
+
+def _axis_parallel(u1, tol_deg=INCLINED_ANGLE_TOL_DEG):
+    u"""単位ベクトルがビューの軸(=基準方向)に平行か。"""
+    s = math.sin(math.radians(tol_deg))
+    return abs(u1[0]) <= s or abs(u1[1]) <= s
+
+
+def find_inclined_features(obliques, covered_dias, angle_dims):
+    u"""**傾斜した円筒穴**(投影が平行な斜線2本になるもの)を1フィーチャーとして同定する(E2)。
+
+    傾斜穴は投影が楕円/斜線になり、その端点が「非丸め値の到達不能な位置ノード」として
+    大量に残る(盲検 25154-3-09 で12件、2-06 で44件)。人間は**角度寸法+基準位置**で
+    1本の穴を指定するので、その根拠が図面にあるときだけ 1 特徴として扱う。
+
+    同定(全て実ジオメトリから):
+      1. 同じビューの斜線2本が平行で、**垂直距離が図面でカバー済みの直径と一致**する
+         (= 傾斜円筒の見え掛かり輪郭の2本)。軸線はその2本の中線。
+      2. そのフィーチャーに**紐づいた角度寸法**が存在する:
+         (a) 頂点が2本のどちらかの実在端点と一致(NODE_TOL)
+         (b) 一方の辺が斜線と平行(=傾斜方向)
+         (c) もう一方の辺がビューの軸方向(=基準方向)
+         (d) 寸法の実測角が、その2辺の幾何的な成す角と一致(0.05度)
+    ❗値だけ・向きだけの一致では採用しない(自己申告の余地を消すため、
+      正多角形の斜め寸法 `_oblique_hits_opposite_vertices` と同じ思想)。
+
+    位置(軸線がどこを通るか)と端点の確定は、全軸の到達判定が出そろってから
+    `_apply_inclined_derivations` が行う。
+
+    Returns: [{"view","axes","diameter","normal","offset","direction","segments",
+               "endpoints","dim_id","angle_deg","ok","reason"}]
+    """
+    feats = []
+    byview = {}
+    for i, o in enumerate(obliques):
+        byview.setdefault(o["view"], []).append((i, o))
+    for view in sorted(byview):
+        items = byview[view]
+        for a in range(len(items)):
+            for b in range(a + 1, len(items)):
+                i1, o1 = items[a]
+                i2, o2 = items[b]
+                if o1["axes"] != o2["axes"]:
+                    continue
+                u1 = _unit(o1["d"][0], o1["d"][1])
+                u2 = _unit(o2["d"][0], o2["d"][1])
+                if u1 is None or u2 is None or not _parallel(u1, u2):
+                    continue
+                nrm = (-u1[1], u1[0])
+                p1 = _seg_points(o1)[0]
+                p2 = _seg_points(o2)[0]
+                c1 = p1[0] * nrm[0] + p1[1] * nrm[1]
+                c2 = p2[0] * nrm[0] + p2[1] * nrm[1]
+                sep = abs(c2 - c1)
+                dia = next((d for d in covered_dias if abs(d - sep) <= VALUE_TOL), None)
+                if dia is None or sep <= VALUE_TOL:
+                    continue
+                endpoints = list(_seg_points(o1)) + list(_seg_points(o2))
+                f = {"view": view, "axes": list(o1["axes"]), "diameter": round(dia, 6),
+                     "direction": [round(u1[0], 9), round(u1[1], 9)],
+                     "normal": [round(nrm[0], 9), round(nrm[1], 9)],
+                     "offset": round((c1 + c2) / 2.0, 6),
+                     "angle_from_axis_deg": round(
+                         math.degrees(math.atan2(abs(u1[1]), abs(u1[0]))), 6),
+                     "segments": [i1, i2],
+                     "endpoints": [[round(p[0], 6) + 0.0, round(p[1], 6) + 0.0]
+                                   for p in endpoints],
+                     "dim_id": None, "angle_deg": None, "ok": False, "reason": None}
+                hit = _match_angle_dim(f, endpoints, u1, angle_dims)
+                if hit is None:
+                    f["reason"] = (u"傾斜円筒(φ%g・%.4g度)だが、この穴に紐づく角度寸法が"
+                                   u"図面に無い(頂点が実在端点・一辺が傾斜方向・"
+                                   u"他辺が基準方向、の全てを満たす角度寸法が必要)"
+                                   % (dia, f["angle_from_axis_deg"]))
+                else:
+                    f["dim_id"], f["angle_deg"] = hit["id"], hit["value"]
+                    f["reason"] = (u"角度寸法%s(%.4g度)が傾斜方向を指定・φ%g は寸法/注記で"
+                                   u"カバー済み" % (hit["id"], hit["value"], dia))
+                feats.append(f)
+    return feats
+
+
+def _match_angle_dim(f, endpoints, udir, angle_dims):
+    u"""この傾斜フィーチャーに**紐づいた**角度寸法を探す(条件は find_inclined_features 参照)。"""
+    for r in angle_dims:
+        if r.get("view") != f["view"] or list(r.get("axes") or []) != f["axes"]:
+            continue
+        vtx = r.get("vertex")
+        rays = r.get("rays") or []
+        if vtx is None or len(rays) != 2 or r.get("value") is None:
+            continue
+        if not any(abs(vtx[0] - p[0]) <= NODE_TOL and abs(vtx[1] - p[1]) <= NODE_TOL
+                   for p in endpoints):
+            continue                      # (a) 頂点が実在端点でない
+        ru = [_unit(x[0], x[1]) for x in rays]
+        if any(x is None for x in ru):
+            continue
+        for k in (0, 1):
+            if not _parallel(ru[k], udir):
+                continue                  # (b) 一方の辺が傾斜方向
+            if not _axis_parallel(ru[1 - k]):
+                continue                  # (c) 他方の辺が基準方向(ビューの軸)
+            # (d) 実測角(図面座標で再計算した値)が2辺の成す角と一致するか。
+            #     モデル座標は鏡像になり得るので**符号を持たない角**で照合し、
+            #     反射で 360-θ になる場合も許す(角の大きさは鏡像で保存される)。
+            dot = ru[0][0] * ru[1][0] + ru[0][1] * ru[1][1]
+            crs = abs(ru[0][0] * ru[1][1] - ru[0][1] * ru[1][0])
+            geo = math.degrees(math.atan2(crs, dot))          # 0..180
+            v = float(r["value"])
+            if min(abs(v - geo), abs((360.0 - v) - geo)) > INCLINED_ANGLE_TOL_DEG:
+                continue
+            return r
+    return None
+
+
+def _apply_inclined_derivations(axis_state, incl_feats, circle_feats):
+    u"""角度寸法で方向が決まった傾斜穴の**位置**を確定し、端点を到達済みへ繰り入れる(E2)。
+
+    確定に必要なのは (1)方向(角度寸法) (2)径(寸法/注記) (3)軸線の通る1点 の3つ。
+    (3) は「軸線が**到達済みの位置ノードの組**を通る」ことで与える
+    (盲検 25154-3-09 は軸線が部品中心 (X=0,Z=0) を通る)。
+
+    端点は「確定した輪郭線 × 図面でカバー済みの円(中心も到達済み)」の交点として
+    **作図的に一意に決まる**ときだけ到達済みにする。
+    ❗端点が説明できない(どの円にも乗らない)場合は**採用しない**。
+      「傾斜穴だから端点は判定対象外」という一括除外はゲートを緩めるので採らない。
+    """
+    def reached(a, v):
+        st = axis_state.get(a)
+        if st is None or st["root"] is None:
+            return False
+        i = st["an"].index(v)
+        return i is not None and st["uf"].find(i) == st["root"]
+
+    def derive(a, v, label, src):
+        st = axis_state.get(a)
+        if st is None or st["root"] is None:
+            return False
+        i = st["an"].index(v)
+        if i is None or st["uf"].find(i) == st["root"]:
+            return False
+        st["uf"].union(st["root"], i)
+        st["rep"]["edges"].append({"from": round(src, 4),
+                                   "to": round(st["an"].values[i], 4),
+                                   "by": label, "new_link": True})
+        return True
+
+    for f in incl_feats:
+        if f["dim_id"] is None:
+            continue
+        ax, ay = f["axes"]
+        if axis_state.get(ax) is None or axis_state.get(ay) is None:
+            continue
+        nx, ny = f["normal"]
+        c = f["offset"]
+        # --- (3) 軸線が通る「到達済みの位置ノードの組」を探す ---
+        anchor = None
+        if abs(ny) > 1e-9:
+            for u in sorted(axis_state[ax]["an"].values):
+                if not reached(ax, u):
+                    continue
+                v = (c - nx * u) / ny
+                idx = axis_state[ay]["an"].index(v)
+                if idx is not None and reached(ay, axis_state[ay]["an"].values[idx]):
+                    anchor = (round(u, 6) + 0.0,
+                              round(axis_state[ay]["an"].values[idx], 6) + 0.0)
+                    break
+        if anchor is None:
+            f["reason"] = (f["reason"] or u"") + \
+                u" / ただし軸線が到達済みの位置(基準点)を通らないため採用しない"
+            continue
+        f["anchor"] = list(anchor)
+        # --- 端点をカバー済みの円との交点として確定する ---
+        lbl_base = u"傾斜穴(φ%g・角度寸法%s・基準点(%s=%g,%s=%g))" % (
+            f["diameter"], f["dim_id"], ax, anchor[0], ay, anchor[1])
+        undecided = []
+        for p in f["endpoints"]:
+            term = None
+            for cf in circle_feats:
+                if list(cf["axes"]) != f["axes"]:
+                    continue
+                cc = cf["center"]
+                if not (reached(ax, cc[ax]) and reached(ay, cc[ay])):
+                    continue
+                if abs(math.hypot(p[0] - cc[ax], p[1] - cc[ay])
+                       - cf["diameter"] / 2.0) <= VALUE_TOL:
+                    term = cf["label"]
+                    break
+            if term is None:
+                undecided.append(p)
+                continue
+            lbl = u"%s と %s の交点" % (lbl_base, term)
+            derive(ax, p[0], lbl, anchor[0])
+            derive(ay, p[1], lbl, anchor[1])
+        f["undecided_endpoints"] = undecided
+        if undecided:
+            f["reason"] = (f["reason"] or u"") + \
+                u" / ただし端点%d個が『カバー済みの円との交点』として説明できない" % len(undecided)
+        else:
+            f["ok"] = True
+
+
+# ---------------------------------------------------------------------------
 # 本体
 # ---------------------------------------------------------------------------
 def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
@@ -814,6 +1181,25 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
         elif base in (3, 4) and am is not None:
             rec["role"] = "diameter"
             rec["value"] = round((val if base == 3 else val * 2.0), 6)
+        elif base == 2 and am is not None:
+            # ❗E2: 角度寸法(ANGULAR・dimtype=2)。長さではないので尺度換算しない。
+            #   頂点と2辺の向きを**ビューの2軸のモデル座標**で持ち、傾斜フィーチャーの
+            #   照合に使う(値そのものは図面座標で再計算した度数)。
+            ax_, ay_ = am["x"][0], am["y"][0]
+            v1 = to_model_coords(am, (e.dxf.defpoint2.x, e.dxf.defpoint2.y))
+            q1 = to_model_coords(am, (e.dxf.defpoint3.x, e.dxf.defpoint3.y))
+            v2 = to_model_coords(am, (e.dxf.defpoint4.x, e.dxf.defpoint4.y))
+            q2 = to_model_coords(am, (e.dxf.defpoint.x, e.dxf.defpoint.y))
+            rec["role"] = "angle"
+            rec["value"] = dim_engine.measure_angle_deg(e)
+            rec["axes"] = [ax_, ay_]
+            rec["vertex"] = [v1[ax_], v1[ay_]]
+            rec["rays"] = [[q1[ax_] - v1[ax_], q1[ay_] - v1[ay_]],
+                           [q2[ax_] - v2[ax_], q2[ay_] - v2[ay_]]]
+            out_of_scope.append({
+                "class": "angle_dimension", "id": did, "angle": rec["value"],
+                "reason": u"角度寸法。位置チェーンの辺には使わない"
+                          u"(傾斜フィーチャーの方向指定としてのみ使う)"})
         dims.append(rec)
 
     notes = []
@@ -917,18 +1303,28 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
 
     # --- 3b) PCD穴群・正多角形の同定(位置カバレッジの根拠) -----------------
     # (b)の拡張。**注記の自己申告をそのまま信じるのではなく実ジオメトリで検算する**
-    pcd_groups = find_pcd_groups(circles, notes)
+    # 群(クラスタ)配置の注記を持つ注記は等配検算にかけない(こちらは `find_cluster_groups`
+    # がより厳しい角度列の検算で扱う。等配でないのは当たり前なので却下ログを出さない)
+    pcd_groups = find_pcd_groups(circles, [n for n in notes if not n.get("clusters")])
+    cluster_groups = find_cluster_groups(circles, notes)
     for g in pcd_groups:
         if not g["ok"]:
             out_of_scope.append({"class": "pcd_group_rejected", "view": g["view"],
                                  "diameter": g["diameter"],
                                  "reason": u"ＰＣＤ注記を位置の根拠に採用できない: %s"
                                            % g["reason"]})
-    if any(g["ok"] for g in pcd_groups):
+    for g in cluster_groups:
+        if not g["ok"]:
+            out_of_scope.append({"class": "cluster_group_rejected", "view": g["view"],
+                                 "diameter": g["diameter"],
+                                 "reason": u"群配置注記を位置の根拠に採用できない: %s"
+                                           % g["reason"]})
+    hole_groups = pcd_groups + cluster_groups
+    if any(g["ok"] for g in hole_groups):
         out_of_scope.append(
             {"class": "pcd_phase",
-             "reason": u"円周等分穴群の**位相(基準角)**はv1の判定対象外。"
-                       u"PCD+等配+個数までを実ジオメトリで検算して位置カバレッジに採用している"})
+             "reason": u"円周配置穴群の**位相(基準角)**はv1の判定対象外。"
+                       u"PCD+配置角+個数までを実ジオメトリで検算して位置カバレッジに採用している"})
 
     # 幅(位置対の距離)は多角形の二面幅照合にも使うので先に集める
     covered_widths = _covered_widths(dims)
@@ -964,6 +1360,12 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                             "reason": u"%sビューの正%d角形(二面幅%.4g・対角%.4g)を決める寸法が無い"
                                       % (pg["view"], pg["n"], pg["across_flats"],
                                          pg["across_corners"])})
+
+    # --- 3c) 傾斜フィーチャー(傾斜穴)の同定(E2) --------------------------
+    #   平行な斜線2本 = 傾斜円筒の見え掛かり輪郭。角度寸法が紐づいていれば1特徴とする。
+    #   位置(基準点)と端点の確定は全軸の到達判定の後(4b)で行う。
+    angle_dims = [r for r in dims if r["role"] == "angle"]
+    inclined_features = find_inclined_features(obliques, covered_dias, angle_dims)
 
     # --- 4) 位置ノードのカバレッジ ----------------------------------------
     axis_report = {}
@@ -1045,18 +1447,22 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
         # (b拡張) PCD穴群: 検算に通った円周等分穴は、PCD中心から各穴中心の位置が決まる。
         #   人間はPCD1本で済ませる流儀なので、弦寸法を何本も要求しない
         #   (中心そのものが図面上で決まっていない場合は連結されないので合格にはならない)
-        for g in pcd_groups:
+        for g in hole_groups:
             if not g["ok"] or a not in g["axes"]:
                 continue
             ic = an.index(g["center"][a])
             if ic is None:
                 continue
+            arrange = (u"%d個×%d群・振分角%s" % (g["per_group"], g["groups"],
+                                                u"-".join(u"%g" % p for p in g["pitches"]))
+                       if g.get("kind") == "cluster" else u"円周等分")
             for hc in g["hole_centers"]:
                 ih = an.index(hc[a])
                 if ih is not None:
                     add_edge(ic, ih,
-                             u"ＰＣＤ%g注記(φ%g×%d・円周等分・%s)"
-                             % (g["pcd"], g["diameter"], g["count_found"], g["view"]),
+                             u"ＰＣＤ%g注記(φ%g×%d・%s・%s)"
+                             % (g["pcd"], g["diameter"], g["count_found"], arrange,
+                                g["view"]),
                              allow_cycle_report=False)
 
         # (b拡張) 正多角形: 二面幅(または対角)1本で全頂点の位置が決まる
@@ -1122,6 +1528,9 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
     #   (f) 円 × 到達済みの直線(片側の弦)          … E5(b)
     #   (g) 円 × 円 の交点                          … E5(a)
     geo_feats = _circle_features(circles, dia_covered, thread_features)
+    # (E2) 傾斜穴は「角度寸法+基準点+カバー済みの円との交点」で端点まで確定する。
+    #   幾何導出より先に効かせ、その結果を幾何導出が使えるようにする。
+    _apply_inclined_derivations(axis_state, inclined_features, geo_feats)
     _apply_geometric_derivations(axis_state, geo_feats, covered_dias, covered_widths)
 
     # --- 4c) 未到達ノードの最終仕分け ---------------------------------------
@@ -1152,6 +1561,21 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                                           u"(他寸法の和・差でも到達できない)" % (a, v)})
         axis_report[a] = rep
 
+    used_angle_ids = {f["dim_id"] for f in inclined_features if f["dim_id"]}
+    for f in inclined_features:
+        if f["ok"]:
+            continue
+        # 不採用の傾斜フィーチャーは「1特徴として検出したが根拠が足りない」ことを明示する。
+        # (端点は従来どおり位置ノードとして未指定に計上され、そこで不合格になる)
+        out_of_scope.append({"class": "inclined_feature_rejected", "view": f["view"],
+                             "diameter": f["diameter"],
+                             "reason": u"傾斜フィーチャーを位置の根拠に採用できない: %s"
+                                       % f["reason"]})
+    for r in dims:
+        if r["role"] == "angle" and r["id"] not in used_angle_ids:
+            floating.append({"id": r["id"], "axis": None,
+                             "reason": u"角度寸法だが、どの傾斜フィーチャーの方向指定にも"
+                                       u"ならない(位置チェーンの辺にもならない)"})
     for r in dims:
         if r["role"] == "oblique_width" and r["id"] not in used_oblique_ids:
             floating.append({"id": r["id"], "axis": None,
@@ -1202,6 +1626,8 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
                              "value": r["value"], "view": r["view"]} for r in dims],
         "hole_notes": notes,
         "pcd_groups": pcd_groups,
+        "cluster_groups": cluster_groups,
+        "inclined_features": inclined_features,
         "polygons": polygons,
         "oblique_width_dimensions": oblique_widths,
         "thread_features": thread_features,
@@ -1479,6 +1905,18 @@ def print_report(rep):
             print(u"   [%s] %s φ%g×%s PCD%g : %s"
                   % (u"採用" if g["ok"] else u"却下", g["view"], g["diameter"],
                      g["count_found"], g["pcd"], g["reason"]))
+    if rep.get("cluster_groups"):
+        print(u"\n-- 群(クラスタ)配置穴群の検算(注記の角度列を位置の根拠に採用してよいか) --")
+        for g in rep["cluster_groups"]:
+            print(u"   [%s] %s φ%g×%s PCD%g %d個×%d群 : %s"
+                  % (u"採用" if g["ok"] else u"却下", g["view"], g["diameter"],
+                     g["count_found"], g["pcd"], g["per_group"], g["groups"], g["reason"]))
+    if rep.get("inclined_features"):
+        print(u"\n-- 傾斜フィーチャー(傾斜穴)の検出 --")
+        for f in rep["inclined_features"]:
+            print(u"   [%s] %s φ%g 傾斜%.4g度 基準点%s : %s"
+                  % (u"採用" if f["ok"] else u"却下", f["view"], f["diameter"],
+                     f["angle_from_axis_deg"], f.get("anchor"), f["reason"]))
     if rep.get("polygons"):
         print(u"\n-- 正多角形の検出 --")
         for p in rep["polygons"]:

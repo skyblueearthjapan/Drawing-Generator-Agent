@@ -216,7 +216,12 @@ def independent_verify(dxf_path, plan_path):
             continue
         kind = _resolve_kind(item, defaults)
         exp = float(item["value_expected"])
-        m = dim_engine.measure_model_value(dim, scale)
+        # ❗角度寸法(kind='angle')は長さではない。尺度換算をせず[度]で独立に測り直し、
+        #   許容差も[度](dim_engine.ANGLE_TOL_DEG_DEFAULT)で判定する
+        is_angle = (kind == "angle")
+        tol_ = dim_engine.ANGLE_TOL_DEG_DEFAULT if is_angle else 0.01
+        m = (dim_engine.measure_angle_deg(dim) if is_angle
+             else dim_engine.measure_model_value(dim, scale))
         t = dim_engine.dim_text_of(doc, dim)
         # ❗寸法文字の照合は「計画が text_override を指定しているか」で3通りに分かれる。
         #   参考寸法ラベル `(ＰＣＤ３３３)` の 333 を実測 321.6533 と比べて不合格にしていたのが
@@ -234,7 +239,9 @@ def independent_verify(dxf_path, plan_path):
                 tv = None
             else:
                 text_role = "override"       # 対称公差 `30%%p0.1` 等 -> 数値は照合する
-                tv = dim_engine.parse_dim_text_value(override)
+                # 角度は `３０°` のように単位付きなので専用パーサで数値を取り出す
+                tv = (dim_engine.parse_angle_text_value(override) if is_angle
+                      else dim_engine.parse_dim_text_value(override))
         diff = None if m is None else abs(m - exp)
         tdiff = None if (tv is None or m is None) else abs(tv - m)
         base = dim.dxf.dimtype & 7
@@ -242,7 +249,7 @@ def independent_verify(dxf_path, plan_path):
                    or (kind in ("linear", "diameter_linear") and base == 0)
                    or (kind == "radius" and base == 4)
                    or (kind == "angle" and base == 2))
-        ok = ((diff is not None and diff <= 0.01) and (tdiff is None or tdiff <= 0.01)
+        ok = ((diff is not None and diff <= tol_) and (tdiff is None or tdiff <= tol_)
               and kind_ok and (override_ok is not False))
         gate_ok = gate_ok and ok
         rows.append({"id": did, "style": style, "kind": kind, "dimtype": dim.dxf.dimtype,
@@ -252,10 +259,14 @@ def independent_verify(dxf_path, plan_path):
                      "text": t, "text_value": tv, "text_role": text_role,
                      "text_override": override, "text_override_ok": override_ok,
                      "text_diff_mm": None if tdiff is None else round(tdiff, 6), "ok": ok})
+        if is_angle:
+            rows[-1]["unit"] = "deg"   # diff_mm/text_diff_mm は**度**で読むこと
     result["scale"] = scale
     result["gate1"] = rows
     result["gate1_ok"] = gate_ok
-    result["gate1_max_diff_mm"] = (max((r["diff_mm"] for r in rows if r["diff_mm"] is not None),
+    # ❗角度[度]をmmの最大差に混ぜない(単位が違う値の max は意味を持たない)
+    result["gate1_max_diff_mm"] = (max((r["diff_mm"] for r in rows
+                                        if r["diff_mm"] is not None and r.get("unit") != "deg"),
                                         default=0.0))
 
     # ---- B. DIMSTYLE実効値 ----

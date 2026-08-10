@@ -226,6 +226,10 @@ def plan_view_reserves(plan, band_mm=DIM_BAND_MM):
     for item in plan.get("dimensions", []):
         pl = item.get("placement") or {}
         side = pl.get("side")
+        # 角度寸法(kind='angle')は頂点まわりの円弧で、ビュー輪郭からのオフセットではない
+        # (`placement` は使わない)。斜め線形寸法と同じく外向きの予約帯を作らない。
+        if item.get("kind") == "angle":
+            continue
         if side not in DIM_SIDES:
             continue
         # 斜め線形寸法(measure.direction が数値で軸平行でないもの)はビュー外周ではなく

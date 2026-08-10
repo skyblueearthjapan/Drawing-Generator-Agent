@@ -614,6 +614,52 @@ def measure_from_defpoints(dim):
     return None
 
 
+def measure_angle_deg(dim):
+    u"""ANGULAR DIMENSION(dimtype=2)の**実測角度[度]**を defpoint から独立に再計算する。
+
+    ❗角度は長さではないので `measure_model_value` の尺度換算(1/scale)を通してはいけない。
+    `add_angular_dim_2l(base, line1=(v,p1), line2=(v,p2))` の defpoint 割り当ては実測で
+    **defpoint2=v / defpoint3=p1 / defpoint4=v / defpoint=p2 / defpoint5=base**。
+    したがって
+        line1 の向き = defpoint3 - defpoint2 、 line2 の向き = defpoint - defpoint4
+    で、**line1 から line2 へ反時計回り(CCW)に測った角**が ezdxf の測定値と一致する
+    (`add_angular_dim_2l` の測定値と突き合わせて確認済み)。
+
+    Returns: 角度[度] 0〜360 / 角度寸法でなければ None
+    """
+    d = dim.dxf
+    if (d.dimtype & 7) != 2:
+        return None
+    try:
+        v1, p1 = d.defpoint2, d.defpoint3
+        v2, p2 = d.defpoint4, d.defpoint
+    except AttributeError:
+        return None
+    a1 = math.atan2(p1.y - v1.y, p1.x - v1.x)
+    a2 = math.atan2(p2.y - v2.y, p2.x - v2.x)
+    return math.degrees((a2 - a1) % (2.0 * math.pi))
+
+
+# 角度寸法の許容差[度]。円周等分/群配置の検算(PCD_ANGLE_TOL_DEG)と同じ厳しさに揃える。
+ANGLE_TOL_DEG_DEFAULT = 0.05
+
+# 角度の寸法文字から数値を取り出す(全角正規化後。`３０°`/`30度`/`30.5 deg` を許す)
+_ANGLE_TEXT_RE = re.compile(r"(-?\d+(?:\.\d+)?)\s*(?:°|度|deg)?")
+
+
+def parse_angle_text_value(raw):
+    u"""角度寸法の `text_override` から数値[度]を取り出す(ゲート①の文字照合用)。
+
+    ❗`kind:"angle"` は text_override 必須(plan_schema §8ルール3)なので、
+    **何もしないと「描いた文字と実測角が食い違っていても誰も気付かない」穴**になる。
+    そこで文字から数値を復元して実測角と突き合わせる(復元できなければ None=照合しない)。
+    """
+    s = strip_mtext_codes(raw)          # 全角→半角の正規化まで含む
+    s = s.replace("(", "").replace(")", "").strip()
+    m = _ANGLE_TEXT_RE.search(s)
+    return float(m.group(1)) if m else None
+
+
 def measure_model_value(dim, scale=1.0):
     u"""defpointから再計算した図面上の実測(draw mm)を**モデル実寸(mm)**へ戻す。
 
@@ -865,6 +911,8 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
     stack_step = float(defaults.get("stack_step_mm", spec["dimstyle_base"]["dimdli"]["value"]))
     snap_tol = float(defaults.get("snap_tol_mm", 0.01))
     gate_tol = float(defaults.get("gate_tol_mm", 0.01))
+    # 角度寸法(kind='angle')の許容差[度]。長さのmm許容差とは別物なので専用キーで持つ
+    angle_tol = float(defaults.get("angle_tol_deg", ANGLE_TOL_DEG_DEFAULT))
     diameter_style = dict(DIAMETER_STYLE_DEFAULT)
     diameter_style.update(defaults.get("diameter_style", {}))
     hole_note_style = dict(HOLE_NOTE_DEFAULT)
@@ -1076,10 +1124,22 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
 
         # ---- ゲート①(照合は**モデル実寸空間**。尺度はここで戻す) ----
         snaps = [round(nearest_feature_distance(p, feats[view]), 6) for p in meas_pts]
-        measured = measure_model_value(ent, scale)
+        is_angle = (kind == "angle")
+        if is_angle:
+            # ❗角度は長さではないので尺度換算をしてはいけない。許容差も[度]で持つ
+            measured = measure_angle_deg(ent)
+            cmp_tol, unit = angle_tol, u"度"
+        else:
+            measured = measure_model_value(ent, scale)
+            cmp_tol, unit = gate_tol, u"mm"
         expected = float(item["value_expected"])
         raw_text = dim_text_of(doc, ent)
         shown = parse_dim_text_value(raw_text) if not text_override else None
+        if is_angle and text_override:
+            # ❗角度は text_override 必須(§8ルール3)。何もしないと「描いた角度文字が
+            #   実測角と食い違っていても誰も気付かない」穴になるので、文字から数値を
+            #   復元して実測角と突き合わせる
+            shown = parse_angle_text_value(raw_text)
 
         row = {
             "id": did, "kind": kind, "plan_kind": item["kind"], "view": view,
@@ -1094,16 +1154,18 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             "style": style_name,
             "ok": True, "errors": [],
         }
+        if is_angle:
+            row["unit"] = "deg"        # diff_mm/text_diff_mm は**度**で読むこと
         if row["snap_max_mm"] is not None and row["snap_max_mm"] > snap_tol:
             row["errors"].append(
                 u"測定点が実ジオメトリ特徴点に一致しない(最大%.4fmm > %.4fmm)"
                 % (row["snap_max_mm"], snap_tol))
         if measured is None:
             row["errors"].append(u"実測値を再計算できない(kind=%s)" % kind)
-        elif row["diff_mm"] > gate_tol:
-            row["errors"].append(u"実測 %.4f vs 期待 %.4f (差 %.4fmm > %.4fmm)"
-                                 % (measured, expected, row["diff_mm"], gate_tol))
-        if row["text_diff_mm"] is not None and row["text_diff_mm"] > gate_tol:
+        elif row["diff_mm"] > cmp_tol:
+            row["errors"].append(u"実測 %.4f vs 期待 %.4f (差 %.4f%s > %.4f%s)"
+                                 % (measured, expected, row["diff_mm"], unit, cmp_tol, unit))
+        if row["text_diff_mm"] is not None and row["text_diff_mm"] > cmp_tol:
             row["errors"].append(u"寸法文字 %.4f が実測 %.4f と不一致"
                                  % (shown, measured))
 

@@ -165,7 +165,11 @@ def verify(test_id, cfg):
         item = by_id[did]
         kind = resolve_kind(item, defaults)
         exp = float(item["value_expected"])
-        m = dim_engine.measure_model_value(dim, scale)
+        # 角度寸法は長さではない -> 尺度換算せず[度]で測り、許容差も[度]
+        is_angle = (kind == "angle")
+        tol_ = dim_engine.ANGLE_TOL_DEG_DEFAULT if is_angle else 0.01
+        m = (dim_engine.measure_angle_deg(dim) if is_angle
+             else dim_engine.measure_model_value(dim, scale))
         t = dim_engine.dim_text_of(doc, dim)
         # ❗参考寸法ラベル `(ＰＣＤ３３３)` を実測と数値比較してはいけない(盲検で誤不合格4件)。
         #   engine/generate_drawing.independent_verify と同じ規則で3通りに分ける。
@@ -179,7 +183,9 @@ def verify(test_id, cfg):
             if dim_engine.is_reference_text(override):
                 text_role, tv = "reference", None
             else:
-                text_role, tv = "override", dim_engine.parse_dim_text_value(override)
+                text_role = "override"
+                tv = (dim_engine.parse_angle_text_value(override) if is_angle
+                      else dim_engine.parse_dim_text_value(override))
         diff = abs(m - exp)
         tdiff = abs(tv - m) if tv is not None else None
         # 実装方式の一致(円形ビュー=ネイティブDIAMETER(base=3) / 輪郭ビュー=線形(base=0))
@@ -188,7 +194,7 @@ def verify(test_id, cfg):
                    or (kind in ("linear", "diameter_linear") and base == 0)
                    or (kind == "radius" and base == 4)
                    or (kind == "angle" and base == 2))
-        ok = (diff <= 0.01 and (tdiff is None or tdiff <= 0.01) and kind_ok
+        ok = (diff <= tol_ and (tdiff is None or tdiff <= tol_) and kind_ok
               and (override_ok is not False))
         gate_ok = gate_ok and ok
         rows.append({"id": did, "style": style, "kind": kind, "dimtype": dim.dxf.dimtype,

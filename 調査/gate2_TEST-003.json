@@ -367,11 +367,14 @@
       ],
       "pcds": [],
       "pipe_threads": [],
+      "clusters": [],
       "count": null,
       "equal_spacing_declared": false
     }
   ],
   "pcd_groups": [],
+  "cluster_groups": [],
+  "inclined_features": [],
   "polygons": [],
   "oblique_width_dimensions": [],
   "thread_features": [],
