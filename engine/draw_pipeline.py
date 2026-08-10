@@ -362,9 +362,28 @@ def _set_view_scale(v, scale=1.0):
 OUTLINE_MARGIN_MM = 11.88
 
 
+def _set_view_angle(v, deg, tol_deg=1e-6):
+    u"""ビューの紙面内回転角(度・CCW)を設定する。
+
+    ❗**`IView.Angle` は radian**(90 を代入すると 90rad が 2.0354rad に折り返る・実測)。
+      **正 = 画像が反時計回り**(`*正面` に +pi/2 で paper_x が +X→-Y になるのを実測)。
+      代入後は必ず読み戻して検証する(Position と同じクラスの罠を警戒)。
+    """
+    import math
+    rad = math.radians(deg % 360)
+    v.Angle = rad
+    got = prop(v, "Angle")
+    if abs((math.degrees(got) - deg) % 360.0) > tol_deg and \
+       abs((math.degrees(got) - deg) % 360.0 - 360.0) > tol_deg:
+        raise RuntimeError(u"ビュー回転角を %s度 にできない(実際 %s度)"
+                           % (deg, math.degrees(got)))
+    return math.degrees(got)
+
+
 def insert_standard_views(mod, dwg, model_path, size_mm=None, gap_mm=40.0,
                           sheet_wh_mm=(841.0, 594.0), scale=1.0,
-                          hidden=True, tangent=swTangentEdgesVisibleAndFonted):
+                          hidden=True, tangent=swTangentEdgesVisibleAndFonted,
+                          plan=None):
     u"""第三角法の 正面/平面/右側面 + 等角投影 を配置する。
 
     各ビューは `CreateDrawViewFromModelView3` で独立に作る(投影ビューの親子関係は作らない)。
@@ -374,6 +393,10 @@ def insert_standard_views(mod, dwg, model_path, size_mm=None, gap_mm=40.0,
                 Position を設定して重なりゼロで配置する
     `IView.Position` は**投影ジオメトリ外形の中心**(実測)なので、グリッドのセル中心を
     そのまま渡せばよい。
+
+    `plan` に `view_orient.view_plan()` の戻り(front/top/right/iso ごとの
+    `sw_view` と `rotation_deg`)を渡すと、**STEPの座標系ではなく形状から決めた向き**で
+    投影する。省略時は従来どおり SWの正面/平面/右側面/等角投影をそのまま使う。
     """
     sw_w, sw_h = sheet_wh_mm
     targets = [
@@ -385,6 +408,10 @@ def insert_standard_views(mod, dwg, model_path, size_mm=None, gap_mm=40.0,
 
     made = {}
     for key, vname, col, row in targets:
+        angle_deg = 0.0
+        if plan and key in plan:
+            vname = plan[key]["sw_view"]
+            angle_deg = float(plan[key].get("rotation_deg") or 0.0)
         v = dwg.CreateDrawViewFromModelView3(model_path, vname,
                                              sw_w / 2000.0, sw_h / 2000.0, 0.0)
         if v is None:
@@ -393,8 +420,12 @@ def insert_standard_views(mod, dwg, model_path, size_mm=None, gap_mm=40.0,
         v.SetDisplayMode3(False, swHIDDEN_GREYED if hidden else swHIDDEN, False, False)
         v.SetDisplayTangentEdges2(tangent)
         _set_view_scale(v, scale)
+        # ❗回転は**外形を測る前**に入れる(回すと GetOutline の縦横が入れ替わるため)
+        if angle_deg:
+            _set_view_angle(v, angle_deg)
         ol = _view_outline_mm(v)
         made[key] = {"view": v, "view_name": vname, "col": col, "row": row,
+                     "angle_deg": angle_deg,
                      "w": ol[2] - ol[0], "h": ol[3] - ol[1]}
 
     # --- グリッド寸法(第三角法: 平面=上 / 右側面=右) ---
@@ -416,6 +447,7 @@ def insert_standard_views(mod, dwg, model_path, size_mm=None, gap_mm=40.0,
         out[key] = {
             "name": prop(v, "GetName2"),
             "view_name": info["view_name"],
+            "angle_deg": info["angle_deg"],
             "grid": [info["col"], info["row"]],
             "position_mm": [p * 1000.0 for p in list(prop(v, "Position"))],
             "outline_mm": ol,

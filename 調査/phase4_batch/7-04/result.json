@@ -1,0 +1,104 @@
+{
+  "key": "7-04",
+  "name": "端子棒",
+  "axis": "7.回転軸",
+  "bucket_a": true,
+  "shape_class": "lathe",
+  "reason": "断面が丸く(外径φ30.00/直交辺[30.0, 30.0])、同軸径2種・軸方向長長い",
+  "frame": {
+    "ex": [
+      0,
+      0,
+      1
+    ],
+    "ey": [
+      1,
+      0,
+      0
+    ],
+    "ez": [
+      0,
+      1,
+      0
+    ],
+    "ex_axis": "Z",
+    "ez_axis": "Y",
+    "rule": "主軸Zを紙面水平(正面=輪郭図 / 右側面=円が見える図)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*平面",
+      "rotation_deg": 90
+    },
+    "top": {
+      "sw_view": "*右側面",
+      "rotation_deg": 180
+    },
+    "right": {
+      "sw_view": "*正面",
+      "rotation_deg": 90
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    30.0,
+    30.0,
+    92.0025
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "17",
+          "role": "front",
+          "sw_view": "top",
+          "transform": "回転180",
+          "det": 1,
+          "iou": 0.9018,
+          "cov_sw": 0.986,
+          "cov_human": 0.9018,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.9018,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 0.9018,
+        "cov_sw": 0.986
+      },
+      "mirror_required": false,
+      "unmatched_human_circles": [],
+      "fails": [
+        "人間側被覆 0.9018 < 1.0000"
+      ],
+      "warns": [],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "17",
+      "matched_sw_view": "top",
+      "matched_transform": "回転180",
+      "ties": [
+        "回転180",
+        "鏡像(左右反転)"
+      ],
+      "n_ties": 2,
+      "planned_sw_view": "*平面",
+      "planned_rotation_deg": 90,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "別ビュー方向(top)"
+    },
+    "verdict": "不合格"
+  }
+}

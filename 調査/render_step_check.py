@@ -12,7 +12,7 @@ import json
 import math
 import argparse
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")   # ❗import時に重ね包みしない(compare_views参照)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "engine"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -62,23 +62,9 @@ def box(ax, bb, label, color="#d62728"):
             color=color, fontsize=8, va="top")
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("label")
-    ap.add_argument("human")
-    ap.add_argument("out")
-    ap.add_argument("--no-frame", action="store_true")
-    ap.add_argument("--gap", type=float, default=8.0)
-    args = ap.parse_args()
-
-    sw_dxf = os.path.join(ROOT, u"調査", u"step_check", u"views_%s.dxf" % args.label)
-    meta_p = os.path.join(ROOT, u"調査", u"step_check", u"meta_%s.json" % args.label)
-    cmp_p = os.path.join(ROOT, u"調査", u"step_check", u"compare_%s.json" % args.label)
-    meta = json.load(io.open(meta_p, encoding="utf-8"))
-    cmpj = json.load(io.open(cmp_p, encoding="utf-8")) if os.path.exists(cmp_p) else {}
-
-    human_p = args.human if os.path.isabs(args.human) else os.path.join(ROOT, args.human)
-    hdoc, hcl, fsum, stext, pmag = cv.load_human(human_p, not args.no_frame, args.gap)
+def render(label, sw_dxf, meta, cmpj, human_p, out_png, use_frame=True, gap=8.0):
+    u"""照合の目視確認PNGを作る(フェーズ4の量産バッチ用に実パス受け取りへ一般化)。"""
+    hdoc, hcl, fsum, stext, pmag = cv.load_human(human_p, use_frame, gap)
     sf = cmpj.get("scale_factor") or 1.0
 
     sdoc = ezdxf.readfile(sw_dxf)
@@ -185,11 +171,31 @@ def main():
 
     if lines:
         fig.text(0.5, 0.012, u"　/　".join(lines), ha="center", fontsize=10)
-    fig.suptitle(u"STEP→投影 vs 人間図面 照合: %s" % args.label, fontsize=13)
+    fig.suptitle(u"STEP→投影 vs 人間図面 照合: %s" % label, fontsize=13)
 
+    fig.savefig(out_png, dpi=130)
+    plt.close(fig)
+    print(u"保存:", out_png)
+    return out_png
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("label")
+    ap.add_argument("human")
+    ap.add_argument("out")
+    ap.add_argument("--no-frame", action="store_true")
+    ap.add_argument("--gap", type=float, default=8.0)
+    args = ap.parse_args()
+
+    base = os.path.join(ROOT, u"調査", u"step_check")
+    meta = json.load(io.open(os.path.join(base, u"meta_%s.json" % args.label), encoding="utf-8"))
+    cmp_p = os.path.join(base, u"compare_%s.json" % args.label)
+    cmpj = json.load(io.open(cmp_p, encoding="utf-8")) if os.path.exists(cmp_p) else {}
+    human_p = args.human if os.path.isabs(args.human) else os.path.join(ROOT, args.human)
     out = args.out if os.path.isabs(args.out) else os.path.join(ROOT, args.out)
-    fig.savefig(out, dpi=130)
-    print(u"保存:", out)
+    render(args.label, os.path.join(base, u"views_%s.dxf" % args.label), meta, cmpj,
+           human_p, out, use_frame=not args.no_frame, gap=args.gap)
 
 
 if __name__ == "__main__":

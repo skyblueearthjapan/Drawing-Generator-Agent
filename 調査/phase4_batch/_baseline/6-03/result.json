@@ -1,0 +1,64 @@
+{
+  "key": "6-03",
+  "name": "傾動ギア",
+  "axis": "6.傾動軸",
+  "bucket_a": false,
+  "shape_class": "lathe",
+  "reason": "断面が丸く(外径φ100.00/直交辺[100.0, 100.0])、同軸径4種・軸方向長短い",
+  "frame": {
+    "ex": [
+      1,
+      0,
+      0
+    ],
+    "ey": [
+      0,
+      1,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "X",
+    "ez_axis": "Z",
+    "rule": "[対照] STEPの座標系そのまま"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 0
+    },
+    "top": {
+      "sw_view": "*平面",
+      "rotation_deg": 0
+    },
+    "right": {
+      "sw_view": "*右側面",
+      "rotation_deg": 0
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    100.0,
+    65.0,
+    100.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "verdict": "判定不能",
+      "reason": "照合が成立していない"
+    },
+    "orientation": {
+      "verdict": "判定不能",
+      "reason": "人間図面のfront役ビューが取れない"
+    },
+    "verdict": "要調査"
+  }
+}

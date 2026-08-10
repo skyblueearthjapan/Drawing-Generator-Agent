@@ -20,7 +20,11 @@ import argparse
 import re
 from collections import Counter
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+# ❗`sys.stdout = io.TextIOWrapper(sys.stdout.buffer, ...)` を**モジュール読み込み時に重ねてはいけない**。
+#   このモジュールを import する側が既に同じ包み方をしていると、外側のラッパーが参照を失って
+#   GC され、その __del__ が**共通のバッファを閉じてしまう**(実測: 以後の print が
+#   ValueError: I/O operation on closed file になる)。reconfigure は冪等で安全。
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "engine"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -31,6 +35,8 @@ import geom_lib as gl  # noqa: E402
 
 CELL = 0.4          # ラスタ格子(mm)
 SIZE_TOL = 0.5      # 外形一致とみなす許容差(mm)。0.5mm超は「不一致」として要調査
+#: 図枠テンプレート(113エンティティ)がこれ以上一致したら「バケットA・用紙倍率1」で確定
+FRAME_MATCH_MIN = 100
 
 #: (名前, 2x2行列, 行列式)
 D4 = [
@@ -217,15 +223,25 @@ def load_human(path, use_frame=True, gap=8.0):
             seen.add(key)
             c["gap"] = g
             kept.append(c)
-    # --- 用紙倍率(図枠が実寸の何倍で描かれているか)を作図範囲から推定 ---
-    xs = []
-    for e in doc.modelspace():
-        if e.dxftype() == "LINE":
-            xs += [e.dxf.start.x, e.dxf.end.x]
-    paper_mag = 1.0
-    if xs:
-        w = max(xs) - min(xs)
-        paper_mag = max(1.0, round(w / 410.0))     # バケットA の図枠内寸 410mm が基準
+    # --- 用紙倍率(図枠が実寸の何倍で描かれているか) ---
+    # ❗**作図範囲からの推定は当てにならない**(実測 2026-08-10・4件で実害):
+    #   25154-2-13/2-202/4-08/5-13 は図枠がバケットAテンプレートと 111〜113/113 で一致している
+    #   = 用紙倍率1 で確定しているのに、図枠の外へ出る線(引出線・部品表の枠)のせいで
+    #   最大X幅が 820 を超え、倍率2 と誤判定していた。sf が半分になり、
+    #   **部品ビューが1つも同定できず「判定不能」になる**。
+    #   → 図枠テンプレートが一致した時点で倍率は 1 で確定させる。
+    paper_mag = None
+    if fsum and fsum.get("frame_matched", 0) >= FRAME_MATCH_MIN:
+        paper_mag = 1.0
+    if paper_mag is None:
+        xs = []
+        for e in doc.modelspace():
+            if e.dxftype() == "LINE":
+                xs += [e.dxf.start.x, e.dxf.end.x]
+        paper_mag = 1.0
+        if xs:
+            w = max(xs) - min(xs)
+            paper_mag = max(1.0, round(w / 410.0))     # バケットA の図枠内寸 410mm が基準
     # 尺度テキスト(バケットAのアンカー(176.415,22.446)を用紙倍率でスケールした位置)
     scale_text = None
     for e in doc.modelspace():
@@ -255,39 +271,91 @@ def scale_factor_from_text(t):
     return None
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("label")
-    ap.add_argument("human")
-    ap.add_argument("--scale", type=float, default=None,
-                    help=u"人間図面の1単位が実物何mmか(未指定なら尺度セルから自動)")
-    ap.add_argument("--no-frame", action="store_true")
-    ap.add_argument("--gap", type=float, default=8.0)
-    ap.add_argument("--sw-gap", type=float, default=8.0)
-    ap.add_argument("--paper-mag", type=float, default=None)
-    args = ap.parse_args()
+#: 第三角法の整合(隣り合うビューは幅または高さを共有する)の許容差(mm)
+ROLE_SIZE_TOL = 0.5
 
-    sw_dxf = os.path.join(ROOT, u"調査", u"step_check", u"views_%s.dxf" % args.label)
-    meta_p = os.path.join(ROOT, u"調査", u"step_check", u"meta_%s.json" % args.label)
-    with io.open(meta_p, encoding="utf-8") as f:
-        meta = json.load(f)
 
-    human_p = args.human if os.path.isabs(args.human) else os.path.join(ROOT, args.human)
-    hdoc, hcl, fsum, stext, pmag = load_human(human_p, not args.no_frame, args.gap)
-    if args.paper_mag:
-        pmag = args.paper_mag
+def assign_roles(h_rec, part_idx):
+    u"""人間図面のビュー群から「どれが正面図か」を第三角法の整合で決める。
+
+    ❗**「左下のビューが正面」という単純な規則は外れる**(実測 2026-08-10・25154-4-15 指針):
+      左側面図が有ると最も左下に来るのは左側面図であり、正面図ではない。
+      これを取り違えると**向きルールの正誤判定そのものが誤る**(測定器が壊れる)。
+
+    そこで各ビューを「正面」と仮定して、第三角法の構造整合をスコアにする:
+      - 上下に並ぶ隣は **幅を共有**する(平面図/下面図) → 一致で +2
+      - 左右に並ぶ隣は **高さを共有**する(側面図)     → 一致で +2
+      - 中心が揃っている(投影線が通る)               → +1
+    最大スコアのビューを正面にする(同点は「下 → 左」の古典規則で決める)。
+    """
+    if not part_idx:
+        return {}, None
+
+    def box(i):
+        return h_rec[i]["bbox"]
+
+    def size(i):
+        return h_rec[i]["size"]
+
+    def cx(i):
+        b = box(i)
+        return (b[0] + b[2]) / 2.0
+
+    def cy(i):
+        b = box(i)
+        return (b[1] + b[3]) / 2.0
+
+    def score_of(f):
+        sc = 0
+        rel = {}
+        for i in part_idx:
+            if i == f:
+                continue
+            dx, dy = cx(i) - cx(f), cy(i) - cy(f)
+            if abs(dy) > abs(dx):                       # 上下に並ぶ
+                rel[i] = "top" if dy > 0 else "bottom"
+                if abs(size(i)[0] - size(f)[0]) <= ROLE_SIZE_TOL:
+                    sc += 2
+                if abs(dx) < max(size(i)[0], size(f)[0]) * 0.6:
+                    sc += 1
+            else:                                       # 左右に並ぶ
+                rel[i] = "right" if dx > 0 else "left"
+                if abs(size(i)[1] - size(f)[1]) <= ROLE_SIZE_TOL:
+                    sc += 2
+                if abs(dy) < max(size(i)[1], size(f)[1]) * 0.6:
+                    sc += 1
+        return sc, rel
+
+    best = max(part_idx, key=lambda f: (score_of(f)[0], -cy(f), -cx(f)))
+    sc, rel = score_of(best)
+    roles = {best: "front"}
+    roles.update(rel)
+    return roles, {"front_idx": best, "score": sc,
+                   "all_scores": {str(i): score_of(i)[0] for i in part_idx}}
+
+
+def run_compare(label, sw_dxf, meta, human_p, scale=None, use_frame=True,
+                gap=8.0, sw_gap=8.0, paper_mag=None, out_path=None):
+    u"""SW投影DXF vs 人間図面DXF を照合して結果 dict を返す(フェーズ4の量産バッチ用に一般化)。
+
+    引数はすべて実パス/実データで受ける(CLI の `調査/step_check/views_<label>.dxf` 決め打ちを外した)。
+    `meta` は `run_step_projection.run()` が書く meta dict(`metrics` と `views` を使う)。
+    """
+    hdoc, hcl, fsum, stext, pmag = load_human(human_p, use_frame, gap)
+    if paper_mag:
+        pmag = paper_mag
     # ❗DXF1単位 → 実物mm = (尺度の分母/分子) / 用紙倍率。
     #   バケットA(410x287・倍率1・尺度1:1)では 1.0 だが、25154-1-12 は
     #   **用紙倍率3 × 尺度1:3** なので偶然また 1.0 になる。倍率と尺度は必ず別々に見ること。
-    sf = args.scale if args.scale else ((scale_factor_from_text(stext) or 1.0) / pmag)
+    sf = scale if scale else ((scale_factor_from_text(stext) or 1.0) / pmag)
 
-    out = {"label": args.label, "human_dxf": os.path.basename(human_p),
+    out = {"label": label, "human_dxf": os.path.basename(human_p),
            "frame_summary": fsum, "scale_text": stext, "scale_factor": sf,
-           "paper_magnification": pmag,
+           "paper_magnification": pmag, "use_frame": bool(use_frame),
            "model_size_mm": meta["metrics"]["size_mm"],
            "model_volume_mm3": meta["metrics"]["volume_mm3"],
            "model_bbox_mm": meta["metrics"]["bbox_mm"]}
-    print(u"== %s ==" % args.label)
+    print(u"== %s ==" % label)
     print(u"人間図面: %s" % os.path.basename(human_p))
     print(u"図枠差し引き: %r" % (fsum,))
     print(u"用紙倍率=%.3g / 尺度セル=%r → DXF1単位=実物%.4gmm" % (pmag, stext, sf))
@@ -296,7 +364,7 @@ def main():
     # --- SW側のビューを meta の geom_mm で同定する ---
     sdoc = ezdxf.readfile(sw_dxf)
     spairs = gl.collect(sdoc)
-    scl = gl.cluster_views(spairs, gap=args.sw_gap)
+    scl = gl.cluster_views(spairs, gap=sw_gap)
     sw_views = {}
     for key in ("front", "top", "right", "iso"):
         g = meta["views"][key]["geom_mm"]
@@ -334,30 +402,9 @@ def main():
 
     # --- 人間図面のビュー役割(第三角法の配置から推定) ---
     part_idx = [i for i, r in enumerate(h_rec) if r["is_part_view"]]
-    roles = {}
-    if part_idx:
-        def cx(i):
-            b = h_rec[i]["bbox"]
-            return (b[0] + b[2]) / 2.0
-
-        def cy(i):
-            b = h_rec[i]["bbox"]
-            return (b[1] + b[3]) / 2.0
-        # 正面 = 「左下」(左に他ビューが無く、下にも他ビューが無い)
-        base = min(part_idx, key=lambda i: (cx(i), cy(i)))
-        roles[base] = "front"
-        for i in part_idx:
-            if i == base:
-                continue
-            dx = cx(i) - cx(base)
-            dy = cy(i) - cy(base)
-            if abs(dy) < max(h_rec[base]["size"][1], h_rec[i]["size"][1]) * 0.6 and dx > 0:
-                roles[i] = "right"      # 第三角法: 右にあるのは右側面図
-            elif abs(dx) < max(h_rec[base]["size"][0], h_rec[i]["size"][0]) * 0.6 and dy > 0:
-                roles[i] = "top"        # 第三角法: 上にあるのは平面図
-            else:
-                roles[i] = "other"
+    roles, role_score = assign_roles(h_rec, part_idx)
     out["human_roles"] = {str(i): roles.get(i, "-") for i in part_idx}
+    out["human_role_score"] = role_score
     print(u"  人間図面の役割推定(第三角法):",
           {"[%d]" % i: roles.get(i, "-") for i in part_idx})
 
@@ -452,6 +499,9 @@ def main():
         inv[str(i)] = {"human_role": roles.get(i, "-"),
                        "human_size": [round(v, 3) for v in b["size"]],
                        "human_circle_d": [c0 for c0, _, _ in b["circles"]],
+                       # ゲート④の「円の直径集合」判定に要るのでSW側の円もここに載せる
+                       "sw_circle_d": [c0 for c0, _, _ in sw_rec[top["sw_view"]]["circles"]],
+                       "sw_size": [round(v, 3) for v in sw_rec[top["sw_view"]]["size"]],
                        "sw_view": top["sw_view"],
                        "transform": top["best"]["transform"],
                        "det": top["best"]["det"],
@@ -473,14 +523,37 @@ def main():
     out["human_to_sw"] = inv
 
     out["sw_views"] = {k: {"size": v["size"], "circles": v["circles"]} for k, v in sw_rec.items()}
-    out["human_views"] = [{"size": r["size"], "circles": r["circles"], "bbox": r["bbox"]}
-                          for r in h_rec]
+    out["human_views"] = [{"size": r["size"], "circles": r["circles"], "bbox": r["bbox"],
+                           "is_part_view": bool(r.get("is_part_view"))} for r in h_rec]
     out["match"] = results
 
-    op = os.path.join(ROOT, u"調査", u"step_check", u"compare_%s.json" % args.label)
-    with io.open(op, "w", encoding="utf-8") as f:
-        f.write(json.dumps(out, ensure_ascii=False, indent=2, default=str))
-    print(u"\n保存: %s" % op)
+    if out_path:
+        with io.open(out_path, "w", encoding="utf-8") as f:
+            f.write(json.dumps(out, ensure_ascii=False, indent=2, default=str))
+        print(u"\n保存: %s" % out_path)
+    return out
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("label")
+    ap.add_argument("human")
+    ap.add_argument("--scale", type=float, default=None,
+                    help=u"人間図面の1単位が実物何mmか(未指定なら尺度セルから自動)")
+    ap.add_argument("--no-frame", action="store_true")
+    ap.add_argument("--gap", type=float, default=8.0)
+    ap.add_argument("--sw-gap", type=float, default=8.0)
+    ap.add_argument("--paper-mag", type=float, default=None)
+    args = ap.parse_args()
+
+    base = os.path.join(ROOT, u"調査", u"step_check")
+    with io.open(os.path.join(base, u"meta_%s.json" % args.label), encoding="utf-8") as f:
+        meta = json.load(f)
+    human_p = args.human if os.path.isabs(args.human) else os.path.join(ROOT, args.human)
+    run_compare(args.label, os.path.join(base, u"views_%s.dxf" % args.label), meta, human_p,
+                scale=args.scale, use_frame=not args.no_frame, gap=args.gap,
+                sw_gap=args.sw_gap, paper_mag=args.paper_mag,
+                out_path=os.path.join(base, u"compare_%s.json" % args.label))
 
 
 if __name__ == "__main__":

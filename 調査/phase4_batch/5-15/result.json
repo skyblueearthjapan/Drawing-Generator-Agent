@@ -1,0 +1,171 @@
+{
+  "key": "5-15",
+  "name": "原点LSブラケット",
+  "axis": "5.ひねり軸",
+  "bucket_a": true,
+  "shape_class": "other",
+  "reason": "支配的な軸も薄さも無い(円筒面積比0.036)",
+  "frame": {
+    "ex": [
+      0,
+      1,
+      0
+    ],
+    "ey": [
+      -1,
+      0,
+      0
+    ],
+    "ez": [
+      0,
+      0,
+      1
+    ],
+    "ex_axis": "Y",
+    "ez_axis": "Z",
+    "rule": "最小辺Z(板厚)を紙面法線(正面=広い面)"
+  },
+  "view_plan": {
+    "front": {
+      "sw_view": "*正面",
+      "rotation_deg": 270
+    },
+    "top": {
+      "sw_view": "*左側面",
+      "rotation_deg": 270
+    },
+    "right": {
+      "sw_view": "*平面",
+      "rotation_deg": 270
+    },
+    "iso": {
+      "sw_view": "*等角投影",
+      "rotation_deg": 0
+    }
+  },
+  "size_mm": [
+    31.0,
+    47.0,
+    18.0
+  ],
+  "projection_ok": true,
+  "compare_ok": true,
+  "verdict": {
+    "gate4": {
+      "views": [
+        {
+          "human_idx": "2",
+          "role": "front",
+          "sw_view": "front",
+          "transform": "回転90",
+          "det": 1,
+          "iou": 0.9798,
+          "cov_sw": 0.9798,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              3.242,
+              4.0,
+              0.758
+            ],
+            [
+              3.242,
+              4.0,
+              0.758
+            ],
+            [
+              4.0,
+              4.0,
+              0.0
+            ],
+            [
+              4.0,
+              4.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": [
+            3.242,
+            3.242
+          ]
+        },
+        {
+          "human_idx": "3",
+          "role": "right",
+          "sw_view": "top",
+          "transform": "鏡像+回転90",
+          "det": -1,
+          "iou": 0.9785,
+          "cov_sw": 0.9785,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": 0.0,
+          "circle_pairs": [
+            [
+              6.0,
+              6.0,
+              0.0
+            ],
+            [
+              6.0,
+              6.0,
+              0.0
+            ]
+          ],
+          "circle_unmatched_human": []
+        },
+        {
+          "human_idx": "4",
+          "role": "top",
+          "sw_view": "right",
+          "transform": "回転90",
+          "det": 1,
+          "iou": 0.9545,
+          "cov_sw": 0.9545,
+          "cov_human": 1.0,
+          "size_err_mm": 0.0,
+          "circle_diff_mm": null,
+          "circle_pairs": [],
+          "circle_unmatched_human": []
+        }
+      ],
+      "worst": {
+        "iou": 0.9545,
+        "size_err": 0.0,
+        "circle": 0.0,
+        "cov_human": 1.0,
+        "cov_sw": 0.9545
+      },
+      "mirror_required": true,
+      "unmatched_human_circles": [
+        3.242,
+        3.242
+      ],
+      "fails": [
+        "鏡像が最良(det=-1)→即停止",
+        "SW側に対応円が無い人間側の円 2 個: [3.242, 3.242](ねじ表現の可能性)"
+      ],
+      "warns": [],
+      "verdict": "不合格"
+    },
+    "orientation": {
+      "human_front_idx": "2",
+      "matched_sw_view": "front",
+      "matched_transform": "回転90",
+      "ties": [
+        "回転90",
+        "鏡像+回転270"
+      ],
+      "n_ties": 2,
+      "planned_sw_view": "*正面",
+      "planned_rotation_deg": 270,
+      "correct": false,
+      "ambiguous": false,
+      "verdict": "不正解",
+      "miss_kind": "紙面内回転(回転90)"
+    },
+    "verdict": "不合格"
+  }
+}
