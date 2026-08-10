@@ -1,0 +1,837 @@
+{
+  "schema_version": "1.0",
+  "_note": "盲検第2弾(2026-08-10)の計画を『様式規則(作法6〜11)』で書き直した版(2026-08-11)。寸法値・測定点の集合は盲検時と等価(基準からの並列積み5本を、同じ位置ノードを通る直列連記5本へ置き換えた)。適用: 作法8(直列連記3組)・作法11(段数の圧縮)。径寸法はφ127のネイティブ1本だけなので作法6/7は非該当。密度は正面図9本・平面図9本と作法11の目安8本を超えるが、位置ノードが実際に多い(取付穴3種・窓・側壁・立ち上がり板)ため削減できない。代わりに**段数**を 正面図左5段→1段 / 平面図左4段→2段 / 右側面図下3段→2段 に圧縮した。",
+  "part": {
+    "model": "4-05(教師STEP/4.前後軸/4-05.STEP)",
+    "図番": "25154-4-05",
+    "品名": "駆動ユニットブラケット",
+    "shape_class": "溶接構造(L字)",
+    "材質": "ＳＳ４００",
+    "個数": 1,
+    "形状要約": "ベース板(x±86.5・y0〜305・z-16〜0)に103×200(R15)の窓。取付穴はφ11×4(±71.5,15/175)、φ10×2(±71.5,95)、φ6×4(±51.5,35/235)。y292〜305に13厚の立ち上がり板があり、φ127の内径とφ10×4(±74.5,22.5/137.5)、φ6深さ12×2(±10,-5)。x±77〜±86.5に側壁(y205〜292・z3〜157)。"
+  },
+  "source": {
+    "base_dxf": "data/依頼箱/BLIND2-25154-4-05/views.dxf",
+    "meta_json": "data/依頼箱/BLIND2-25154-4-05/meta.json",
+    "scale": 0.25
+  },
+  "layout": {
+    "views": [
+      "front",
+      "top",
+      "right"
+    ],
+    "dim_reserve": true
+  },
+  "defaults": {
+    "first_offset_mm": 16.0,
+    "stack_step_mm": 8.0,
+    "snap_tol_mm": 0.01,
+    "gate_tol_mm": 0.01
+  },
+  "dimensions": [
+    {
+      "id": "X103_window",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -51.5,
+          35,
+          -16
+        ],
+        "p2": [
+          51.5,
+          35,
+          -16
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "level": 1
+      },
+      "value_expected": 103.0,
+      "tolerance": null,
+      "comment": "窓の幅。X軸は0対称で中点=対称中心のため両側が一括で決まる(作法1)"
+    },
+    {
+      "id": "X143_holes",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -71.5,
+          15,
+          -16
+        ],
+        "p2": [
+          71.5,
+          15,
+          -16
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "level": 2
+      },
+      "value_expected": 143.0,
+      "tolerance": null,
+      "comment": "ベース板の取付穴列の間隔(φ11・φ10共通)"
+    },
+    {
+      "id": "X173_base",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -86.5,
+          0,
+          -16
+        ],
+        "p2": [
+          86.5,
+          0,
+          -16
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "level": 3
+      },
+      "value_expected": 173.0,
+      "tolerance": null,
+      "comment": "全幅"
+    },
+    {
+      "id": "X20_tap",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -10,
+          305,
+          -5
+        ],
+        "p2": [
+          10,
+          305,
+          -5
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 1
+      },
+      "value_expected": 20.0,
+      "tolerance": null,
+      "comment": "立ち上がり板端面のφ6止まり穴2個の間隔"
+    },
+    {
+      "id": "X149_motor",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -74.5,
+          305,
+          22.5
+        ],
+        "p2": [
+          74.5,
+          305,
+          22.5
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 2
+      },
+      "value_expected": 149.0,
+      "tolerance": null,
+      "comment": "立ち上がり板のφ10取付穴の間隔"
+    },
+    {
+      "id": "X154_wall_in",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -77,
+          305,
+          3
+        ],
+        "p2": [
+          77,
+          305,
+          3
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 3
+      },
+      "value_expected": 154.0,
+      "tolerance": null,
+      "comment": "側壁の内のり"
+    },
+    {
+      "id": "X163_wall_out",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -81.5,
+          305,
+          3
+        ],
+        "p2": [
+          81.5,
+          305,
+          3
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 4
+      },
+      "value_expected": 163.0,
+      "tolerance": null,
+      "comment": "側壁の外のり(板厚4.5×2ぶん内のりより広い)"
+    },
+    {
+      "id": "Y15_hole1",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -86.5,
+          0,
+          -16
+        ],
+        "p2": [
+          -71.5,
+          15,
+          -16
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "chain_group": "Ychain"
+      },
+      "value_expected": 15.0,
+      "tolerance": null,
+      "comment": "Y軸のdatum=ベース板端面y=0。【様式】作法8: 以降を数珠つなぎにして1本の寸法線へ連記する(15｜35｜45｜80｜45)"
+    },
+    {
+      "id": "Y35_window",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -71.5,
+          15,
+          -16
+        ],
+        "p2": [
+          -36.5,
+          50,
+          -16
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "chain_group": "Ychain"
+      },
+      "value_expected": 35.0,
+      "tolerance": null,
+      "comment": "φ11穴中心(y=15)から窓の手前側R中心(y=50)まで。旧 Y50_window(datumから50)と同じノードを繋ぐ"
+    },
+    {
+      "id": "Y45_hole2",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -36.5,
+          50,
+          -16
+        ],
+        "p2": [
+          -71.5,
+          95,
+          -16
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "chain_group": "Ychain"
+      },
+      "value_expected": 45.0,
+      "tolerance": null,
+      "comment": "窓手前R中心(y=50)からφ10穴中心(y=95)まで。旧 Y95_hole2 と同じノード"
+    },
+    {
+      "id": "Y80_hole3",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -71.5,
+          95,
+          -16
+        ],
+        "p2": [
+          -71.5,
+          175,
+          -16
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "chain_group": "Ychain"
+      },
+      "value_expected": 80.0,
+      "tolerance": null,
+      "comment": "φ10穴(y=95)から2列目のφ11穴(y=175)まで。旧 Y175_hole3 と同じノード"
+    },
+    {
+      "id": "Y45_window2",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -71.5,
+          175,
+          -16
+        ],
+        "p2": [
+          -36.5,
+          220,
+          -16
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "chain_group": "Ychain"
+      },
+      "value_expected": 45.0,
+      "tolerance": null,
+      "comment": "φ11穴(y=175)から窓の奥側R中心(y=220)まで。旧 Y220_window と同じノード"
+    },
+    {
+      "id": "Y249_wall",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          0,
+          -16
+        ],
+        "p2": [
+          0,
+          249,
+          114
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "level": 1
+      },
+      "value_expected": 249.0,
+      "tolerance": null,
+      "comment": "datumから側壁の段(z=114で立ち上がる位置)まで"
+    },
+    {
+      "id": "Y13_plate",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          292,
+          157
+        ],
+        "p2": [
+          0,
+          305,
+          157
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "level": 2
+      },
+      "value_expected": 13.0,
+      "tolerance": null,
+      "comment": "立ち上がり板の板厚。【修正1回目】当初 z=3 側で測ったが、(z=3,y=305) は y=305 稜線(z=-16〜157)の中間点で特徴点ではなくスナップ検証に落ちた(最近傍はφ6穴の稜線 z=-2 で5mm)。両端とも実在端点になる z=157 側へ移した。"
+    },
+    {
+      "id": "Y305_total",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          0,
+          -16
+        ],
+        "p2": [
+          0,
+          305,
+          -16
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "level": 3
+      },
+      "value_expected": 305.0,
+      "tolerance": null,
+      "comment": "全長"
+    },
+    {
+      "id": "Z16_base",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          0,
+          -16
+        ],
+        "p2": [
+          0,
+          0,
+          0
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "chain_group": "Zdepth"
+      },
+      "value_expected": 16.0,
+      "tolerance": null,
+      "comment": "ベース板の厚み。Z軸のdatum=ベース板上面z=0。【様式】作法8: z=0 を共有する Z114_wall と同一寸法線へ直列連記(16｜114)"
+    },
+    {
+      "id": "Z173_depth",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          305,
+          -16
+        ],
+        "p2": [
+          0,
+          305,
+          157
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "level": 2
+      },
+      "value_expected": 173.0,
+      "tolerance": null,
+      "comment": "全奥行。全奥行は直列連記の1段外側"
+    },
+    {
+      "id": "Z114_wall",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          205,
+          0
+        ],
+        "p2": [
+          0,
+          205,
+          114
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "chain_group": "Zdepth"
+      },
+      "value_expected": 114.0,
+      "tolerance": null,
+      "comment": "側壁の段の位置(datum z=0から)。Z16_base と直列連記"
+    },
+    {
+      "id": "Z3_step",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          205,
+          0
+        ],
+        "p2": [
+          0,
+          205,
+          3
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 1
+      },
+      "value_expected": 3.0,
+      "tolerance": null,
+      "comment": "側壁・立ち上がり板の座面の段差"
+    },
+    {
+      "id": "Z5_tap",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -10,
+          305,
+          -5
+        ],
+        "p2": [
+          -86.5,
+          305,
+          0
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "chain_group": "Zchain"
+      },
+      "value_expected": 5.0,
+      "tolerance": null,
+      "comment": "datum(z=0)から端面φ6止まり穴の中心まで。【様式】作法8: z=0 を共有する Z22_5_motor と同一寸法線へ直列連記(5｜22.5｜115)"
+    },
+    {
+      "id": "Z22_5_motor",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -74.5,
+          305,
+          22.5
+        ],
+        "p2": [
+          -86.5,
+          305,
+          0
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "chain_group": "Zchain"
+      },
+      "value_expected": 22.5,
+      "tolerance": null,
+      "comment": "datumから立ち上がり板の手前側φ10穴中心まで。Z5_tap / Z115_motor と直列連記"
+    },
+    {
+      "id": "Z80_bore",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          305,
+          80
+        ],
+        "p2": [
+          -86.5,
+          305,
+          0
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "level": 2
+      },
+      "value_expected": 80.0,
+      "tolerance": null,
+      "comment": "datumからφ127内径の中心まで。直列連記(5｜22.5｜115)と区間が重なるため1段外側の別の寸法線に置く"
+    },
+    {
+      "id": "Z115_motor",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -74.5,
+          305,
+          22.5
+        ],
+        "p2": [
+          -74.5,
+          305,
+          137.5
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "chain_group": "Zchain"
+      },
+      "value_expected": 115.0,
+      "tolerance": null,
+      "comment": "立ち上がり板のφ10穴の縦ピッチ。z=22.5 を共有するので直列連記の3本目に入れる"
+    },
+    {
+      "id": "D127_bore",
+      "kind": "diameter",
+      "context": "circular_view",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          305,
+          80
+        ],
+        "diameter": 127.0,
+        "leader_angle": 45
+      },
+      "value_expected": 127.0,
+      "tolerance": null,
+      "comment": "駆動ユニットのインロー内径。円が見えるビューなのでネイティブDIAMETER型"
+    },
+    {
+      "id": "R15_window",
+      "kind": "radius",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -36.5,
+          50,
+          -16
+        ],
+        "radius": 15.0,
+        "leader_angle": 225
+      },
+      "value_expected": 15.0,
+      "tolerance": null,
+      "comment": "窓の隅R。φ30の円特徴をカバーし、±36.5↔±51.5 と 50↔35 / 220↔235 の位置ノードも連結する"
+    }
+  ],
+  "hole_notes": [
+    {
+      "id": "N_hole11",
+      "view": "front",
+      "pattern": "\\A1;４－%%c１１",
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            77,
+            175,
+            -16
+          ],
+          [
+            396.5,
+            -135,
+            -16
+          ],
+          [
+            476.5,
+            -135,
+            -16
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        484.5,
+        -135,
+        -16
+      ],
+      "attachment": "bottom-left",
+      "comment": "ベース板の取付穴4個。φ11はM10のボルト通し径(標準クリアランス)で呼び径一致ではないためφ表記"
+    },
+    {
+      "id": "N_hole10_base",
+      "view": "front",
+      "pattern": "\\A1;２－%%c１０",
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            77,
+            95,
+            -16
+          ],
+          [
+            396.5,
+            -195,
+            -16
+          ],
+          [
+            476.5,
+            -195,
+            -16
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        484.5,
+        -195,
+        -16
+      ],
+      "attachment": "bottom-left",
+      "comment": "ベース板中央の通し穴2個。φ10はМ１０の呼び径ちょうどだが、運用ルール『М判定は呼び径±0.1一致 かつ 3個以上が円周等配』を満たさない(2個・直線配置)ためφ表記。採らなかった解釈=Ｍ１０タップ。"
+    },
+    {
+      "id": "N_hole6_base",
+      "view": "front",
+      "pattern": "\\A1;４－%%c６",
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            54.5,
+            235,
+            -16
+          ],
+          [
+            396.5,
+            325,
+            -16
+          ],
+          [
+            476.5,
+            325,
+            -16
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        484.5,
+        325,
+        -16
+      ],
+      "attachment": "bottom-left",
+      "comment": "窓の四隅寄りの通し穴4個"
+    },
+    {
+      "id": "N_hole10_motor",
+      "view": "top",
+      "pattern": "\\A1;４－%%c１０",
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            79.5,
+            305,
+            22.5
+          ],
+          [
+            396.5,
+            305,
+            97
+          ],
+          [
+            476.5,
+            305,
+            97
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        484.5,
+        305,
+        97
+      ],
+      "attachment": "bottom-left",
+      "comment": "立ち上がり板の取付穴4個"
+    },
+    {
+      "id": "N_hole6_motor",
+      "view": "top",
+      "pattern": "\\A1;２－%%c６深さ１２",
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            13,
+            305,
+            -5
+          ],
+          [
+            396.5,
+            305,
+            -103
+          ],
+          [
+            476.5,
+            305,
+            -103
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        484.5,
+        305,
+        -103
+      ],
+      "attachment": "bottom-left",
+      "comment": "立ち上がり板の端面(y=305)からの止まり穴2個・深さ12。φ6はМ６の呼び径ちょうどだが2個・非等配のためφ表記。採らなかった解釈=Ｍ６タップ(深さ12=2×dはタップらしい比率)。"
+    }
+  ],
+  "notes": []
+}

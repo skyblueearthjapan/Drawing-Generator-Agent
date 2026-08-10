@@ -499,6 +499,17 @@ def main(argv):
         layout_ok = not frame_collisions
         summary["steps"]["dim_engine"] = {
             "gate1_ok": gate1_ok, "warnings": dim_report["warnings"],
+            # 様式第3弾(上品さの3層構造)。**生成は止めない**が納品物の品質指標として残す
+            "style_warnings": dim_report.get("style_warnings", []),
+            "nominal": dim_report.get("nominal", {}),
+            "extension_lines": {k: v for k, v
+                                in (dim_report.get("extension_lines") or {}).items()
+                                if k != "reports"},
+            "circular_view_diameter_over": dim_report.get("circular_view_diameter_over", []),
+            "hole_note_leader_len_mm": [
+                {"id": n["id"], "len_mm": n.get("leader_len_mm"),
+                 "auto_placed": n.get("auto_placed")}
+                for n in dim_report.get("hole_notes", [])],
             "style_check_ok": dim_report["style_check"]["ok"],
             "layout_collisions": dim_report["layout"]["collisions"],
             "frame_collisions": frame_collisions,

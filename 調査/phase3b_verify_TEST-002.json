@@ -433,8 +433,29 @@
           299.0,
           120.0
         ],
+        "attachment": "bottom-left",
+        "auto_placed": false,
         "ok": true,
         "errors": [],
+        "nominal": [
+          {
+            "field": "drill",
+            "measured": 8.0,
+            "nominal": 8.0,
+            "resolved": true,
+            "delta_mm": 0.0,
+            "reason": "実測が呼び値と一致"
+          },
+          {
+            "field": "counterbore.dia",
+            "measured": 11.0,
+            "nominal": 11.0,
+            "resolved": true,
+            "delta_mm": 0.0,
+            "reason": "実測が呼び値と一致"
+          }
+        ],
+        "leader_len_mm": 33.5565,
         "anchor_check": {
           "ok": true,
           "dist_err_mm": 0.0
@@ -832,8 +853,338 @@
         "notation": "kiri",
         "width": "zenkaku",
         "separator": " "
-      }
+      },
+      "nominal_translation": true,
+      "nominal_tol_mm": 0.05,
+      "extension_gap_avoid": false
     },
-    "warnings": []
+    "style_warnings": [
+      "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 2本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('L35_counterbore_depth', 'below', 38.0), ('L5_bore_land', 'below', 38.0)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる",
+      "補助線が長い(p90=30mm超・輪郭とは重ならない) 1本: [('P60_hole_pitch', 'below', 54.5)]"
+    ],
+    "nominal": {
+      "pending": [],
+      "review_dimensions": []
+    },
+    "extension_lines": {
+      "reports": [
+        {
+          "id": "D26_bore",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    176.841,
+                    86.408
+                  ],
+                  [
+                    181.841,
+                    86.408
+                  ]
+                ],
+                "handle": "14D"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    181.841,
+                    112.408
+                  ],
+                  [
+                    176.841,
+                    112.408
+                  ]
+                ],
+                "handle": "14E"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            12.0,
+            12.0
+          ],
+          "ext_len_max_mm": 12.0,
+          "side": "right",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "D33_counterbore",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    141.841,
+                    82.908
+                  ],
+                  [
+                    176.841,
+                    82.908
+                  ]
+                ],
+                "handle": "14B"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    176.841,
+                    115.908
+                  ],
+                  [
+                    141.841,
+                    115.908
+                  ]
+                ],
+                "handle": "14C"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            17.0
+          ],
+          "ext_len_max_mm": 17.0,
+          "side": "left",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "L35_counterbore_depth",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    141.841,
+                    61.908
+                  ],
+                  [
+                    141.841,
+                    99.408
+                  ]
+                ],
+                "handle": "141"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    176.841,
+                    82.908
+                  ],
+                  [
+                    176.841,
+                    99.408
+                  ]
+                ],
+                "handle": "146"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            38.0
+          ],
+          "ext_len_max_mm": 38.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "L40_total",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    141.841,
+                    61.908
+                  ],
+                  [
+                    141.841,
+                    99.408
+                  ]
+                ],
+                "handle": "141"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    181.841,
+                    61.908
+                  ],
+                  [
+                    181.841,
+                    99.408
+                  ]
+                ],
+                "handle": "143"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            25.0,
+            25.0
+          ],
+          "ext_len_max_mm": 25.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "L5_bore_land",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    176.841,
+                    82.908
+                  ],
+                  [
+                    176.841,
+                    99.408
+                  ]
+                ],
+                "handle": "146"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    181.841,
+                    61.908
+                  ],
+                  [
+                    181.841,
+                    99.408
+                  ]
+                ],
+                "handle": "143"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            38.0,
+            17.0
+          ],
+          "ext_len_max_mm": 38.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "P60_hole_pitch",
+          "view": "right",
+          "dimexo_planned": 1.0,
+          "collinear_before": 0,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [],
+            []
+          ],
+          "collinear_count": 0,
+          "ext_len_mm": [
+            54.5,
+            54.5
+          ],
+          "ext_len_max_mm": 54.5,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        }
+      ],
+      "collinear_count": 5,
+      "long_count": 3,
+      "long_and_collinear_count": 2,
+      "ext_len_max_mm": 54.5,
+      "ext_len_median_mm": 21.0,
+      "avoided_count": 0,
+      "gap_mismatch_count": 0
+    },
+    "circular_view_diameter_over": [],
+    "warnings": [
+      "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 2本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('L35_counterbore_depth', 'below', 38.0), ('L5_bore_land', 'below', 38.0)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる",
+      "補助線が長い(p90=30mm超・輪郭とは重ならない) 1本: [('P60_hole_pitch', 'below', 54.5)]"
+    ]
   }
 }

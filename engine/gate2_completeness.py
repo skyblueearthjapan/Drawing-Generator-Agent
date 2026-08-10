@@ -53,6 +53,8 @@ AXES = ("X", "Y", "Z")
 # 位置ノードのクラスタリング許容差 / 値一致の許容差(mm)
 NODE_TOL = 0.01
 VALUE_TOL = 0.01
+# 注記の径は**呼び値**なので実ジオメトリとは呼び値窓ぶんずれる(engine/nominal_size.py)
+NOTE_DIA_TOL = 0.05
 # 直線を「軸に垂直」と見なす許容差(mm)
 ORTHO_TOL = 1e-6
 # 斜線を「45度面取り」と見なす許容比
@@ -1254,8 +1256,17 @@ def check_completeness(dxf_path, plan_path, drop_dim_ids=(), verbose=False):
 
     # --- 3) 円(直径)のカバレッジ ---------------------------------------
     def dia_covered(d):
-        for x in covered_dias:
+        for x in dim_dias:
             if abs(x - d) <= VALUE_TOL:
+                return True
+        # ❗**注記の径は呼び値**である(2026-08-11 呼び値翻訳層の導入に伴う整合)。
+        #   `engine/nominal_size.py` が実測φ7.04を呼びφ7へ翻訳して作図するため、
+        #   注記の径と実ジオメトリの径は**呼び値窓(±0.05mm)ぶんずれるのが正常**。
+        #   ここを VALUE_TOL(0.01mm)のままにすると「φ7の注記がφ7.04の穴を覆わない」と
+        #   誤判定する(=翻訳したら必ずゲート②が落ちる、という設計矛盾になる)。
+        #   寸法値(dim_dias)は翻訳しないので従来どおり 0.01mm のまま。
+        for x in note_dias:
+            if abs(x - d) <= NOTE_DIA_TOL:
                 return True
         return False
 

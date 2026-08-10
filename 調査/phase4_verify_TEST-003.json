@@ -465,8 +465,11 @@
           291.0,
           132.2089
         ],
+        "attachment": "bottom-left",
+        "auto_placed": false,
         "ok": true,
         "errors": [],
+        "leader_len_mm": 33.0227,
         "anchor_check": {
           "ok": true,
           "dist_err_mm": 0.0
@@ -946,8 +949,536 @@
         "notation": "kiri",
         "width": "zenkaku",
         "separator": " "
-      }
+      },
+      "nominal_translation": true,
+      "nominal_tol_mm": 0.05,
+      "extension_gap_avoid": false
     },
-    "warnings": []
+    "style_warnings": [
+      "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 1本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('W19_flats', 'below', 38.481)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる"
+    ],
+    "nominal": {
+      "pending": [],
+      "review_dimensions": []
+    },
+    "extension_lines": {
+      "reports": [
+        {
+          "id": "D25_left",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    125.316,
+                    106.709
+                  ],
+                  [
+                    130.316,
+                    106.709
+                  ]
+                ],
+                "handle": "142"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    130.316,
+                    131.709
+                  ],
+                  [
+                    125.316,
+                    131.709
+                  ]
+                ],
+                "handle": "143"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            17.0
+          ],
+          "ext_len_max_mm": 17.0,
+          "side": "left",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "D25_right",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    153.316,
+                    106.709
+                  ],
+                  [
+                    202.316,
+                    106.709
+                  ]
+                ],
+                "handle": "140"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    202.316,
+                    131.709
+                  ],
+                  [
+                    153.316,
+                    131.709
+                  ]
+                ],
+                "handle": "141"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            18.0,
+            18.0
+          ],
+          "ext_len_max_mm": 18.0,
+          "side": "right",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "D30_step",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    130.316,
+                    104.209
+                  ],
+                  [
+                    153.316,
+                    104.209
+                  ]
+                ],
+                "handle": "13E"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    153.316,
+                    134.209
+                  ],
+                  [
+                    130.316,
+                    134.209
+                  ]
+                ],
+                "handle": "13F"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            30.0,
+            30.0
+          ],
+          "ext_len_max_mm": 30.0,
+          "side": "left",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "L10_flat",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    193.316,
+                    127.333
+                  ],
+                  [
+                    193.316,
+                    111.085
+                  ]
+                ],
+                "handle": "14B"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    203.316,
+                    125.69
+                  ],
+                  [
+                    203.316,
+                    130.709
+                  ]
+                ],
+                "handle": "152"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            23.876,
+            20.5
+          ],
+          "ext_len_max_mm": 23.876,
+          "side": "above",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "L28_to_step_end",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    125.316,
+                    119.209
+                  ],
+                  [
+                    125.316,
+                    131.709
+                  ]
+                ],
+                "handle": "14F"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    153.316,
+                    119.209
+                  ],
+                  [
+                    153.316,
+                    134.209
+                  ]
+                ],
+                "handle": "146"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            27.5,
+            25.0
+          ],
+          "ext_len_max_mm": 27.5,
+          "side": "above",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "L50_from_step_end",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    153.316,
+                    119.209
+                  ],
+                  [
+                    153.316,
+                    134.209
+                  ]
+                ],
+                "handle": "146"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    203.316,
+                    125.69
+                  ],
+                  [
+                    203.316,
+                    130.709
+                  ]
+                ],
+                "handle": "152"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            25.0,
+            28.5
+          ],
+          "ext_len_max_mm": 28.5,
+          "side": "above",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "L5_left_step",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    125.316,
+                    119.209
+                  ],
+                  [
+                    125.316,
+                    131.709
+                  ]
+                ],
+                "handle": "14F"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    130.316,
+                    119.209
+                  ],
+                  [
+                    130.316,
+                    134.209
+                  ]
+                ],
+                "handle": "148"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            19.5,
+            17.0
+          ],
+          "ext_len_max_mm": 19.5,
+          "side": "above",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "L78_total",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    125.316,
+                    106.709
+                  ],
+                  [
+                    125.316,
+                    119.209
+                  ]
+                ],
+                "handle": "150"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    203.316,
+                    107.709
+                  ],
+                  [
+                    203.316,
+                    112.728
+                  ]
+                ],
+                "handle": "154"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            19.5,
+            20.5
+          ],
+          "ext_len_max_mm": 20.5,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "W19_flats",
+          "view": "right",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 0.0,
+                "overlap": true,
+                "seg": [
+                  [
+                    247.0,
+                    125.69
+                  ],
+                  [
+                    247.0,
+                    112.728
+                  ]
+                ],
+                "handle": "171"
+              }
+            ],
+            [
+              {
+                "gap_mm": 0.0,
+                "overlap": true,
+                "seg": [
+                  [
+                    266.0,
+                    112.728
+                  ],
+                  [
+                    266.0,
+                    125.69
+                  ]
+                ],
+                "handle": "173"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            38.481,
+            38.481
+          ],
+          "ext_len_max_mm": 38.481,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        }
+      ],
+      "collinear_count": 9,
+      "long_count": 1,
+      "long_and_collinear_count": 1,
+      "ext_len_max_mm": 38.481,
+      "ext_len_median_mm": 22.188,
+      "avoided_count": 0,
+      "gap_mismatch_count": 0
+    },
+    "circular_view_diameter_over": [],
+    "warnings": [
+      "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 1本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('W19_flats', 'below', 38.481)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる"
+    ]
   }
 }

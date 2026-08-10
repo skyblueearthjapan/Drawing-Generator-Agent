@@ -481,8 +481,48 @@ SolidWorksモデルの3D座標(mm)。エンジンが `source.meta_json` の
 ```
 
 `spec` のキー: `count`(個数) / `drill`(ドリル径) / `thread`(ねじ呼び) / `depth`(深さ) /
-`counterbore:{dia,depth}`(ザグリ) / `placement`(2行目=PCD等) / `extra_lines[]`。
+`counterbore:{dia,depth}`(ザグリ) / `countersink:{angle,dia}`(皿もみ) /
+`placement`(2行目=PCD等) / `extra_lines[]`。
 `style` を書くとその注記だけ書式を上書きできる(`{"notation":"kiri","width":"hankaku"}`)。
+
+### 3.0 ❗径は「モデル実測値」を書く —— 呼び値への翻訳はエンジンがやる(2026-08-11)
+
+出典: `調査/図面品質メモ_指針レビュー_2026-08-11.md` §8・§15 とユーザー裁定。
+`spec.drill` / `spec.counterbore.dia` / `spec.countersink.dia` には **モデル実測値**を書く。
+`engine/nominal_size.py` が JIS呼び値表(φ1.0〜13.0=0.1刻み / φ13.5〜50=0.5刻み /
+φ51〜100=1.0刻み、許容窓 **±0.05mm**)で注記の径だけを呼び値へ翻訳する。
+
+- φ7.04 → **φ7**(差0.04 ≦ 窓)。人間が使う数字になる。
+- φ13.44(90°皿もみ)・φ219.1(インロー疑い)のように **窓内に呼び値が無い値は丸めない**。
+  「呼び値未確定」として `report.nominal.pending` に載り、解釈レポート/質問票へ自動で回る
+  (ユーザー裁定「事実に基づかない補完はしない」)。φ100超も同様(呼びで語る範囲外)。
+- **寸法値(`dimensions[].value_expected`)は一切翻訳しない**。ゲート①②の正はモデル実測。
+  `anchor_check.diameter` も実測のまま書くこと(実在円の照合に使う)。
+- ❗**計画側で「人間ならφ8と書くだろう」と丸めてはいけない**。
+  エンジンが実測値との差を**呼び値表にも翻訳関数にも依存せずに**検算しており、
+  嘘の丸めはゲート①不合格になる(反証 `調査/run_style3_falsification.py` N4)。
+- 無効化: `defaults.nominal_translation: false`(既定 true)。
+
+### 3.2 `auto_place` —— 注記を対象フィーチャーの近くへ自動配置(2026-08-11・論点21)
+
+```jsonc
+{
+  "id": "N_hole11", "view": "front",
+  "spec": {"count": 4, "drill": 11},
+  "auto_place": true,                    // ★エンジンが置き場所を探す
+  "anchor_check": {"type": "on_circle", "view": "front", "space": "model",
+                   "center": [0, 0, 16], "diameter": 11.0},   // 必須(対象の指定を兼ねる)
+  "leader": {"space": "view", "points": [[...], [...], [...]]},  // フォールバック用に必ず書く
+  "text_insert": [299.0, 120.0]                                   // 同上
+}
+```
+
+- 対象円の外周から 10〜36mm の距離・8方向(ビュー外向きを優先)を近い順に試し、
+  **文字枠がビュー幾何・既配置の文字枠・表題欄・左上ノートと衝突せず図枠内に収まる**
+  最初の位置を採る。引出線は `[円周上の始点, 折れ点, 水平ランディング端]` の3点。
+- 見つからなければ**計画の `leader.points` / `text_insert` へフォールバック**し、
+  `style_warnings` に「自動配置に失敗」が出る。
+- 引出線長の目安は 10〜50mm(人間図面実測)。50mm超で様式警告。
 
 > ❗**`placement` に `PCD<値>` を書くと、ゲート②が「その円周上の穴中心の位置は決まっている」と
 > 判定できる**(円周等分穴群対応・2026-08-10)。ただし採用されるのは

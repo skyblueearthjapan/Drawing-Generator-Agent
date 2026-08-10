@@ -1,0 +1,1589 @@
+{
+  "summary": {
+    "model": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\荏原トライ調整用\\教師STEP\\3.昇降軸\\3-05.STEP",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\phase5_ai_operator\\plan_AUTO-002_ベアリングカラー.json",
+    "request": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\phase5_ai_operator\\request_AUTO-002.json",
+    "zuban": "AUTO-002",
+    "part_name": "ベアリングカラー",
+    "skip_sw": true,
+    "steps": {
+      "sw_projection": {
+        "skipped": true,
+        "views_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\phase5_ai_operator\\views_3-05.dxf",
+        "meta_json": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\phase5_ai_operator\\meta_3-05.json"
+      },
+      "density": {
+        "material": "S45C",
+        "resolved_kgm3": 7850.0,
+        "note": "材質記号 'S45C' -> 密度7850.0kg/m^3"
+      },
+      "compose": {
+        "scale": 1.0,
+        "views": [
+          "front",
+          "top",
+          "right",
+          "iso"
+        ],
+        "layout": {
+          "views": [
+            "front",
+            "top",
+            "right",
+            "iso"
+          ],
+          "gap_x_mm": 15.0,
+          "gap_y_mm": 15.0,
+          "group_wh_mm": [
+            76.31854249492392,
+            95.00000000000014
+          ],
+          "avail_wh_mm": [
+            410.0,
+            262.0
+          ],
+          "reserves": {
+            "front": {
+              "above": 0.0,
+              "below": 29.5,
+              "left": 37.5,
+              "right": 0.0
+            },
+            "top": {},
+            "right": {},
+            "iso": {}
+          }
+        },
+        "frame_check": {
+          "total": 175,
+          "frame_matched": 112,
+          "remaining": 63,
+          "remaining_ratio": 0.36
+        },
+        "zone_overlaps": [],
+        "view_pair_overlaps": [],
+        "weight": {
+          "volume_mm3": 2274.5130811990116,
+          "density_kgm3_used": 7850.0,
+          "mass_kg": 0.01785492768741224,
+          "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+        },
+        "warnings": []
+      },
+      "dim_engine": {
+        "gate1_ok": true,
+        "warnings": [
+          "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 1本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('D40_flange', 'left', 33.0)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる"
+        ],
+        "style_warnings": [
+          "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 1本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('D40_flange', 'left', 33.0)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる"
+        ],
+        "nominal": {
+          "pending": [],
+          "review_dimensions": []
+        },
+        "extension_lines": {
+          "collinear_count": 5,
+          "long_count": 1,
+          "long_and_collinear_count": 1,
+          "ext_len_max_mm": 33.0,
+          "ext_len_median_mm": 25.5,
+          "avoided_count": 0,
+          "gap_mismatch_count": 0
+        },
+        "circular_view_diameter_over": [],
+        "hole_note_leader_len_mm": [],
+        "style_check_ok": true,
+        "layout_collisions": [],
+        "frame_collisions": [],
+        "resolved_kinds": {
+          "T2_flange": "linear",
+          "L4_75_total": "linear",
+          "D30_bore": "diameter_linear",
+          "D38_body": "diameter_linear",
+          "D40_flange": "diameter_linear"
+        },
+        "chains_ok": true,
+        "chains": []
+      },
+      "layout_verify": {
+        "ok": true,
+        "frame_collision_count": 0,
+        "reasons": []
+      },
+      "gate2": {
+        "ok": true,
+        "unspecified_count": 0,
+        "redundant_count": 0
+      },
+      "independent_verify": {
+        "ok": true,
+        "file_attrs_ok": true,
+        "gate1_ok": true,
+        "gate1_max_diff_mm": 0.0,
+        "style_ok": true,
+        "note_ok": true,
+        "chains_ok": true,
+        "chain_errors": []
+      },
+      "centerline": {
+        "enabled": true,
+        "added": 4,
+        "counts": {
+          "view_axis": 3,
+          "profile_mark": 1
+        },
+        "gate3_circle_centerline_ok": true,
+        "n_features": 1,
+        "n_missing": 0,
+        "zone_hits": [],
+        "skipped_marks": []
+      }
+    },
+    "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3_regress_out\\AUTO-002_ベアリングカラー.dxf",
+    "final_png": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3_regress_out\\AUTO-002_ベアリングカラー.png",
+    "gate1_ok": true,
+    "gate2_ok": true,
+    "verify_ok": true,
+    "layout_ok": true,
+    "centerline_ok": true,
+    "overall_ok": true,
+    "status": "検証通過"
+  },
+  "compose": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3_regress_out\\AUTO-002_ベアリングカラー.dxf",
+    "scale": 1.0,
+    "views": [
+      "front",
+      "top",
+      "right",
+      "iso"
+    ],
+    "layout": {
+      "views": [
+        "front",
+        "top",
+        "right",
+        "iso"
+      ],
+      "gap_x_mm": 15.0,
+      "gap_y_mm": 15.0,
+      "group_wh_mm": [
+        76.31854249492392,
+        95.00000000000014
+      ],
+      "avail_wh_mm": [
+        410.0,
+        262.0
+      ],
+      "reserves": {
+        "front": {
+          "above": 0.0,
+          "below": 29.5,
+          "left": 37.5,
+          "right": 0.0
+        },
+        "top": {},
+        "right": {},
+        "iso": {}
+      }
+    },
+    "frame_entity_count_loaded": 112,
+    "frame_check": {
+      "total": 175,
+      "frame_matched": 112,
+      "remaining": 63,
+      "remaining_ratio": 0.36
+    },
+    "view_entity_counts": {
+      "front": 12,
+      "top": 9,
+      "right": 6,
+      "iso": 26
+    },
+    "dropped_view_entity_counts": {},
+    "unclassified_entity_count": 0,
+    "view_out_bbox_mm": {
+      "front": [
+        171.84072875253804,
+        113.49999999999993,
+        176.5907287525381,
+        153.4999999999999
+      ],
+      "top": [
+        171.84072875253804,
+        168.4999999999999,
+        176.5907287525381,
+        208.50000000000006
+      ],
+      "right": [
+        199.875,
+        113.49999999999993,
+        239.87500000000006,
+        153.4999999999999
+      ],
+      "iso": [
+        191.5907287525381,
+        170.23255333531716,
+        248.15927124746196,
+        206.76744666468278
+      ]
+    },
+    "zone_overlaps": [],
+    "view_pair_overlaps": [],
+    "field_anchor_check": {
+      "品名_値": {
+        "expected": [
+          224.477,
+          22.51
+        ],
+        "actual": [
+          224.477,
+          22.51
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "装置名_値": {
+        "expected": [
+          224.477,
+          14.877
+        ],
+        "actual": [
+          224.477,
+          14.877
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "図番_値": {
+        "expected": [
+          273.605,
+          20.498
+        ],
+        "actual": [
+          273.605,
+          20.498
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "製図者_氏名": {
+        "expected": [
+          191.878,
+          22.586
+        ],
+        "actual": [
+          191.878,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_3": {
+        "expected": [
+          207.705,
+          22.586
+        ],
+        "actual": [
+          207.705,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_2": {
+        "expected": [
+          207.705,
+          14.722
+        ],
+        "actual": [
+          207.705,
+          14.722
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "尺度_値": {
+        "expected": [
+          176.415,
+          22.446
+        ],
+        "actual": [
+          176.415,
+          22.446
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "連番マーク_値": {
+        "expected": [
+          19.324,
+          275.03
+        ],
+        "actual": [
+          19.324,
+          275.03
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "材質個数ノート_自製品": {
+        "expected": [
+          33.595,
+          280.001
+        ],
+        "actual": [
+          33.595,
+          280.001
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "重量_値": {
+        "expected": [
+          224.593,
+          6.704
+        ],
+        "actual": [
+          224.593,
+          6.704
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      }
+    },
+    "linetypes_added": [
+      "HIDDEN",
+      "PHANTOM",
+      "CENTER"
+    ],
+    "linetypes_missing": [],
+    "weight": {
+      "volume_mm3": 2274.5130811990116,
+      "density_kgm3_used": 7850.0,
+      "mass_kg": 0.01785492768741224,
+      "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+    },
+    "field_values": {
+      "品名": "ベアリングカラー",
+      "図番": "ＡＵＴＯ－００２",
+      "装置名": "昇降軸",
+      "尺度": "１：１",
+      "製図者": "ＡＩ",
+      "製図日付": "２６．０８．１１",
+      "連番": "０２",
+      "重量": "０．０２"
+    },
+    "warnings": []
+  },
+  "dim": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3_regress_out\\AUTO-002_ベアリングカラー.dxf",
+    "base_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3_regress_out\\AUTO-002_ベアリングカラー.dxf",
+    "gate1": [
+      {
+        "id": "T2_flange",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 2.0,
+        "measured": 2.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "2",
+        "text_value": 2.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN001",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "L4_75_total",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 4.75,
+        "measured": 4.75,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "4.75",
+        "text_value": 4.75,
+        "text_diff_mm": 0.0,
+        "style": "GEN002",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "D30_bore",
+        "kind": "diameter_linear",
+        "plan_kind": "diameter",
+        "view": "front",
+        "expected": 30.0,
+        "measured": 30.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "%%c30",
+        "text_value": 30.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN003",
+        "ok": true,
+        "errors": [],
+        "cross_check": {
+          "ok": true,
+          "view": "right",
+          "found_diameter": 30.0,
+          "diff_vs_measured_mm": 0.0
+        }
+      },
+      {
+        "id": "D38_body",
+        "kind": "diameter_linear",
+        "plan_kind": "diameter",
+        "view": "front",
+        "expected": 38.0,
+        "measured": 38.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "%%c38",
+        "text_value": 38.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN004",
+        "ok": true,
+        "errors": [],
+        "cross_check": {
+          "ok": true,
+          "view": "right",
+          "found_diameter": 38.0,
+          "diff_vs_measured_mm": 0.0
+        }
+      },
+      {
+        "id": "D40_flange",
+        "kind": "diameter_linear",
+        "plan_kind": "diameter",
+        "view": "front",
+        "expected": 40.0,
+        "measured": 40.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "%%c40",
+        "text_value": 40.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN005",
+        "ok": true,
+        "errors": [],
+        "cross_check": {
+          "ok": true,
+          "view": "right",
+          "found_diameter": 40.0,
+          "diff_vs_measured_mm": 0.0
+        }
+      }
+    ],
+    "gate1_ok": true,
+    "chains": [],
+    "chains_ok": true,
+    "dim_offsets": {
+      "T2_flange": 16.0,
+      "L4_75_total": 24.0,
+      "D30_bore": 16.0,
+      "D38_body": 24.0,
+      "D40_flange": 32.0
+    },
+    "hole_notes": [],
+    "dimstyles": {
+      "T2_flange": "GEN001",
+      "L4_75_total": "GEN002",
+      "D30_bore": "GEN003",
+      "D38_body": "GEN004",
+      "D40_flange": "GEN005"
+    },
+    "style_check": {
+      "ok": true,
+      "mismatches": [],
+      "effective": {
+        "T2_flange": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "L4_75_total": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "D30_bore": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "%%c<>",
+          "dimtol": 0
+        },
+        "D38_body": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "%%c<>",
+          "dimtol": 0
+        },
+        "D40_flange": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "%%c<>",
+          "dimtol": 0
+        }
+      }
+    },
+    "arrow_blocks_created": [
+      "_OPEN30"
+    ],
+    "frame_check": {
+      "total": 175,
+      "frame_matched": 112,
+      "remaining": 63,
+      "remaining_ratio": 0.36
+    },
+    "view_bbox": {
+      "front": [
+        171.8407,
+        113.5,
+        176.5907,
+        153.5
+      ],
+      "top": [
+        171.8407,
+        168.5,
+        176.5907,
+        208.5
+      ],
+      "right": [
+        199.875,
+        113.5,
+        239.875,
+        153.5
+      ],
+      "iso": [
+        199.875,
+        175.0157,
+        239.875,
+        201.407
+      ]
+    },
+    "layout": {
+      "text_boxes": {
+        "T2_flange": [
+          171.3407,
+          100.0,
+          174.3407,
+          104.0
+        ],
+        "L4_75_total": [
+          168.2157,
+          92.0,
+          180.2157,
+          96.0
+        ],
+        "D30_bore": [
+          156.3407,
+          129.0,
+          160.3407,
+          138.0
+        ],
+        "D38_body": [
+          148.3407,
+          129.0,
+          152.3407,
+          138.0
+        ],
+        "D40_flange": [
+          140.3407,
+          129.0,
+          144.3407,
+          138.0
+        ],
+        "N_general": [
+          295.0,
+          65.9,
+          370.6,
+          75.0
+        ]
+      },
+      "collisions": [],
+      "geom_boxes": {
+        "T2_flange": [
+          168.8407,
+          95.5,
+          176.8407,
+          113.5
+        ],
+        "L4_75_total": [
+          168.7778,
+          87.5,
+          179.6537,
+          114.5
+        ],
+        "D30_bore": [
+          153.8407,
+          115.5,
+          171.8407,
+          151.5
+        ],
+        "D38_body": [
+          145.8407,
+          111.5,
+          176.5907,
+          155.5
+        ],
+        "D40_flange": [
+          137.8407,
+          110.5,
+          171.8407,
+          156.5
+        ]
+      },
+      "frame_collisions": [],
+      "frame_ok": true
+    },
+    "resolved_kinds": {
+      "T2_flange": "linear",
+      "L4_75_total": "linear",
+      "D30_bore": "diameter_linear",
+      "D38_body": "diameter_linear",
+      "D40_flange": "diameter_linear"
+    },
+    "scale": 1.0,
+    "dimlfac": 1.0,
+    "views": [
+      "front",
+      "top",
+      "right",
+      "iso"
+    ],
+    "view_reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 29.5,
+        "left": 37.5,
+        "right": 0.0
+      }
+    },
+    "defaults_applied": {
+      "diameter_style": {
+        "circular_view": "native",
+        "profile_view": "linear"
+      },
+      "hole_note": {
+        "notation": "kiri",
+        "width": "zenkaku",
+        "separator": " "
+      },
+      "nominal_translation": true,
+      "nominal_tol_mm": 0.05,
+      "extension_gap_avoid": false
+    },
+    "style_warnings": [
+      "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 1本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('D40_flange', 'left', 33.0)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる"
+    ],
+    "nominal": {
+      "pending": [],
+      "review_dimensions": []
+    },
+    "extension_lines": {
+      "reports": [
+        {
+          "id": "D30_bore",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    176.591,
+                    148.5
+                  ],
+                  [
+                    171.841,
+                    148.5
+                  ]
+                ],
+                "handle": "149"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    171.841,
+                    118.5
+                  ],
+                  [
+                    176.591,
+                    118.5
+                  ]
+                ],
+                "handle": "148"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            17.0
+          ],
+          "ext_len_max_mm": 17.0,
+          "side": "left",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "D38_body",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 0.0,
+                "overlap": true,
+                "seg": [
+                  [
+                    176.591,
+                    152.5
+                  ],
+                  [
+                    173.841,
+                    152.5
+                  ]
+                ],
+                "handle": "140"
+              }
+            ],
+            [
+              {
+                "gap_mm": 0.0,
+                "overlap": true,
+                "seg": [
+                  [
+                    173.841,
+                    114.5
+                  ],
+                  [
+                    176.591,
+                    114.5
+                  ]
+                ],
+                "handle": "141"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            29.75,
+            29.75
+          ],
+          "ext_len_max_mm": 29.75,
+          "side": "left",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "D40_flange",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    173.841,
+                    153.5
+                  ],
+                  [
+                    171.841,
+                    153.5
+                  ]
+                ],
+                "handle": "13E"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    171.841,
+                    113.5
+                  ],
+                  [
+                    173.841,
+                    113.5
+                  ]
+                ],
+                "handle": "13F"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            33.0,
+            33.0
+          ],
+          "ext_len_max_mm": 33.0,
+          "side": "left",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "L4_75_total",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    171.841,
+                    113.5
+                  ],
+                  [
+                    171.841,
+                    133.5
+                  ]
+                ],
+                "handle": "145"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    176.591,
+                    114.5
+                  ],
+                  [
+                    176.591,
+                    133.5
+                  ]
+                ],
+                "handle": "147"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            25.0,
+            26.0
+          ],
+          "ext_len_max_mm": 26.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "T2_flange",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    171.841,
+                    113.5
+                  ],
+                  [
+                    171.841,
+                    133.5
+                  ]
+                ],
+                "handle": "145"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    173.841,
+                    113.5
+                  ],
+                  [
+                    173.841,
+                    133.5
+                  ]
+                ],
+                "handle": "144"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            17.0
+          ],
+          "ext_len_max_mm": 17.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        }
+      ],
+      "collinear_count": 5,
+      "long_count": 1,
+      "long_and_collinear_count": 1,
+      "ext_len_max_mm": 33.0,
+      "ext_len_median_mm": 25.5,
+      "avoided_count": 0,
+      "gap_mismatch_count": 0
+    },
+    "circular_view_diameter_over": [],
+    "warnings": [
+      "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 1本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('D40_flange', 'left', 33.0)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる"
+    ]
+  },
+  "gate2": {
+    "gate": "gate2_completeness_v1",
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3_regress_out\\AUTO-002_ベアリングカラー.dxf",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\phase5_ai_operator\\plan_AUTO-002_ベアリングカラー.json",
+    "dropped_dimensions": [],
+    "ok": true,
+    "unspecified": [],
+    "floating_dimensions": [],
+    "style_dimensions": [],
+    "redundant_dimensions": [],
+    "duplicate_value_dimensions": [],
+    "circles": [
+      {
+        "diameter": 30.0,
+        "count": 1,
+        "views": [
+          "right"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 38.0,
+        "count": 1,
+        "views": [
+          "right"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 40.0,
+        "count": 1,
+        "views": [
+          "right"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      }
+    ],
+    "axes": {
+      "X": {
+        "axis": "X",
+        "node_count": 7,
+        "nodes": [
+          -20.0,
+          -19.0,
+          -15.0,
+          0.0,
+          15.0,
+          19.0,
+          20.0
+        ],
+        "mode": "symmetric",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": -15.0,
+            "by": "D30_bore(対称・径/幅30)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 15.0,
+            "by": "D30_bore(対称・径/幅30)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -19.0,
+            "by": "D38_body(対称・径/幅38)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 19.0,
+            "by": "D38_body(対称・径/幅38)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -20.0,
+            "by": "D40_flange(対称・径/幅40)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 20.0,
+            "by": "D40_flange(対称・径/幅40)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": 0.0
+      },
+      "Y": {
+        "axis": "Y",
+        "node_count": 3,
+        "nodes": [
+          0.0,
+          2.0,
+          4.75
+        ],
+        "mode": "chain",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": 2.0,
+            "by": "T2_flange(2)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 4.75,
+            "by": "L4_75_total(4.75)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": null
+      },
+      "Z": {
+        "axis": "Z",
+        "node_count": 7,
+        "nodes": [
+          -20.0,
+          -19.0,
+          -15.0,
+          0.0,
+          15.0,
+          19.0,
+          20.0
+        ],
+        "mode": "symmetric",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": 19.0,
+            "by": "円φ38(right)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -19.0,
+            "by": "円φ38(right)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 15.0,
+            "by": "円φ30(right)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -15.0,
+            "by": "円φ30(right)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 20.0,
+            "by": "円φ40(right)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -20.0,
+            "by": "円φ40(right)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": 0.0
+      }
+    },
+    "dimensions_read": [
+      {
+        "id": "T2_flange",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 2.0,
+        "view": "front"
+      },
+      {
+        "id": "L4_75_total",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 4.75,
+        "view": "front"
+      },
+      {
+        "id": "D30_bore",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 30.0,
+        "view": "front"
+      },
+      {
+        "id": "D38_body",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 38.0,
+        "view": "front"
+      },
+      {
+        "id": "D40_flange",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 40.0,
+        "view": "front"
+      }
+    ],
+    "hole_notes": [],
+    "pcd_groups": [],
+    "cluster_groups": [],
+    "inclined_features": [],
+    "polygons": [],
+    "oblique_width_dimensions": [],
+    "thread_features": [],
+    "note_diameters": [],
+    "note_taps": [],
+    "note_depths": [],
+    "covered_diameters": [
+      30.0,
+      38.0,
+      40.0
+    ],
+    "chamfers": [],
+    "out_of_scope": [
+      {
+        "class": "view_not_axis_aligned",
+        "view": "iso",
+        "reason": "軸平行でない投影(等角投影等)。v1は寸法棚卸しの対象外"
+      },
+      {
+        "class": "not_implemented",
+        "reason": "表面性状記号・幾何公差・溶接記号・ねじのピッチ/等級はv1の判定対象外(生成側も未実装)"
+      }
+    ]
+  },
+  "independent_verify": {
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3_regress_out\\AUTO-002_ベアリングカラー.dxf",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\phase5_ai_operator\\plan_AUTO-002_ベアリングカラー.json",
+    "file_attrs_ok": true,
+    "frame": {
+      "total": 181,
+      "frame_matched": 112,
+      "remaining": 69,
+      "remaining_ratio": 0.3812154696132597
+    },
+    "scale": 1.0,
+    "gate1": [
+      {
+        "id": "T2_flange",
+        "style": "GEN001",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 2.0,
+        "measured": 2.0,
+        "diff_mm": 0.0,
+        "text": "2",
+        "text_value": 2.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "L4_75_total",
+        "style": "GEN002",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 4.75,
+        "measured": 4.75,
+        "diff_mm": 0.0,
+        "text": "4.75",
+        "text_value": 4.75,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "D30_bore",
+        "style": "GEN003",
+        "kind": "diameter_linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 30.0,
+        "measured": 30.0,
+        "diff_mm": 0.0,
+        "text": "%%c30",
+        "text_value": 30.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "D38_body",
+        "style": "GEN004",
+        "kind": "diameter_linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 38.0,
+        "measured": 38.0,
+        "diff_mm": 0.0,
+        "text": "%%c38",
+        "text_value": 38.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "D40_flange",
+        "style": "GEN005",
+        "kind": "diameter_linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 40.0,
+        "measured": 40.0,
+        "diff_mm": 0.0,
+        "text": "%%c40",
+        "text_value": 40.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      }
+    ],
+    "gate1_ok": true,
+    "chains": [],
+    "chains_ok": true,
+    "gate1_max_diff_mm": 0.0,
+    "style_ok": true,
+    "style_mismatches": [],
+    "frame_collisions": [],
+    "layout_ok": true,
+    "notes": [],
+    "note_ok": true,
+    "ok": true
+  },
+  "centerline": {
+    "enabled": true,
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3_regress_out\\AUTO-002_ベアリングカラー.dxf",
+    "added": 4,
+    "counts": {
+      "view_axis": 3,
+      "profile_mark": 1
+    },
+    "linetype_added": false,
+    "style": {
+      "linetype": "DASHDOT",
+      "color": 3,
+      "hole_ext_mm": 5.0,
+      "axis_ext_mm": 5.0
+    },
+    "features": [
+      {
+        "view": "right",
+        "center": [
+          219.875,
+          133.5
+        ],
+        "d_draw": 40.0,
+        "d_model": 40.0,
+        "n_circles": 3
+      }
+    ],
+    "lines": [
+      {
+        "view": "top",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          166.8407,
+          188.5
+        ],
+        "p2": [
+          181.5907,
+          188.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "view_axis",
+        "dir": "v",
+        "p1": [
+          219.875,
+          108.5
+        ],
+        "p2": [
+          219.875,
+          158.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          194.875,
+          133.5
+        ],
+        "p2": [
+          244.875,
+          133.5
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "profile_mark",
+        "dir": "h",
+        "p1": [
+          166.8407,
+          133.5
+        ],
+        "p2": [
+          178.8407,
+          133.5
+        ]
+      }
+    ],
+    "circles": [],
+    "notes": []
+  },
+  "centerline_check": {
+    "ok": true,
+    "n_features": 1,
+    "n_missing": 0,
+    "coverage": 1.0,
+    "n_centerline_entities": 4,
+    "n_designed": 4,
+    "n_not_realized": 0,
+    "missing": [],
+    "not_realized": [],
+    "zone_hits": [],
+    "checked": [
+      {
+        "view": "right",
+        "center": [
+          219.875,
+          133.5
+        ],
+        "d_model": 40.0,
+        "h": 5.0,
+        "v": 5.0
+      }
+    ]
+  }
+}

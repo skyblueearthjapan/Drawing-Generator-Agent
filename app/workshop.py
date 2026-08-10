@@ -359,6 +359,42 @@ def _centerline_line(summary):
                cl["n_features"] - cl.get("n_missing", 0)))
 
 
+def _style3_section(summary):
+    u"""解釈レポート用: 様式(上品さの3層構造)の計測値と、**呼び値未確定=質問票行き**の列挙。
+
+    ❗呼び値未確定・呼び値でない径は「事実に基づかない補完はしない」というユーザー裁定に従い
+      エンジンが**勝手に丸めなかった**ものである。人間に意図を確認する必要がある。
+    """
+    de = (summary.get("steps") or {}).get("dim_engine") or {}
+    sw = de.get("style_warnings") or []
+    nom = de.get("nominal") or {}
+    pend = nom.get("pending") or []
+    review = nom.get("review_dimensions") or []
+    ext = de.get("extension_lines") or {}
+    out = [u"## 様式(上品さの3層構造)の計測"]
+    if not de:
+        return out + [u"- 未実施(ゲート①で停止)", u""]
+    out.append(u"- 様式警告: %d件%s"
+               % (len(sw), u"" if not sw else u"\n" + u"\n".join(u"  - " + w for w in sw)))
+    out.append(u"- 補助線: 溶け込み%s本 / 目安超%s本 / 最長%smm(人間コーパスp90=30mm)"
+               % (ext.get("collinear_count"), ext.get("long_count"),
+                  ext.get("ext_len_max_mm")))
+    out.append(u"- 円形ビューの径寸法の超過: %s"
+               % (de.get("circular_view_diameter_over") or u"なし"))
+    out.append(u"")
+    if pend or review:
+        out.append(u"## ❗人間に確認が要る項目(質問票)")
+        for p in pend:
+            out.append(u"- 呼び値未確定 `%s` の %s = 実測φ%s。%s"
+                       % (p["id"], p["field"], p["measured"], p["reason"]))
+        for r in review:
+            out.append(u"- 呼び値でない径寸法 `%s`(%s ビュー)= φ%s。"
+                       u"インロー/インチ系の疑い。この径の意図は?(値は実測のまま作図済み)"
+                       % (r["id"], r["view"], r["value"]))
+        out.append(u"")
+    return out
+
+
 def write_interpretation_report(path, request_id, request, summary):
     lines = [
         u"# 解釈レポート %s %s" % (summary.get("zuban", ""), summary.get("part_name", "")),
@@ -376,6 +412,9 @@ def write_interpretation_report(path, request_id, request, summary):
         u"- 独立検証(DIMSTYLE・図枠・注記書式): %s" % (u"合格" if summary.get("verify_ok") else u"不合格"),
         u"- ゲート③の機械化第一歩(円形フィーチャーの中心線被覆): %s" % _centerline_line(summary),
         u"",
+    ]
+    lines += _style3_section(summary)
+    lines += [
         u"## 既知の制限(このループでは未実施)",
         u"- ゲート③(目視照合)は中心線の被覆チェックだけが機械化されている。"
         u"ビューの正しさ・注記の重なりはPNGを人間が確認すること。",

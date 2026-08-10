@@ -1,0 +1,1977 @@
+{
+ "cases": [
+  {
+   "zuban": "25154-1-27",
+   "name": "走行フレーム踏板",
+   "human": {
+    "path": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\1.走行軸\\25154-1-27_走行フレーム踏板.dxf",
+    "n_linear_dim": 10,
+    "n_collinear": 6,
+    "ratio": 0.6,
+    "dimexo_seen": [
+     4.0
+    ],
+    "ext_len_paper_mm": {
+     "n": 20,
+     "p25": 12.18,
+     "median": 20.62,
+     "p75": 23.16,
+     "p90": 29.09,
+     "max": 29.093
+    },
+    "ext_len_collinear_paper_mm": {
+     "n": 12,
+     "median": 20.91,
+     "p75": 27.78,
+     "max": 29.093
+    },
+    "rows": [
+     {
+      "handle": "440",
+      "dimexo": 4.0,
+      "paper_unit": 4.0,
+      "ext_len_paper_mm": [
+       20.905,
+       20.905
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "45A",
+      "dimexo": 4.0,
+      "paper_unit": 4.0,
+      "ext_len_paper_mm": [
+       13.177,
+       12.177
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 2.25
+     },
+     {
+      "handle": "45B",
+      "dimexo": 4.0,
+      "paper_unit": 4.0,
+      "ext_len_paper_mm": [
+       12.177,
+       12.177
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "45C",
+      "dimexo": 4.0,
+      "paper_unit": 4.0,
+      "ext_len_paper_mm": [
+       20.621,
+       20.621
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 2.25
+     },
+     {
+      "handle": "462",
+      "dimexo": 4.0,
+      "paper_unit": 4.0,
+      "ext_len_paper_mm": [
+       21.655,
+       23.155
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 2.25
+     },
+     {
+      "handle": "463",
+      "dimexo": 4.0,
+      "paper_unit": 4.0,
+      "ext_len_paper_mm": [
+       23.155,
+       19.405
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "464",
+      "dimexo": 4.0,
+      "paper_unit": 4.0,
+      "ext_len_paper_mm": [
+       19.405,
+       23.155
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "465",
+      "dimexo": 4.0,
+      "paper_unit": 4.0,
+      "ext_len_paper_mm": [
+       29.093,
+       29.093
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 2.25
+     },
+     {
+      "handle": "480",
+      "dimexo": 4.0,
+      "paper_unit": 4.0,
+      "ext_len_paper_mm": [
+       27.78,
+       10.407
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "481",
+      "dimexo": 4.0,
+      "paper_unit": 4.0,
+      "ext_len_paper_mm": [
+       10.407,
+       10.407
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     }
+    ]
+   },
+   "generated": {
+    "path": "data\\納品箱\\BLIND2-25154-1-27\\25154-1-27_走行フレーム踏板.dxf",
+    "n_linear_dim": 8,
+    "n_collinear": 5,
+    "ratio": 0.625,
+    "dimexo_seen": [
+     1.0
+    ],
+    "ext_len_paper_mm": {
+     "n": 16,
+     "p25": 65.3,
+     "median": 95.6,
+     "p75": 162.01,
+     "p90": 211.4,
+     "max": 211.4
+    },
+    "ext_len_collinear_paper_mm": {
+     "n": 10,
+     "median": 95.6,
+     "p75": 162.01,
+     "max": 211.4
+    },
+    "rows": [
+     {
+      "handle": "1AD",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       48.8,
+       48.8
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "1BD",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       86.6,
+       86.6
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "1CD",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       95.6,
+       95.6
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "1DD",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       114.2,
+       114.2
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "1ED",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       26.0,
+       26.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "1FD",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       65.297,
+       65.297
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "219",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       211.4,
+       211.4
+      ],
+      "collinear": 6,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "229",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       162.006,
+       162.006
+      ],
+      "collinear": 7,
+      "min_gap_paper_mm": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "zuban": "25154-2-16",
+   "name": "指針",
+   "human": {
+    "path": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\2.ターン軸\\25154-2-16_指針.dxf",
+    "n_linear_dim": 9,
+    "n_collinear": 8,
+    "ratio": 0.8889,
+    "dimexo_seen": [
+     1.0
+    ],
+    "ext_len_paper_mm": {
+     "n": 18,
+     "p25": 10.55,
+     "median": 12.97,
+     "p75": 18.68,
+     "p90": 23.05,
+     "max": 63.666
+    },
+    "ext_len_collinear_paper_mm": {
+     "n": 16,
+     "median": 12.97,
+     "p75": 20.67,
+     "max": 63.666
+    },
+    "rows": [
+     {
+      "handle": "360",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       10.547,
+       10.547
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "361",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       10.547,
+       12.047
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 2.0
+     },
+     {
+      "handle": "362",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       18.676,
+       18.676
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 2.0
+     },
+     {
+      "handle": "37C",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       23.052,
+       23.052
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "37F",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       12.974,
+       12.974
+      ],
+      "collinear": 3,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "380",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       12.974,
+       12.974
+      ],
+      "collinear": 3,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "381",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       8.438,
+       8.438
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "38C",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       20.666,
+       63.666
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "38D",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       8.42,
+       8.42
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     }
+    ]
+   },
+   "generated": {
+    "path": "data\\納品箱\\BLIND2-25154-2-16\\25154-2-16_指針.dxf",
+    "n_linear_dim": 11,
+    "n_collinear": 10,
+    "ratio": 0.9091,
+    "dimexo_seen": [
+     1.0
+    ],
+    "ext_len_paper_mm": {
+     "n": 22,
+     "p25": 29.5,
+     "median": 50.0,
+     "p75": 105.0,
+     "p90": 113.0,
+     "max": 164.8
+    },
+    "ext_len_collinear_paper_mm": {
+     "n": 20,
+     "median": 60.0,
+     "p75": 105.0,
+     "max": 164.8
+    },
+    "rows": [
+     {
+      "handle": "174",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       28.2,
+       31.4
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "184",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       20.2,
+       20.2
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "194",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       20.2,
+       23.4
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "1A4",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       164.8,
+       164.8
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "1B4",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       105.0,
+       62.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "1C4",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       113.0,
+       113.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "1D4",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       60.0,
+       60.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "1F0",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       105.0,
+       105.0
+      ],
+      "collinear": 6,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "200",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       50.0,
+       50.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "210",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       29.5,
+       29.5
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "220",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       29.5,
+       42.0
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "zuban": "25154-3-02",
+   "name": "モータブラケット",
+   "human": {
+    "path": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\3.昇降軸\\25154-3-02_モータブラケット.dxf",
+    "n_linear_dim": 9,
+    "n_collinear": 9,
+    "ratio": 1.0,
+    "dimexo_seen": [
+     1.5
+    ],
+    "ext_len_paper_mm": {
+     "n": 18,
+     "p25": 15.85,
+     "median": 23.24,
+     "p75": 25.01,
+     "p90": 38.52,
+     "max": 45.907
+    },
+    "ext_len_collinear_paper_mm": {
+     "n": 18,
+     "median": 23.24,
+     "p75": 25.01,
+     "max": 45.907
+    },
+    "rows": [
+     {
+      "handle": "4E6",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       15.852,
+       15.852
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "4E7",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       15.852,
+       38.518
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "4E8",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       23.24,
+       45.907
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "4F4",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       25.011,
+       25.011
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "4F5",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       23.622,
+       23.622
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "4F6",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       21.593,
+       21.593
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "4F8",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       1.331,
+       1.331
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "4F9",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       1.331,
+       1.662
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "4FD",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       33.21,
+       33.21
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     }
+    ]
+   },
+   "generated": {
+    "path": "data\\納品箱\\BLIND2-25154-3-02\\25154-3-02_モータブラケット.dxf",
+    "n_linear_dim": 8,
+    "n_collinear": 8,
+    "ratio": 1.0,
+    "dimexo_seen": [
+     1.0
+    ],
+    "ext_len_paper_mm": {
+     "n": 16,
+     "p25": 38.5,
+     "median": 61.75,
+     "p75": 98.5,
+     "p90": 115.0,
+     "max": 123.0
+    },
+    "ext_len_collinear_paper_mm": {
+     "n": 16,
+     "median": 61.75,
+     "p75": 98.5,
+     "max": 123.0
+    },
+    "rows": [
+     {
+      "handle": "1A4",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       53.75,
+       53.75
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "1B4",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       25.0,
+       25.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "1C4",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       17.0,
+       17.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "1D4",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       61.75,
+       61.75
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "1E4",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       98.5,
+       98.5
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "1F4",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       115.0,
+       115.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "204",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       87.25,
+       123.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "214",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       38.5,
+       38.5
+      ],
+      "collinear": 4,
+      "min_gap_paper_mm": 0.0
+     }
+    ]
+   }
+  },
+  {
+   "zuban": "25154-4-05",
+   "name": "駆動ユニットブラケット",
+   "human": {
+    "path": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\4.前後軸\\25154-4-05_駆動ユニットブラケット.dxf",
+    "n_linear_dim": 27,
+    "n_collinear": 20,
+    "ratio": 0.7407,
+    "dimexo_seen": [
+     3.0
+    ],
+    "ext_len_paper_mm": {
+     "n": 54,
+     "p25": 9.85,
+     "median": 10.7,
+     "p75": 16.3,
+     "p90": 18.71,
+     "max": 62.178
+    },
+    "ext_len_collinear_paper_mm": {
+     "n": 40,
+     "median": 10.7,
+     "p75": 16.3,
+     "max": 62.178
+    },
+    "rows": [
+     {
+      "handle": "4B3",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       7.148,
+       7.148
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4B5",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       9.191,
+       9.191
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4B6",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       10.606,
+       31.772
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "4B7",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       9.903,
+       9.903
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4BB",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       14.939,
+       10.606
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "508",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       18.096,
+       18.096
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "509",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       8.599,
+       8.599
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "50B",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       18.712,
+       18.712
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "514",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       10.46,
+       10.46
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "515",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       29.277,
+       14.61
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "516",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       14.61,
+       14.61
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "518",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       13.388,
+       13.388
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "519",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       7.433,
+       7.433
+      ],
+      "collinear": 3,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "51A",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       7.433,
+       7.433
+      ],
+      "collinear": 3,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "51C",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       17.877,
+       17.877
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "51F",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       18.205,
+       18.205
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "529",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       8.962,
+       16.295
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "52A",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       16.295,
+       16.295
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "53A",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       62.178,
+       24.178
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "53B",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       24.178,
+       9.845
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "53C",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       9.845,
+       9.845
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "53D",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       9.845,
+       9.845
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "546",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       6.365,
+       10.699
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "547",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       10.699,
+       10.699
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "548",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       10.699,
+       10.699
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "549",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       10.699,
+       10.699
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "54A",
+      "dimexo": 3.0,
+      "paper_unit": 3.0,
+      "ext_len_paper_mm": [
+       10.699,
+       6.365
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     }
+    ]
+   },
+   "generated": {
+    "path": "data\\納品箱\\BLIND2-25154-4-05\\25154-4-05_駆動ユニットブラケット.dxf",
+    "n_linear_dim": 23,
+    "n_collinear": 14,
+    "ratio": 0.6087,
+    "dimexo_seen": [
+     1.0
+    ],
+    "ext_len_paper_mm": {
+     "n": 46,
+     "p25": 20.75,
+     "median": 29.5,
+     "p75": 42.0,
+     "p90": 68.25,
+     "max": 101.25
+    },
+    "ext_len_collinear_paper_mm": {
+     "n": 28,
+     "median": 37.75,
+     "p75": 49.5,
+     "max": 101.25
+    },
+    "rows": [
+     {
+      "handle": "1F5",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       25.75,
+       25.75
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "205",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       28.75,
+       28.75
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "215",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       33.0,
+       33.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "225",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       19.75,
+       19.75
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "235",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       34.625,
+       34.625
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "245",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       37.75,
+       37.75
+      ],
+      "collinear": 6,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "255",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       45.75,
+       45.75
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "265",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       17.0,
+       20.75
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "275",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       20.75,
+       29.5
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "285",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       29.5,
+       20.75
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "295",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       20.75,
+       20.75
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "2A5",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       20.75,
+       29.5
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "2B5",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       17.0,
+       49.5
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "2C5",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       68.25,
+       68.25
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "2D5",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       33.0,
+       33.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "2E5",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       17.0,
+       17.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "2F5",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       101.25,
+       101.25
+      ],
+      "collinear": 3,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "305",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       68.25,
+       68.25
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "315",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       42.0,
+       42.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "325",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       36.125,
+       17.0
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "335",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       20.0,
+       17.0
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "345",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       46.625,
+       25.0
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "355",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       20.0,
+       20.0
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     }
+    ]
+   }
+  },
+  {
+   "zuban": "25154-5-05",
+   "name": "減速機フランジ",
+   "human": {
+    "path": "荏原トライ調整用\\DXF\\部品表用DXFデータ\\5.ひねり軸\\25154-5-05_減速機フランジ.dxf",
+    "n_linear_dim": 33,
+    "n_collinear": 16,
+    "ratio": 0.4848,
+    "dimexo_seen": [
+     1.5
+    ],
+    "ext_len_paper_mm": {
+     "n": 66,
+     "p25": 16.01,
+     "median": 21.32,
+     "p75": 23.72,
+     "p90": 33.72,
+     "max": 46.346
+    },
+    "ext_len_collinear_paper_mm": {
+     "n": 32,
+     "median": 17.62,
+     "p75": 26.75,
+     "max": 46.346
+    },
+    "rows": [
+     {
+      "handle": "4E1",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       11.988,
+       11.988
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4E2",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       21.541,
+       21.541
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "4E7",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       18.399,
+       17.732
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4E8",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       17.732,
+       17.732
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4E9",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       17.732,
+       18.399
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4EF",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       16.983,
+       21.317
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4F0",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       21.317,
+       21.317
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4F1",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       21.317,
+       16.983
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4F5",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       39.96,
+       39.96
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "4F6",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       36.066,
+       36.066
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 2.14
+     },
+     {
+      "handle": "531",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       11.988,
+       11.988
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "532",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       21.541,
+       21.541
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "540",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       16.983,
+       21.317
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "541",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       21.317,
+       21.317
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "542",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       21.317,
+       16.983
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "543",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       26.73,
+       26.73
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "548",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       14.668,
+       14.668
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "550",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       17.625,
+       17.625
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.667
+     },
+     {
+      "handle": "55A",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       9.613,
+       8.946
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "55D",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       27.718,
+       27.718
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "55F",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       33.715,
+       26.749
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "562",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       15.846,
+       17.179
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "563",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       17.179,
+       24.146
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "56E",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       23.716,
+       23.049
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "56F",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       23.049,
+       23.049
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "570",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       23.049,
+       23.716
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "571",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       31.159,
+       31.159
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "572",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       11.697,
+       11.697
+      ],
+      "collinear": 3,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "573",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       21.48,
+       21.48
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "574",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       16.013,
+       16.013
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "575",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       16.013,
+       46.346
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "59E",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       14.116,
+       14.116
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "59F",
+      "dimexo": 1.5,
+      "paper_unit": 1.5,
+      "ext_len_paper_mm": [
+       14.116,
+       34.45
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     }
+    ]
+   },
+   "generated": {
+    "path": "data\\納品箱\\BLIND2-25154-5-05\\25154-5-05_減速機フランジ.dxf",
+    "n_linear_dim": 13,
+    "n_collinear": 9,
+    "ratio": 0.6923,
+    "dimexo_seen": [
+     1.0
+    ],
+    "ext_len_paper_mm": {
+     "n": 26,
+     "p25": 24.0,
+     "median": 40.0,
+     "p75": 65.0,
+     "p90": 149.75,
+     "max": 157.0
+    },
+    "ext_len_collinear_paper_mm": {
+     "n": 18,
+     "median": 32.25,
+     "p75": 40.0,
+     "max": 149.75
+    },
+    "rows": [
+     {
+      "handle": "1CB",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       24.0,
+       24.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "1DB",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       25.0,
+       25.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "1EB",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       40.0,
+       40.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "1FB",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       149.75,
+       149.75
+      ],
+      "collinear": 8,
+      "min_gap_paper_mm": 0.0
+     },
+     {
+      "handle": "20B",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       32.25,
+       36.225
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "21B",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       17.0,
+       17.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "255",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       39.75,
+       39.75
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "265",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       49.0,
+       49.0
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "275",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       57.0,
+       57.0
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "285",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       107.0,
+       157.0
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "295",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       65.0,
+       65.0
+      ],
+      "collinear": 0,
+      "min_gap_paper_mm": null
+     },
+     {
+      "handle": "2A5",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       91.0,
+       17.0
+      ],
+      "collinear": 1,
+      "min_gap_paper_mm": 1.0
+     },
+     {
+      "handle": "2B5",
+      "dimexo": 1.0,
+      "paper_unit": 1.0,
+      "ext_len_paper_mm": [
+       17.0,
+       17.0
+      ],
+      "collinear": 2,
+      "min_gap_paper_mm": 1.0
+     }
+    ]
+   }
+  }
+ ],
+ "total": {
+  "human": {
+   "collinear": 59,
+   "linear_dims": 88,
+   "ratio": 0.6705,
+   "ext_len_paper_mm": {
+    "n": 176,
+    "p25": 10.7,
+    "median": 17.18,
+    "p75": 23.05,
+    "p90": 29.09,
+    "max": 63.67
+   },
+   "ext_len_collinear_paper_mm": {
+    "n": 118,
+    "median": 15.85,
+    "p75": 23.05,
+    "p90": 31.77,
+    "max": 63.67
+   }
+  },
+  "generated": {
+   "collinear": 46,
+   "linear_dims": 63,
+   "ratio": 0.7302,
+   "ext_len_paper_mm": {
+    "n": 126,
+    "p25": 25.0,
+    "median": 39.75,
+    "p75": 68.25,
+    "p90": 114.2,
+    "max": 211.4
+   },
+   "ext_len_collinear_paper_mm": {
+    "n": 92,
+    "median": 42.0,
+    "p75": 91.0,
+    "p90": 115.0,
+    "max": 211.4
+   }
+  }
+ }
+}

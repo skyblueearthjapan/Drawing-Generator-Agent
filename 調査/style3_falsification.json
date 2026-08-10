@@ -1,0 +1,110 @@
+{
+ "summary": {
+  "total": 17,
+  "ok": 17
+ },
+ "results": [
+  {
+   "case": "N0_base",
+   "desc": "呼び値と一致する注記",
+   "ok": true,
+   "detail": "gate1=True 未確定=0 翻訳=[('drill', 8.0, 8.0), ('counterbore.dia', 11.0, 11.0)]"
+  },
+  {
+   "case": "N1_round",
+   "desc": "φ7.04 -> 呼びφ7",
+   "ok": true,
+   "detail": "注記=\\A1;２－７キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０ 翻訳=[(7.04, 7.0, 0.04)]"
+  },
+  {
+   "case": "N2_ambiguous",
+   "desc": "φ13.44 は丸めず呼び値未確定",
+   "ok": true,
+   "detail": "注記=\\A1;２－８キリ　ザグリ%%c１１深さ７　９０°皿もみ%%c１３．４４\\PＰＣＤ６０ 未確定=[('countersink.dia', 13.44)] 警告=True"
+  },
+  {
+   "case": "N3_out_of_domain",
+   "desc": "φ219.1 は呼びの範囲外 -> 未確定",
+   "ok": true,
+   "detail": "注記=\\A1;２－８キリ　ザグリ%%c２１９．１深さ７\\PＰＣＤ６０ 理由=呼び値で語る範囲外(φ219.1 > φ100)。加工径として実測のまま残し、意図を質問票で確認する"
+  },
+  {
+   "case": "N4_forged_translation",
+   "desc": "嘘の丸め(7.04->8.0)はゲート①で落ちる",
+   "ok": true,
+   "detail": "gate=不合格 msg=ゲート①不合格 1件(DXFは保存していない): [   {     \"id\": \"N_bolt_holes\",     \"view\": \"right\",     \"pattern\": \"\\\\A1;２－８キリ　ザグリ%%"
+  },
+  {
+   "case": "N5_forged_table",
+   "desc": "表を偽装しても嘘の丸めはせず未確定に倒れる",
+   "ok": true,
+   "detail": "注記=\\A1;２－７．０４キリ　ザグリ%%c１１深さ７\\PＰＣＤ６０ 未確定=[('drill', 7.04), ('counterbore.dia', 11.0)]"
+  },
+  {
+   "case": "C1_collinear_base",
+   "desc": "素のTEST-002で溶け込みを検出する",
+   "ok": true,
+   "detail": "検出=5本 / 線形寸法6本"
+  },
+  {
+   "case": "C2_detector_regression",
+   "desc": "検出器を無効化した退行は数値に出る",
+   "ok": true,
+   "detail": "退行実装=0本(素は5本)"
+  },
+  {
+   "case": "C3_no_contour",
+   "desc": "輪郭を隠すと検出0(輪郭を本当に見ている)",
+   "ok": true,
+   "detail": "輪郭なし=0本(素は5本)"
+  },
+  {
+   "case": "C4_dimexo_effective",
+   "desc": "実DXFに描かれたすき間はdimexoと一致する",
+   "ok": true,
+   "detail": "素のすき間=[1.0] / 回避ON=[1.0, 3.0](不一致 0件)"
+  },
+  {
+   "case": "C5_len_threshold",
+   "desc": "補助線長のしきい値が効いている",
+   "ok": true,
+   "detail": "しきい値30mm=3本 / 300mm=0本(最大54.5mm)"
+  },
+  {
+   "case": "V2_circular_one",
+   "desc": "円形ビューの径1本なら警告0",
+   "ok": true,
+   "detail": "超過=[]"
+  },
+  {
+   "case": "V1_circular_two",
+   "desc": "円形ビューに径2本 -> 様式警告",
+   "ok": true,
+   "detail": "超過=[{'view': 'right', 'ids': ['D75_outer', 'D33_on_circular'], 'count': 2}] 警告=True"
+  },
+  {
+   "case": "L2_leader_ok",
+   "desc": "引出線が目安内なら警告なし",
+   "ok": true,
+   "detail": "引出線長=33.6mm(上限50)"
+  },
+  {
+   "case": "L1_leader_long",
+   "desc": "引出線が長すぎると様式警告",
+   "ok": true,
+   "detail": "引出線長=128.1mm 警告=True"
+  },
+  {
+   "case": "A1_auto_place",
+   "desc": "自動配置で対象の近傍に置かれ衝突0",
+   "ok": true,
+   "detail": "自動=True 引出線長 33.6 -> 14.0mm ビュー衝突=[] 文字枠衝突=[]"
+  },
+  {
+   "case": "A2_auto_place_fail",
+   "desc": "置き場所が無ければ警告して計画値へ戻る",
+   "ok": true,
+   "detail": "自動=False 警告=True 位置=[299.0, 120.0]"
+  }
+ ]
+}

@@ -1,0 +1,568 @@
+{
+  "schema_version": "1.0",
+  "_note": "盲検第2弾(2026-08-10)の計画を『様式規則(作法6〜11)』で書き直した版(2026-08-11)。寸法値・測定点は盲検時のまま。適用: 作法7(正面図の左右を長さの帯として分け直し)・作法8(直列連記2組)・作法9(ＰＣＤ２０６の8等配Ｍ８穴群の位相を角度寸法45度で明示)。径寸法3本は円形ビュー(平面図)のネイティブDIAMETER型で、引出し角を45/135/225度に散らして同じ象限に固めない(作法6後段)。",
+  "part": {
+    "model": "5-05(教師STEP/5.ひねり軸/5-05.STEP)",
+    "図番": "25154-5-05",
+    "品名": "減速機フランジ",
+    "shape_class": "板物",
+    "材質": "ＳＳ４００",
+    "個数": 1,
+    "形状要約": "235(X)×240(Z)×t14の角板(四隅R15)にφ219.1のボスが高さ30(y14〜44)。内径はy0〜14がφ200、y14〜44がφ190で口元にC1面取り(φ192)。四隅に17幅×27長の長穴4個(R中心 ±100×±95/±105)。ＰＣＤ２０６に8等配のφ8止まり深さ29。x±98〜±148・z-68〜-56・y14〜26に耳2個(いずれも-Z側)。"
+  },
+  "source": {
+    "base_dxf": "data/依頼箱/BLIND2-25154-5-05/views.dxf",
+    "meta_json": "data/依頼箱/BLIND2-25154-5-05/meta.json",
+    "scale": 0.5
+  },
+  "layout": {
+    "views": [
+      "front",
+      "top"
+    ],
+    "dim_reserve": true
+  },
+  "defaults": {
+    "first_offset_mm": 16.0,
+    "stack_step_mm": 8.0,
+    "snap_tol_mm": 0.01,
+    "gate_tol_mm": 0.01
+  },
+  "dimensions": [
+    {
+      "id": "X196_lug_roots",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -98,
+          14,
+          -56
+        ],
+        "p2": [
+          98,
+          14,
+          -56
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "level": 1
+      },
+      "value_expected": 196.0,
+      "tolerance": null,
+      "comment": "左右の耳の付根面間。【修正1回目】当初は右耳だけの張り出し長さ50(x98→148)を入れたが、X軸は0対称でゲート②のルートが対称中心0になるため、中点が0でない寸法は片側にしか辺を張らず x=-98 が未指定で落ちた。対称対の寸法に置き換えて両側を一括で決める(作法1)。耳の張り出しは (296-196)/2=50 で読める。"
+    },
+    {
+      "id": "X235_plate",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -117.5,
+          0,
+          105
+        ],
+        "p2": [
+          117.5,
+          0,
+          105
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "level": 2
+      },
+      "value_expected": 235.0,
+      "tolerance": null,
+      "comment": "角板のX幅。X軸は0対称で中点=対称中心のため両端が一括で決まる"
+    },
+    {
+      "id": "X296_lugs",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -148,
+          14,
+          -56
+        ],
+        "p2": [
+          148,
+          14,
+          -56
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "below",
+        "level": 3
+      },
+      "value_expected": 296.0,
+      "tolerance": null,
+      "comment": "耳先端間の全幅"
+    },
+    {
+      "id": "Y14_plate",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -117.5,
+          0,
+          105
+        ],
+        "p2": [
+          -117.5,
+          14,
+          105
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "chain_group": "Yseg"
+      },
+      "value_expected": 14.0,
+      "tolerance": null,
+      "comment": "板厚。Y軸のdatum=取付面y=0。【様式】作法8: y=14 を共有する Y12_lug と同一寸法線へ直列連記(１４｜１２)。作法7に倣い長さ寸法は左に積まず、左は全高1本だけにする"
+    },
+    {
+      "id": "Y44_total",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -117.5,
+          0,
+          105
+        ],
+        "p2": [
+          -109.55,
+          44,
+          0
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "level": 1
+      },
+      "value_expected": 44.0,
+      "tolerance": null,
+      "comment": "全高(ボス頂まで)。datumから積む。【様式】左は全高1本だけ(旧計画は左に2段積んでいた)"
+    },
+    {
+      "id": "Y12_lug",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          148,
+          14,
+          -56
+        ],
+        "p2": [
+          148,
+          26,
+          -56
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "chain_group": "Yseg"
+      },
+      "value_expected": 12.0,
+      "tolerance": null,
+      "comment": "耳の厚み。板上面y=14から積む。Y14_plate と直列連記"
+    },
+    {
+      "id": "D219_1_boss",
+      "kind": "diameter",
+      "context": "circular_view",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          44,
+          0
+        ],
+        "diameter": 219.1,
+        "leader_angle": 45
+      },
+      "value_expected": 219.1,
+      "tolerance": null,
+      "comment": "ボス外径。円が見えるビューなのでネイティブDIAMETER型(スキーマ2.1a)"
+    },
+    {
+      "id": "D200_counterbore",
+      "kind": "diameter",
+      "context": "circular_view",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          0,
+          0
+        ],
+        "diameter": 200.0,
+        "leader_angle": 225
+      },
+      "value_expected": 200.0,
+      "tolerance": null,
+      "comment": "取付面側の内径(y0〜14)"
+    },
+    {
+      "id": "D190_bore",
+      "kind": "diameter",
+      "context": "circular_view",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          44,
+          0
+        ],
+        "diameter": 190.0,
+        "leader_angle": 135
+      },
+      "value_expected": 190.0,
+      "tolerance": null,
+      "comment": "ボス内径。口元のC1面取りで見える φ192 はこの径からの面取り導出でカバーされる"
+    },
+    {
+      "id": "Z240_plate",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -102.5,
+          0,
+          -120
+        ],
+        "p2": [
+          -102.5,
+          0,
+          120
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "level": 1
+      },
+      "value_expected": 240.0,
+      "tolerance": null,
+      "comment": "角板のZ幅"
+    },
+    {
+      "id": "Z210_slot_out",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -100,
+          0,
+          -105
+        ],
+        "p2": [
+          -100,
+          0,
+          105
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "level": 2
+      },
+      "value_expected": 210.0,
+      "tolerance": null,
+      "comment": "長穴の外側R中心間"
+    },
+    {
+      "id": "Z190_slot_in",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -100,
+          0,
+          -95
+        ],
+        "p2": [
+          -100,
+          0,
+          95
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "level": 3
+      },
+      "value_expected": 190.0,
+      "tolerance": null,
+      "comment": "長穴の内側R中心間"
+    },
+    {
+      "id": "Z105_center",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          0,
+          0
+        ],
+        "p2": [
+          -100,
+          0,
+          -105
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "level": 3
+      },
+      "value_expected": 105.0,
+      "tolerance": null,
+      "comment": "中心線から長穴外側R中心まで。Z軸は耳が-Z側だけにあり非対称なので、中心を基準にしたチェーンで位置を与える(作法1)。【様式】左に4段積んでいたのを右へ回して左右3段ずつに均す(作法6) 直列連記の『１２』は区間が短くて文字が線の外へ押し出されるため、1段空けて(level=3)文字が重ならないようにした。"
+    },
+    {
+      "id": "Z10_slot",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          100,
+          0,
+          -105
+        ],
+        "p2": [
+          100,
+          0,
+          -95
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "level": 4
+      },
+      "value_expected": 10.0,
+      "tolerance": null,
+      "comment": "長穴のR中心間(全長27=10+φ17)"
+    },
+    {
+      "id": "Z56_lug",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          0,
+          0
+        ],
+        "p2": [
+          148,
+          14,
+          -56
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "chain_group": "Zseg"
+      },
+      "value_expected": 56.0,
+      "tolerance": null,
+      "comment": "中心線から耳の手前面まで。Z12_lug と直列連記"
+    },
+    {
+      "id": "Z12_lug",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          148,
+          14,
+          -68
+        ],
+        "p2": [
+          148,
+          14,
+          -56
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "chain_group": "Zseg"
+      },
+      "value_expected": 12.0,
+      "tolerance": null,
+      "comment": "耳の幅。【様式】作法8: z=-56 を共有する Z56_lug と同一寸法線へ直列連記(１２｜５６)"
+    },
+    {
+      "id": "A45_phase",
+      "kind": "angle",
+      "purpose": "style",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "vertex": [
+          0,
+          0,
+          0
+        ],
+        "p1": [
+          72.831998,
+          0,
+          72.831998
+        ],
+        "p2": [
+          103.0,
+          0,
+          0
+        ],
+        "base": [
+          55.4329,
+          0,
+          22.961
+        ]
+      },
+      "placement": {
+        "side": "right",
+        "level": 1
+      },
+      "value_expected": 45.0,
+      "text_override": "\\A1;４５%%d",
+      "comment": "【様式】作法9: ＰＣＤ２０６の8等配Ｍ８穴群の割付角45度。PCD注記は等配であることしか保証せず位相(基準角)はゲート②の判定対象外なので、『穴がX中心線上(0度)から始まる』ことを角度寸法で読めるようにする。完全性の根拠にはしないので purpose='style'(様式寸法)。頂点=φ190/φ200内径の実在円中心、両辺の端点=実在するＭ８穴の中心。円弧はφ190内径の内側の空き(モデルr=60)に置く(ボス外周とM8穴の帯は詰まっているため)"
+    },
+    {
+      "id": "R15_corner",
+      "kind": "radius",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -102.5,
+          0,
+          -105
+        ],
+        "radius": 15.0,
+        "leader_angle": 225
+      },
+      "value_expected": 15.0,
+      "tolerance": null,
+      "comment": "四隅の隅R。φ30の円特徴をカバーし、±102.5↔±117.5 と ±105↔±120 の位置ノードも連結する"
+    }
+  ],
+  "hole_notes": [
+    {
+      "id": "N_slot",
+      "view": "top",
+      "pattern": "\\A1;４－%%c１７長穴　長さ２７",
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            108.5,
+            0,
+            -105
+          ],
+          [
+            180,
+            0,
+            -141
+          ],
+          [
+            210,
+            0,
+            -141
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        214,
+        0,
+        -141
+      ],
+      "attachment": "bottom-left",
+      "comment": "17幅×27長の長穴4個。R中心は(±100,±95)と(±100,±105)"
+    },
+    {
+      "id": "N_tap8",
+      "view": "top",
+      "spec": {
+        "count": 8,
+        "thread": "M8",
+        "depth": 29,
+        "placement": "ＰＣＤ２０６"
+      },
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            107,
+            0,
+            0
+          ],
+          [
+            180,
+            0,
+            39
+          ],
+          [
+            210,
+            0,
+            39
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        214,
+        0,
+        39
+      ],
+      "attachment": "bottom-left",
+      "comment": "作法5のМ判定: 実測径8.000=M8呼び径と±0.1一致 / 8個が実測PCD206.000上で隣接角45度の円周等配(3個以上) / 取付面(y=0)からの止まり穴深さ29 → タップ穴と判断しＭ８表記。採らなかった解釈=φ8止まり穴。"
+    }
+  ],
+  "notes": [
+    {
+      "id": "N_general",
+      "text": "注記．\\P　指示無き角部はＣ０．２、隅部はＲ２以下とする。",
+      "insert": [
+        310.0,
+        100.0
+      ],
+      "attachment": "top-left",
+      "height": 3.5,
+      "comment": "塗装色・公差・仕上げ記号は3Dからは決まらないため質問票へ回し、共通注記のみ記載"
+    }
+  ]
+}

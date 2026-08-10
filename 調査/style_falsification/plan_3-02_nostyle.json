@@ -49,7 +49,7 @@
         "direction": "vertical"
       },
       "placement": {
-        "side": "left",
+        "side": "right",
         "level": 1
       },
       "value_expected": 53.0,
@@ -77,7 +77,7 @@
       },
       "placement": {
         "side": "left",
-        "level": 2
+        "level": 1
       },
       "value_expected": 110.0,
       "tolerance": null,
@@ -104,7 +104,7 @@
       },
       "placement": {
         "side": "right",
-        "level": 1
+        "level": 2
       },
       "value_expected": 130.0,
       "tolerance": null,
@@ -130,7 +130,7 @@
         "direction": "vertical"
       },
       "placement": {
-        "side": "right",
+        "side": "left",
         "level": 2
       },
       "value_expected": 196.0,
@@ -156,8 +156,9 @@
         "direction": "horizontal"
       },
       "placement": {
-        "side": "below",
-        "chain_group": "Zseg"
+        "side": "above",
+        "chain_group": "Zseg",
+        "level": 2
       },
       "value_expected": 3.0,
       "tolerance": null,
@@ -182,8 +183,9 @@
         "direction": "horizontal"
       },
       "placement": {
-        "side": "below",
-        "chain_group": "Zseg"
+        "side": "above",
+        "chain_group": "Zseg",
+        "level": 2
       },
       "value_expected": 70.5,
       "tolerance": null,
@@ -208,8 +210,8 @@
         "direction": "horizontal"
       },
       "placement": {
-        "side": "below",
-        "level": 2
+        "side": "above",
+        "level": 3
       },
       "value_expected": 73.5,
       "tolerance": null,
@@ -352,7 +354,8 @@
         0
       ],
       "attachment": "bottom-left",
-      "comment": "φ12通し+φ18ザグリ深さ10が4個。実測PCD=165.000・隣接角90度で円周等分(作法2の採用条件を満たす)。ザグリ付きなので通しボルト穴と判断しМ表記にはしない。位相は A90_pitch / A20_phase の角度寸法で補う(作法9)。"
+      "comment": "φ12通し+φ18ザグリ深さ10が4個。実測PCD=165.000・隣接角90度で円周等分(作法2の採用条件を満たす)。ザグリ付きなので通しボルト穴と判断しМ表記にはしない。位相は A90_pitch / A20_phase の角度寸法で補う(作法9)。",
+      "auto_place": true
     },
     {
       "id": "N_tap8",
@@ -390,7 +393,8 @@
         0
       ],
       "attachment": "bottom-left",
-      "comment": "作法5のМ判定: 実測径8.000=M8呼び径と±0.1一致 / 4個が実測PCD145.000上で隣接角90度の円周等配(3個以上) / 深さ15は径の1.9倍の止まり穴 → タップ穴と判断しＭ８表記。採らなかった解釈=φ8止まり穴(ただし止まり穴なのでボルト通しにはならない)。"
+      "comment": "作法5のМ判定: 実測径8.000=M8呼び径と±0.1一致 / 4個が実測PCD145.000上で隣接角90度の円周等配(3個以上) / 深さ15は径の1.9倍の止まり穴 → タップ穴と判断しＭ８表記。採らなかった解釈=φ8止まり穴(ただし止まり穴なのでボルト通しにはならない)。",
+      "auto_place": true
     }
   ],
   "notes": [

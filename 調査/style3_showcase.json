@@ -1,0 +1,330 @@
+{
+ "cases": [
+  {
+   "request_id": "BLIND-25154-6-02",
+   "zuban": "25154-6-02",
+   "name": "傾動面板",
+   "rc": 0,
+   "ok": true,
+   "gates": {
+    "gate1": true,
+    "gate2": true,
+    "verify": true,
+    "layout": true,
+    "centerline": true
+   },
+   "gate2_unspecified": 0,
+   "style_warnings": [
+    "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 1本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('X18', 'above', 94.191)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる",
+    "補助線が長い(p90=30mm超・輪郭とは重ならない) 6本: [('X73', 'above', 122.191), ('X108', 'above', 122.191), ('X70b', 'above', 94.191), ('Y328', 'right', 66.667), ('Y112', 'right', 58.667), ('X43', 'above', 40.191)]",
+    "❗注記 N_h8 の自動配置に失敗(対象の近傍に衝突しない場所が無い)。計画の text_insert を使う",
+    "❗注記 N_h12 の自動配置に失敗(対象の近傍に衝突しない場所が無い)。計画の text_insert を使う"
+   ],
+   "n_style_warnings": 4,
+   "extension_lines": {
+    "collinear_count": 5,
+    "long_count": 7,
+    "long_and_collinear_count": 1,
+    "ext_len_max_mm": 122.191,
+    "ext_len_median_mm": 40.191,
+    "avoided_count": 0,
+    "gap_mismatch_count": 0
+   },
+   "circular_view_diameter_over": [],
+   "nominal": {
+    "pending": [],
+    "review_dimensions": []
+   },
+   "leaders": [
+    {
+     "id": "N_h11",
+     "len_mm": 24.0,
+     "auto_placed": true
+    },
+    {
+     "id": "N_h8",
+     "len_mm": 38.785,
+     "auto_placed": false
+    },
+    {
+     "id": "N_h12",
+     "len_mm": 34.4487,
+     "auto_placed": false
+    },
+    {
+     "id": "N_h10",
+     "len_mm": 40.0,
+     "auto_placed": true
+    },
+    {
+     "id": "N_h20",
+     "len_mm": 40.0,
+     "auto_placed": true
+    }
+   ],
+   "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3\\after\\BLIND-25154-6-02\\25154-6-02_傾動面板.dxf"
+  },
+  {
+   "request_id": "BLIND2-25154-1-27",
+   "zuban": "25154-1-27",
+   "name": "走行フレーム踏板",
+   "rc": 0,
+   "ok": true,
+   "gates": {
+    "gate1": true,
+    "gate2": true,
+    "verify": true,
+    "layout": true,
+    "centerline": true
+   },
+   "gate2_unspecified": 0,
+   "style_warnings": [
+    "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 3本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('Y10_hex', 'right', 66.394), ('Z19_hex_flats', 'right', 65.297), ('X972_total', 'above', 34.0)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる",
+    "補助線が長い(p90=30mm超・輪郭とは重ならない) 3本: [('Z149_csk_minus', 'right', 72.2), ('Z149_csk_plus', 'right', 72.2), ('X500_hex', 'above', 48.8)]",
+    "❗注記 N_hex の自動配置に失敗(対象の近傍に衝突しない場所が無い)。計画の text_insert を使う",
+    "❗引出線が長すぎる(論点21) N_hex: 104.3mm > 目安上限50mm。注記を対象フィーチャーの近くへ寄せること(auto_place=true)",
+    "❗呼び値未確定 1件(論点8/15。丸め先が自明でないため実測のまま作図した。解釈レポート/質問票で意図を確認すること): [('N_csk', 'countersink.dia', 13.44)]"
+   ],
+   "n_style_warnings": 5,
+   "extension_lines": {
+    "collinear_count": 5,
+    "long_count": 6,
+    "long_and_collinear_count": 3,
+    "ext_len_max_mm": 72.2,
+    "ext_len_median_mm": 34.0,
+    "avoided_count": 0,
+    "gap_mismatch_count": 0
+   },
+   "circular_view_diameter_over": [],
+   "nominal": {
+    "pending": [
+     {
+      "id": "N_csk",
+      "view": "front",
+      "field": "countersink.dia",
+      "measured": 13.44,
+      "reason": "許容窓±0.050mm内に呼び値が無い(最寄りφ13.5・差0.060mm)。丸め先が自明でないため実測のまま残す"
+     }
+    ],
+    "review_dimensions": []
+   },
+   "leaders": [
+    {
+     "id": "N_csk",
+     "len_mm": 14.0,
+     "auto_placed": true
+    },
+    {
+     "id": "N_hex",
+     "len_mm": 104.3031,
+     "auto_placed": false
+    }
+   ],
+   "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3\\after\\BLIND2-25154-1-27\\25154-1-27_走行フレーム踏板.dxf"
+  },
+  {
+   "request_id": "BLIND2-25154-2-16",
+   "zuban": "25154-2-16",
+   "name": "指針",
+   "rc": 0,
+   "ok": true,
+   "gates": {
+    "gate1": true,
+    "gate2": true,
+    "verify": true,
+    "layout": true,
+    "centerline": true
+   },
+   "gate2_unspecified": 0,
+   "style_warnings": [
+    "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 4本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('Y135_total', 'right', 76.0), ('Y3_2_topflange', 'right', 60.0), ('Z15_end', 'below', 37.5), ('Z88_total', 'below', 33.0)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる",
+    "補助線が長い(p90=30mm超・輪郭とは重ならない) 1本: [('Z20_pitch', 'below', 37.5)]"
+   ],
+   "n_style_warnings": 2,
+   "extension_lines": {
+    "collinear_count": 10,
+    "long_count": 5,
+    "long_and_collinear_count": 4,
+    "ext_len_max_mm": 76.0,
+    "ext_len_median_mm": 25.0,
+    "avoided_count": 0,
+    "gap_mismatch_count": 0
+   },
+   "circular_view_diameter_over": [],
+   "nominal": {
+    "pending": [],
+    "review_dimensions": []
+   },
+   "leaders": [
+    {
+     "id": "N_hole8",
+     "len_mm": 14.0,
+     "auto_placed": true
+    }
+   ],
+   "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3\\after\\BLIND2-25154-2-16\\25154-2-16_指針.dxf"
+  },
+  {
+   "request_id": "BLIND2-25154-3-02",
+   "zuban": "25154-3-02",
+   "name": "モータブラケット",
+   "rc": 0,
+   "ok": true,
+   "gates": {
+    "gate1": true,
+    "gate2": true,
+    "verify": true,
+    "layout": true,
+    "centerline": true
+   },
+   "gate2_unspecified": 0,
+   "style_warnings": [
+    "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 3本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('Z73_5_total', 'above', 68.75), ('Z3_spigot', 'above', 41.5), ('Z10_recess_depth', 'above', 38.5)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる"
+   ],
+   "n_style_warnings": 1,
+   "extension_lines": {
+    "collinear_count": 8,
+    "long_count": 3,
+    "long_and_collinear_count": 3,
+    "ext_len_max_mm": 68.75,
+    "ext_len_median_mm": 25.0,
+    "avoided_count": 0,
+    "gap_mismatch_count": 0
+   },
+   "circular_view_diameter_over": [],
+   "nominal": {
+    "pending": [],
+    "review_dimensions": []
+   },
+   "leaders": [
+    {
+     "id": "N_bolt12",
+     "len_mm": 14.0,
+     "auto_placed": true
+    },
+    {
+     "id": "N_tap8",
+     "len_mm": 14.0,
+     "auto_placed": true
+    }
+   ],
+   "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3\\after\\BLIND2-25154-3-02\\25154-3-02_モータブラケット.dxf"
+  },
+  {
+   "request_id": "BLIND2-25154-4-05",
+   "zuban": "25154-4-05",
+   "name": "駆動ユニットブラケット",
+   "rc": 0,
+   "ok": true,
+   "gates": {
+    "gate1": true,
+    "gate2": true,
+    "verify": true,
+    "layout": true,
+    "centerline": true
+   },
+   "gate2_unspecified": 0,
+   "style_warnings": [
+    "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 8本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('Z114_wall', 'below', 68.25), ('Y249_wall', 'right', 49.5), ('X163_wall_out', 'above', 45.75), ('Z5_tap', 'left', 44.125), ('Z3_step', 'above', 42.0), ('Z80_bore', 'left', 38.625), ('X154_wall_in', 'above', 37.75), ('X173_base', 'below', 33.0)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる",
+    "補助線が長い(p90=30mm超・輪郭とは重ならない) 1本: [('X149_motor', 'above', 34.625)]"
+   ],
+   "n_style_warnings": 2,
+   "extension_lines": {
+    "collinear_count": 14,
+    "long_count": 9,
+    "long_and_collinear_count": 8,
+    "ext_len_max_mm": 68.25,
+    "ext_len_median_mm": 26.875,
+    "avoided_count": 0,
+    "gap_mismatch_count": 0
+   },
+   "circular_view_diameter_over": [],
+   "nominal": {
+    "pending": [],
+    "review_dimensions": []
+   },
+   "leaders": [
+    {
+     "id": "N_hole11",
+     "len_mm": 40.0,
+     "auto_placed": true
+    },
+    {
+     "id": "N_hole10_base",
+     "len_mm": 34.0,
+     "auto_placed": true
+    },
+    {
+     "id": "N_hole6_base",
+     "len_mm": 29.0,
+     "auto_placed": true
+    },
+    {
+     "id": "N_hole10_motor",
+     "len_mm": 14.0,
+     "auto_placed": true
+    },
+    {
+     "id": "N_hole6_motor",
+     "len_mm": 14.0,
+     "auto_placed": true
+    }
+   ],
+   "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3\\after\\BLIND2-25154-4-05\\25154-4-05_駆動ユニットブラケット.dxf"
+  },
+  {
+   "request_id": "BLIND2-25154-5-05",
+   "zuban": "25154-5-05",
+   "name": "減速機フランジ",
+   "rc": 0,
+   "ok": true,
+   "gates": {
+    "gate1": true,
+    "gate2": true,
+    "verify": true,
+    "layout": true,
+    "centerline": true
+   },
+   "gate2_unspecified": 0,
+   "style_warnings": [
+    "❗補助線が長すぎて輪郭線と溶ける(論点7・主因) 7本(人間コーパスの補助線長 p90=30mm 超 かつ 輪郭と同一直線上): [('Y14_plate', 'right', 149.75), ('Z56_lug', 'right', 99.0), ('Z240_plate', 'left', 63.75), ('X296_lugs', 'below', 48.0), ('D200_counterbore', 'above', 39.0), ('Y44_total', 'left', 36.225), ('X235_plate', 'below', 33.0)]。**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる",
+    "補助線が長い(p90=30mm超・輪郭とは重ならない) 4本: [('Z105_center', 'left', 91.0), ('Z210_slot_out', 'left', 57.0), ('Z190_slot_in', 'left', 49.0), ('Z10_slot', 'right', 41.0)]",
+    "❗呼び値でない径寸法 1件(論点15/26。**値は実測のまま正**。インロー/インチ系の疑いがあるので意図を質問票で確認する): [('D219_1_boss', 219.1)]"
+   ],
+   "n_style_warnings": 3,
+   "extension_lines": {
+    "collinear_count": 11,
+    "long_count": 11,
+    "long_and_collinear_count": 7,
+    "ext_len_max_mm": 149.75,
+    "ext_len_median_mm": 40.0,
+    "avoided_count": 0,
+    "gap_mismatch_count": 0
+   },
+   "circular_view_diameter_over": [],
+   "nominal": {
+    "pending": [],
+    "review_dimensions": [
+     {
+      "id": "D219_1_boss",
+      "view": "top",
+      "value": 219.1
+     }
+    ]
+   },
+   "leaders": [
+    {
+     "id": "N_slot",
+     "len_mm": 14.0,
+     "auto_placed": true
+    },
+    {
+     "id": "N_tap8",
+     "len_mm": 24.0,
+     "auto_placed": true
+    }
+   ],
+   "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\Documents\\部品図作成agent\\調査\\style3\\after\\BLIND2-25154-5-05\\25154-5-05_減速機フランジ.dxf"
+  }
+ ]
+}

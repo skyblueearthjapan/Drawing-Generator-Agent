@@ -44,6 +44,7 @@ from ezdxf.render.arrows import ARROWS
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from engine import compose_drawing  # noqa: E402
+from engine import nominal_size  # noqa: E402
 from engine.frame_extract import subtract_frame  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -511,6 +512,14 @@ def build_hole_note_pattern(spec, style=None):
         head += u"%sザグリ%%%%c%s" % (sep, _fmt_num(cb["dia"]))
         if cb.get("depth") is not None:
             head += u"深さ%s" % _fmt_num(cb["depth"])
+    # 皿もみ(countersink)。例 {"angle":90,"dia":13.44} -> `９０°皿もみ%%c１３．４４`
+    cs = spec.get("countersink")
+    if cs:
+        sep = st.get("separator", HOLE_NOTE_DEFAULT["separator"])
+        head += sep
+        if cs.get("angle") is not None:
+            head += u"%s°" % _fmt_num(cs["angle"])
+        head += u"皿もみ%%%%c%s" % _fmt_num(cs["dia"])
     lines.append(head)
     if spec.get("placement"):
         lines.append(str(spec["placement"]))
@@ -918,6 +927,313 @@ def base_point(region, side, p1, p2, offset):
 
 
 # ---------------------------------------------------------------------------
+# 様式第3弾・層3「線の振る舞い」: 補助線が輪郭線と溶ける問題(論点7)
+#
+# 今泉さん指摘:「線の一番先端から取ると、寸法線と図解の線がすべて寸法線のように見える」。
+# 生成図面は寸法補助線が**輪郭線と同一直線上に連続して延びる**ため、
+# モノの形の線(図解)と注釈の線(寸法)の区別が視覚的に消える。
+#
+# 対策は2段:
+#   (a) 検出 —— 補助線の延長軸上に、同一直線の輪郭線分が近接して存在するかを機械判定する
+#       (`find_collinear_contours`)。合わせて**実DXFに描かれた補助線のすき間**を測って
+#       dimexo が実際に効いているかを検証する(`measure_extension_gaps`)。
+#       CLAUDE.md の教訓「値が合っていることは正しく描かれていることの証明ではない。
+#       作図系の検証は必ず描画実体を測る」に従う。
+#   (b) 自動回避 —— 検出された寸法だけ **dimexo を広げて**すき間を視認できる量にする
+#       (1寸法=1専用DIMSTYLE方式なので他の寸法に副作用が無い)。
+#       補助線の経路そのものに輪郭が重なる(overlap)ケースは広げても解けないので様式警告。
+# ---------------------------------------------------------------------------
+#: 補助線と輪郭線を「平行」とみなす角度許容[度]
+COLLINEAR_ANGLE_TOL_DEG = 0.5
+#: 補助線と輪郭線を「同一直線上」とみなす垂直距離[mm]
+COLLINEAR_OFFSET_TOL_MM = 0.2
+#: 同一直線上の輪郭がこの距離以内まで迫っていたら「溶けている」と判定[mm]
+COLLINEAR_GAP_MAX_MM = 2.5
+#: 自動回避で使う dimexo。**既定では使わない**(下記の実測結果を参照)
+EXT_GAP_AVOID_MM = 3.0
+#: 描かれたすき間と dimexo の一致許容[mm](dimexoが実DXFで機能しているかの検証)
+EXT_GAP_VERIFY_TOL_MM = 0.05
+
+# ---------------------------------------------------------------------------
+# ❗❗論点7の実測結果(調査/measure_extension_collinear.py・人間5枚 vs 生成5枚)
+#
+#   仮説A「生成の補助線は輪郭線と同一直線上に来るから溶ける」は **反証された**。
+#     用紙倍率で正規化して同じ判定器で測ると
+#     **人間 59/88 = 67.1% / 生成 46/63 = 73.0%** で、ほぼ同率。
+#     人間も日常的に「輪郭の端点から同一直線上に」補助線を出している。
+#   仮説B「すき間(dimexo)が足りない」も **反証された**。
+#     紙面上の dimexo はコーパス927/927 = 100% が 1.0mm。生成も 1.0mm で同値
+#     (人間ファイルのDXF単位 4.0/3.0/1.5 は用紙倍率であって紙面量ではない)。
+#     しかも実DXFの描画実体を測ると付け根のすき間は dimexo と 0.0000mm 一致していた
+#     (= dimexo は正しく機能している)。
+#   ★実際に効いていた差は **補助線の長さ**だった:
+#       人間  中央 17.2mm / p75 23.1 / p90 29.1 / 最大 63.7
+#       生成  中央 39.8mm / p75 68.3 / p90 114.2 / **最大 211.4**
+#     A3の紙に211mmの緑の直線が輪郭の延長として走れば、それは「図解の線」に見える。
+#     今泉さん指摘「線の一番先端から取ると全部が寸法線に見える」の実体はこれである。
+#   原因は構造的: 寸法線は**ビュー外接矩形**から offset だけ外に置かれるので、
+#     `補助線長 = (測定点からその辺の輪郭までの距離) + offset`。
+#     測定点がその辺に載っていれば offset(=16mm・人間の中央値17mmと一致)で済むが、
+#     **反対側の辺に寸法を置くと部品を縦断する長さになる**。
+#   → よってエンジンの仕事は「検出して警告する」ことであり、直すのは**計画の側**
+#     (寸法を測定点に最も近い辺へ置く。plan_prompt 作法12)。
+#     dimexoを勝手に広げる自動回避は**自社流儀(紙面1.0mm)から外れる**ので既定OFFにした。
+# ---------------------------------------------------------------------------
+#: 補助線の長さの様式しきい値[mm](人間コーパス5枚の p90 = 29.1mm を丸めた値)
+EXT_LEN_WARN_MM = 30.0
+
+
+def contour_segments(entities):
+    u"""ビューの実ジオメトリを線分列 [(a, b, entity), ...] へ平坦化する(図面座標mm)。"""
+    segs = []
+    for e in entities:
+        t = e.dxftype()
+        try:
+            if t == "LINE":
+                a, b = e.dxf.start, e.dxf.end
+                segs.append(((a.x, a.y), (b.x, b.y), e))
+            elif t == "LWPOLYLINE":
+                pts = [(p[0], p[1]) for p in e.get_points("xy")]
+                if e.closed and len(pts) > 2:
+                    pts = pts + [pts[0]]
+                for a, b in zip(pts, pts[1:]):
+                    segs.append((a, b, e))
+            elif t == "POLYLINE":
+                pts = [(v.dxf.location.x, v.dxf.location.y) for v in e.vertices]
+                for a, b in zip(pts, pts[1:]):
+                    segs.append((a, b, e))
+        except Exception:
+            continue
+    return segs
+
+
+def extension_line_geometry(p1, p2, base, angle_deg, dimexo=1.0, dimexe=2.0):
+    u"""線形寸法の**補助線2本**の幾何(図面座標mm)。
+
+    Returns: [{"origin":(x,y), "u":(ux,uy), "length":L, "t_start":dimexo, "t_end":L+dimexe}, ...]
+      origin = 測定点 / u = 測定点から寸法線へ向かう単位ベクトル /
+      t は origin を0とした u 方向の座標。描かれる補助線は [t_start, t_end]。
+    """
+    a = math.radians(float(angle_deg))
+    ux, uy = math.cos(a), math.sin(a)          # 寸法線の方向
+    nx, ny = -uy, ux                            # それに直交する方向(補助線の軸)
+    out = []
+    for p in (p1, p2):
+        d = (base[0] - p[0]) * nx + (base[1] - p[1]) * ny
+        s = 1.0 if d >= 0 else -1.0
+        out.append({"origin": (float(p[0]), float(p[1])),
+                    "u": (nx * s, ny * s), "length": abs(d),
+                    "t_start": float(dimexo), "t_end": abs(d) + float(dimexe)})
+    return out
+
+
+def find_collinear_contours(ext, segs, angle_tol_deg=COLLINEAR_ANGLE_TOL_DEG,
+                            offset_tol=COLLINEAR_OFFSET_TOL_MM,
+                            gap_max=COLLINEAR_GAP_MAX_MM):
+    u"""補助線 `ext` と**同一直線上で近接する**輪郭線分を列挙する(=溶け込みの検出)。
+
+    典型例(論点7): 板厚3.2を板の端から取ると、補助線が板の長辺の延長になり
+    「輪郭線がそこで終わる」ことが見て分からなくなる。
+    """
+    ox, oy = ext["origin"]
+    ux, uy = ext["u"]
+    nx, ny = -uy, ux
+    sin_tol = math.sin(math.radians(angle_tol_deg))
+    hits = []
+    for a, b, e in segs:
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        seg_len = math.hypot(dx, dy)
+        if seg_len < 1e-9:
+            continue
+        vx, vy = dx / seg_len, dy / seg_len
+        if abs(vx * uy - vy * ux) > sin_tol:          # 平行でない
+            continue
+        if abs((a[0] - ox) * nx + (a[1] - oy) * ny) > offset_tol:   # 同一直線でない
+            continue
+        t0 = (a[0] - ox) * ux + (a[1] - oy) * uy
+        t1 = (b[0] - ox) * ux + (b[1] - oy) * uy
+        if t0 > t1:
+            t0, t1 = t1, t0
+        e0, e1 = ext["t_start"], ext["t_end"]
+        if t1 < e0:
+            gap = e0 - t1
+        elif t0 > e1:
+            gap = t0 - e1
+        else:
+            gap = 0.0
+        if gap > gap_max:
+            continue
+        hits.append({"gap_mm": round(gap, 4), "overlap": gap <= 1e-9,
+                     "seg": [[round(a[0], 3), round(a[1], 3)],
+                             [round(b[0], 3), round(b[1], 3)]],
+                     "handle": str(e.dxf.get("handle", ""))})
+    return hits
+
+
+def measure_extension_gaps(dim, ext_geoms, angle_tol_deg=COLLINEAR_ANGLE_TOL_DEG,
+                           offset_tol=COLLINEAR_OFFSET_TOL_MM):
+    u"""**実DXFに描かれた**補助線の付け根のすき間[mm]を測る(dimexoの実効検証)。
+
+    DIMENSIONを virtual_entities() で展開し、補助線軸と同一直線上のLINEを拾って
+    「測定点から最も近い端点までの距離」を返す。計画値ではなく描画実体を測る。
+    """
+    try:
+        prims = [p for p in dim.virtual_entities() if p.dxftype() == "LINE"]
+    except Exception:
+        return [None for _ in ext_geoms]
+    sin_tol = math.sin(math.radians(angle_tol_deg))
+    out = []
+    for ext in ext_geoms:
+        ox, oy = ext["origin"]
+        ux, uy = ext["u"]
+        nx, ny = -uy, ux
+        best = None
+        for p in prims:
+            a = (p.dxf.start.x, p.dxf.start.y)
+            b = (p.dxf.end.x, p.dxf.end.y)
+            dx, dy = b[0] - a[0], b[1] - a[1]
+            seg_len = math.hypot(dx, dy)
+            if seg_len < 1e-9:
+                continue
+            vx, vy = dx / seg_len, dy / seg_len
+            if abs(vx * uy - vy * ux) > sin_tol:
+                continue
+            if abs((a[0] - ox) * nx + (a[1] - oy) * ny) > offset_tol:
+                continue
+            t0 = (a[0] - ox) * ux + (a[1] - oy) * uy
+            t1 = (b[0] - ox) * ux + (b[1] - oy) * uy
+            lo = min(t0, t1)
+            if lo < -0.5:        # 反対向きに伸びる線(別の補助線・寸法線本体)は対象外
+                continue
+            if best is None or lo < best:
+                best = lo
+        out.append(None if best is None else round(best, 4))
+    return out
+
+
+# ---------------------------------------------------------------------------
+# 様式第3弾・層2「置き場所」: 注記は対象の近くに(論点21)
+#
+# 生成図面は穴注記を**右端に固定**していたため引出線が図を斜めに長く横断・交差していた。
+# 人間は注記を対象フィーチャーの近くに置く(位置は固定でなく対象追従)。
+# ---------------------------------------------------------------------------
+#: 引出線の長さの上限目安[mm]。人間図面の実測はおおむね10〜50mm(論点21)
+LEADER_LEN_MAX_MM = 50.0
+#: 自動配置で試す「対象円の外周から注記の折れ点まで」の距離[mm](近い順)
+NOTE_PLACE_DISTS = (10.0, 13.0, 16.0, 20.0, 25.0, 30.0, 36.0)
+#: 自動配置で試す方向(単位ベクトル化して使う)
+NOTE_PLACE_DIRS = ((1.0, 1.0), (-1.0, 1.0), (1.0, -1.0), (-1.0, -1.0),
+                   (1.0, 0.0), (0.0, 1.0), (-1.0, 0.0), (0.0, -1.0))
+#: 折れ点から文字までの水平な着地線[mm]
+NOTE_LANDING_MM = 4.0
+
+
+def note_text_box(insert, size_wh, attachment="bottom-left"):
+    u"""注記MTEXTの外接矩形(attachment を考慮)。"""
+    w, h = size_wh
+    x, y = insert[0], insert[1]
+    a = str(attachment)
+    if a.endswith("-center"):
+        x0, x1 = x - w / 2.0, x + w / 2.0
+    elif a.endswith("-right"):
+        x0, x1 = x - w, x
+    else:
+        x0, x1 = x, x + w
+    if a.startswith("top"):
+        y0, y1 = y - h, y
+    elif a.startswith("middle"):
+        y0, y1 = y - h / 2.0, y + h / 2.0
+    else:
+        y0, y1 = y, y + h
+    return (x0, y0, x1, y1)
+
+
+def auto_place_hole_note(center, radius, size_wh, obstacles, frame_rect,
+                         view_center=None, dists=NOTE_PLACE_DISTS,
+                         landing=NOTE_LANDING_MM):
+    u"""対象フィーチャーの近傍で、他要素と衝突しない注記位置を探す。
+
+    Args:
+        center:    対象円の中心(図面座標mm)
+        radius:    対象円の半径(図面座標mm)。引出線の始点は円周上に置く
+                   (`anchor_check` が「始点が円周上にあること」を検証する)
+        size_wh:   注記の文字枠(幅, 高さ)mm
+        obstacles: 避ける矩形のリスト(ビュー輪郭・既配置の文字枠・表題欄・左上ノート)
+        frame_rect:この矩形の内側に文字枠が収まること
+        view_center: ビュー中心。**外向き**の方向を優先するために使う
+
+    Returns: {"leader_points", "insert", "attachment", "box", "leader_len_mm"} or None
+    """
+    cx, cy = float(center[0]), float(center[1])
+    dirs = list(NOTE_PLACE_DIRS)
+    if view_center is not None:
+        ox = cx - float(view_center[0])
+        oy = cy - float(view_center[1])
+        n = math.hypot(ox, oy)
+        if n > 1e-9:
+            ox, oy = ox / n, oy / n
+            dirs.sort(key=lambda d: -(d[0] * ox + d[1] * oy) /
+                      math.hypot(d[0], d[1]))
+    for dist in dists:
+        for dx, dy in dirs:
+            n = math.hypot(dx, dy)
+            ux, uy = dx / n, dy / n
+            start = (cx + radius * ux, cy + radius * uy)
+            elbow = (cx + (radius + dist) * ux, cy + (radius + dist) * uy)
+            sgn = 1.0 if ux >= 0 else -1.0
+            land = (elbow[0] + sgn * landing, elbow[1])
+            attach = "bottom-left" if sgn > 0 else "bottom-right"
+            box = note_text_box(land, size_wh, attach)
+            if not _rect_inside(box, frame_rect):
+                continue
+            if any(_rect_overlap(box, ob) for ob in obstacles):
+                continue
+            pts = [start, elbow, land]
+            ln = sum(math.hypot(b[0] - a[0], b[1] - a[1])
+                     for a, b in zip(pts, pts[1:]))
+            return {"leader_points": pts, "insert": land, "attachment": attach,
+                    "box": box, "leader_len_mm": round(ln, 4),
+                    "dist_mm": dist}
+    return None
+
+
+def polyline_length(pts):
+    return sum(math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in zip(pts, pts[1:]))
+
+
+def _median(vals):
+    a = sorted(vals)
+    if not a:
+        return None
+    n = len(a)
+    return round(a[n // 2] if n % 2 else (a[n // 2 - 1] + a[n // 2]) / 2.0, 3)
+
+
+# ---------------------------------------------------------------------------
+# 様式第3弾・層2「置き場所」: 円形ビューの径寸法は1本まで(論点14)
+#
+# 生成はφ200/φ190/φ219.1の3本を円形ビューに対角線で入れ、大円の中がX字交差で騒がしい。
+# 人間は径を断面ビューに積み、円形ビューはPCD・穴・長穴・角度など**位置情報専用**にする。
+# 「円形ビュー外径=ネイティブDIAMETER」裁定の運用は**1本まで**(2本目以降は断面ビューへ)。
+# ---------------------------------------------------------------------------
+CIRCULAR_VIEW_DIA_MAX = 1
+
+
+def check_circular_view_diameters(plan, resolved_kinds, limit=CIRCULAR_VIEW_DIA_MAX):
+    u"""円形ビューに置かれたネイティブ直径寸法が limit 本を超えていないか。
+
+    Returns: [{"view":..., "ids":[...], "count":n}, ...](超過したビューだけ)
+    """
+    per_view = {}
+    for item in plan.get("dimensions", []):
+        if resolved_kinds.get(item["id"]) != "diameter_native":
+            continue
+        per_view.setdefault(item["view"], []).append(item["id"])
+    return [{"view": v, "ids": ids, "count": len(ids)}
+            for v, ids in sorted(per_view.items()) if len(ids) > limit]
+
+
+# ---------------------------------------------------------------------------
 # レイアウト(テキスト矩形と衝突検出。初歩的なもの・フェーズ4で改善)
 # ---------------------------------------------------------------------------
 def _text_box(doc, dim, width_factor=0.75):
@@ -1107,6 +1423,12 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
     diameter_style.update(defaults.get("diameter_style", {}))
     hole_note_style = dict(HOLE_NOTE_DEFAULT)
     hole_note_style.update(defaults.get("hole_note", {}))
+    # 層1: 呼び値翻訳(注記の径値のみ)。既定ON。丸め窓は nominal_size 側の定数
+    nominal_on = bool(defaults.get("nominal_translation", True))
+    # ❗許容窓は**計画から上書きさせない**。計画側で窓を広げられると
+    #   「翻訳も検算も同じ広い窓で通る」抜け穴になり、嘘の丸めが素通りする
+    nominal_tol = nominal_size.NOMINAL_TOL_MM
+    nominal_pending = []      # 呼び値未確定(解釈レポート/質問票へ誘導する)
 
     src = plan["source"]
     base_dxf = base_dxf_override or os.path.join(ROOT, src["base_dxf"])
@@ -1185,6 +1507,13 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
     #   ここで独自計算するとレイアウト(予約帯)と実配置がずれる
     dim_offsets = compose_drawing.resolve_dim_offsets(plan)
     dims_by_id = {}
+    # 層3: 補助線の溶け込み(論点7)。ビューごとの輪郭線分を1回だけ作って使い回す
+    # ❗既定OFF: 紙面dimexoは人間コーパス927/927=100%が1.0mm。広げると流儀から外れる
+    #   (上の実測ブロック参照)。実験・特例用にオプションとしてだけ残す。
+    ext_avoid = bool(defaults.get("extension_gap_avoid", False))
+    view_segs = {k: contour_segments(per_view[k]) for k in per_view}
+    ext_reports = {}
+    style_warnings = []
     for item in plan.get("dimensions", []):
         did = item["id"]
         # kind='diameter' は文脈(context)と defaults.diameter_style から実装方式を解決する。
@@ -1229,25 +1558,58 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             if text_override is None:
                 text_override = "\\A1;%s%%%%p%s" % (
                     _fmt_num(item["value_expected"]), _fmt_num(tol["value"]))
+        # ---- 層3: 補助線の溶け込み検出と自動回避(論点7) ----------------
+        # ❗DIMSTYLEを作る**前**に判定する。1寸法=1専用DIMSTYLE方式なので、
+        #   この寸法の dimexo だけを広げても他の寸法に副作用が無い。
+        lin_pre = None
+        if kind in ("linear", "diameter_linear"):
+            _p1 = to_draw(view, space, meas["p1"])
+            _p2 = to_draw(view, space, meas["p2"])
+            _angle = resolve_direction(meas, side)
+            if is_oblique_direction(_angle):
+                # 斜め線形寸法(紙面内で回転した正多角形の対角/二面幅。ゲート②E4)。
+                # side は「中点からどちら側へ寸法線を逃がすか」の符号としてだけ使う
+                _base = oblique_base_point(side, _p1, _p2, _angle, offset)
+            else:
+                if abs((_angle % 180.0) - (_SIDE_ANGLE[side] % 180.0)) > 1e-6:
+                    raise ValueError(
+                        "%s: placement.side='%s' と measure.direction が矛盾しています"
+                        % (did, side))
+                _base = base_point(view_bbox[view], side, _p1, _p2, offset)
+            lin_pre = (_p1, _p2, _angle, _base)
+            _exo = float(dv.get("dimexo", 1.0))
+            _exe = float(dv.get("dimexe", 2.0))
+            _segs = view_segs.get(view, [])
+            _geoms = extension_line_geometry(_p1, _p2, _base, _angle, _exo, _exe)
+            _hits = [find_collinear_contours(g, _segs) for g in _geoms]
+            erep = {"id": did, "view": view, "dimexo_planned": _exo,
+                    "collinear_before": sum(len(h) for h in _hits), "avoided": False}
+            if sum(len(h) for h in _hits) and ext_avoid:
+                _exo2 = max(_exo, EXT_GAP_AVOID_MM)
+                _g2 = extension_line_geometry(_p1, _p2, _base, _angle, _exo2, _exe)
+                _h2 = [find_collinear_contours(g, _segs) for g in _g2]
+                if sum(len(h) for h in _h2) < sum(len(h) for h in _hits):
+                    dv["dimexo"] = _exo2
+                    erep["avoided"] = True
+                    _geoms, _hits = _g2, _h2
+            erep["dimexo_used"] = float(dv.get("dimexo", 1.0))
+            erep["collinear"] = [h for h in _hits]
+            erep["collinear_count"] = sum(len(h) for h in _hits)
+            # ★論点7の真因(実測): 補助線の**長さ**。人間 中央17.2/p90 29.1mm に対し
+            #   生成は中央39.8/最大211.4mm だった。長さ = 測定点からその辺の輪郭までの距離 + offset
+            erep["ext_len_mm"] = [round(g["t_end"] - g["t_start"], 3) for g in _geoms]
+            erep["ext_len_max_mm"] = round(max(erep["ext_len_mm"]), 3)
+            erep["side"] = side
+            erep["_ext_geoms"] = _geoms
+            ext_reports[did] = erep
+
         style_name = next_style_name()
         _new_dimstyle(doc, style_name, dv)
 
         attribs = {"layer": dim_layer}
 
         if kind in ("linear", "diameter_linear"):
-            p1 = to_draw(view, space, meas["p1"])
-            p2 = to_draw(view, space, meas["p2"])
-            angle = resolve_direction(meas, side)
-            if is_oblique_direction(angle):
-                # 斜め線形寸法(紙面内で回転した正多角形の対角/二面幅。ゲート②E4)。
-                # side は「中点からどちら側へ寸法線を逃がすか」の符号としてだけ使う
-                base = oblique_base_point(side, p1, p2, angle, offset)
-            else:
-                if abs((angle % 180.0) - (_SIDE_ANGLE[side] % 180.0)) > 1e-6:
-                    raise ValueError(
-                        "%s: placement.side='%s' と measure.direction が矛盾しています"
-                        % (did, side))
-                base = base_point(view_bbox[view], side, p1, p2, offset)
+            p1, p2, angle, base = lin_pre
             dim = msp.add_linear_dim(base=base, p1=p1, p2=p2, angle=angle,
                                      dimstyle=style_name, dxfattribs=attribs)
             if text_override:
@@ -1409,6 +1771,15 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
                     row["errors"].append(
                         u"cross_check: 実在円φ%.4f と実測 %.4f が不一致" % (real_d, measured))
 
+        # ❗描かれた補助線のすき間を**実体から**測る(dimexoが実DXFで効いているかの検証)。
+        #   CLAUDE.md の教訓「値が合っていることは正しく描かれていることの証明ではない」。
+        er = ext_reports.get(did)
+        if er is not None:
+            er["drawn_gap_mm"] = measure_extension_gaps(ent, er.pop("_ext_geoms"))
+            bad = [g for g in er["drawn_gap_mm"]
+                   if g is not None and abs(g - er["dimexo_used"]) > EXT_GAP_VERIFY_TOL_MM]
+            er["gap_matches_dimexo"] = not bad
+
         row["ok"] = not row["errors"]
         gate_rows.append(row)
         dims_by_id[did] = ent
@@ -1422,6 +1793,58 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             geom_boxes[did] = [round(v, 4) for v in (
                 min(p[0] for p in pbs), min(p[1] for p in pbs),
                 max(p[2] for p in pbs), max(p[3] for p in pbs))]
+
+    # --- 4.4) 層3: 補助線の溶け込みの集計(論点7) ---------------------------
+    ext_unresolved = [er for er in ext_reports.values() if er.get("collinear_count")]
+    for did_, er in sorted(ext_reports.items()):
+        if er.get("gap_matches_dimexo") is False:
+            style_warnings.append(
+                u"❗補助線の付け根のすき間が dimexo=%.2f と一致しない(%s・実測%s)。"
+                u"dimexoが実DXFで効いていない疑い"
+                % (er["dimexo_used"], did_, er["drawn_gap_mm"]))
+    # ★実測で「溶ける」の主因と分かったのは長さ(人間 p90=29.1mm)。
+    #   同一直線上に来ること自体は人間も67%やっており、単独では欠陥ではない。
+    ext_long = sorted([er for er in ext_reports.values()
+                       if er.get("ext_len_max_mm", 0.0) > EXT_LEN_WARN_MM],
+                      key=lambda e: -e["ext_len_max_mm"])
+    ext_long_collinear = [er for er in ext_long if er.get("collinear_count")]
+    if ext_long_collinear:
+        style_warnings.append(
+            u"❗補助線が長すぎて輪郭線と溶ける(論点7・主因) %d本"
+            u"(人間コーパスの補助線長 p90=%.0fmm 超 かつ 輪郭と同一直線上): %s。"
+            u"**寸法を測定点に最も近い辺へ置く**(placement.side)ことで短くなる"
+            % (len(ext_long_collinear), EXT_LEN_WARN_MM,
+               [(er["id"], er["side"], er["ext_len_max_mm"])
+                for er in ext_long_collinear]))
+    ext_long_only = [er for er in ext_long if not er.get("collinear_count")]
+    if ext_long_only:
+        style_warnings.append(
+            u"補助線が長い(p90=%.0fmm超・輪郭とは重ならない) %d本: %s"
+            % (EXT_LEN_WARN_MM, len(ext_long_only),
+               [(er["id"], er["side"], er["ext_len_max_mm"]) for er in ext_long_only]))
+
+    # --- 4.6) 層2: 円形ビューの径寸法は1本まで(論点14) ----------------------
+    circ_over = check_circular_view_diameters(plan, resolved_kinds)
+    for c in circ_over:
+        style_warnings.append(
+            u"❗円形ビューの径寸法は1本まで(論点14): %s に %d本 %s。"
+            u"2本目以降は断面ビューへ移し、円形ビューはPCD・穴・角度など位置情報専用にすること"
+            % (c["view"], c["count"], c["ids"]))
+
+    # --- 4.7) 層1: 径寸法の値の点検(呼び値でない径 -> 質問票へ) -------------
+    #   ❗**寸法値は書き換えない**(モデル実測がゲート①の正)。列挙するだけ。
+    nominal_review = []
+    for item in plan.get("dimensions", []):
+        if resolved_kinds.get(item["id"]) not in ("diameter_native", "diameter_linear"):
+            continue
+        v = float(item["value_expected"])
+        if not nominal_size.is_nominal_like(v):
+            nominal_review.append({"id": item["id"], "view": item["view"], "value": v})
+    if nominal_review:
+        style_warnings.append(
+            u"❗呼び値でない径寸法 %d件(論点15/26。**値は実測のまま正**。"
+            u"インロー/インチ系の疑いがあるので意図を質問票で確認する): %s"
+            % (len(nominal_review), [(r["id"], r["value"]) for r in nominal_review]))
 
     # --- 4.5) 直列連記(chain_group)の整列検証 -------------------------------
     # ❗連記が崩れた(同一グループの寸法線がずれた・重なった・飛び地になった)図面は
@@ -1449,33 +1872,119 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             _new_dimstyle(doc, ldr_style, lv)
     for note in plan.get("hole_notes", []):
         view = note["view"]
+        # ---- 層1: 実測径 -> 呼び値の翻訳(論点8・§15)。**注記の径値だけ**が対象 ----
+        #   丸め先が自明でない値は丸めず「呼び値未確定」として質問票へ回す。
+        nom_recs = []
+        note_spec = note.get("spec")
+        if note_spec is not None:
+            note_spec, nom_recs = nominal_size.translate_hole_spec(
+                note_spec, tol=nominal_tol, enabled=nominal_on)
         # pattern が明示されていればそれを使う(強制指定)。無ければ spec から既定書式で組み立てる
         pattern = note.get("pattern")
         if pattern is None:
-            if "spec" not in note:
+            if note_spec is None:
                 raise ValueError("%s: hole_note は pattern か spec のどちらかが必要" % note["id"])
             style_over = dict(hole_note_style)
             style_over.update(note.get("style", {}))
-            pattern = build_hole_note_pattern(note["spec"], style_over)
+            pattern = build_hole_note_pattern(note_spec, style_over)
         note = dict(note, pattern=pattern)
+
+        # ---- 注記の文字枠の大きさ(配置の決定に先に必要) ----
+        h = dimvars_base["dimtxt"]
+        lines_ = note["pattern"].split("\\P")
+        w = max(_disp_len(_MTEXT_CODE_RE.sub("", l).replace("%%c", "f")) for l in lines_) * h * \
+            spec["text_style"]["width_factor"]
+        size_wh = (w, len(lines_) * h * 1.3)
+        attachment = note.get("attachment", "bottom-left")
+
+        # ---- 層2: 注記は対象の近くに(論点21)。auto_place=true で engine が場所を探す ----
+        #   従来は計画が注記を紙面右端に固定しており、引出線が図を斜めに長く横断していた。
+        auto_rep = None
         space = note.get("leader", {}).get("space", "view")
-        pts = [to_draw(view, space, p) for p in note["leader"]["points"]]
+        if note.get("auto_place"):
+            ac0 = note.get("anchor_check")
+            if ac0:
+                # 対象円が分かっている場合: 引出線の始点を円周上に置く
+                #(anchor_check が「始点が円周上にあること」を独立に検証する)
+                acx = to_draw(ac0["view"], ac0.get("space", "view"), ac0["center"])
+                acr = float(ac0["diameter"]) / 2.0 * scale
+                ac_view = ac0["view"]
+            else:
+                # anchor_check が無い計画でも使えるようにする: **計画が書いた引出線の始点**を
+                # 対象点(半径0)として扱い、折れ点から先だけを engine が置き直す。
+                # 始点は動かさないので、指し先の正しさは計画の責任のまま変わらない。
+                acx = to_draw(view, space, note["leader"]["points"][0])
+                acr = 0.0
+                ac_view = view
+            ac0 = {"view": ac_view}
+            obstacles = ([tuple(view_bbox[k]) for k in view_bbox]
+                         + [tuple(bx) for bx in text_boxes.values()]
+                         + [TITLE_BLOCK_RECT, NOTE_ZONE_RECT])
+            vb = view_bbox[ac0["view"]]
+            auto_rep = auto_place_hole_note(
+                acx, acr, size_wh, obstacles, FRAME_RECT,
+                view_center=((vb[0] + vb[2]) / 2.0, (vb[1] + vb[3]) / 2.0))
+            if auto_rep is None:
+                style_warnings.append(
+                    u"❗注記 %s の自動配置に失敗(対象の近傍に衝突しない場所が無い)。"
+                    u"計画の text_insert を使う" % note["id"])
+            else:
+                pts = list(auto_rep["leader_points"])
+                ins = auto_rep["insert"]
+                attachment = auto_rep["attachment"]
+        if auto_rep is None:
+            pts = [to_draw(view, space, p) for p in note["leader"]["points"]]
+            ins = to_draw(view, note.get("text_space", "view"), note["text_insert"])
+
         leader = msp.add_leader(pts, dimstyle=ldr_style,
                                 dxfattribs={"layer": leader_layer})
-        ins = to_draw(view, note.get("text_space", "view"), note["text_insert"])
         msp.add_mtext(note["pattern"], dxfattribs={
             "style": text_style,
             "char_height": dimvars_base["dimtxt"],
-            "attachment_point": ATTACH.get(note.get("attachment", "bottom-left"), 7),
+            "attachment_point": ATTACH.get(attachment, 7),
             "insert": (ins[0], ins[1], 0.0),
             "layer": leader_layer,
         })
         nrow = {"id": note["id"], "view": view, "pattern": note["pattern"],
                 "leader_points": [[round(p[0], 4), round(p[1], 4)] for p in pts],
                 "text_insert": [round(ins[0], 4), round(ins[1], 4)],
+                "attachment": attachment, "auto_placed": bool(auto_rep),
                 "ok": True, "errors": []}
         if "\u03c6" in note["pattern"] or "\u03a6" in note["pattern"]:
             nrow["errors"].append(u"φのUnicode文字は禁止(%%cを使うこと)")
+
+        # ---- 呼び値翻訳の**独立検算**(呼び値表にも翻訳関数にも依存しない) ----
+        #   ❗表を偽装しても(φ7.04 -> φ8 のような嘘の丸め)ここで落ちる。
+        #     翻訳の正しさを保証するのは表ではなく「実測値との差」の検算である。
+        if nom_recs:
+            nrow["nominal"] = [{k: r[k] for k in ("field", "measured", "nominal",
+                                                  "resolved", "delta_mm", "reason")}
+                               for r in nom_recs]
+            for r in nom_recs:
+                if not r["resolved"]:
+                    nominal_pending.append(
+                        {"id": note["id"], "view": view, "field": r["field"],
+                         "measured": r["measured"], "reason": r["reason"]})
+                    continue
+                d = abs(float(r["nominal"]) - float(r["measured"]))
+                if d > nominal_tol + 1e-9:
+                    nrow["errors"].append(
+                        u"呼び値翻訳が許容窓を超えている(%s: 実測φ%.4g -> 呼びφ%.4g・"
+                        u"差%.4fmm > %.4fmm)"
+                        % (r["field"], r["measured"], r["nominal"], d, nominal_tol))
+                elif float(r["nominal"]) not in nominal_size.NOMINAL_TABLE:
+                    nrow["errors"].append(
+                        u"呼び値翻訳の結果が呼び値表に無い(%s: φ%.4g)"
+                        % (r["field"], r["nominal"]))
+
+        # ---- 層2: 引出線の長距離横断(論点21) ----
+        _llen = polyline_length(pts)
+        nrow["leader_len_mm"] = round(_llen, 4)
+        if _llen > LEADER_LEN_MAX_MM:
+            style_warnings.append(
+                u"❗引出線が長すぎる(論点21) %s: %.1fmm > 目安上限%.0fmm。"
+                u"注記を対象フィーチャーの近くへ寄せること(auto_place=true)"
+                % (note["id"], _llen, LEADER_LEN_MAX_MM))
         ac = note.get("anchor_check")
         if ac:
             c = to_draw(ac["view"], ac.get("space", "view"), ac["center"])
@@ -1489,12 +1998,10 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
                 nrow["errors"].append(u"anchor_check: 引出線始点が円周上にない(%.4fmm)" % d)
         nrow["ok"] = not nrow["errors"]
         note_rows.append(nrow)
-        h = dimvars_base["dimtxt"]
-        lines = note["pattern"].split("\\P")
-        w = max(_disp_len(_MTEXT_CODE_RE.sub("", l).replace("%%c", "f")) for l in lines) * h * \
-            spec["text_style"]["width_factor"]
-        text_boxes[note["id"]] = [round(ins[0], 4), round(ins[1], 4),
-                                  round(ins[0] + w, 4), round(ins[1] + len(lines) * h * 1.3, 4)]
+        # ❗文字枠は attachment を考慮する(bottom-right の注記を bottom-left として
+        #   扱っていた従来実装は、注記の衝突判定を左右反転した位置で見ていた)
+        text_boxes[note["id"]] = [round(v, 4) for v in
+                                  note_text_box(ins, size_wh, attachment)]
         nrow["leader_handle"] = leader.dxf.handle
         # 引出線は区間ごと・注記は文字枠を1つの矩形として扱う(空白を巻き込まないため)
         tbn = text_boxes[note["id"]]
@@ -1557,6 +2064,16 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
             % (len(frame_collisions),
                [(c["id"], c["zone"]) for c in frame_collisions]))
 
+    # 層1: 呼び値未確定(丸めずに実測のまま残した注記の径)を質問票へ誘導する
+    if nominal_pending:
+        style_warnings.append(
+            u"❗呼び値未確定 %d件(論点8/15。丸め先が自明でないため実測のまま作図した。"
+            u"解釈レポート/質問票で意図を確認すること): %s"
+            % (len(nominal_pending),
+               [(p["id"], p["field"], p["measured"]) for p in nominal_pending]))
+    # 様式警告は**生成を止めない**(ゲート①②とは別の品質軸。読み手への配慮の層)
+    warnings.extend(style_warnings)
+
     # --- 8) スタイル読み戻し検証 -------------------------------------------
     style_check = _check_dimstyles(doc, dimstyle_records, dimvars_base, spec)
 
@@ -1584,7 +2101,28 @@ def apply_plan(plan_path, out_dxf_path, dimstyle_spec_path=DIMSTYLE_SPEC_DEFAULT
         "dimlfac": dimvars_base["dimlfac"],
         "views": list(use_views),
         "view_reserves": reserves,
-        "defaults_applied": {"diameter_style": diameter_style, "hole_note": hole_note_style},
+        "defaults_applied": {"diameter_style": diameter_style, "hole_note": hole_note_style,
+                             "nominal_translation": nominal_on,
+                             "nominal_tol_mm": nominal_tol,
+                             "extension_gap_avoid": ext_avoid},
+        # --- 様式第3弾(上品さの3層構造)の計測値 ---
+        "style_warnings": style_warnings,
+        "nominal": {"pending": nominal_pending, "review_dimensions": nominal_review},
+        "extension_lines": {
+            "reports": [ext_reports[k] for k in sorted(ext_reports)],
+            "collinear_count": sum(1 for e in ext_reports.values()
+                                   if e.get("collinear_count")),
+            "long_count": len(ext_long),
+            "long_and_collinear_count": len(ext_long_collinear),
+            "ext_len_max_mm": (max(e.get("ext_len_max_mm", 0.0)
+                                   for e in ext_reports.values())
+                               if ext_reports else None),
+            "ext_len_median_mm": _median([v for e in ext_reports.values()
+                                          for v in e.get("ext_len_mm", [])]),
+            "avoided_count": sum(1 for e in ext_reports.values() if e.get("avoided")),
+            "gap_mismatch_count": sum(1 for e in ext_reports.values()
+                                      if e.get("gap_matches_dimexo") is False)},
+        "circular_view_diameter_over": circ_over,
         "warnings": warnings,
     }
 

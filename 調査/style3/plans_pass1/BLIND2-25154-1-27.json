@@ -1,0 +1,386 @@
+{
+  "schema_version": "1.0",
+  "_note": "盲検第2弾(2026-08-10)の計画を『様式規則(作法6〜11)』で書き直した版(2026-08-11)。寸法の集合・測定点・値は盲検時のまま。変更は配置の様式のみ。本部品は**径寸法・PCD穴群を持たない板物**なので作法6(径の左右振り分け)・作法7(径の帯/長さの帯の分離)・作法9(角度で位相を示す)は非該当。適用したのは作法8(直列連記)のみ: 平面図の板厚3.2と六角座高さ10が y=0 を共有するので1本の寸法線へ連ねた。密度は正面図7本・平面図2本で作法11(1ビュー4〜6本・8本超は分割)の範囲内のため削減はしていない。",
+  "part": {
+    "model": "1-27(教師STEP/1.走行軸/1-27.STEP)",
+    "図番": "25154-1-27",
+    "品名": "走行フレーム踏板",
+    "shape_class": "板物",
+    "材質": "ＳＳ４００",
+    "個数": 1,
+    "形状要約": "972×318×t3.2の平板。四隅R5。上面(y=3.2)側から90度皿もみのφ7.04通し穴6個(x=-466/0/466 × z=±149)。x=±250・z=0に裏面(y=-10〜0)へ二面幅19の六角座が出ており、板側φ14通し・六角座側φ12通し。"
+  },
+  "source": {
+    "base_dxf": "data/依頼箱/BLIND2-25154-1-27/views.dxf",
+    "meta_json": "data/依頼箱/BLIND2-25154-1-27/meta.json",
+    "scale": 0.2
+  },
+  "layout": {
+    "views": [
+      "front",
+      "top"
+    ],
+    "dim_reserve": true
+  },
+  "defaults": {
+    "first_offset_mm": 16.0,
+    "stack_step_mm": 8.0,
+    "snap_tol_mm": 0.01,
+    "gate_tol_mm": 0.01
+  },
+  "dimensions": [
+    {
+      "id": "X500_hex",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -250,
+          0,
+          0
+        ],
+        "p2": [
+          250,
+          0,
+          0
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 1
+      },
+      "value_expected": 500.0,
+      "tolerance": null,
+      "comment": "六角座(φ14穴)中心間。X軸は0対称で中点=対称中心のため両側が一括で決まる(作法1)"
+    },
+    {
+      "id": "X932_csk",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -466,
+          0,
+          -149
+        ],
+        "p2": [
+          466,
+          0,
+          -149
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 2
+      },
+      "value_expected": 932.0,
+      "tolerance": null,
+      "comment": "両端の皿穴中心間。中央の皿穴はx=0=対称中心そのもの"
+    },
+    {
+      "id": "X972_total",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -486,
+          0,
+          -154
+        ],
+        "p2": [
+          486,
+          0,
+          -154
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 3
+      },
+      "value_expected": 972.0,
+      "tolerance": null,
+      "comment": "全長"
+    },
+    {
+      "kind": "linear",
+      "view": "front",
+      "tolerance": null,
+      "id": "Z149_csk_minus",
+      "value_expected": 149.0,
+      "measure": {
+        "space": "model",
+        "p1": [
+          250,
+          0,
+          0
+        ],
+        "p2": [
+          466,
+          0,
+          -149
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "chain_group": "Zsym",
+        "level": 1
+      },
+      "comment": "論点11: 板の対称穴列は全スパン1本(298)でなく**中心から±で振り分ける**(146+146型)。中心側の測定点は六角穴の中心(z=0)、外側は皿穴の中心(z=-149)でどちらも実在フィーチャーなのでゲート①のsnapを満たす。"
+    },
+    {
+      "kind": "linear",
+      "view": "front",
+      "tolerance": null,
+      "id": "Z149_csk_plus",
+      "value_expected": 149.0,
+      "measure": {
+        "space": "model",
+        "p1": [
+          250,
+          0,
+          0
+        ],
+        "p2": [
+          466,
+          0,
+          149
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "chain_group": "Zsym",
+        "level": 1
+      },
+      "comment": "同上(中心から+側)。"
+    },
+    {
+      "id": "Z318_total",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -481,
+          0,
+          -159
+        ],
+        "p2": [
+          -481,
+          0,
+          159
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "level": 2
+      },
+      "value_expected": 318.0,
+      "tolerance": null,
+      "comment": "全幅"
+    },
+    {
+      "id": "Z19_hex_flats",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          244.51517244,
+          0,
+          -9.5
+        ],
+        "p2": [
+          244.51517244,
+          0,
+          9.5
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "level": 1
+      },
+      "value_expected": 19.0,
+      "tolerance": null,
+      "comment": "六角座の二面幅(作法3: 正多角形は二面幅か対角を1本必須)。測定点は六角形の平面部エッジ端点"
+    },
+    {
+      "id": "R5_corner",
+      "kind": "radius",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          -481,
+          0,
+          154
+        ],
+        "radius": 5.0,
+        "leader_angle": 225
+      },
+      "value_expected": 5.0,
+      "tolerance": null,
+      "comment": "四隅の隅R。φ10の円特徴をカバーし、円弧中心から四分点への辺で ±486↔±481 と ±159↔±154↔±149 を連結する"
+    },
+    {
+      "id": "Y3_2_plate",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          486,
+          0,
+          0
+        ],
+        "p2": [
+          486,
+          3.2,
+          0
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "chain_group": "Yseg",
+        "level": 1
+      },
+      "value_expected": 3.2,
+      "tolerance": null,
+      "comment": "板厚。Y軸のdatum=六角座が出る側の板下面y=0。【様式】作法8: y=0 を共有する Y10_hex と同一寸法線へ直列連記(１０｜３．２)"
+    },
+    {
+      "id": "Y10_hex",
+      "kind": "linear",
+      "view": "top",
+      "measure": {
+        "space": "model",
+        "p1": [
+          239.03034489,
+          0,
+          0
+        ],
+        "p2": [
+          239.03034489,
+          -10,
+          0
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "chain_group": "Yseg",
+        "level": 1
+      },
+      "value_expected": 10.0,
+      "tolerance": null,
+      "comment": "六角座の高さ。datum(y=0)から積む。【様式】作法8: Y3_2_plate と直列連記(旧計画は左右に分かれて2本の寸法線になっていた)"
+    }
+  ],
+  "hole_notes": [
+    {
+      "id": "N_csk",
+      "view": "front",
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            466,
+            0,
+            -155.72
+          ],
+          [
+            550,
+            0,
+            -389.1
+          ],
+          [
+            625,
+            0,
+            -389.1
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        635,
+        0,
+        -389.1
+      ],
+      "attachment": "bottom-left",
+      "comment": "皿もみ穴6個。**実測値をそのまま spec に書き、呼び値への翻訳は engine/nominal_size.py に任せる**(作法16)。φ7.04 -> 呼びφ7(差0.04 ≦ 窓0.05)。90°皿もみのφ13.44 は許容窓内に呼び値が無いので**丸めず**「呼び値未確定」として質問票へ回る(ユーザー裁定『事実に基づかない補完はしない』)。",
+      "auto_place": true,
+      "spec": {
+        "count": 6,
+        "drill": 7.04,
+        "countersink": {
+          "angle": 90,
+          "dia": 13.44
+        }
+      }
+    },
+    {
+      "id": "N_hex",
+      "view": "front",
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            250,
+            0,
+            7
+          ],
+          [
+            550,
+            0,
+            -289.1
+          ],
+          [
+            650,
+            0,
+            -289.1
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        660,
+        0,
+        -289.1
+      ],
+      "attachment": "bottom-left",
+      "comment": "板側φ14通し+裏面に二面幅19の六角座(φ12通し)。φ12は呼び径ちょうどでМ12溶接ナットの可能性が高いが、運用ルール『М判定は呼び径±0.1一致 かつ 3個以上が円周等配』を満たさない(2個・非等配)ためφ表記のままとした。採らなかった解釈=М12ナット溶接。",
+      "auto_place": true,
+      "spec": {
+        "count": 2,
+        "drill": 14,
+        "extra_lines": [
+          "裏面六角座　二面幅19",
+          "%%c12通し"
+        ]
+      }
+    }
+  ],
+  "notes": [
+    {
+      "id": "N_general",
+      "text": "注記．\\P　指示無き角部はＣ０．２、隅部はＲ２以下とする。",
+      "insert": [
+        130.0,
+        250.0
+      ],
+      "attachment": "top-left",
+      "height": 3.5,
+      "comment": "塗装色・公差・仕上げ記号は3Dからは決まらないため質問票へ回し、共通注記のみ記載"
+    }
+  ]
+}

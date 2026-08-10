@@ -1,0 +1,557 @@
+{
+  "schema_version": "1.0",
+  "_note": "盲検量産テスト(2026-08-10)+修理パス(2026-08-10)。修正内容=作法1(X軸チェーン)/作法4(図枠ゾーン回避・PCD参考寸法の削除)/作法5(М表記)。",
+  "part": {
+    "model": "6-02(教師STEP/6.傾動軸/6-02.STEP)",
+    "図番": "25154-6-02",
+    "品名": "傾動面板",
+    "shape_class": "大径円板(plate)",
+    "材質": "ＳＳ４００",
+    "個数": 1,
+    "形状要約": "外径φ420×t16の面板。φ360深さ2のインロー、中央φ75貫通。PCD333にφ11×12、PCD140にφ8×4、右側にφ12/φ10/φ20の取付穴群。外周2箇所に切欠き。尺度1:2。"
+  },
+  "source": {
+    "base_dxf": "data/依頼箱/BLIND-25154-6-02/views.dxf",
+    "meta_json": "data/依頼箱/BLIND-25154-6-02/meta.json",
+    "scale": 0.5
+  },
+  "layout": {
+    "views": [
+      "front",
+      "right"
+    ],
+    "dim_reserve": true
+  },
+  "defaults": {
+    "first_offset_mm": 16.0,
+    "stack_step_mm": 8.0,
+    "snap_tol_mm": 0.01,
+    "gate_tol_mm": 0.01,
+    "diameter_style": {
+      "circular_view": "native",
+      "profile_view": "linear"
+    }
+  },
+  "dimensions": [
+    {
+      "id": "D420",
+      "kind": "diameter",
+      "context": "circular_view",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          0,
+          16
+        ],
+        "diameter": 420.0,
+        "leader_angle": 45.0
+      },
+      "placement": {
+        "side": "right",
+        "level": 1
+      },
+      "value_expected": 420.0,
+      "tolerance": null,
+      "comment": "外径φ420(円形ビュー)"
+    },
+    {
+      "id": "D360",
+      "kind": "diameter",
+      "context": "profile_view",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          -180,
+          2
+        ],
+        "p2": [
+          0,
+          180,
+          2
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "left",
+        "level": 1
+      },
+      "value_expected": 360.0,
+      "tolerance": null,
+      "comment": "論点14: 円形ビューの径は外径1本まで。インロー/中央穴の径は輪郭ビュー(right)へ線形+%%cで移した。"
+    },
+    {
+      "id": "D75",
+      "kind": "diameter",
+      "context": "profile_view",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          -37.5,
+          16
+        ],
+        "p2": [
+          0,
+          37.5,
+          16
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "level": 1
+      },
+      "value_expected": 75.0,
+      "tolerance": null,
+      "comment": "論点14: 円形ビューの径は外径1本まで。インロー/中央穴の径は輪郭ビュー(right)へ線形+%%cで移した。"
+    },
+    {
+      "id": "Y112",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          143,
+          -56,
+          16
+        ],
+        "p2": [
+          143,
+          56,
+          16
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "level": 1
+      },
+      "value_expected": 112.0,
+      "tolerance": null,
+      "comment": "右側φ12穴の中心距離"
+    },
+    {
+      "id": "Y328",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          143,
+          -164,
+          16
+        ],
+        "p2": [
+          143,
+          164,
+          16
+        ],
+        "direction": "vertical"
+      },
+      "placement": {
+        "side": "right",
+        "level": 2
+      },
+      "value_expected": 328.0,
+      "tolerance": null,
+      "comment": "外側φ12穴列の中心距離"
+    },
+    {
+      "id": "T16",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          180,
+          0
+        ],
+        "p2": [
+          0,
+          210,
+          16
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 1,
+        "offset_mm": 11.0
+      },
+      "value_expected": 16.0,
+      "tolerance": null,
+      "comment": "全厚"
+    },
+    {
+      "id": "T2",
+      "kind": "linear",
+      "view": "right",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          180,
+          0
+        ],
+        "p2": [
+          0,
+          180,
+          2
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 1,
+        "offset_mm": 11.0
+      },
+      "value_expected": 2.0,
+      "tolerance": null,
+      "comment": "φ360のボス(段)の高さ"
+    },
+    {
+      "id": "X73",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          0,
+          16
+        ],
+        "p2": [
+          73,
+          164,
+          16
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 1,
+        "offset_mm": 11.0
+      },
+      "value_expected": 73.0,
+      "tolerance": null,
+      "comment": "[修正・作法1] 中心線→φ12穴列1(X方向チェーン1段目)"
+    },
+    {
+      "id": "X70b",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          73,
+          164,
+          16
+        ],
+        "p2": [
+          143,
+          56,
+          16
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 1,
+        "offset_mm": 11.0
+      },
+      "value_expected": 70.0,
+      "tolerance": null,
+      "comment": "[修正・作法1] φ12穴列1→φ12穴列2(X方向チェーン2段目)"
+    },
+    {
+      "id": "X18",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          143,
+          56,
+          16
+        ],
+        "p2": [
+          161,
+          169,
+          16
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 1,
+        "offset_mm": 11.0
+      },
+      "value_expected": 18.0,
+      "tolerance": null,
+      "comment": "[修正・作法1] φ12穴列2→外周切欠きの立面(X方向チェーン3段目)"
+    },
+    {
+      "id": "X108",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          0,
+          0,
+          16
+        ],
+        "p2": [
+          108,
+          164,
+          16
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 1,
+        "offset_mm": 11.0
+      },
+      "value_expected": 108.0,
+      "tolerance": null,
+      "comment": "[修正・作法1] 中心線→φ10穴(X方向2本目の寸法線)"
+    },
+    {
+      "id": "X43",
+      "kind": "linear",
+      "view": "front",
+      "measure": {
+        "space": "model",
+        "p1": [
+          108,
+          164,
+          16
+        ],
+        "p2": [
+          151,
+          169,
+          16
+        ],
+        "direction": "horizontal"
+      },
+      "placement": {
+        "side": "above",
+        "level": 1,
+        "offset_mm": 11.0
+      },
+      "value_expected": 43.0,
+      "tolerance": null,
+      "comment": "[修正・作法1] φ10穴→φ20穴(X方向2本目の寸法線)"
+    }
+  ],
+  "hole_notes": [
+    {
+      "id": "N_h11",
+      "view": "front",
+      "spec": {
+        "count": 12,
+        "drill": 11,
+        "placement": "PCD333"
+      },
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            -166.327,
+            -43.093,
+            16
+          ],
+          [
+            -200,
+            -80,
+            16
+          ],
+          [
+            -235,
+            -80,
+            16
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        -236,
+        -80,
+        16
+      ],
+      "attachment": "bottom-right",
+      "comment": "φ11通し穴12箇所・PCD333",
+      "auto_place": true
+    },
+    {
+      "id": "N_h8",
+      "view": "front",
+      "spec": {
+        "count": 4,
+        "thread": "M8",
+        "placement": "PCD140"
+      },
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            -49.497,
+            -53.497,
+            16
+          ],
+          [
+            -80,
+            -90,
+            16
+          ],
+          [
+            -110,
+            -90,
+            16
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        -111,
+        -90,
+        16
+      ],
+      "attachment": "bottom-right",
+      "comment": "[修正・作法5] φ8×4・PCD140円周等配。呼び径М8と±0.1mm一致し3個以上等配のためМ８と注記(下穴6.8/呼び径8の双方がゲート②のカバー径になる)。通し穴のためボルト通し穴の可能性も残る=要人間確認",
+      "auto_place": true
+    },
+    {
+      "id": "N_h12",
+      "view": "front",
+      "spec": {
+        "count": 6,
+        "drill": 12
+      },
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            143,
+            62,
+            16
+          ],
+          [
+            170,
+            90,
+            16
+          ],
+          [
+            200,
+            90,
+            16
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        201,
+        90,
+        16
+      ],
+      "attachment": "bottom-left",
+      "comment": "φ12穴6箇所(右側の取付穴列)",
+      "auto_place": true
+    },
+    {
+      "id": "N_h10",
+      "view": "front",
+      "spec": {
+        "count": 2,
+        "drill": 10
+      },
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            108,
+            -169,
+            16
+          ],
+          [
+            130,
+            -195,
+            16
+          ],
+          [
+            160,
+            -195,
+            16
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        161,
+        -195,
+        16
+      ],
+      "attachment": "bottom-left",
+      "comment": "[修正]φ10穴2箇所",
+      "auto_place": true
+    },
+    {
+      "id": "N_h20",
+      "view": "front",
+      "spec": {
+        "count": 2,
+        "drill": 20
+      },
+      "leader": {
+        "space": "model",
+        "points": [
+          [
+            151,
+            -179,
+            16
+          ],
+          [
+            175,
+            -200,
+            16
+          ],
+          [
+            205,
+            -200,
+            16
+          ]
+        ]
+      },
+      "text_space": "model",
+      "text_insert": [
+        206,
+        -200,
+        16
+      ],
+      "attachment": "bottom-left",
+      "comment": "[修正]φ20穴2箇所",
+      "auto_place": true
+    }
+  ],
+  "notes": [
+    {
+      "id": "N_general",
+      "comment": "共通注記のみ。塗装色・公差・仕上げ記号は3Dから決まらないため質問票へ回した",
+      "text": "注記．\\P　指示無き角部はＣ０．２、隅部はＲ２以下とする。",
+      "insert": [
+        295.0,
+        75.0
+      ],
+      "attachment": "top-left",
+      "height": 3.5
+    }
+  ]
+}

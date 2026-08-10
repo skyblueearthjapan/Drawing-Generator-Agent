@@ -1,0 +1,153 @@
+{
+ "reports": [
+  {
+   "plan": "data\\依頼箱\\BLIND-25154-6-02\\plan.json",
+   "side_moves": [
+    {
+     "group": "('#', 'D360')",
+     "ids": [
+      "D360"
+     ],
+     "from": "left",
+     "to": "right",
+     "ext_len_mm": 17.0
+    },
+    {
+     "group": "('#', 'D75')",
+     "ids": [
+      "D75"
+     ],
+     "from": "right",
+     "to": "left",
+     "ext_len_mm": 16.0
+    }
+   ],
+   "level_changes": [],
+   "auto_place_added": [],
+   "circular_view_over": {},
+   "raw_pattern_notes": []
+  },
+  {
+   "plan": "data\\依頼箱\\BLIND2-25154-1-27\\plan.json",
+   "side_moves": [
+    {
+     "group": "('front', 'Zsym')",
+     "ids": [
+      "Z149_csk_minus",
+      "Z149_csk_plus"
+     ],
+     "from": "left",
+     "to": "right",
+     "ext_len_mm": 63.2
+    }
+   ],
+   "level_changes": [
+    {
+     "id": "Z318_total",
+     "view": "front",
+     "side": "left",
+     "level_from": 2,
+     "level_to": 1
+    },
+    {
+     "id": "Z149_csk_minus",
+     "view": "front",
+     "side": "right",
+     "level_from": 1,
+     "level_to": 2
+    },
+    {
+     "id": "Z149_csk_plus",
+     "view": "front",
+     "side": "right",
+     "level_from": 1,
+     "level_to": 2
+    }
+   ],
+   "auto_place_added": [],
+   "circular_view_over": {},
+   "raw_pattern_notes": []
+  },
+  {
+   "plan": "data\\依頼箱\\BLIND2-25154-2-16\\plan.json",
+   "side_moves": [],
+   "level_changes": [],
+   "auto_place_added": [],
+   "circular_view_over": {},
+   "raw_pattern_notes": [
+    "N_hole8"
+   ]
+  },
+  {
+   "plan": "data\\依頼箱\\BLIND2-25154-3-02\\plan.json",
+   "side_moves": [],
+   "level_changes": [],
+   "auto_place_added": [],
+   "circular_view_over": {},
+   "raw_pattern_notes": []
+  },
+  {
+   "plan": "data\\依頼箱\\BLIND2-25154-4-05\\plan.json",
+   "side_moves": [],
+   "level_changes": [],
+   "auto_place_added": [],
+   "circular_view_over": {},
+   "raw_pattern_notes": [
+    "N_hole11",
+    "N_hole10_base",
+    "N_hole6_base",
+    "N_hole10_motor",
+    "N_hole6_motor"
+   ]
+  },
+  {
+   "plan": "data\\依頼箱\\BLIND2-25154-5-05\\plan.json",
+   "side_moves": [
+    {
+     "group": "('#', 'D200_counterbore')",
+     "ids": [
+      "D200_counterbore"
+     ],
+     "from": "above",
+     "to": "below",
+     "ext_len_mm": 16.0
+    }
+   ],
+   "level_changes": [
+    {
+     "id": "D190_bore",
+     "view": "front",
+     "side": "above",
+     "level_from": 2,
+     "level_to": 1
+    },
+    {
+     "id": "D200_counterbore",
+     "view": "front",
+     "side": "below",
+     "level_from": 1,
+     "level_to": 2
+    },
+    {
+     "id": "X235_plate",
+     "view": "front",
+     "side": "below",
+     "level_from": 2,
+     "level_to": 3
+    },
+    {
+     "id": "X296_lugs",
+     "view": "front",
+     "side": "below",
+     "level_from": 3,
+     "level_to": 4
+    }
+   ],
+   "auto_place_added": [],
+   "circular_view_over": {},
+   "raw_pattern_notes": [
+    "N_slot"
+   ]
+  }
+ ]
+}
