@@ -23,6 +23,12 @@ u"""工房ループ CLI(フェーズ5・依頼受付→処理→納品→台帳)
 choice.json(向き選択)/plan.json(作図計画)をこのフォルダに置くのを待つ
 (`app/prompts/orientation_prompt.md` / `plan_prompt.md` がそのAIへの指示雛形)。
 
+環境変数:
+    SOLIDIFY_DRAWING_ROOT   data/(依頼箱・納品箱)と台帳.mdの置き場所(既定=このリポジトリ自身)。
+                            Z2工房(SOLIDIFY)からの橋渡し実行で別ディレクトリへ差し替える時に使う
+                            (Z2工房統合手順書_2026-08-11.md §3.3)。engine/呼び出し等のコード資産の
+                            置き場所には影響しない(常にこのファイルの実位置=ROOT基準)。
+
 安全規約:
   - engine/*.py・図枠/・生成図面/ は一切書き換えない(読むだけ)。
   - engine/generate_drawing.py はブラックボックスとして CLI 経由でのみ呼ぶ。
@@ -48,8 +54,16 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # app/ 自身(ca
 import view_orient  # noqa: E402  (純粋関数のみ使用。SW接続はしない)
 import candidates as candidate_sets  # noqa: E402
 
-INBOX_DIR = os.path.join(ROOT, u"data", u"依頼箱")
-DELIVERY_DIR = os.path.join(ROOT, u"data", u"納品箱")
+# data/(依頼箱・納品箱)と台帳.mdの置き場所。既定はこのリポジトリ自身(ROOT)だが、
+# Z2工房(SOLIDIFY)からの橋渡し実行では環境変数 SOLIDIFY_DRAWING_ROOT で
+# 別ディレクトリ(例 橋渡しモジュールが依頼を複製する先)へ差し替えられる
+# (Z2工房統合手順書_2026-08-11.md §3.3「置き場所は環境変数で渡す。ハードコードしない」)。
+# engine/・app/prompts/・調査/ 配下のコード資産・スクリプト実行位置は常に ROOT
+# (このファイルの実位置)基準のまま(コードの置き場所とデータの置き場所を分離する)。
+DATA_ROOT = os.environ.get("SOLIDIFY_DRAWING_ROOT") or ROOT
+
+INBOX_DIR = os.path.join(DATA_ROOT, u"data", u"依頼箱")
+DELIVERY_DIR = os.path.join(DATA_ROOT, u"data", u"納品箱")
 
 MEASURE_SCRIPT = os.path.join(u"調査", u"phase5_ai_operator", u"measure_3d.py")
 PROJECT_CAND_SCRIPT = os.path.join(u"調査", u"phase5_ai_operator", u"project_candidates.py")
@@ -76,7 +90,7 @@ STATES_TERMINAL = (u"合格", u"不合格", u"質問あり")
 
 QUESTION_FILENAME = u"質問票.md"       # 計画待ち中にAIオペレータが置く(向き/計画で判断できない時)
 GEN_MARKER_FILENAME = u"生成完了.json"  # 生成成功〜status更新の間のクラッシュ復旧用マーカー
-LEDGER_PATH = os.path.join(ROOT, u"台帳.md")
+LEDGER_PATH = os.path.join(DATA_ROOT, u"台帳.md")
 
 # ---------------------------------------------------------------------------
 # 小物
@@ -632,7 +646,7 @@ def book_ledger(request_id, request, zuban, result):
     def _relslash(p):
         if not p:
             return "-"
-        return os.path.relpath(p, ROOT).replace(os.sep, "/")
+        return os.path.relpath(p, DATA_ROOT).replace(os.sep, "/")
 
     upsert_ledger_row(request_id, {
         "date": datetime.date.today().isoformat(),
