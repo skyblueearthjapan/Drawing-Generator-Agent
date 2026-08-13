@@ -1,0 +1,1704 @@
+{
+  "summary": {
+    "model": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\3-13.STEP",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\plan.json",
+    "request": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\依頼.json",
+    "zuban": "25154-3-13",
+    "part_name": "クッション",
+    "skip_sw": true,
+    "steps": {
+      "sw_projection": {
+        "skipped": true,
+        "views_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\views.dxf",
+        "meta_json": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\meta.json"
+      },
+      "density": {
+        "material": "ＳＳ４００",
+        "resolved_kgm3": 7850.0,
+        "note": "材質記号 'SS400' -> 密度7850.0kg/m^3"
+      },
+      "compose": {
+        "scale": 1.0,
+        "views": [
+          "front",
+          "right"
+        ],
+        "layout": {
+          "views": [
+            "front",
+            "right"
+          ],
+          "gap_x_mm": 15.0,
+          "gap_y_mm": 0.0,
+          "group_wh_mm": [
+            64.00000000000034,
+            22.00000000000003
+          ],
+          "avail_wh_mm": [
+            410.0,
+            262.0
+          ],
+          "reserves": {
+            "front": {
+              "above": 0.0,
+              "below": 29.5,
+              "left": 0.0,
+              "right": 0.0
+            },
+            "right": {
+              "above": 0.0,
+              "below": 21.5,
+              "left": 0.0,
+              "right": 21.5
+            }
+          }
+        },
+        "frame_check": {
+          "total": 140,
+          "frame_matched": 112,
+          "remaining": 28,
+          "remaining_ratio": 0.2
+        },
+        "zone_overlaps": [],
+        "view_pair_overlaps": [],
+        "weight": {
+          "volume_mm3": 11861.039372398971,
+          "density_kgm3_used": 7850.0,
+          "mass_kg": 0.09310915907333193,
+          "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+        },
+        "warnings": [
+          "使用しないビューのエンティティを除外: {'top': 9, 'iso': 24}"
+        ]
+      },
+      "dim_engine": {
+        "gate1_ok": true,
+        "warnings": [],
+        "style_warnings": [],
+        "nominal": {
+          "pending": [],
+          "review_dimensions": []
+        },
+        "extension_lines": {
+          "collinear_count": 5,
+          "long_count": 0,
+          "long_and_collinear_count": 0,
+          "ext_len_max_mm": 25.25,
+          "ext_len_median_mm": 23.25,
+          "avoided_count": 0,
+          "gap_mismatch_count": 0
+        },
+        "circular_view_diameter_over": [],
+        "hole_note_leader_len_mm": [
+          {
+            "id": "N_stepped_hole",
+            "len_mm": 14.0,
+            "auto_placed": true
+          }
+        ],
+        "style_check_ok": true,
+        "layout_collisions": [],
+        "frame_collisions": [],
+        "resolved_kinds": {
+          "Z15_drill_depth": "linear",
+          "Z12_bore_depth": "linear",
+          "Z27_overall": "linear",
+          "X22_across": "linear",
+          "Y22_high": "linear"
+        },
+        "chains_ok": true,
+        "chains": [
+          {
+            "group": "Zseg",
+            "view": "front",
+            "ids": [
+              "Z15_drill_depth",
+              "Z12_bore_depth"
+            ],
+            "ok": true,
+            "errors": []
+          }
+        ]
+      },
+      "layout_verify": {
+        "ok": true,
+        "frame_collision_count": 0,
+        "reasons": []
+      },
+      "gate2": {
+        "ok": true,
+        "unspecified_count": 0,
+        "redundant_count": 1
+      },
+      "independent_verify": {
+        "ok": true,
+        "file_attrs_ok": true,
+        "gate1_ok": true,
+        "gate1_max_diff_mm": 0.0,
+        "style_ok": true,
+        "note_ok": true,
+        "chains_ok": true,
+        "chain_errors": []
+      },
+      "centerline": {
+        "enabled": true,
+        "added": 3,
+        "counts": {
+          "view_axis": 3
+        },
+        "gate3_circle_centerline_ok": true,
+        "n_features": 1,
+        "n_missing": 0,
+        "zone_hits": [],
+        "skipped_marks": []
+      }
+    },
+    "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\生成\\25154-3-13_クッション.dxf",
+    "final_png": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\生成\\25154-3-13_クッション.png",
+    "gate1_ok": true,
+    "gate2_ok": true,
+    "verify_ok": true,
+    "layout_ok": true,
+    "centerline_ok": true,
+    "overall_ok": true,
+    "status": "検証通過"
+  },
+  "compose": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\生成\\25154-3-13_クッション.dxf",
+    "scale": 1.0,
+    "views": [
+      "front",
+      "right"
+    ],
+    "layout": {
+      "views": [
+        "front",
+        "right"
+      ],
+      "gap_x_mm": 15.0,
+      "gap_y_mm": 0.0,
+      "group_wh_mm": [
+        64.00000000000034,
+        22.00000000000003
+      ],
+      "avail_wh_mm": [
+        410.0,
+        262.0
+      ],
+      "reserves": {
+        "front": {
+          "above": 0.0,
+          "below": 29.5,
+          "left": 0.0,
+          "right": 0.0
+        },
+        "right": {
+          "above": 0.0,
+          "below": 21.5,
+          "left": 0.0,
+          "right": 21.5
+        }
+      }
+    },
+    "frame_entity_count_loaded": 112,
+    "frame_check": {
+      "total": 140,
+      "frame_matched": 112,
+      "remaining": 28,
+      "remaining_ratio": 0.2
+    },
+    "view_entity_counts": {
+      "front": 10,
+      "right": 8
+    },
+    "dropped_view_entity_counts": {
+      "top": 9,
+      "iso": 24
+    },
+    "unclassified_entity_count": 0,
+    "view_out_bbox_mm": {
+      "front": [
+        177.99999999999983,
+        150.0,
+        205.0,
+        172.0
+      ],
+      "right": [
+        220.0,
+        150.0,
+        242.00000000000017,
+        172.0
+      ]
+    },
+    "zone_overlaps": [],
+    "view_pair_overlaps": [],
+    "field_anchor_check": {
+      "品名_値": {
+        "expected": [
+          224.477,
+          22.51
+        ],
+        "actual": [
+          224.477,
+          22.51
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "装置名_値": {
+        "expected": [
+          224.477,
+          14.877
+        ],
+        "actual": [
+          224.477,
+          14.877
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "図番_値": {
+        "expected": [
+          273.605,
+          20.498
+        ],
+        "actual": [
+          273.605,
+          20.498
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "製図者_氏名": {
+        "expected": [
+          191.878,
+          22.586
+        ],
+        "actual": [
+          191.878,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_3": {
+        "expected": [
+          207.705,
+          22.586
+        ],
+        "actual": [
+          207.705,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_2": {
+        "expected": [
+          207.705,
+          14.722
+        ],
+        "actual": [
+          207.705,
+          14.722
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "尺度_値": {
+        "expected": [
+          176.415,
+          22.446
+        ],
+        "actual": [
+          176.415,
+          22.446
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "連番マーク_値": {
+        "expected": [
+          19.324,
+          275.03
+        ],
+        "actual": [
+          19.324,
+          275.03
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "材質個数ノート_自製品": {
+        "expected": [
+          33.595,
+          280.001
+        ],
+        "actual": [
+          33.595,
+          280.001
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "重量_値": {
+        "expected": [
+          224.593,
+          6.704
+        ],
+        "actual": [
+          224.593,
+          6.704
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      }
+    },
+    "linetypes_added": [
+      "HIDDEN",
+      "PHANTOM",
+      "CENTER"
+    ],
+    "linetypes_missing": [],
+    "weight": {
+      "volume_mm3": 11861.039372398971,
+      "density_kgm3_used": 7850.0,
+      "mass_kg": 0.09310915907333193,
+      "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+    },
+    "field_values": {
+      "品名": "クッション",
+      "図番": "２５１５４－３－１３",
+      "装置名": "昇降軸",
+      "尺度": "１：１",
+      "製図者": "ＡＩ",
+      "製図日付": "２６．０８．１２",
+      "連番": "１３",
+      "重量": "０．０９"
+    },
+    "warnings": [
+      "使用しないビューのエンティティを除外: {'top': 9, 'iso': 24}"
+    ]
+  },
+  "dim": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\生成\\25154-3-13_クッション.dxf",
+    "base_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\生成\\25154-3-13_クッション.dxf",
+    "gate1": [
+      {
+        "id": "Z15_drill_depth",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 15.0,
+        "measured": 15.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "15",
+        "text_value": 15.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN001",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z12_bore_depth",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 12.0,
+        "measured": 12.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "12",
+        "text_value": 12.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN002",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z27_overall",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 27.0,
+        "measured": 27.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "27",
+        "text_value": 27.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN003",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "X22_across",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 22.0,
+        "measured": 22.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "22",
+        "text_value": 22.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN004",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y22_high",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 22.0,
+        "measured": 22.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "22",
+        "text_value": 22.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN005",
+        "ok": true,
+        "errors": []
+      }
+    ],
+    "gate1_ok": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "Zseg",
+        "ids": [
+          "Z15_drill_depth",
+          "Z12_bore_depth"
+        ],
+        "offset_coord": 134.0,
+        "segments": [
+          {
+            "id": "Z12_bore_depth",
+            "s0": 178.0,
+            "s1": 190.0,
+            "line_coord": 134.0
+          },
+          {
+            "id": "Z15_drill_depth",
+            "s0": 190.0,
+            "s1": 205.0,
+            "line_coord": 134.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "dim_offsets": {
+      "Z15_drill_depth": 16.0,
+      "Z12_bore_depth": 16.0,
+      "Z27_overall": 24.0,
+      "X22_across": 16.0,
+      "Y22_high": 16.0
+    },
+    "hole_notes": [
+      {
+        "id": "N_stepped_hole",
+        "view": "right",
+        "pattern": "\\A1;%%c５．５　ザグリ%%c９．５深さ１２\\Pザグリは裏面より加工",
+        "leader_points": [
+          [
+            234.3588,
+            164.3588
+          ],
+          [
+            241.4298,
+            171.4298
+          ],
+          [
+            245.4298,
+            171.4298
+          ]
+        ],
+        "text_insert": [
+          245.4298,
+          171.4298
+        ],
+        "attachment": "bottom-left",
+        "auto_placed": true,
+        "ok": true,
+        "errors": [],
+        "nominal": [
+          {
+            "field": "drill",
+            "measured": 5.5,
+            "nominal": 5.5,
+            "resolved": true,
+            "delta_mm": 0.0,
+            "reason": "実測が呼び値と一致"
+          },
+          {
+            "field": "counterbore.dia",
+            "measured": 9.5,
+            "nominal": 9.5,
+            "resolved": true,
+            "delta_mm": 0.0,
+            "reason": "実測が呼び値と一致"
+          }
+        ],
+        "leader_len_mm": 14.0,
+        "anchor_check": {
+          "ok": true,
+          "dist_err_mm": 0.0
+        },
+        "leader_handle": "1B7"
+      }
+    ],
+    "dimstyles": {
+      "Z15_drill_depth": "GEN001",
+      "Z12_bore_depth": "GEN002",
+      "Z27_overall": "GEN003",
+      "X22_across": "GEN004",
+      "Y22_high": "GEN005"
+    },
+    "style_check": {
+      "ok": true,
+      "mismatches": [],
+      "effective": {
+        "Z15_drill_depth": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z12_bore_depth": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z27_overall": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "X22_across": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y22_high": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        }
+      }
+    },
+    "arrow_blocks_created": [
+      "_OPEN30"
+    ],
+    "frame_check": {
+      "total": 140,
+      "frame_matched": 112,
+      "remaining": 28,
+      "remaining_ratio": 0.2
+    },
+    "view_bbox": {
+      "front": [
+        178.0,
+        150.0,
+        205.0,
+        172.0
+      ],
+      "right": [
+        220.0,
+        150.0,
+        242.0,
+        172.0
+      ]
+    },
+    "layout": {
+      "text_boxes": {
+        "Z15_drill_depth": [
+          194.5,
+          129.5,
+          200.5,
+          133.5
+        ],
+        "Z12_bore_depth": [
+          181.0,
+          129.5,
+          187.0,
+          133.5
+        ],
+        "Z27_overall": [
+          188.5,
+          121.5,
+          194.5,
+          125.5
+        ],
+        "X22_across": [
+          228.0,
+          129.5,
+          234.0,
+          133.5
+        ],
+        "Y22_high": [
+          253.5,
+          158.0,
+          257.5,
+          164.0
+        ],
+        "N_stepped_hole": [
+          245.4298,
+          171.4298,
+          335.4298,
+          181.8298
+        ]
+      },
+      "collisions": [],
+      "geom_boxes": {
+        "Z15_drill_depth": [
+          187.0,
+          128.9447,
+          208.0,
+          158.25
+        ],
+        "Z12_bore_depth": [
+          175.0,
+          128.9447,
+          193.0,
+          156.25
+        ],
+        "Z27_overall": [
+          175.0,
+          120.9447,
+          208.0,
+          150.0
+        ],
+        "X22_across": [
+          217.0,
+          128.9447,
+          245.0,
+          150.0
+        ],
+        "Y22_high": [
+          242.0,
+          150.0,
+          260.0,
+          172.0
+        ],
+        "N_stepped_hole": [
+          234.3588,
+          164.3588,
+          335.4298,
+          181.8298
+        ]
+      },
+      "frame_collisions": [],
+      "frame_ok": true
+    },
+    "resolved_kinds": {
+      "Z15_drill_depth": "linear",
+      "Z12_bore_depth": "linear",
+      "Z27_overall": "linear",
+      "X22_across": "linear",
+      "Y22_high": "linear"
+    },
+    "scale": 1.0,
+    "dimlfac": 1.0,
+    "views": [
+      "front",
+      "right"
+    ],
+    "view_reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 29.5,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "right": {
+        "above": 0.0,
+        "below": 21.5,
+        "left": 0.0,
+        "right": 21.5
+      }
+    },
+    "defaults_applied": {
+      "diameter_style": {
+        "circular_view": "native",
+        "profile_view": "linear"
+      },
+      "hole_note": {
+        "notation": "phi",
+        "width": "zenkaku",
+        "separator": " "
+      },
+      "nominal_translation": true,
+      "nominal_tol_mm": 0.05,
+      "extension_gap_avoid": false
+    },
+    "style_warnings": [],
+    "nominal": {
+      "pending": [],
+      "review_dimensions": []
+    },
+    "extension_lines": {
+      "reports": [
+        {
+          "id": "X22_across",
+          "view": "right",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    242.0,
+                    172.0
+                  ],
+                  [
+                    242.0,
+                    150.0
+                  ]
+                ],
+                "handle": "149"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    220.0,
+                    150.0
+                  ],
+                  [
+                    220.0,
+                    172.0
+                  ]
+                ],
+                "handle": "14D"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            17.0
+          ],
+          "ext_len_max_mm": 17.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "Y22_high",
+          "view": "right",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    242.0,
+                    150.0
+                  ],
+                  [
+                    220.0,
+                    150.0
+                  ]
+                ],
+                "handle": "14A"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    220.0,
+                    172.0
+                  ],
+                  [
+                    242.0,
+                    172.0
+                  ]
+                ],
+                "handle": "148"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            17.0
+          ],
+          "ext_len_max_mm": 17.0,
+          "side": "right",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "Z12_bore_depth",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    190.0,
+                    156.25
+                  ],
+                  [
+                    190.0,
+                    161.0
+                  ]
+                ],
+                "handle": "143"
+              }
+            ],
+            [
+              {
+                "gap_mm": 0.0,
+                "overlap": true,
+                "seg": [
+                  [
+                    178.0,
+                    150.0
+                  ],
+                  [
+                    178.0,
+                    172.0
+                  ]
+                ],
+                "handle": "13F"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            23.25,
+            23.25
+          ],
+          "ext_len_max_mm": 23.25,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "Z15_drill_depth",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 0.0,
+                "overlap": true,
+                "seg": [
+                  [
+                    205.0,
+                    150.0
+                  ],
+                  [
+                    205.0,
+                    172.0
+                  ]
+                ],
+                "handle": "141"
+              }
+            ],
+            [
+              {
+                "gap_mm": 0.0,
+                "overlap": true,
+                "seg": [
+                  [
+                    190.0,
+                    156.25
+                  ],
+                  [
+                    190.0,
+                    161.0
+                  ]
+                ],
+                "handle": "143"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            25.25,
+            25.25
+          ],
+          "ext_len_max_mm": 25.25,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "Z27_overall",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    205.0,
+                    150.0
+                  ],
+                  [
+                    205.0,
+                    172.0
+                  ]
+                ],
+                "handle": "141"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    178.0,
+                    150.0
+                  ],
+                  [
+                    178.0,
+                    172.0
+                  ]
+                ],
+                "handle": "13F"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            25.0,
+            25.0
+          ],
+          "ext_len_max_mm": 25.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        }
+      ],
+      "collinear_count": 5,
+      "long_count": 0,
+      "long_and_collinear_count": 0,
+      "ext_len_max_mm": 25.25,
+      "ext_len_median_mm": 23.25,
+      "avoided_count": 0,
+      "gap_mismatch_count": 0
+    },
+    "circular_view_diameter_over": [],
+    "warnings": []
+  },
+  "gate2": {
+    "gate": "gate2_completeness_v1",
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\生成\\25154-3-13_クッション.dxf",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\plan.json",
+    "dropped_dimensions": [],
+    "ok": true,
+    "unspecified": [],
+    "floating_dimensions": [],
+    "style_dimensions": [],
+    "redundant_dimensions": [
+      {
+        "axis": "Z",
+        "by": "Z27_overall(27)",
+        "from": 0.0,
+        "to": 27.0,
+        "reason": "位置チェーンに閉路を作る(他の寸法の和・差で導出可)"
+      }
+    ],
+    "duplicate_value_dimensions": [
+      {
+        "value": 22.0,
+        "ids": [
+          "X22_across",
+          "Y22_high"
+        ]
+      }
+    ],
+    "circles": [
+      {
+        "diameter": 5.5,
+        "count": 1,
+        "views": [
+          "right"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 9.5,
+        "count": 1,
+        "views": [
+          "right"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      }
+    ],
+    "axes": {
+      "X": {
+        "axis": "X",
+        "node_count": 3,
+        "nodes": [
+          -11.0,
+          0.0,
+          11.0
+        ],
+        "mode": "symmetric",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": -11.0,
+            "by": "X22_across(対称・径/幅22)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 11.0,
+            "by": "X22_across(対称・径/幅22)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": 0.0
+      },
+      "Y": {
+        "axis": "Y",
+        "node_count": 7,
+        "nodes": [
+          -11.0,
+          -4.75,
+          -2.75,
+          0.0,
+          2.75,
+          4.75,
+          11.0
+        ],
+        "mode": "symmetric",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": -11.0,
+            "by": "Y22_high(対称・径/幅22)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 11.0,
+            "by": "Y22_high(対称・径/幅22)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 2.75,
+            "by": "円φ5.5(right)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -2.75,
+            "by": "円φ5.5(right)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 4.75,
+            "by": "円φ9.5(right)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -4.75,
+            "by": "円φ9.5(right)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": 0.0
+      },
+      "Z": {
+        "axis": "Z",
+        "node_count": 3,
+        "nodes": [
+          0.0,
+          15.0,
+          27.0
+        ],
+        "mode": "chain",
+        "edges": [
+          {
+            "from": 0.0,
+            "to": 15.0,
+            "by": "Z15_drill_depth(15)",
+            "new_link": true
+          },
+          {
+            "from": 15.0,
+            "to": 27.0,
+            "by": "Z12_bore_depth(12)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 27.0,
+            "by": "Z27_overall(27)",
+            "new_link": false
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": null
+      }
+    },
+    "dimensions_read": [
+      {
+        "id": "Z15_drill_depth",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 15.0,
+        "view": "front"
+      },
+      {
+        "id": "Z12_bore_depth",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 12.0,
+        "view": "front"
+      },
+      {
+        "id": "Z27_overall",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 27.0,
+        "view": "front"
+      },
+      {
+        "id": "X22_across",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 22.0,
+        "view": "right"
+      },
+      {
+        "id": "Y22_high",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 22.0,
+        "view": "right"
+      }
+    ],
+    "hole_notes": [
+      {
+        "raw": "\\A1;%%c５．５　ザグリ%%c９．５深さ１２\\Pザグリは裏面より加工",
+        "normalized": "%%c5.5 ザグリ%%c9.5深さ12 ザグリは裏面より加工",
+        "diameters": [
+          5.5,
+          9.5
+        ],
+        "taps": [],
+        "depths": [
+          12.0
+        ],
+        "pcds": [],
+        "pipe_threads": [],
+        "clusters": [],
+        "count": null,
+        "equal_spacing_declared": false
+      }
+    ],
+    "pcd_groups": [],
+    "cluster_groups": [],
+    "inclined_features": [],
+    "polygons": [
+      {
+        "n": 4,
+        "center": [
+          0.0,
+          0.0
+        ],
+        "circum_r": 15.556349,
+        "across_flats": 22.0,
+        "across_corners": 31.112698,
+        "vertices": [
+          [
+            -11.0,
+            -11.0
+          ],
+          [
+            -11.0,
+            11.0
+          ],
+          [
+            11.0,
+            11.0
+          ],
+          [
+            11.0,
+            -11.0
+          ]
+        ],
+        "view": "right",
+        "axes": [
+          "X",
+          "Y"
+        ],
+        "ok": true,
+        "covered_by": "二面幅22"
+      }
+    ],
+    "oblique_width_dimensions": [],
+    "thread_features": [],
+    "note_diameters": [
+      5.5,
+      9.5
+    ],
+    "note_taps": [],
+    "note_depths": [
+      12.0
+    ],
+    "covered_diameters": [
+      5.5,
+      9.5
+    ],
+    "chamfers": [],
+    "out_of_scope": [
+      {
+        "class": "not_implemented",
+        "reason": "表面性状記号・幾何公差・溶接記号・ねじのピッチ/等級はv1の判定対象外(生成側も未実装)"
+      },
+      {
+        "class": "same_value_features",
+        "reason": "v1の台帳は特徴を**値と座標**で持つため、同じ値の別フィーチャー(左右のφ25等)を区別しない。片方の寸法を消しても検出できない(該当: [22.0])"
+      }
+    ]
+  },
+  "independent_verify": {
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\生成\\25154-3-13_クッション.dxf",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\plan.json",
+    "file_attrs_ok": true,
+    "frame": {
+      "total": 147,
+      "frame_matched": 112,
+      "remaining": 35,
+      "remaining_ratio": 0.23809523809523808
+    },
+    "scale": 1.0,
+    "gate1": [
+      {
+        "id": "Z15_drill_depth",
+        "style": "GEN001",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 15.0,
+        "measured": 15.0,
+        "diff_mm": 0.0,
+        "text": "15",
+        "text_value": 15.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z12_bore_depth",
+        "style": "GEN002",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 12.0,
+        "measured": 12.0,
+        "diff_mm": 0.0,
+        "text": "12",
+        "text_value": 12.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z27_overall",
+        "style": "GEN003",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 27.0,
+        "measured": 27.0,
+        "diff_mm": 0.0,
+        "text": "27",
+        "text_value": 27.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "X22_across",
+        "style": "GEN004",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 22.0,
+        "measured": 22.0,
+        "diff_mm": 0.0,
+        "text": "22",
+        "text_value": 22.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y22_high",
+        "style": "GEN005",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 22.0,
+        "measured": 22.0,
+        "diff_mm": 0.0,
+        "text": "22",
+        "text_value": 22.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      }
+    ],
+    "gate1_ok": true,
+    "chains": [
+      {
+        "view": "front",
+        "group": "Zseg",
+        "ids": [
+          "Z15_drill_depth",
+          "Z12_bore_depth"
+        ],
+        "offset_coord": 134.0,
+        "segments": [
+          {
+            "id": "Z12_bore_depth",
+            "s0": 178.0,
+            "s1": 190.0,
+            "line_coord": 134.0
+          },
+          {
+            "id": "Z15_drill_depth",
+            "s0": 190.0,
+            "s1": 205.0,
+            "line_coord": 134.0
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "gate1_max_diff_mm": 0.0,
+    "style_ok": true,
+    "style_mismatches": [],
+    "frame_collisions": [],
+    "layout_ok": true,
+    "notes": [
+      "\\A1;%%c５．５　ザグリ%%c９．５深さ１２\\Pザグリは裏面より加工"
+    ],
+    "note_ok": true,
+    "ok": true
+  },
+  "centerline": {
+    "enabled": true,
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-006\\_work\\dga\\data\\依頼箱\\J20260812-006\\生成\\25154-3-13_クッション.dxf",
+    "added": 3,
+    "counts": {
+      "view_axis": 3
+    },
+    "linetype_added": false,
+    "style": {
+      "linetype": "DASHDOT",
+      "color": 3,
+      "hole_ext_mm": 5.0,
+      "axis_ext_mm": 5.0
+    },
+    "features": [
+      {
+        "view": "right",
+        "center": [
+          231.0,
+          161.0
+        ],
+        "d_draw": 9.5,
+        "d_model": 9.5,
+        "n_circles": 2
+      }
+    ],
+    "lines": [
+      {
+        "view": "front",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          173.0,
+          161.0
+        ],
+        "p2": [
+          210.0,
+          161.0
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "view_axis",
+        "dir": "v",
+        "p1": [
+          231.0,
+          145.0
+        ],
+        "p2": [
+          231.0,
+          177.0
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "view_axis",
+        "dir": "h",
+        "p1": [
+          215.0,
+          161.0
+        ],
+        "p2": [
+          247.0,
+          161.0
+        ]
+      }
+    ],
+    "circles": [],
+    "notes": []
+  },
+  "centerline_check": {
+    "ok": true,
+    "n_features": 1,
+    "n_missing": 0,
+    "coverage": 1.0,
+    "n_centerline_entities": 3,
+    "n_designed": 3,
+    "n_not_realized": 0,
+    "missing": [],
+    "not_realized": [],
+    "zone_hits": [],
+    "checked": [
+      {
+        "view": "right",
+        "center": [
+          231.0,
+          161.0
+        ],
+        "d_model": 9.5,
+        "h": 11.25,
+        "v": 11.25
+      }
+    ]
+  }
+}

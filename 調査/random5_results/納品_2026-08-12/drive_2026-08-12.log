@@ -1,0 +1,290 @@
+[18:00:48] === v4 ラウンド 1 / 残り queued=5 (計測タイムボックス15分) ===
+[18:00:49] SolidWorks を落とします(取り込みハングの後始末を残さないため)
+[18:01:01] Licensing Service: Stopped
+[18:01:02] Licensing Service を起動しました → Running
+[18:01:33] SW健康診断: progid=SldWorks.Application.31 docs=0 OK: 文書0件・すぐ使えます 
+[18:01:33] ワーカーを起こします(--max-jobs 1)
+[18:16:35] ワーカーが終わりました(rc=0)
+[18:16:35]
+  J20260812-001 25154-1-106 フラットフレーム追加工  failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-002 25154-3-13  クッション        queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-003 25154-5-22  指針           queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-004 25154-4-01  前後フレーム       queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-005 25154-5-17  LSカバー        queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+[18:16:36] === v4 ラウンド 2 / 残り queued=4 (計測タイムボックス15分) ===
+[18:16:36] SolidWorks を落とします(取り込みハングの後始末を残さないため)
+[18:16:49] Licensing Service: Stopped
+[18:16:50] Licensing Service を起動しました → Running
+[18:17:20] SW健康診断: progid=SldWorks.Application.31 docs=0 OK: 文書0件・すぐ使えます 
+[18:17:21] ワーカーを起こします(--max-jobs 1)
+[18:32:20] ワーカーが終わりました(rc=127)
+Traceback (most recent call last):
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [WinError 10061] 対象のコンピューターによって拒否されたため、接続できませんでした。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1093, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\http\client.py", line 1037, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+        self, f"Failed to establish a new connection: {e}"
+    ) from e
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='127.0.0.1', port=8799): Failed to establish a new connection: [WinError 10061] 対象のコンピューターによって拒否されたため、接続できませんでした。
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=8799): Max retries exceeded with url: /api/jobs (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=8799): Failed to establish a new connection: [WinError 10061] 対象のコンピューターによって拒否されたため、接続できませんでした。"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Temp\claude\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\7750bde9-ca51-4726-a273-81d40001103f\scratchpad\random5\watch.py", line 55, in <module>
+    if snap():
+       ~~~~^^
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Temp\claude\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\7750bde9-ca51-4726-a273-81d40001103f\scratchpad\random5\watch.py", line 36, in snap
+    jobs = {j["id"]: j for j in requests.get(BASE + "/api/jobs", timeout=30).json()}
+                                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=8799): Max retries exceeded with url: /api/jobs (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=8799): Failed to establish a new connection: [WinError 10061] 対象のコンピューターによって拒否されたため、接続できませんでした。"))
+[18:32:25] === v4 ラウンド 3 / 残り queued= (計測タイムボックス15分) ===
+[18:32:26] Licensing Service: Stopped
+[18:32:27] Licensing Service を起動しました → Running
+[18:32:59] SW健康診断: progid=SldWorks.Application.31 docs=1 Traceback (most recent call last):   File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Temp\claude\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\7750bde9-ca51-4726-a273-81d40001103f\scratchpad\random5\sw_health.py", line 78, in <module>     sys.exit(main())              ~~~~^^   File "C:\Users\imaizumi.LINEWORKS-NET\AppData\Local\Temp\claude\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\7750bde9-ca51-4726-a273-81d40001103f\scratchpad\random5\sw_health.py", line 56, in main     doc = doc.GetNext() TypeError: 'NoneType' object is not callable 
+[18:32:59] ❗SW を用意できませんでした
+[18:32:59] === drive4.sh 終了 ===
+[19:29:19] === v4 ラウンド 1 / 残り queued=5 (計測タイムボックス15分) ===
+[19:29:20] SolidWorks を落とします(取り込みハングの後始末を残さないため)
+[19:29:34] Licensing Service: Stopped
+[19:29:36] Licensing Service を起動しました → Running
+[19:30:07] SW健康診断: progid=SldWorks.Application.31 docs=0 OK: 文書0件・すぐ使えます 
+[19:30:07] ワーカーを起こします(--max-jobs 1)
+[19:46:44] ワーカーが終わりました(rc=0)
+[19:46:45]
+  J20260812-001 25154-1-106 フラットフレーム追加工  fuda        DGA=計画待ち    図面だけでは決めきれない点が 3 つあります。赤い札を出しました。
+  J20260812-002 25154-3-13  クッション        queued      DGA=計測中     📥 OS再起動(2026-08-12 19:21)後の再投入。順番が来たら計測から始めます。
+  J20260812-003 25154-5-22  指針           queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-004 25154-4-01  前後フレーム       queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-005 25154-5-17  LSカバー        queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+[19:46:45] === v4 ラウンド 2 / 残り queued=4 (計測タイムボックス15分) ===
+[19:46:45] SolidWorks を落とします(取り込みハングの後始末を残さないため)
+[19:47:00] Licensing Service: Stopped
+[19:47:02] Licensing Service を起動しました → Running
+[19:47:34] SW健康診断: progid=SldWorks.Application.31 docs=0 OK: 文書0件・すぐ使えます 
+[19:47:34] ワーカーを起こします(--max-jobs 1)
+[20:02:35] ワーカーが終わりました(rc=0)
+[20:02:35]
+  J20260812-001 25154-1-106 フラットフレーム追加工  fuda        DGA=計画待ち    図面だけでは決めきれない点が 3 つあります。赤い札を出しました。
+  J20260812-002 25154-3-13  クッション        failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-003 25154-5-22  指針           queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-004 25154-4-01  前後フレーム       queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-005 25154-5-17  LSカバー        queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+[20:02:35] === v4 ラウンド 3 / 残り queued=3 (計測タイムボックス15分) ===
+[20:02:36] SolidWorks を落とします(取り込みハングの後始末を残さないため)
+[20:02:50] Licensing Service: Stopped
+[20:02:52] Licensing Service を起動しました → Running
+[20:03:23] SW健康診断: progid=SldWorks.Application.31 docs=0 OK: 文書0件・すぐ使えます 
+[20:03:23] ワーカーを起こします(--max-jobs 1)
+[20:18:24] ワーカーが終わりました(rc=0)
+[20:18:24]
+  J20260812-001 25154-1-106 フラットフレーム追加工  fuda        DGA=計画待ち    図面だけでは決めきれない点が 3 つあります。赤い札を出しました。
+  J20260812-002 25154-3-13  クッション        failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-003 25154-5-22  指針           failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-004 25154-4-01  前後フレーム       queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-005 25154-5-17  LSカバー        queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+[20:18:25] === v4 ラウンド 4 / 残り queued=2 (計測タイムボックス15分) ===
+[20:18:25] SolidWorks を落とします(取り込みハングの後始末を残さないため)
+[20:18:39] Licensing Service: Stopped
+[20:18:41] Licensing Service を起動しました → Running
+[20:19:13] SW健康診断: progid=SldWorks.Application.31 docs=0 OK: 文書0件・すぐ使えます 
+[20:19:13] ワーカーを起こします(--max-jobs 1)
+[20:52:25] === v4 ラウンド 1 / 残り queued=1 (計測タイムボックス15分) ===
+[20:52:25] SolidWorks を落とします(取り込みハングの後始末を残さないため)
+[20:52:40] Licensing Service: Stopped
+[20:52:42] Licensing Service を起動しました → Running
+[20:53:13] SW健康診断: progid=SldWorks.Application.31 docs=0 OK: 文書0件・すぐ使えます 
+[20:53:13] ワーカーを起こします(--max-jobs 1)
+[21:08:14] ワーカーが終わりました(rc=0)
+[21:08:15]
+  J20260812-001 25154-1-106 フラットフレーム追加工  fuda        DGA=計画待ち    図面だけでは決めきれない点が 3 つあります。赤い札を出しました。
+  J20260812-002 25154-3-13  クッション        failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-003 25154-5-22  指針           failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-004 25154-4-01  前後フレーム       failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-005 25154-5-17  LSカバー        queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+[21:08:15] === v4 ラウンド 2 / 残り queued=1 (計測タイムボックス15分) ===
+[21:08:15] SolidWorks を落とします(取り込みハングの後始末を残さないため)
+[21:08:30] Licensing Service: Stopped
+[21:08:32] Licensing Service を起動しました → Running
+[21:09:03] === v5 ラウンド 1 / 残り queued=1 (サービス不起動・計測タイムボックス15分) ===
+[21:09:04] SolidWorks を落とします(取り込みハングの後始末を残さないため)
+[21:09:05] SW健康診断: progid=SldWorks.Application.31 docs=0 OK: 文書0件・すぐ使えます 
+[21:09:05] ワーカーを起こします(--max-jobs 1)
+[21:09:06] ワーカーが終わりました(rc=0)
+[21:09:07]
+  J20260812-001 25154-1-106 フラットフレーム追加工  fuda        DGA=計画待ち    図面だけでは決めきれない点が 3 つあります。赤い札を出しました。
+  J20260812-002 25154-3-13  クッション        failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-003 25154-5-22  指針           failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-004 25154-4-01  前後フレーム       failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-005 25154-5-17  LSカバー        failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+== 5件とも終わりました ==
+[21:09:07] === v4 ラウンド 3 / 残り queued=0 (計測タイムボックス15分) ===
+[21:09:07] キューが空になりました
+[21:09:07] === drive4.sh 終了 ===
+[21:09:18] Licensing Service: Running(v5はこれを起こさない)
+[21:09:20] Licensing Service を停止しました → Running
+[21:09:52] SW健康診断: progid=SldWorks.Application.31 docs=0 OK: 文書0件・すぐ使えます 
+[21:09:52] ワーカーを起こします(--max-jobs 1)
+[21:10:53] ワーカーが終わりました(rc=0)
+[21:10:53]
+  J20260812-001 25154-1-106 フラットフレーム追加工  fuda        DGA=計画待ち    図面だけでは決めきれない点が 3 つあります。赤い札を出しました。
+  J20260812-002 25154-3-13  クッション        failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-003 25154-5-22  指針           failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-004 25154-4-01  前後フレーム       failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+  J20260812-005 25154-5-17  LSカバー        failed      DGA=計測中     工程の途中でつまずきました。原因を控えてありますので、ご確認をお願いします。
+== 5件とも終わりました ==
+[21:10:53] === v5 ラウンド 2 / 残り queued=0 (サービス不起動・計測タイムボックス15分) ===
+[21:10:54] キューが空になりました
+[21:10:54] === drive5.sh 終了 ===
+[21:21:20] === v5.1 ラウンド 1 / 残り queued=4 (サービス不起動・ヘルパー道連れkill・計測タイムボックス15分) ===
+[21:21:20] SolidWorks をヘルパーごと落とします(v5.1: sldworks_fs/sldBgDwld が毒の運び屋の疑い)
+[21:21:34] Licensing Service: Stopped(v5はこれを起こさない)
+[21:22:06] SW健康診断: progid=SldWorks.Application.31 docs=0 OK: 文書0件・すぐ使えます 
+[21:22:06] ワーカーを起こします(--max-jobs 1)
+[21:33:48] === v6 ラウンド 1 / 残り queued=3 (接種方式・計測タイムボックス15分) ===
+[21:35:50] 接種 1 回目: rc=124 /  
+[21:35:50] 接種失敗(初回インポートのハング)→ SWをヘルパーごと作り直して再接種
+[21:35:50] SW を作り直します
+[21:36:37] 接種 2 回目: rc=0 / 接種インポート 4.1s {'import_error': 0} 残り文書: [] 
+[21:36:37] 接種成功 → このインスタンスに実ジョブを流します
+[21:36:37] ワーカーを起こします(--max-jobs 1)
+[21:54:30] ワーカーが終わりました(rc=0)
+[21:54:30]
+  J20260812-006 25154-3-13  クッション        delivered   DGA=合格      きれいに通りました。おとどけします。
+  J20260812-007 25154-5-22  指針           queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-008 25154-4-01  前後フレーム       queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-009 25154-5-17  LSカバー        queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+[21:54:31] === v6 ラウンド 2 / 残り queued=3 (接種方式・計測タイムボックス15分) ===
+[21:54:31] SW を作り直します
+[21:56:43] 接種 1 回目: rc=124 /  
+[21:56:43] 接種失敗(初回インポートのハング)→ SWをヘルパーごと作り直して再接種
+[21:56:44] SW を作り直します
+[21:58:56] 接種 2 回目: rc=124 /  
+[21:58:56] 接種失敗(初回インポートのハング)→ SWをヘルパーごと作り直して再接種
+[21:58:56] SW を作り直します
+[22:01:08] 接種 3 回目: rc=124 /  
+[22:01:08] 接種失敗(初回インポートのハング)→ SWをヘルパーごと作り直して再接種
+[22:01:09] SW を作り直します
+[22:03:21] 接種 4 回目: rc=124 /  
+[22:03:21] 接種失敗(初回インポートのハング)→ SWをヘルパーごと作り直して再接種
+[22:03:21] ❗接種が4回とも失敗しました
+[22:03:21] ❗SW を用意できませんでした
+[22:03:21] === drive6.sh 終了 ===
+[22:09:19] === v6 ラウンド 1 / 残り queued=3 (接種方式・計測タイムボックス15分) ===
+[22:09:19] SW を作り直します
+[22:11:32] 接種 1 回目: rc=124 /  
+[22:11:32] 接種失敗(初回インポートのハング)→ SWをヘルパーごと作り直して再接種
+[22:11:32] SW を作り直します
+[22:13:44] 接種 2 回目: rc=124 /  
+[22:13:44] 接種失敗(初回インポートのハング)→ SWをヘルパーごと作り直して再接種
+[22:13:45] SW を作り直します
+[22:14:30] 接種 3 回目: rc=0 / 接種インポート 2.5s {'import_error': 0} 残り文書: [] 
+[22:14:30] 接種成功 → このインスタンスに実ジョブを流します
+[22:14:30] ワーカーを起こします(--max-jobs 1)
+[22:34:39] === v7 ラウンド 1 / 残り queued=2 (接種方式・計測タイムボックス15分) ===
+[22:34:43] 既存SWの接種確認: rc=0 / 接種インポート 2.6s {'import_error': 0} 残り文書: [] 
+[22:34:43] 既存インスタンスは接種済み → そのまま実ジョブを流します
+[22:34:43] ワーカーを起こします(--max-jobs 1)
+[22:45:51] ワーカーが終わりました(rc=0)
+[22:45:51]
+  J20260812-006 25154-3-13  クッション        delivered   DGA=合格      きれいに通りました。おとどけします。
+  J20260812-007 25154-5-22  指針           delivered   DGA=合格      全ゲート合格です。おとどけまで進めました。
+  J20260812-008 25154-4-01  前後フレーム       queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+  J20260812-009 25154-5-17  LSカバー        queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+[22:45:52] === v7 ラウンド 2 / 残り queued=2 (接種方式・計測タイムボックス15分) ===
+[22:45:53] 既存SWの接種確認: rc=0 / 接種インポート 1.1s {'import_error': 0} 残り文書: [] 
+[22:45:53] 既存インスタンスは接種済み → そのまま実ジョブを流します
+[22:45:54] ワーカーを起こします(--max-jobs 1)
+[23:32:09] ワーカーが終わりました(rc=0)
+[23:32:09]
+  J20260812-006 25154-3-13  クッション        delivered   DGA=合格      きれいに通りました。おとどけします。
+  J20260812-007 25154-5-22  指針           delivered   DGA=合格      全ゲート合格です。おとどけまで進めました。
+  J20260812-008 25154-4-01  前後フレーム       delivered   DGA=合格      不明点はありませんでした。おとどけ済みにします。
+  J20260812-009 25154-5-17  LSカバー        queued      DGA=-       📥 3Dモデルをおあずかりしました。順番が来たら計測から始めますね。
+[23:32:10] === v7 ラウンド 3 / 残り queued=1 (接種方式・計測タイムボックス15分) ===
+[23:32:12] 既存SWの接種確認: rc=0 / 接種インポート 1.3s {'import_error': 0} 残り文書: [] 
+[23:32:12] 既存インスタンスは接種済み → そのまま実ジョブを流します
+[23:32:12] ワーカーを起こします(--max-jobs 1)
+[23:57:02] ワーカーが終わりました(rc=0)
+[23:57:02]
+  J20260812-006 25154-3-13  クッション        delivered   DGA=合格      きれいに通りました。おとどけします。
+  J20260812-007 25154-5-22  指針           delivered   DGA=合格      全ゲート合格です。おとどけまで進めました。
+  J20260812-008 25154-4-01  前後フレーム       delivered   DGA=合格      不明点はありませんでした。おとどけ済みにします。
+  J20260812-009 25154-5-17  LSカバー        delivered   DGA=合格      不明点はありませんでした。おとどけ済みにします。
+== 5件とも終わりました ==
+[23:57:02] === v7 ラウンド 4 / 残り queued=0 (接種方式・計測タイムボックス15分) ===
+[23:57:02] キューが空になりました
+[23:57:03] === drive7.sh 終了 ===

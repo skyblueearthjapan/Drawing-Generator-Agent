@@ -1,0 +1,2473 @@
+{
+  "summary": {
+    "model": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\5-17.STEP",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\plan.json",
+    "request": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\依頼.json",
+    "zuban": "25154-5-17",
+    "part_name": "LSカバー",
+    "skip_sw": true,
+    "steps": {
+      "sw_projection": {
+        "skipped": true,
+        "views_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\views.dxf",
+        "meta_json": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\meta.json"
+      },
+      "density": {
+        "material": "ＳＳ４００",
+        "resolved_kgm3": 7850.0,
+        "note": "材質記号 'SS400' -> 密度7850.0kg/m^3"
+      },
+      "compose": {
+        "scale": 1.0,
+        "views": [
+          "front",
+          "right"
+        ],
+        "layout": {
+          "views": [
+            "front",
+            "right"
+          ],
+          "gap_x_mm": 15.0,
+          "gap_y_mm": 0.0,
+          "group_wh_mm": [
+            254.0000000000006,
+            135.00000000000003
+          ],
+          "avail_wh_mm": [
+            410.0,
+            262.0
+          ],
+          "reserves": {
+            "front": {
+              "above": 0.0,
+              "below": 29.5,
+              "left": 29.5,
+              "right": 0.0
+            },
+            "right": {
+              "above": 21.5,
+              "below": 29.5,
+              "left": 0.0,
+              "right": 21.5
+            }
+          }
+        },
+        "frame_check": {
+          "total": 159,
+          "frame_matched": 112,
+          "remaining": 47,
+          "remaining_ratio": 0.29559748427672955
+        },
+        "zone_overlaps": [],
+        "view_pair_overlaps": [],
+        "weight": {
+          "volume_mm3": 44308.33982236882,
+          "density_kgm3_used": 7850.0,
+          "mass_kg": 0.34782046760559526,
+          "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+        },
+        "warnings": [
+          "使用しないビューのエンティティを除外: {'top': 18, 'iso': 78}"
+        ]
+      },
+      "dim_engine": {
+        "gate1_ok": true,
+        "warnings": [
+          "レイアウト衝突(要目視確認) 1件: [['R5_toe', 'view:right']]"
+        ],
+        "style_warnings": [],
+        "nominal": {
+          "pending": [],
+          "review_dimensions": []
+        },
+        "extension_lines": {
+          "collinear_count": 9,
+          "long_count": 0,
+          "long_and_collinear_count": 0,
+          "ext_len_max_mm": 30.0,
+          "ext_len_median_mm": 23.5,
+          "avoided_count": 0,
+          "gap_mismatch_count": 0
+        },
+        "circular_view_diameter_over": [],
+        "hole_note_leader_len_mm": [
+          {
+            "id": "N_h6",
+            "len_mm": 14.0,
+            "auto_placed": true
+          }
+        ],
+        "style_check_ok": true,
+        "layout_collisions": [
+          [
+            "R5_toe",
+            "view:right"
+          ]
+        ],
+        "frame_collisions": [],
+        "resolved_kinds": {
+          "T16_left": "linear",
+          "T16_right": "linear",
+          "X169_overall": "linear",
+          "T16_top": "linear",
+          "Y135_overall": "linear",
+          "Z70_plate": "linear",
+          "Z8_hole1": "linear",
+          "Z44_hole2": "linear",
+          "Z60_wall": "linear",
+          "Y8_hole": "linear",
+          "R5_toe": "radius"
+        },
+        "chains_ok": true,
+        "chains": [
+          {
+            "group": "Zpos",
+            "view": "right",
+            "ids": [
+              "Z8_hole1",
+              "Z44_hole2"
+            ],
+            "ok": true,
+            "errors": []
+          }
+        ]
+      },
+      "layout_verify": {
+        "ok": true,
+        "frame_collision_count": 0,
+        "reasons": []
+      },
+      "gate2": {
+        "ok": true,
+        "unspecified_count": 0,
+        "redundant_count": 0
+      },
+      "independent_verify": {
+        "ok": true,
+        "file_attrs_ok": true,
+        "gate1_ok": true,
+        "gate1_max_diff_mm": 0.0,
+        "style_ok": true,
+        "note_ok": true,
+        "chains_ok": true,
+        "chain_errors": []
+      },
+      "centerline": {
+        "enabled": true,
+        "added": 5,
+        "counts": {
+          "view_axis": 1,
+          "hole_cross": 3,
+          "profile_mark": 1
+        },
+        "gate3_circle_centerline_ok": true,
+        "n_features": 2,
+        "n_missing": 0,
+        "zone_hits": [],
+        "skipped_marks": []
+      }
+    },
+    "final_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\生成\\25154-5-17_LSカバー.dxf",
+    "final_png": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\生成\\25154-5-17_LSカバー.png",
+    "gate1_ok": true,
+    "gate2_ok": true,
+    "verify_ok": true,
+    "layout_ok": true,
+    "centerline_ok": true,
+    "overall_ok": true,
+    "status": "検証通過"
+  },
+  "compose": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\生成\\25154-5-17_LSカバー.dxf",
+    "scale": 1.0,
+    "views": [
+      "front",
+      "right"
+    ],
+    "layout": {
+      "views": [
+        "front",
+        "right"
+      ],
+      "gap_x_mm": 15.0,
+      "gap_y_mm": 0.0,
+      "group_wh_mm": [
+        254.0000000000006,
+        135.00000000000003
+      ],
+      "avail_wh_mm": [
+        410.0,
+        262.0
+      ],
+      "reserves": {
+        "front": {
+          "above": 0.0,
+          "below": 29.5,
+          "left": 29.5,
+          "right": 0.0
+        },
+        "right": {
+          "above": 21.5,
+          "below": 29.5,
+          "left": 0.0,
+          "right": 21.5
+        }
+      }
+    },
+    "frame_entity_count_loaded": 112,
+    "frame_check": {
+      "total": 159,
+      "frame_matched": 112,
+      "remaining": 47,
+      "remaining_ratio": 0.29559748427672955
+    },
+    "view_entity_counts": {
+      "front": 22,
+      "right": 15
+    },
+    "dropped_view_entity_counts": {
+      "top": 18,
+      "iso": 78
+    },
+    "unclassified_entity_count": 0,
+    "view_out_bbox_mm": {
+      "front": [
+        82.9999999999997,
+        93.49999999999999,
+        251.99999999999972,
+        228.5
+      ],
+      "right": [
+        266.9999999999997,
+        93.49999999999999,
+        337.0000000000003,
+        228.5
+      ]
+    },
+    "zone_overlaps": [],
+    "view_pair_overlaps": [],
+    "field_anchor_check": {
+      "品名_値": {
+        "expected": [
+          224.477,
+          22.51
+        ],
+        "actual": [
+          224.477,
+          22.51
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "装置名_値": {
+        "expected": [
+          224.477,
+          14.877
+        ],
+        "actual": [
+          224.477,
+          14.877
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "図番_値": {
+        "expected": [
+          273.605,
+          20.498
+        ],
+        "actual": [
+          273.605,
+          20.498
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "製図者_氏名": {
+        "expected": [
+          191.878,
+          22.586
+        ],
+        "actual": [
+          191.878,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_3": {
+        "expected": [
+          207.705,
+          22.586
+        ],
+        "actual": [
+          207.705,
+          22.586
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "REV_日付_2": {
+        "expected": [
+          207.705,
+          14.722
+        ],
+        "actual": [
+          207.705,
+          14.722
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "尺度_値": {
+        "expected": [
+          176.415,
+          22.446
+        ],
+        "actual": [
+          176.415,
+          22.446
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "連番マーク_値": {
+        "expected": [
+          19.324,
+          275.03
+        ],
+        "actual": [
+          19.324,
+          275.03
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "材質個数ノート_自製品": {
+        "expected": [
+          33.595,
+          280.001
+        ],
+        "actual": [
+          33.595,
+          280.001
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      },
+      "重量_値": {
+        "expected": [
+          224.593,
+          6.704
+        ],
+        "actual": [
+          224.593,
+          6.704
+        ],
+        "diff_mm": [
+          0.0,
+          0.0
+        ],
+        "within_0_5mm": true
+      }
+    },
+    "linetypes_added": [
+      "HIDDEN",
+      "PHANTOM",
+      "CENTER"
+    ],
+    "linetypes_missing": [],
+    "weight": {
+      "volume_mm3": 44308.33982236882,
+      "density_kgm3_used": 7850.0,
+      "mass_kg": 0.34782046760559526,
+      "note": "fields['密度_kgm3']=7850.0 で上書き計算"
+    },
+    "field_values": {
+      "品名": "ＬＳカバー",
+      "図番": "２５１５４－５－１７",
+      "装置名": "ひねり軸",
+      "尺度": "１：１",
+      "製図者": "ＡＩ",
+      "製図日付": "２６．０８．１２",
+      "連番": "１７",
+      "重量": "０．３５"
+    },
+    "warnings": [
+      "使用しないビューのエンティティを除外: {'top': 18, 'iso': 78}"
+    ]
+  },
+  "dim": {
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\生成\\25154-5-17_LSカバー.dxf",
+    "base_dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\生成\\25154-5-17_LSカバー.dxf",
+    "gate1": [
+      {
+        "id": "T16_left",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 1.6,
+        "measured": 1.6,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "1.6",
+        "text_value": 1.6,
+        "text_diff_mm": 0.0,
+        "style": "GEN001",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "T16_right",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 1.6,
+        "measured": 1.6,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "1.6",
+        "text_value": 1.6,
+        "text_diff_mm": 0.0,
+        "style": "GEN002",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "X169_overall",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 169.0,
+        "measured": 169.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "169",
+        "text_value": 169.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN003",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "T16_top",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 1.6,
+        "measured": 1.6,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "1.6",
+        "text_value": 1.6,
+        "text_diff_mm": 0.0,
+        "style": "GEN004",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y135_overall",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "front",
+        "expected": 135.0,
+        "measured": 135.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "135",
+        "text_value": 135.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN005",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z70_plate",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 70.0,
+        "measured": 70.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "70",
+        "text_value": 70.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN006",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z8_hole1",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 8.0,
+        "measured": 8.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "8",
+        "text_value": 8.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN007",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z44_hole2",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 44.0,
+        "measured": 44.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "44",
+        "text_value": 44.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN008",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Z60_wall",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 60.0,
+        "measured": 60.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "60",
+        "text_value": 60.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN009",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "Y8_hole",
+        "kind": "linear",
+        "plan_kind": "linear",
+        "view": "right",
+        "expected": 8.0,
+        "measured": 8.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "8",
+        "text_value": 8.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN010",
+        "ok": true,
+        "errors": []
+      },
+      {
+        "id": "R5_toe",
+        "kind": "radius",
+        "plan_kind": "radius",
+        "view": "right",
+        "expected": 5.0,
+        "measured": 5.0,
+        "diff_mm": 0.0,
+        "snap_max_mm": 0.0,
+        "text": "R5",
+        "text_value": 5.0,
+        "text_diff_mm": 0.0,
+        "style": "GEN011",
+        "ok": true,
+        "errors": []
+      }
+    ],
+    "gate1_ok": true,
+    "chains": [
+      {
+        "view": "right",
+        "group": "Zpos",
+        "ids": [
+          "Z8_hole1",
+          "Z44_hole2"
+        ],
+        "offset_coord": 77.5,
+        "segments": [
+          {
+            "id": "Z44_hole2",
+            "s0": 285.0,
+            "s1": 329.0,
+            "line_coord": 77.5
+          },
+          {
+            "id": "Z8_hole1",
+            "s0": 329.0,
+            "s1": 337.0,
+            "line_coord": 77.5
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "dim_offsets": {
+      "T16_left": 16.0,
+      "T16_right": 16.0,
+      "X169_overall": 24.0,
+      "T16_top": 16.0,
+      "Y135_overall": 24.0,
+      "Z70_plate": 16.0,
+      "Z8_hole1": 16.0,
+      "Z44_hole2": 16.0,
+      "Z60_wall": 24.0,
+      "Y8_hole": 16.0,
+      "R5_toe": 16.0
+    },
+    "hole_notes": [
+      {
+        "id": "N_h6",
+        "view": "right",
+        "pattern": "\\A1;４－%%c６\\P通し",
+        "leader_points": [
+          [
+            332.0,
+            101.5
+          ],
+          [
+            342.0,
+            101.5
+          ],
+          [
+            346.0,
+            101.5
+          ]
+        ],
+        "text_insert": [
+          346.0,
+          101.5
+        ],
+        "attachment": "bottom-left",
+        "auto_placed": true,
+        "ok": true,
+        "errors": [],
+        "nominal": [
+          {
+            "field": "drill",
+            "measured": 6.0,
+            "nominal": 6.0,
+            "resolved": true,
+            "delta_mm": 0.0,
+            "reason": "実測が呼び値と一致"
+          }
+        ],
+        "leader_len_mm": 14.0,
+        "anchor_check": {
+          "ok": true,
+          "dist_err_mm": 0.0
+        },
+        "leader_handle": "226"
+      }
+    ],
+    "dimstyles": {
+      "T16_left": "GEN001",
+      "T16_right": "GEN002",
+      "X169_overall": "GEN003",
+      "T16_top": "GEN004",
+      "Y135_overall": "GEN005",
+      "Z70_plate": "GEN006",
+      "Z8_hole1": "GEN007",
+      "Z44_hole2": "GEN008",
+      "Z60_wall": "GEN009",
+      "Y8_hole": "GEN010",
+      "R5_toe": "GEN011"
+    },
+    "style_check": {
+      "ok": true,
+      "mismatches": [],
+      "effective": {
+        "T16_left": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "T16_right": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "X169_overall": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "T16_top": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y135_overall": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z70_plate": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z8_hole1": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z44_hole2": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Z60_wall": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "Y8_hole": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "",
+          "dimtol": 0
+        },
+        "R5_toe": {
+          "dimtxt": 4.0,
+          "dimasz": 3.0,
+          "dimexo": 1.0,
+          "dimexe": 2.0,
+          "dimgap": 0.5,
+          "dimdec": 2,
+          "dimtad": 3,
+          "dimclrd": 3,
+          "dimclre": 3,
+          "dimclrt": 7,
+          "dimdli": 8.0,
+          "dimscale": 1.0,
+          "dimlfac": 1.0,
+          "dimsah": 1,
+          "dimjust": 0,
+          "dimcen": 1.0,
+          "dimatfit": 3,
+          "dimtmove": 0,
+          "dimdsep": 46,
+          "dimzin": 8,
+          "dimblk1": "_OPEN30",
+          "dimblk2": "_OPEN30",
+          "dimtxsty": "VF003",
+          "dimpost": "R<>",
+          "dimtol": 0
+        }
+      }
+    },
+    "arrow_blocks_created": [
+      "_OPEN30"
+    ],
+    "frame_check": {
+      "total": 159,
+      "frame_matched": 112,
+      "remaining": 47,
+      "remaining_ratio": 0.29559748427672955
+    },
+    "view_bbox": {
+      "front": [
+        83.0,
+        93.5,
+        252.0,
+        228.5
+      ],
+      "right": [
+        267.0,
+        93.5,
+        337.0,
+        228.5
+      ]
+    },
+    "layout": {
+      "text_boxes": {
+        "T16_left": [
+          79.3,
+          80.0,
+          88.3,
+          84.0
+        ],
+        "T16_right": [
+          246.7,
+          80.0,
+          255.7,
+          84.0
+        ],
+        "X169_overall": [
+          163.0,
+          70.0,
+          172.0,
+          74.0
+        ],
+        "T16_top": [
+          60.5,
+          223.2,
+          64.5,
+          232.2
+        ],
+        "Y135_overall": [
+          54.5,
+          156.5,
+          58.5,
+          165.5
+        ],
+        "Z70_plate": [
+          299.0,
+          245.0,
+          305.0,
+          249.0
+        ],
+        "Z8_hole1": [
+          331.5,
+          73.0,
+          334.5,
+          77.0
+        ],
+        "Z44_hole2": [
+          304.0,
+          73.0,
+          310.0,
+          77.0
+        ],
+        "Z60_wall": [
+          304.0,
+          65.0,
+          310.0,
+          69.0
+        ],
+        "Y8_hole": [
+          348.5,
+          96.0,
+          352.5,
+          99.0
+        ],
+        "R5_toe": [
+          269.1005,
+          90.136,
+          275.1005,
+          94.136
+        ],
+        "N_h6": [
+          346.0,
+          101.5,
+          367.0,
+          111.9
+        ],
+        "N_corner_r5": [
+          20.0,
+          234.9,
+          86.15,
+          244.0
+        ]
+      },
+      "collisions": [
+        [
+          "R5_toe",
+          "view:right"
+        ]
+      ],
+      "geom_boxes": {
+        "T16_left": [
+          79.916,
+          75.5,
+          87.684,
+          93.5
+        ],
+        "T16_right": [
+          247.316,
+          75.5,
+          255.084,
+          93.5
+        ],
+        "X169_overall": [
+          83.0,
+          67.5,
+          252.0,
+          93.5
+        ],
+        "T16_top": [
+          59.9447,
+          223.816,
+          83.0,
+          231.584
+        ],
+        "Y135_overall": [
+          53.9447,
+          93.5,
+          83.0,
+          228.5
+        ],
+        "Z70_plate": [
+          267.0,
+          228.5,
+          337.0,
+          249.5553
+        ],
+        "Z8_hole1": [
+          326.0,
+          72.4447,
+          340.0,
+          101.5
+        ],
+        "Z44_hole2": [
+          282.0,
+          72.4447,
+          332.0,
+          101.5
+        ],
+        "Z60_wall": [
+          274.0,
+          64.4447,
+          340.0,
+          98.5
+        ],
+        "Y8_hole": [
+          329.0,
+          93.5,
+          355.0,
+          101.5
+        ],
+        "R5_toe": [
+          267.7681,
+          87.8037,
+          282.0,
+          98.5
+        ],
+        "N_h6": [
+          332.0,
+          101.5,
+          367.0,
+          111.9
+        ]
+      },
+      "frame_collisions": [],
+      "frame_ok": true
+    },
+    "resolved_kinds": {
+      "T16_left": "linear",
+      "T16_right": "linear",
+      "X169_overall": "linear",
+      "T16_top": "linear",
+      "Y135_overall": "linear",
+      "Z70_plate": "linear",
+      "Z8_hole1": "linear",
+      "Z44_hole2": "linear",
+      "Z60_wall": "linear",
+      "Y8_hole": "linear",
+      "R5_toe": "radius"
+    },
+    "scale": 1.0,
+    "dimlfac": 1.0,
+    "views": [
+      "front",
+      "right"
+    ],
+    "view_reserves": {
+      "front": {
+        "above": 0.0,
+        "below": 29.5,
+        "left": 29.5,
+        "right": 0.0
+      },
+      "right": {
+        "above": 21.5,
+        "below": 29.5,
+        "left": 0.0,
+        "right": 21.5
+      }
+    },
+    "defaults_applied": {
+      "diameter_style": {
+        "circular_view": "native",
+        "profile_view": "linear"
+      },
+      "hole_note": {
+        "notation": "phi",
+        "width": "zenkaku",
+        "separator": " "
+      },
+      "nominal_translation": true,
+      "nominal_tol_mm": 0.05,
+      "extension_gap_avoid": false
+    },
+    "style_warnings": [],
+    "nominal": {
+      "pending": [],
+      "review_dimensions": []
+    },
+    "extension_lines": {
+      "reports": [
+        {
+          "id": "T16_left",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    83.0,
+                    93.5
+                  ],
+                  [
+                    83.0,
+                    98.5
+                  ]
+                ],
+                "handle": "14D"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    84.6,
+                    98.5
+                  ],
+                  [
+                    84.6,
+                    93.5
+                  ]
+                ],
+                "handle": "14C"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            17.0
+          ],
+          "ext_len_max_mm": 17.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "T16_right",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    250.4,
+                    93.5
+                  ],
+                  [
+                    250.4,
+                    98.5
+                  ]
+                ],
+                "handle": "147"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    252.0,
+                    98.5
+                  ],
+                  [
+                    252.0,
+                    93.5
+                  ]
+                ],
+                "handle": "148"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            17.0
+          ],
+          "ext_len_max_mm": 17.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "T16_top",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    88.0,
+                    226.9
+                  ],
+                  [
+                    83.0,
+                    226.9
+                  ]
+                ],
+                "handle": "13E"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    83.0,
+                    228.5
+                  ],
+                  [
+                    88.0,
+                    228.5
+                  ]
+                ],
+                "handle": "140"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            17.0
+          ],
+          "ext_len_max_mm": 17.0,
+          "side": "left",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "X169_overall",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    83.0,
+                    93.5
+                  ],
+                  [
+                    83.0,
+                    98.5
+                  ]
+                ],
+                "handle": "14D"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    252.0,
+                    98.5
+                  ],
+                  [
+                    252.0,
+                    93.5
+                  ]
+                ],
+                "handle": "148"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            25.0,
+            25.0
+          ],
+          "ext_len_max_mm": 25.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "Y135_overall",
+          "view": "front",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    84.6,
+                    93.5
+                  ],
+                  [
+                    83.0,
+                    93.5
+                  ]
+                ],
+                "handle": "14B"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    83.0,
+                    228.5
+                  ],
+                  [
+                    88.0,
+                    228.5
+                  ]
+                ],
+                "handle": "140"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            25.0,
+            25.0
+          ],
+          "ext_len_max_mm": 25.0,
+          "side": "left",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "Y8_hole",
+          "view": "right",
+          "dimexo_planned": 1.0,
+          "collinear_before": 1,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    282.0,
+                    93.5
+                  ],
+                  [
+                    332.0,
+                    93.5
+                  ]
+                ],
+                "handle": "158"
+              }
+            ],
+            []
+          ],
+          "collinear_count": 1,
+          "ext_len_mm": [
+            22.0,
+            25.0
+          ],
+          "ext_len_max_mm": 25.0,
+          "side": "right",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "Z44_hole2",
+          "view": "right",
+          "dimexo_planned": 1.0,
+          "collinear_before": 0,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [],
+            []
+          ],
+          "collinear_count": 0,
+          "ext_len_mm": [
+            25.0,
+            25.0
+          ],
+          "ext_len_max_mm": 25.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "Z60_wall",
+          "view": "right",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    337.0,
+                    98.5
+                  ],
+                  [
+                    337.0,
+                    228.5
+                  ]
+                ],
+                "handle": "15E"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    277.0,
+                    226.9
+                  ],
+                  [
+                    277.0,
+                    98.5
+                  ]
+                ],
+                "handle": "155"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            30.0,
+            30.0
+          ],
+          "ext_len_max_mm": 30.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "Z70_plate",
+          "view": "right",
+          "dimexo_planned": 1.0,
+          "collinear_before": 2,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    267.0,
+                    226.9
+                  ],
+                  [
+                    267.0,
+                    228.5
+                  ]
+                ],
+                "handle": "15F"
+              }
+            ],
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    337.0,
+                    98.5
+                  ],
+                  [
+                    337.0,
+                    228.5
+                  ]
+                ],
+                "handle": "15E"
+              }
+            ]
+          ],
+          "collinear_count": 2,
+          "ext_len_mm": [
+            17.0,
+            17.0
+          ],
+          "ext_len_max_mm": 17.0,
+          "side": "above",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        },
+        {
+          "id": "Z8_hole1",
+          "view": "right",
+          "dimexo_planned": 1.0,
+          "collinear_before": 1,
+          "avoided": false,
+          "dimexo_used": 1.0,
+          "collinear": [
+            [
+              {
+                "gap_mm": 1.0,
+                "overlap": false,
+                "seg": [
+                  [
+                    337.0,
+                    98.5
+                  ],
+                  [
+                    337.0,
+                    228.5
+                  ]
+                ],
+                "handle": "15E"
+              }
+            ],
+            []
+          ],
+          "collinear_count": 1,
+          "ext_len_mm": [
+            22.0,
+            25.0
+          ],
+          "ext_len_max_mm": 25.0,
+          "side": "below",
+          "drawn_gap_mm": [
+            1.0,
+            1.0
+          ],
+          "gap_matches_dimexo": true
+        }
+      ],
+      "collinear_count": 9,
+      "long_count": 0,
+      "long_and_collinear_count": 0,
+      "ext_len_max_mm": 30.0,
+      "ext_len_median_mm": 23.5,
+      "avoided_count": 0,
+      "gap_mismatch_count": 0
+    },
+    "circular_view_diameter_over": [],
+    "warnings": [
+      "レイアウト衝突(要目視確認) 1件: [['R5_toe', 'view:right']]"
+    ]
+  },
+  "gate2": {
+    "gate": "gate2_completeness_v1",
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\生成\\25154-5-17_LSカバー.dxf",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\plan.json",
+    "dropped_dimensions": [],
+    "ok": true,
+    "unspecified": [],
+    "floating_dimensions": [],
+    "style_dimensions": [],
+    "redundant_dimensions": [],
+    "duplicate_value_dimensions": [
+      {
+        "value": 1.6,
+        "ids": [
+          "T16_left",
+          "T16_right",
+          "T16_top"
+        ]
+      },
+      {
+        "value": 8.0,
+        "ids": [
+          "Z8_hole1",
+          "Y8_hole"
+        ]
+      }
+    ],
+    "circles": [
+      {
+        "diameter": 6.0,
+        "count": 2,
+        "views": [
+          "right"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      },
+      {
+        "diameter": 10.0,
+        "count": 2,
+        "views": [
+          "right"
+        ],
+        "covered_by": "dimension_or_note",
+        "ok": true
+      }
+    ],
+    "axes": {
+      "X": {
+        "axis": "X",
+        "node_count": 4,
+        "nodes": [
+          -84.5,
+          -82.9,
+          0.0,
+          82.9,
+          84.5
+        ],
+        "mode": "symmetric",
+        "edges": [
+          {
+            "from": -84.5,
+            "to": -82.9,
+            "by": "T16_left(1.6)",
+            "new_link": true
+          },
+          {
+            "from": 82.9,
+            "to": 84.5,
+            "by": "T16_right(1.6)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": -84.5,
+            "by": "X169_overall(対称・径/幅169)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 84.5,
+            "by": "X169_overall(対称・径/幅169)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": 0.0
+      },
+      "Y": {
+        "axis": "Y",
+        "node_count": 6,
+        "nodes": [
+          0.0,
+          5.0,
+          8.0,
+          11.0,
+          133.4,
+          135.0
+        ],
+        "mode": "chain",
+        "edges": [
+          {
+            "from": 133.4,
+            "to": 135.0,
+            "by": "T16_top(1.6)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 135.0,
+            "by": "Y135_overall(135)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 8.0,
+            "by": "Y8_hole(8)",
+            "new_link": true
+          },
+          {
+            "from": 5.0,
+            "to": 0.0,
+            "by": "円φ10(right)",
+            "new_link": true
+          },
+          {
+            "from": 8.0,
+            "to": 11.0,
+            "by": "円φ6(right)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": null
+      },
+      "Z": {
+        "axis": "Z",
+        "node_count": 7,
+        "nodes": [
+          0.0,
+          5.0,
+          8.0,
+          52.0,
+          55.0,
+          60.0,
+          70.0
+        ],
+        "mode": "chain",
+        "edges": [
+          {
+            "from": 70.0,
+            "to": 0.0,
+            "by": "Z70_plate(70)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 8.0,
+            "by": "Z8_hole1(8)",
+            "new_link": true
+          },
+          {
+            "from": 8.0,
+            "to": 52.0,
+            "by": "Z44_hole2(44)",
+            "new_link": true
+          },
+          {
+            "from": 0.0,
+            "to": 60.0,
+            "by": "Z60_wall(60)",
+            "new_link": true
+          },
+          {
+            "from": 55.0,
+            "to": 60.0,
+            "by": "円φ10(right)",
+            "new_link": true
+          },
+          {
+            "from": 5.0,
+            "to": 0.0,
+            "by": "円φ10(right)",
+            "new_link": true
+          }
+        ],
+        "uncovered": [],
+        "out_of_scope_nodes": [],
+        "symmetry_center": null
+      }
+    },
+    "dimensions_read": [
+      {
+        "id": "T16_left",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 1.6,
+        "view": "front"
+      },
+      {
+        "id": "T16_right",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 1.6,
+        "view": "front"
+      },
+      {
+        "id": "X169_overall",
+        "role": "position_pair",
+        "axis": "X",
+        "value": 169.0,
+        "view": "front"
+      },
+      {
+        "id": "T16_top",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 1.6,
+        "view": "front"
+      },
+      {
+        "id": "Y135_overall",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 135.0,
+        "view": "front"
+      },
+      {
+        "id": "Z70_plate",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 70.0,
+        "view": "right"
+      },
+      {
+        "id": "Z8_hole1",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 8.0,
+        "view": "right"
+      },
+      {
+        "id": "Z44_hole2",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 44.0,
+        "view": "right"
+      },
+      {
+        "id": "Z60_wall",
+        "role": "position_pair",
+        "axis": "Z",
+        "value": 60.0,
+        "view": "right"
+      },
+      {
+        "id": "Y8_hole",
+        "role": "position_pair",
+        "axis": "Y",
+        "value": 8.0,
+        "view": "right"
+      },
+      {
+        "id": "R5_toe",
+        "role": "diameter",
+        "axis": null,
+        "value": 10.0,
+        "view": "right"
+      }
+    ],
+    "hole_notes": [
+      {
+        "raw": "\\A1;４－%%c６\\P通し",
+        "normalized": "4-%%c6 通し",
+        "diameters": [
+          6.0
+        ],
+        "taps": [],
+        "depths": [],
+        "pcds": [],
+        "pipe_threads": [],
+        "clusters": [],
+        "count": 4,
+        "equal_spacing_declared": false
+      }
+    ],
+    "pcd_groups": [],
+    "cluster_groups": [],
+    "inclined_features": [],
+    "polygons": [],
+    "oblique_width_dimensions": [],
+    "thread_features": [],
+    "note_diameters": [
+      6.0
+    ],
+    "note_taps": [],
+    "note_depths": [],
+    "covered_diameters": [
+      6.0,
+      10.0
+    ],
+    "chamfers": [],
+    "out_of_scope": [
+      {
+        "class": "not_implemented",
+        "reason": "表面性状記号・幾何公差・溶接記号・ねじのピッチ/等級はv1の判定対象外(生成側も未実装)"
+      },
+      {
+        "class": "same_value_features",
+        "reason": "v1の台帳は特徴を**値と座標**で持つため、同じ値の別フィーチャー(左右のφ25等)を区別しない。片方の寸法を消しても検出できない(該当: [1.6, 8.0])"
+      }
+    ]
+  },
+  "independent_verify": {
+    "dxf": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\生成\\25154-5-17_LSカバー.dxf",
+    "plan": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\plan.json",
+    "file_attrs_ok": true,
+    "frame": {
+      "total": 173,
+      "frame_matched": 112,
+      "remaining": 61,
+      "remaining_ratio": 0.35260115606936415
+    },
+    "scale": 1.0,
+    "gate1": [
+      {
+        "id": "T16_left",
+        "style": "GEN001",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 1.6,
+        "measured": 1.6,
+        "diff_mm": 0.0,
+        "text": "1.6",
+        "text_value": 1.6,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "T16_right",
+        "style": "GEN002",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 1.6,
+        "measured": 1.6,
+        "diff_mm": 0.0,
+        "text": "1.6",
+        "text_value": 1.6,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "X169_overall",
+        "style": "GEN003",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 169.0,
+        "measured": 169.0,
+        "diff_mm": 0.0,
+        "text": "169",
+        "text_value": 169.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "T16_top",
+        "style": "GEN004",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 1.6,
+        "measured": 1.6,
+        "diff_mm": 0.0,
+        "text": "1.6",
+        "text_value": 1.6,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y135_overall",
+        "style": "GEN005",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 135.0,
+        "measured": 135.0,
+        "diff_mm": 0.0,
+        "text": "135",
+        "text_value": 135.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z70_plate",
+        "style": "GEN006",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 70.0,
+        "measured": 70.0,
+        "diff_mm": 0.0,
+        "text": "70",
+        "text_value": 70.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z8_hole1",
+        "style": "GEN007",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 8.0,
+        "measured": 8.0,
+        "diff_mm": 0.0,
+        "text": "8",
+        "text_value": 8.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z44_hole2",
+        "style": "GEN008",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 44.0,
+        "measured": 44.0,
+        "diff_mm": 0.0,
+        "text": "44",
+        "text_value": 44.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Z60_wall",
+        "style": "GEN009",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 60.0,
+        "measured": 60.0,
+        "diff_mm": 0.0,
+        "text": "60",
+        "text_value": 60.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "Y8_hole",
+        "style": "GEN010",
+        "kind": "linear",
+        "dimtype": 32,
+        "dimtype_base": 0,
+        "kind_impl_ok": true,
+        "expected": 8.0,
+        "measured": 8.0,
+        "diff_mm": 0.0,
+        "text": "8",
+        "text_value": 8.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      },
+      {
+        "id": "R5_toe",
+        "style": "GEN011",
+        "kind": "radius",
+        "dimtype": 36,
+        "dimtype_base": 4,
+        "kind_impl_ok": true,
+        "expected": 5.0,
+        "measured": 5.0,
+        "diff_mm": 0.0,
+        "text": "R5",
+        "text_value": 5.0,
+        "text_role": "measured",
+        "text_override": null,
+        "text_override_ok": null,
+        "text_diff_mm": 0.0,
+        "ok": true
+      }
+    ],
+    "gate1_ok": true,
+    "chains": [
+      {
+        "view": "right",
+        "group": "Zpos",
+        "ids": [
+          "Z8_hole1",
+          "Z44_hole2"
+        ],
+        "offset_coord": 77.5,
+        "segments": [
+          {
+            "id": "Z44_hole2",
+            "s0": 285.0,
+            "s1": 329.0,
+            "line_coord": 77.5
+          },
+          {
+            "id": "Z8_hole1",
+            "s0": 329.0,
+            "s1": 337.0,
+            "line_coord": 77.5
+          }
+        ],
+        "errors": [],
+        "member_errors": {},
+        "ok": true
+      }
+    ],
+    "chains_ok": true,
+    "gate1_max_diff_mm": 0.0,
+    "style_ok": true,
+    "style_mismatches": [],
+    "frame_collisions": [],
+    "layout_ok": true,
+    "notes": [
+      "\\A1;４－%%c６\\P通し"
+    ],
+    "note_ok": true,
+    "ok": true
+  },
+  "centerline": {
+    "enabled": true,
+    "out_path": "C:\\Users\\imaizumi.LINEWORKS-NET\\AppData\\Local\\Temp\\claude\\C--Users-imaizumi-LINEWORKS-NET-Documents------agent\\7750bde9-ca51-4726-a273-81d40001103f\\scratchpad\\random5\\data\\納品箱\\J20260812-009\\_work\\dga\\data\\依頼箱\\J20260812-009\\生成\\25154-5-17_LSカバー.dxf",
+    "added": 5,
+    "counts": {
+      "view_axis": 1,
+      "hole_cross": 3,
+      "profile_mark": 1
+    },
+    "linetype_added": false,
+    "style": {
+      "linetype": "DASHDOT",
+      "color": 3,
+      "hole_ext_mm": 5.0,
+      "axis_ext_mm": 5.0
+    },
+    "features": [
+      {
+        "view": "right",
+        "center": [
+          329.0,
+          101.5
+        ],
+        "d_draw": 6.0,
+        "d_model": 6.0,
+        "n_circles": 1
+      },
+      {
+        "view": "right",
+        "center": [
+          285.0,
+          101.5
+        ],
+        "d_draw": 6.0,
+        "d_model": 6.0,
+        "n_circles": 1
+      }
+    ],
+    "lines": [
+      {
+        "view": "front",
+        "cls": "view_axis",
+        "dir": "v",
+        "p1": [
+          167.5,
+          88.5
+        ],
+        "p2": [
+          167.5,
+          233.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          329.0,
+          93.5
+        ],
+        "p2": [
+          329.0,
+          109.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "hole_cross",
+        "dir": "h",
+        "p1": [
+          277.0,
+          101.5
+        ],
+        "p2": [
+          337.0,
+          101.5
+        ]
+      },
+      {
+        "view": "right",
+        "cls": "hole_cross",
+        "dir": "v",
+        "p1": [
+          285.0,
+          93.5
+        ],
+        "p2": [
+          285.0,
+          109.5
+        ]
+      },
+      {
+        "view": "front",
+        "cls": "profile_mark",
+        "dir": "h",
+        "p1": [
+          78.0,
+          101.5
+        ],
+        "p2": [
+          257.0,
+          101.5
+        ]
+      }
+    ],
+    "circles": [],
+    "notes": []
+  },
+  "centerline_check": {
+    "ok": true,
+    "n_features": 2,
+    "n_missing": 0,
+    "coverage": 1.0,
+    "n_centerline_entities": 5,
+    "n_designed": 5,
+    "n_not_realized": 0,
+    "missing": [],
+    "not_realized": [],
+    "zone_hits": [],
+    "checked": [
+      {
+        "view": "right",
+        "center": [
+          329.0,
+          101.5
+        ],
+        "d_model": 6.0,
+        "h": 5.0,
+        "v": 5.0
+      },
+      {
+        "view": "right",
+        "center": [
+          285.0,
+          101.5
+        ],
+        "d_model": 6.0,
+        "h": 5.0,
+        "v": 5.0
+      }
+    ]
+  }
+}
