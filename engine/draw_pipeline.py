@@ -54,6 +54,11 @@ swDxfMultiSheetOption = 253
 # swUserPreferenceToggle_e
 swDxfUseSolidworksLayers = 305
 swDxfMapping = 8
+# ❗3D Interconnect(STEPを外部参照 "->" で取り込む方式)。ON だと LoadFile4 の
+#   COM戻りが永遠に失われる(Z2/SW2021 SP0.0 で 5/5 再現・2026-08-17実測。
+#   画面上は取り込み完了・フィーチャーツリーに "1-18.STEP<1> ->" が出るのが症状)。
+#   OFF なら 3.3s で正常返答。インポート前に必ず OFF を確認する。
+swMultiCAD_Enable3DInterconnect = 691
 # swDxfFormat_e
 swDxfFormat_R2000 = 3
 swDxfFormat_R2013 = 7
@@ -196,6 +201,16 @@ def open_step_readonly(sw, mod, path):
     if not os.path.exists(path):
         raise IOError(u"STEP が無い: %s" % path)
 
+    # ❗3D Interconnect が ON だと LoadFile4 がハングする(Z2/SW2021 実測)。
+    #   OFF へ倒し、戻さない(戻すと同一セッションの後続インポートが再びハングする)。
+    interconnect_disabled = False
+    try:
+        if sw.GetUserPreferenceToggle(swMultiCAD_Enable3DInterconnect):
+            sw.SetUserPreferenceToggle(swMultiCAD_Enable3DInterconnect, False)
+            interconnect_disabled = True
+    except Exception:                    # noqa: BLE001 - 読めない版では従来動作のまま
+        pass
+
     isd = sw.GetImportFileData(path)     # STEP なら IImportStepData が返る(None でも続行可)
     ret = sw.LoadFile4(path, "r", isd, 0)
     doc, err = (ret if isinstance(ret, tuple) else (ret, None))
@@ -208,7 +223,8 @@ def open_step_readonly(sw, mod, path):
     if os.path.splitext(title)[0] != stem:
         # 掴んだのが別物 → 絶対に閉じない(ユーザーのドキュメントの可能性)
         raise RuntimeError(u"タイトル不一致: 期待 '%s.*' / 実際 %r" % (stem, title))
-    return OpenedDoc(sw, doc, title, True, path, imported=True), {"import_error": err}
+    return OpenedDoc(sw, doc, title, True, path, imported=True), {
+        "import_error": err, "interconnect_disabled": interconnect_disabled}
 
 
 def open_model_readonly(sw, mod, path):
@@ -514,9 +530,21 @@ def export_dxf(sw, opened, out_path, dxf_version=swDxfFormat_R2000):
     ints = ((swDxfVersion, dxf_version),
             (swDxfMultiSheetOption, swDxfActiveSheetOnly))
     with prefs_override(sw, ints=ints) as before:
-        ret = opened.doc.Extension.SaveAs3(
-            out_path, swSaveAsCurrentVersion, swSaveAsOptions_Silent,
-            None, None, 0, 0)
+        try:
+            ret = opened.doc.Extension.SaveAs3(
+                out_path, swSaveAsCurrentVersion, swSaveAsOptions_Silent,
+                None, None, 0, 0)
+        except Exception as exc:         # noqa: BLE001
+            # ❗Z2/SW2021 の gen_py では Extension.SaveAs3 の byref 引数が
+            #   DISP_E_TYPEMISMATCH(-2147352571) になる(2026-08-17実測。
+            #   VARIANT を渡す変種も early binding に拒否される)。
+            #   旧 IModelDoc2.SaveAs3(3引数) は同機で成功する。戻り値は成功でも
+            #   0 が返るため信用せず、後段のファイル実在チェックを正とする。
+            if getattr(exc, "hresult", None) != -2147352571:
+                raise
+            opened.doc.SaveAs3(out_path, swSaveAsCurrentVersion,
+                               swSaveAsOptions_Silent)
+            ret = (os.path.exists(out_path), 0, 0)
     ok, errs, warns = (ret if isinstance(ret, tuple) else (ret, 0, 0))
     if not ok or errs:
         raise RuntimeError(u"SaveAs3(DXF) 失敗 ok=%r errors=%r warnings=%r"
