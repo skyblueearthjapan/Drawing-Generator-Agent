@@ -175,6 +175,13 @@ engine/          恒久エンジン(sw_compat.py, sw_helper.py, dxf_dump.py, dxf
 - ❗Z2の物理モニタ(iiyama PL2493H)は**DisplayPort入力口が故障**(2026-08-18切り分け完了)。
   **HDMI入力なら映る**。症状は「EDIDだけ時々通り映像線が常に不通」でPC側故障と紛らわしい
   (Z2本体・A400・iGPU・BIOSは全ポート無罪と確定)。現地で画面確認する時はHDMI接続を使うこと
+- **Z2は毎朝05:30に自動再起動**(タスク `Z2-DailyReboot`・2026-08-18ユーザー新設。長期稼働に
+  よるSW COMハング体質の予防を兼ねる)。実体は `C:\workshop\z2_reboot_gate.py` の**ゲート方式**:
+  工房DBをread-onlyで確認し、作業中ジョブ(reading/verifying/building/inspecting)が
+  0件になってから `shutdown /r`。90分待っても空かなければ**その日はスキップ**
+  (ログ=C:\workshop\z2_reboot_gate.log)。DB不読は fail-open(再起動する)。
+  queuedは対象外(再起動をまたいで順番待ちが続くだけ)。SOLIDIFYの中断復帰
+  (起動時に作業中ジョブをqueuedへ戻す契約機能)は保険としてそのまま有効
 
 ### ❗SolidWorks COMの機械レベル故障 — プロセス再起動では直らない【2026-08-11・ランダム5点テスト全滅】
 - 症状: `GetImportFileData()`/`LoadFile4()`(draw_pipeline.py:199-200)が**永遠に戻らない**
