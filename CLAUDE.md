@@ -170,7 +170,11 @@ engine/          恒久エンジン(sw_compat.py, sw_helper.py, dxf_dump.py, dxf
   →新インスタンスで読み戻し確認。**WatchdogはSW本体も蘇生させる**(「殺して蘇るか」テストも今回合格)
 - Z2運用メモ: ssh経由のインラインPowerShellは引用符が剥がれる→**スクリプトをscpして実行が正**(手順書§2.1どおり)。
   COMは schtasks の対話タスク(/it)経由。モニタ無しでも同セッションの対話タスクから
-  win32gui列挙+PIL ImageGrab でスクリーンショットが取れる(ダイアログ有無の切り分けに有効)
+  win32gui列挙+PIL ImageGrab でスクリーンショットが取れる(ダイアログ有無の切り分けに有効)。
+  自宅からは ssh エイリアス **z2-ts**(Tailscale経由・2026-08-18ユーザー追加)で同じ手順が使える
+- ❗Z2の物理モニタ(iiyama PL2493H)は**DisplayPort入力口が故障**(2026-08-18切り分け完了)。
+  **HDMI入力なら映る**。症状は「EDIDだけ時々通り映像線が常に不通」でPC側故障と紛らわしい
+  (Z2本体・A400・iGPU・BIOSは全ポート無罪と確定)。現地で画面確認する時はHDMI接続を使うこと
 
 ### ❗SolidWorks COMの機械レベル故障 — プロセス再起動では直らない【2026-08-11・ランダム5点テスト全滅】
 - 症状: `GetImportFileData()`/`LoadFile4()`(draw_pipeline.py:199-200)が**永遠に戻らない**
